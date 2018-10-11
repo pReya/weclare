@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Container, Row, Col, Button } from "reactstrap";
-import Server from "./server";
-import Client from "./client";
+import Server from "./server/Server";
+import Client from "./client/Client";
 
-import SelectBox from "./selectBox";
+import SelectBox from "./SelectBox";
 import "./App.css";
 
 const App = () => (
