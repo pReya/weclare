@@ -3,17 +3,17 @@ import { Card, CardText, CardBody, CardHeader, CardTitle } from "reactstrap";
 import PropTypes from "prop-types";
 
 const SelectBox = props => {
-  const { header, title, text, button } = props;
+  const { header, title, text, children } = props;
   return (
     <div>
       <Card>
         <CardHeader>
-          <h4 className="my-0">{header || ""}</h4>
+          <h4 className="my-0">{header}</h4>
         </CardHeader>
         <CardBody>
-          <CardTitle>{title || ""}</CardTitle>
-          <CardText>{text || ""}</CardText>
-          {button}
+          <CardTitle>{title}</CardTitle>
+          <CardText>{text}</CardText>
+          {children}
         </CardBody>
       </Card>
     </div>
@@ -24,14 +24,14 @@ SelectBox.defaultProps = {
   header: "",
   title: "",
   text: "",
-  button: ""
+  children: ""
 };
 
 SelectBox.propTypes = {
   header: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
-  button: PropTypes.string
+  children: PropTypes.element
 };
 
 export default SelectBox;
