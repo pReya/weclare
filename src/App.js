@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Container, Row, Col, Button } from "reactstrap";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+
 import Server from "./server/Server";
 import Client from "./client/Client";
 
 import SelectBox from "./SelectBox";
-
 import "./scss/App.scss";
-import "./scss/custom.scss";
+
+library.add(faGraduationCap);
 
 const App = () => (
   <div className="App">
@@ -25,6 +28,7 @@ const App = () => (
             <SelectBox
               header="For Instructors 👩‍🏫"
               text="Start the server app, which allows you to create new question sets and accept connections from students."
+              icon="graduation-cap"
             >
               <Button
                 onClick={() => {
