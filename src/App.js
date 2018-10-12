@@ -5,7 +5,9 @@ import Server from "./server/Server";
 import Client from "./client/Client";
 
 import SelectBox from "./SelectBox";
-import "./App.css";
+
+import "./scss/App.scss";
+import "./scss/custom.scss";
 
 const App = () => (
   <div className="App">

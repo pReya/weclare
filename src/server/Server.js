@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import "../scss/App.scss";
 
 const Server = () => (
   <div className="App">
