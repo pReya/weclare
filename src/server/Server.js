@@ -3,8 +3,8 @@ import "../scss/App.scss";
 import Peer from "peerjs";
 
 class Server extends React.Component {
-  static handleData(d) {
-    console.log(`Received message from ?: ${d}`);
+  static handleData(d, sender) {
+    console.log(`Received message from ${sender}: ${d}`);
   }
 
   constructor() {
@@ -33,7 +33,7 @@ class Server extends React.Component {
   }
 
   handleConnection(c) {
-    c.on("data", this.handleData);
+    c.on("data", data => this.handleData(data, c.peer));
     this.setState(prevState => ({
       status: 2,
       connections: [...prevState.connections, c]

@@ -5,7 +5,9 @@ module.exports = {
   rules: {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/label-has-for": "off",
+    "jsx-a11y/label-has-associated-control": "off"
   },
   env: {
     browser: true,
