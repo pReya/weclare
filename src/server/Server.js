@@ -3,49 +3,66 @@ import "../scss/App.scss";
 import Peer from "peerjs";
 
 class Server extends React.Component {
+  static handleData(d) {
+    console.log(`Received message from ?: ${d}`);
+  }
+
+  constructor() {
+    super();
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleConnection = this.handleConnection.bind(this);
+  }
+
   state = {
     peer: new Peer({ debug: 3, secure: true, port: 443 }),
-    status: "initialized",
+    // Status: 0(initialized), 1(waiting for connection), 2(at least 1 client connected)
+    status: 0,
     connections: []
   };
 
   componentDidMount() {
-    const { peer, connections } = this.state;
-    peer.on("open", id => {
-      console.log(`My peer ID is: ${id}`);
-      // document.querySelector("#myId").value = id;
-      this.setState({ status: "waiting for connection" });
-    });
-    peer.on("connection", c => {
-      c.on("data", data => {
-        console.log(`Received message from ?: ${data}`);
-      });
+    const { peer } = this.state;
+    peer.on("open", this.handleOpen);
+    peer.on("connection", this.handleConnection);
+  }
 
-      this.setState(prevState => ({
-        connections: [...prevState.connections, c]
-      }));
+  handleOpen(id) {
+    console.log(`My peer ID is: ${id}`);
+    // document.querySelector("#myId").value = id;
+    this.setState({ status: 1 });
+  }
 
-      console.log("New connection: ", c);
+  handleConnection(c) {
+    c.on("data", this.handleData);
+    this.setState(prevState => ({
+      status: 2,
+      connections: [...prevState.connections, c]
+    }));
 
-      // console.log("Current connections:", connections);
+    console.log(`New client ${c.peer} connected`);
+    // console.log("Current connections:", connections);
 
-      // var newPeer = document.createElement("li");
-      // newPeer.innerHTML = c.peer;
-      // document.querySelector("#peerList").appendChild(newPeer);
-      // document.querySelector("#status").style = "color: green";
-      // document.querySelector("#status").value =
-      //   conn.length + " Clients connected";
-    });
+    // var newPeer = document.createElement("li");
+    // newPeer.innerHTML = c.peer;
+    // document.querySelector("#peerList").appendChild(newPeer);
+    // document.querySelector("#status").style = "color: green";
+    // document.querySelector("#status").value =
+    //   conn.length + " Clients connected";
   }
 
   render() {
-    const { status } = this.state;
+    const statusDescriptions = [
+      "Initialized",
+      "Waiting for connections",
+      "Client(s) connected"
+    ];
+    const { status, connections } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           <p>
-            Status:
-            {status}
+            Status: {connections.length ? connections.length : ""}{" "}
+            {statusDescriptions[status]}
           </p>
         </header>
       </div>

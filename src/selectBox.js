@@ -1,10 +1,9 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardText, CardBody, CardHeader, CardTitle } from "reactstrap";
 import PropTypes from "prop-types";
 
 const SelectBox = props => {
-  const { header, title, text, children, icon } = props;
+  const { header, title, text, children } = props;
   return (
     <div>
       <Card className="shadow">
@@ -13,7 +12,6 @@ const SelectBox = props => {
         </CardHeader>
         <CardBody>
           <CardTitle>{title}</CardTitle>
-          {/* <FontAwesomeIcon icon={icon} size="6x" color="#8a817c" /> */}
           <CardText>{text}</CardText>
           {children}
         </CardBody>
@@ -26,16 +24,14 @@ SelectBox.defaultProps = {
   header: "",
   title: "",
   text: "",
-  children: "",
-  icon: ""
+  children: ""
 };
 
 SelectBox.propTypes = {
   header: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
-  children: PropTypes.element,
-  icon: PropTypes.element
+  children: PropTypes.element
 };
 
 export default SelectBox;
