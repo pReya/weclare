@@ -5,7 +5,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import Server from "./server/Server";
 import Client from "./client/Client";
 
-import SelectBox from "./SelectBox";
+import SelectBox from "./selectBox";
 import "./scss/App.scss";
 
 const App = () => (
@@ -32,7 +32,7 @@ const App = () => (
                 }}
                 className="btn btn-lg btn-block btn-outline-primary"
               >
-                Start Server
+                Create Session
               </Button>
             </SelectBox>
           </Col>
@@ -47,7 +47,7 @@ const App = () => (
                 }}
                 className="btn btn-lg btn-block btn-outline-primary"
               >
-                Start Client
+                Join Session
               </Button>
             </SelectBox>
           </Col>
