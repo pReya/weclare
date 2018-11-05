@@ -14,6 +14,7 @@ class Server extends React.Component {
   }
 
   state = {
+    //TODO: This breaks the app, if PeerJS server times out
     peer: new Peer({ debug: 3, secure: true, port: 443 }),
     // Status: 0(initialized), 1(waiting for connection), 2(at least 1 client connected)
     status: 0,
