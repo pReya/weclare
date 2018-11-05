@@ -3,6 +3,9 @@ import "../scss/App.scss";
 import Peer from "peerjs";
 
 import { Container } from "reactstrap";
+import Footer from "../shared/footer";
+import Header from "../shared/header";
+
 import ConnectForm from "./ConnectForm";
 
 class Client extends React.Component {
@@ -45,10 +48,8 @@ class Client extends React.Component {
   render() {
     const { status, serverId } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>Client</p>
-        </header>
+      <div>
+        <Header />
         <Container>
           <ConnectForm
             status={status}
@@ -56,6 +57,7 @@ class Client extends React.Component {
             onChangeServerId={id => this.setState({ serverId: id })}
             onClickConnect={this.handleConnect}
           />
+          <Footer />
         </Container>
       </div>
     );

@@ -16,7 +16,7 @@ class ConnectForm extends React.Component {
 
   render() {
     const statusDescriptions = [
-      "Initialized",
+      "Ready",
       "Trying to connect",
       "Connected to server"
     ];
