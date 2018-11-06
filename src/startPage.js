@@ -20,9 +20,9 @@ const StartPage = () => (
       <div className="card-deck mb-3 text-center">
         <Col>
           <SelectBox
-            header="For Instructors 👩‍🏫"
+            header="For Instructors"
             text="Start the server app, which allows you to create new question sets and accept connections from students."
-            icon="graduation-cap"
+            emoji="👩‍🏫"
           >
             <Button
               tag={Link}
@@ -35,8 +35,9 @@ const StartPage = () => (
         </Col>
         <Col>
           <SelectBox
-            header="For Students 👩‍🎓"
+            header="For Students"
             text="Start the client app, which allows you to connect to an existing session and answer questions."
+            emoji="👩‍🎓"
           >
             <Button
               tag={Link}

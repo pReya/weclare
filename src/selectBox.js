@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, CardText, CardBody, CardHeader, CardTitle } from "reactstrap";
+import { Card, CardText, CardBody, CardHeader } from "reactstrap";
 import PropTypes from "prop-types";
 
 const SelectBox = props => {
-  const { header, title, text, children } = props;
+  const { header, text, children, emoji } = props;
   return (
     <div>
       <Card className="shadow">
@@ -11,8 +11,18 @@ const SelectBox = props => {
           <h4 className="my-0">{header}</h4>
         </CardHeader>
         <CardBody>
-          <CardTitle>{title}</CardTitle>
-          <CardText>{text}</CardText>
+          <CardText>
+            <span
+              role="img"
+              aria-label="Student"
+              className="d-block"
+              style={{ fontSize: "4em" }}
+            >
+              {emoji}
+            </span>
+
+            <span>{text}</span>
+          </CardText>
           {children}
         </CardBody>
       </Card>
@@ -22,14 +32,14 @@ const SelectBox = props => {
 
 SelectBox.defaultProps = {
   header: "",
-  title: "",
   text: "",
-  children: ""
+  children: "",
+  emoji: ""
 };
 
 SelectBox.propTypes = {
+  emoji: PropTypes.string,
   header: PropTypes.string,
-  title: PropTypes.string,
   text: PropTypes.string,
   children: PropTypes.element
 };

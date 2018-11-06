@@ -1,4 +1,4 @@
-@import 'custom.scss';
+@import "custom.scss";
 
 @font-face {
   font-family: "IBMPlex";
@@ -27,4 +27,8 @@ body {
 
 .card-header {
   font-weight: bold !important;
+}
+
+hr {
+  margin-top: 3rem !important;
 }

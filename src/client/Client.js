@@ -49,7 +49,7 @@ class Client extends React.Component {
     const { status, serverId } = this.state;
     return (
       <div>
-        <Header />
+        <Header status={status} componentRole="client" />
         <Container>
           <ConnectForm
             status={status}

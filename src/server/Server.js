@@ -1,6 +1,9 @@
 import React from "react";
 import "../scss/App.scss";
 import Peer from "peerjs";
+import { Container } from "reactstrap";
+import Footer from "../shared/footer";
+import Header from "../shared/header";
 
 class Server extends React.Component {
   static handleData(d, sender) {
@@ -52,20 +55,13 @@ class Server extends React.Component {
   }
 
   render() {
-    const statusDescriptions = [
-      "Initialized",
-      "Waiting for connections",
-      "Client(s) connected"
-    ];
     const { status, connections } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Status: {connections.length ? connections.length : ""}{" "}
-            {statusDescriptions[status]}
-          </p>
-        </header>
+      <div>
+        <Header status={status} isServer numberOfClients={connections.length} />
+        <Container>
+          <Footer />
+        </Container>
       </div>
     );
   }
