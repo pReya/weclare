@@ -2,7 +2,7 @@ import React from "react";
 import "../scss/App.scss";
 import Peer from "peerjs";
 
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import Footer from "../shared/footer";
 import Header from "../shared/header";
 
@@ -20,7 +20,6 @@ class Client extends React.Component {
 
   state = {
     peer: new Peer({ debug: 3, secure: true, port: 443 }),
-    // Status: 0(initialized), 1(Trying to connect), 2(Connected)
     status: 0,
     connection: null,
     serverId: ""
@@ -51,12 +50,16 @@ class Client extends React.Component {
       <div>
         <Header status={status} componentRole="client" />
         <Container>
-          <ConnectForm
-            status={status}
-            serverId={serverId}
-            onChangeServerId={id => this.setState({ serverId: id })}
-            onClickConnect={this.handleConnect}
-          />
+          <Row className="justify-content-center">
+            <Col md="8">
+              <ConnectForm
+                status={status}
+                serverId={serverId}
+                onChangeServerId={id => this.setState({ serverId: id })}
+                onClickConnect={this.handleConnect}
+              />
+            </Col>
+          </Row>
           <Footer />
         </Container>
       </div>

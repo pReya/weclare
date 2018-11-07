@@ -29,13 +29,13 @@ class ConnectForm extends React.Component {
     return (
       <Card className="shadow">
         <CardHeader>
-          <h4 className="my-0">Connect to Server</h4>
+          <h6 className="my-0">Connect to Server</h6>
         </CardHeader>
         <CardBody>
           <CardText>Please enter a valid Server ID to connect to.</CardText>
           <Form>
-            <FormGroup row>
-              <Col md={4}>
+            <FormGroup row className="form-row">
+              <Col md={6}>
                 <Input
                   id="serverId"
                   type="text"
@@ -44,10 +44,11 @@ class ConnectForm extends React.Component {
                   disabled={status === 2}
                 />
               </Col>
-              <Col md={4}>
+              <Col md={3}>
                 <Button
                   type="button"
                   id="connect"
+                  className="btn-block"
                   onClick={onClickConnect}
                   disabled={status === 2}
                 >
