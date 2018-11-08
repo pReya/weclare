@@ -4,7 +4,7 @@ import { Form, FormGroup, Button, Input, Col } from "reactstrap";
 import PropTypes from "prop-types";
 import DefaultCard from "../shared/defaultCard";
 
-class ConnectForm extends React.Component {
+class ServerIdCreator extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -16,11 +16,11 @@ class ConnectForm extends React.Component {
   }
 
   render() {
-    const { serverId, onClickConnect } = this.props;
+    const { serverId, onClickCreateId } = this.props;
     return (
       <DefaultCard
-        title="Connect to Server"
-        text="Please enter a valid Server ID. You should receive this ID from your instructor."
+        title="Create a New Server Id"
+        text="Please define your individual Server Id that you can give to participants."
       >
         <Form>
           <FormGroup row className="form-row">
@@ -37,9 +37,9 @@ class ConnectForm extends React.Component {
                 type="button"
                 id="connect"
                 className="btn-block"
-                onClick={onClickConnect}
+                onClick={onClickCreateId}
               >
-                Connect
+                Create
               </Button>
             </Col>
           </FormGroup>
@@ -49,10 +49,10 @@ class ConnectForm extends React.Component {
   }
 }
 
-ConnectForm.propTypes = {
+ServerIdCreator.propTypes = {
   onChangeServerId: PropTypes.func.isRequired,
-  onClickConnect: PropTypes.func.isRequired,
+  onClickCreateId: PropTypes.func.isRequired,
   serverId: PropTypes.string.isRequired
 };
 
-export default ConnectForm;
+export default ServerIdCreator;

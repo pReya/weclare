@@ -1,9 +1,12 @@
 import React from "react";
 import "../scss/App.scss";
 import Peer from "peerjs";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
+import { Route, Redirect } from "react-router-dom";
 import Footer from "../shared/footer";
 import Header from "../shared/header";
+
+import ServerIdCreator from "./ServerIdCreator";
 
 class Server extends React.Component {
   static handleData(d, sender) {
@@ -14,21 +17,17 @@ class Server extends React.Component {
     super();
     this.handleOpen = this.handleOpen.bind(this);
     this.handleConnection = this.handleConnection.bind(this);
+    this.handleCreateId = this.handleCreateId.bind(this);
   }
 
   state = {
     // TODO: This might break the app, if PeerJS server times out
-    peer: new Peer({ debug: 3, secure: true, port: 443 }),
+    peer: null,
     // Status: 0(initialized), 1(waiting for connection), 2(at least 1 client connected)
     status: 0,
-    connections: []
+    connections: [],
+    ownServerId: ""
   };
-
-  componentDidMount() {
-    const { peer } = this.state;
-    peer.on("open", this.handleOpen);
-    peer.on("connection", this.handleConnection);
-  }
 
   handleOpen(id) {
     console.log(`My peer ID is: ${id}`);
@@ -54,12 +53,37 @@ class Server extends React.Component {
     //   conn.length + " Clients connected";
   }
 
+  handleCreateId() {
+    const { ownServerId } = this.state;
+    console.log("arrived in handleCreatId");
+    const peer = new Peer(ownServerId, { debug: 3, secure: true });
+    this.setState({ peer });
+
+    peer.on("open", this.handleOpen);
+    peer.on("connection", this.handleConnection);
+    return <Redirect to="/" />;
+  }
+
   render() {
-    const { status, connections } = this.state;
+    const { ownServerId, connections, status } = this.state;
     return (
       <div>
         <Header status={status} isServer numberOfClients={connections.length} />
         <Container>
+          <Row className="justify-content-center">
+            <Col md="8">
+              <Route
+                path="/server/createId"
+                render={() => (
+                  <ServerIdCreator
+                    serverId={ownServerId}
+                    onChangeServerId={id => this.setState({ ownServerId: id })}
+                    onClickCreateId={this.handleCreateId}
+                  />
+                )}
+              />
+            </Col>
+          </Row>
           <Footer />
         </Container>
       </div>

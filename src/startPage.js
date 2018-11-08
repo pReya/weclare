@@ -26,7 +26,7 @@ const StartPage = () => (
           >
             <Button
               tag={Link}
-              to="/server"
+              to="/server/createId"
               className="btn btn-lg btn-block btn-outline-primary"
             >
               Create Quiz

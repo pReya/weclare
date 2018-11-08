@@ -19,16 +19,29 @@ class Client extends React.Component {
   }
 
   state = {
-    peer: new Peer({ debug: 3, secure: true, port: 443 }),
+    peer: new Peer({ debug: 3, secure: true }),
     status: 0,
     connection: null,
-    serverId: ""
+    remoteServerId: ""
   };
 
+  componentDidMount() {
+    const { peer } = this.state;
+    peer.on("error", err => {
+      console.log(err);
+      this.setState({
+        status: 3
+      });
+    });
+  }
+
   handleConnect() {
-    const { peer, serverId } = this.state;
-    console.log(`Trying to connect to server ${serverId}...`);
-    const c = peer.connect(serverId);
+    const { peer, remoteServerId } = this.state;
+    console.log(`Trying to connect to server ${remoteServerId}...`);
+    const c = peer.connect(
+      remoteServerId,
+      { reliable: true }
+    );
     this.setState({
       status: 1,
       connection: c
@@ -45,7 +58,7 @@ class Client extends React.Component {
   }
 
   render() {
-    const { status, serverId } = this.state;
+    const { status, remoteServerId } = this.state;
     return (
       <div>
         <Header status={status} componentRole="client" />
@@ -53,9 +66,8 @@ class Client extends React.Component {
           <Row className="justify-content-center">
             <Col md="8">
               <ConnectForm
-                status={status}
-                serverId={serverId}
-                onChangeServerId={id => this.setState({ serverId: id })}
+                serverId={remoteServerId}
+                onChangeServerId={id => this.setState({ remoteServerId: id })}
                 onClickConnect={this.handleConnect}
               />
             </Col>

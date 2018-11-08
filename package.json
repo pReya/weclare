@@ -8,7 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.3",
     "bootstrap": "^4.1.3",
     "node-sass": "^4.9.3",
-    "peerjs": "^0.3.16",
+    "peerjs": "^0.3.18",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "secureStart": "export HTTPS=true&&npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

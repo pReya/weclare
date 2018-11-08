@@ -51,11 +51,12 @@ Header.defaultProps = {
 function ConnectionIndicator(props) {
   const { status, isServer, numberOfClients } = props;
   const statusDescriptions = {
-    client: ["⌨️ Ready", "Trying to connect", "✅ Connected"],
+    client: ["⌨️ Ready", "Trying to connect", "✅ Connected", "❌ Error"],
     server: [
       "⌨️ Ready",
       "Waiting for connections",
-      `✅ ${numberOfClients} Clients Connected`
+      `✅ ${numberOfClients} Clients Connected`,
+      "❌ Error"
     ]
   };
   const componentRole = isServer ? "server" : "client";
