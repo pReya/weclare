@@ -16,6 +16,7 @@ class ServerProvider extends React.Component {
     this.handleOpenPeer = id => {
       console.log(`My peer ID is: ${id}`);
       this.setState({ status: 1 });
+      return <Redirect to="/server/questionEditor" push />;
     };
 
     this.handleConnection = c => {

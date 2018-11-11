@@ -2,10 +2,11 @@ import React from "react";
 import "../scss/App.scss";
 import { Form, FormGroup, Button, Input, Col } from "reactstrap";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import DefaultCard from "../shared/defaultCard";
 import { ServerContext } from "./ServerProvider";
 
-const ServerIdCreator = () => (
+const ServerIdCreator = ({ history }) => (
   <DefaultCard
     title="Create a New Server Id"
     text="Please define your individual Server Id that you can give to participants."
@@ -27,7 +28,10 @@ const ServerIdCreator = () => (
                 type="button"
                 id="connect"
                 className="btn-block"
-                onClick={context.handleCreatePeer}
+                onClick={() => {
+                  context.handleCreatePeer();
+                  history.push("/server/questionEditor");
+                }}
               >
                 Create
               </Button>
@@ -39,10 +43,9 @@ const ServerIdCreator = () => (
   </DefaultCard>
 );
 
-// ServerIdCreator.propTypes = {
-//   onChangeServerId: PropTypes.func.isRequired,
-//   onClickCreateId: PropTypes.func.isRequired,
-//   serverId: PropTypes.string.isRequired
-// };
-
-export default ServerIdCreator;
+ServerIdCreator.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
+};
+export default withRouter(ServerIdCreator);

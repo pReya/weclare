@@ -1,11 +1,12 @@
 import React from "react";
 import "../scss/App.scss";
 import { Container, Row, Col } from "reactstrap";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Footer from "../shared/footer";
 import Header from "../shared/header";
 import ServerProvider, { ServerContext } from "./ServerProvider";
 import ServerIdCreator from "./ServerIdCreator";
+import QuestionSetSelect from "./QuestionSetSelect";
 
 export default () => {
   console.log("HALLO");
@@ -30,7 +31,12 @@ export default () => {
               <Route
                 exact
                 path="/server/createId"
-                render={() => <ServerIdCreator />}
+                component={ServerIdCreator}
+              />
+              <Route
+                exact
+                path="/server/questionEditor"
+                component={QuestionSetSelect}
               />
             </Col>
           </Row>
