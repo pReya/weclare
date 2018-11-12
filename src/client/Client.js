@@ -3,8 +3,8 @@ import "../scss/App.scss";
 import Peer from "peerjs";
 
 import { Container, Row, Col } from "reactstrap";
-import Footer from "../shared/footer";
-import Header from "../shared/header";
+import Footer from "../shared/Footer";
+import Header from "../shared/Header";
 
 import ConnectForm from "./ConnectForm";
 

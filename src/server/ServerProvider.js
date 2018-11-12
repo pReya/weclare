@@ -1,22 +1,22 @@
 import React from "react";
 import "../scss/App.scss";
 import Peer from "peerjs";
-import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+import Logger from "../util/Logger";
 
 export const ServerContext = React.createContext();
 
 class ServerProvider extends React.Component {
   static handleData(d, sender) {
-    console.log(`Received message from ${sender}: ${d}`);
+    Logger.info(`Received message from ${sender}: ${d}`);
   }
 
   constructor() {
     super();
 
     this.handleOpenPeer = id => {
-      console.log(`My peer ID is: ${id}`);
+      Logger.info(`My peer ID is: ${id}`);
       this.setState({ status: 1 });
-      return <Redirect to="/server/questionEditor" push />;
     };
 
     this.handleConnection = c => {
@@ -41,9 +41,7 @@ class ServerProvider extends React.Component {
     };
 
     this.state = {
-      // TODO: This might break the app, if PeerJS server times out
       peer: null,
-      // Status: 0(initialized), 1(waiting for connection), 2(at least 1 client connected)
       status: 0,
       connections: [],
       ownServerId: "",
@@ -52,8 +50,6 @@ class ServerProvider extends React.Component {
       handleChangeServerId: this.handleChangeServerId,
       handleCreatePeer: this.handleCreatePeer
     };
-
-    console.log("Constructor: ", this);
   }
 
   render() {
@@ -65,5 +61,9 @@ class ServerProvider extends React.Component {
     );
   }
 }
+
+ServerProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default ServerProvider;

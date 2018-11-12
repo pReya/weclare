@@ -13,7 +13,6 @@ import {
 
 export default function Header(props) {
   const { status, isServer } = props;
-  console.log("Header");
   return (
     <div>
       <Navbar expand="lg" className="mb-4 border-bottom shadow-sm">

@@ -3,7 +3,7 @@ import "../scss/App.scss";
 import { Form, FormGroup, Button, Input, Col } from "reactstrap";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import DefaultCard from "../shared/defaultCard";
+import DefaultCard from "../shared/DefaultCard";
 import { ServerContext } from "./ServerProvider";
 
 const ServerIdCreator = ({ history }) => (
@@ -46,6 +46,6 @@ const ServerIdCreator = ({ history }) => (
 ServerIdCreator.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
-  })
+  }).isRequired
 };
 export default withRouter(ServerIdCreator);
