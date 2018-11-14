@@ -20,7 +20,7 @@ const ServerIdCreator = ({ history }) => (
                 id="serverId"
                 type="text"
                 value={context.ownServerId}
-                onChange={context.handleChangeServerId}
+                onChange={e => context.changeServerId(e.target.value)}
               />
             </Col>
             <Col md={3}>
@@ -29,7 +29,7 @@ const ServerIdCreator = ({ history }) => (
                 id="connect"
                 className="btn-block"
                 onClick={() => {
-                  context.handleCreatePeer();
+                  context.createPeer();
                   history.push("/server/questionEditor");
                 }}
               >

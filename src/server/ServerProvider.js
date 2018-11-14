@@ -11,59 +11,58 @@ class ServerProvider extends React.Component {
     Logger.info(`Received message from ${sender}: ${d}`);
   }
 
-  constructor() {
-    super();
+  static propTypes = {
+    children: PropTypes.node.isRequired
+  };
 
-    this.handleOpenPeer = id => {
-      Logger.info(`My peer ID is: ${id}`);
-      this.setState({ status: 1 });
-    };
+  state = {
+    peer: null,
+    status: 0,
+    connections: [],
+    ownServerId: ""
+  };
 
-    this.handleConnection = c => {
-      c.on("data", data => this.handleData(data, c.peer));
-      this.setState(prevState => ({
-        status: 2,
-        connections: [...prevState.connections, c]
-      }));
-    };
+  handleOpenPeer = id => {
+    Logger.info(`My peer ID is: ${id}`);
+    this.setState({ status: 1 });
+  };
 
-    this.handleChangeServerId = e => {
-      this.setState({ ownServerId: e.target.value });
-    };
+  createConnection = c => {
+    c.on("data", data => this.handleData(data, c.peer));
+    this.setState(prevState => ({
+      status: 2,
+      connections: [...prevState.connections, c]
+    }));
+  };
 
-    this.handleCreatePeer = () => {
-      const { ownServerId } = this.state;
-      const peer = new Peer(ownServerId, { debug: 3, secure: true });
-      this.setState({ peer });
+  changeServerId = id => {
+    this.setState({ ownServerId: id });
+  };
 
-      peer.on("open", this.handleOpenPeer);
-      peer.on("connection", this.handleConnection);
-    };
+  createPeer = () => {
+    const { ownServerId } = this.state;
+    const peer = new Peer(ownServerId, { debug: 3, secure: true });
+    this.setState({ peer });
 
-    this.state = {
-      peer: null,
-      status: 0,
-      connections: [],
-      ownServerId: "",
-      handleOpenPeer: this.handleOpenPeer,
-      handleConnection: this.handleConnection,
-      handleChangeServerId: this.handleChangeServerId,
-      handleCreatePeer: this.handleCreatePeer
-    };
-  }
+    peer.on("open", this.handleOpenPeer);
+    peer.on("connection", this.handleConnection);
+    peer.on("error", this.handleConnection);
+  };
 
   render() {
     const { children } = this.props;
     return (
-      <ServerContext.Provider value={this.state}>
+      <ServerContext.Provider
+        value={{
+          ...this.state,
+          changeServerId: this.changeServerId,
+          createPeer: this.createPeer
+        }}
+      >
         {children}
       </ServerContext.Provider>
     );
   }
 }
-
-ServerProvider.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 export default ServerProvider;

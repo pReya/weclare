@@ -1,12 +1,12 @@
 import React from "react";
 import "../scss/App.scss";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row } from "reactstrap";
 import { Route } from "react-router-dom";
 import Footer from "../shared/Footer";
 import Header from "../shared/Header";
 import ServerProvider, { ServerContext } from "./ServerProvider";
 import ServerIdCreator from "./ServerIdCreator";
-import QuestionSetSelect from "./QuestionSetSelect";
+import QuestionEditor from "./QuestionEditor";
 
 export default () => (
   <div>
@@ -22,14 +22,12 @@ export default () => (
       </ServerContext.Consumer>
       <Container>
         <Row className="justify-content-center">
-          <Col md="8">
-            <Route exact path="/server/createId" component={ServerIdCreator} />
-            <Route
-              exact
-              path="/server/questionEditor"
-              component={QuestionSetSelect}
-            />
-          </Col>
+          <Route exact path="/server/createId" component={ServerIdCreator} />
+          <Route
+            exact
+            path="/server/questionEditor"
+            component={QuestionEditor}
+          />
         </Row>
         <Footer />
       </Container>
