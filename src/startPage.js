@@ -2,8 +2,8 @@ import React from "react";
 import { Row, Col, Button, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 
-import Footer from "./shared/footer";
-import SelectBox from "./selectBox";
+import Footer from "./shared/Footer";
+import SelectBox from "./SelectBox";
 import "./scss/App.scss";
 
 const StartPage = () => (

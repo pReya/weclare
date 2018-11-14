@@ -2,7 +2,7 @@ import React from "react";
 import "../scss/App.scss";
 import { Form, FormGroup, Button, Input, Col } from "reactstrap";
 import PropTypes from "prop-types";
-import DefaultCard from "../shared/defaultCard";
+import DefaultCard from "../shared/DefaultCard";
 
 class ConnectForm extends React.Component {
   constructor(props) {

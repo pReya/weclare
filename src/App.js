@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Server from "./server/Server";
 import Client from "./client/Client";
 
-import StartPage from "./startPage";
+import StartPage from "./StartPage";
 import "./scss/App.scss";
 
 const App = () => (
