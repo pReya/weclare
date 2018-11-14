@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 
 function QuestionList(props) {
-  const { questions, onSelect } = props;
+  const { questions, onSelect, selectedQuestion } = props;
   return (
     <Card className="shadow">
       <CardHeader>
@@ -25,8 +25,18 @@ function QuestionList(props) {
 
       <ListGroup flush>
         {questions.map((q, i) => (
-          <ListGroupItem key={`question-${i}`} tag="a" onClick={onSelect}>
-            <ListGroupItemText>{q}</ListGroupItemText>
+          <ListGroupItem
+            key={`question-${i}`}
+            tag="a"
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              onSelect(i);
+            }}
+            action
+            active={selectedQuestion === i}
+          >
+            <ListGroupItemText className="mb-0">{q}</ListGroupItemText>
           </ListGroupItem>
         ))}
       </ListGroup>
