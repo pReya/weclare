@@ -4,26 +4,31 @@ import { Col, Card, CardBody, CardText, CardHeader } from "reactstrap";
 
 import QuestionList from "./QuestionList";
 
-const questions = ["Frage 1", "Frage 2", "Frage 3"];
-
 class QuestionEditor extends React.Component {
   state = {
-    selectedQuestion: null
+    selectedQuestion: null,
+    questions: []
   };
 
   changeSelection = s => {
-    console.log("Handler called with ", s);
     this.setState({ selectedQuestion: s });
   };
 
+  addQuestion = q => {
+    this.setState(prevState => ({
+      questions: [...prevState.questions, q]
+    }));
+  };
+
   render() {
-    const { selectedQuestion } = this.state;
+    const { selectedQuestion, questions } = this.state;
     return (
       <React.Fragment>
         <Col md="4">
           <QuestionList
             questions={questions}
             onSelect={this.changeSelection}
+            onAddQuestion={this.addQuestion}
             selectedQuestion={selectedQuestion}
           />
         </Col>

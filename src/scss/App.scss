@@ -32,3 +32,10 @@ body {
 hr {
   margin-top: 3rem !important;
 }
+
+.cardFooterButton:focus,
+.cardFooterButton:active {
+  outline: none !important;
+  box-shadow: none;
+  cursor: pointer;
+}
