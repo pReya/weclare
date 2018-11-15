@@ -1,23 +1,45 @@
 import React from "react";
 import "../scss/App.scss";
-import { Col, Card, CardBody, CardText, CardHeader } from "reactstrap";
+import { Col } from "reactstrap";
+import QuestionContent from "./QuestionContent";
 
 import QuestionList from "./QuestionList";
 
 class QuestionEditor extends React.Component {
   state = {
     selectedQuestion: null,
-    questions: []
+    questions: [
+      {
+        text: "Wie ist die Antwort?",
+        answers: ["Antwort A", "Antwort B", "Antwort C"]
+      }
+    ]
   };
 
   changeSelection = s => {
     this.setState({ selectedQuestion: s });
   };
 
-  addQuestion = q => {
-    this.setState(prevState => ({
-      questions: [...prevState.questions, q]
-    }));
+  editQuestion = q => {
+    const { questions, selectedQuestion } = this.state;
+    const clonedQuestions = questions.slice();
+    clonedQuestions[selectedQuestion] = q;
+    this.setState({
+      questions: clonedQuestions
+    });
+  };
+
+  addQuestion = () => {
+    this.setState(prevState => {
+      const newQuestion = {
+        text: "Wie ist die Antwort?",
+        answers: ["Antwort A", "Antwort B"]
+      };
+      return {
+        selectedQuestion: prevState.questions.length,
+        questions: [...prevState.questions, newQuestion]
+      };
+    });
   };
 
   render() {
@@ -33,14 +55,11 @@ class QuestionEditor extends React.Component {
           />
         </Col>
         <Col md="8">
-          <Card className="shadow">
-            <CardHeader>
-              <h6 className="my-0">Edit Question</h6>
-            </CardHeader>
-            <CardBody>
-              <CardText>{questions[selectedQuestion]}</CardText>
-            </CardBody>
-          </Card>
+          <QuestionContent
+            question={questions[selectedQuestion]}
+            onEditQuestion={this.editQuestion}
+            selectedQuestion={selectedQuestion}
+          />
         </Col>
       </React.Fragment>
     );

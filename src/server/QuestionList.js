@@ -39,7 +39,7 @@ function QuestionList(props) {
             action
             active={selectedQuestion === i}
           >
-            <ListGroupItemText className="mb-0">{q}</ListGroupItemText>
+            <ListGroupItemText className="mb-0">{q.text}</ListGroupItemText>
           </ListGroupItem>
         ))}
         {questions.length === 0 && (
@@ -52,7 +52,7 @@ function QuestionList(props) {
         tag="button"
         className="cardFooterButton"
         onClick={() => {
-          onAddQuestion(`Frage ${questions.length + 1}`);
+          onAddQuestion(`Question ${questions.length + 1}`);
         }}
       >
         <AddIcon className="text-success" style={{ paddingBottom: "3px" }} />
@@ -63,13 +63,14 @@ function QuestionList(props) {
 }
 
 QuestionList.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.string),
+  questions: PropTypes.arrayOf(PropTypes.object),
   onSelect: PropTypes.func.isRequired,
   selectedQuestion: PropTypes.number,
   onAddQuestion: PropTypes.func.isRequired
 };
 
 QuestionList.defaultProps = {
-  questions: ["No questions"]
+  questions: ["No questions"],
+  selectedQuestion: null
 };
 export default QuestionList;
