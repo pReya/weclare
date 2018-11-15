@@ -41,13 +41,13 @@ export default props => {
                     answers: question.answers
                   })
                 }
-                value={question.text}
+                value={question.questionText}
               />
             </FormGroup>
             <FormGroup row className="form-row">
               <Label sm={2}>Answers</Label>
-              {question.answers.map((a, i) => (
-                <SingleChoiceAnswer answer={a} key={`answer-${i}`} />
+              {Object.values(question.answers).map((a, i) => (
+                <SingleChoiceAnswer answer={a.answerText} key={`answer-${i}`} />
               ))}
               <Button outline block color="success">
                 Add question
@@ -71,7 +71,13 @@ const SingleChoiceAnswer = props => {
           <Input
             addon
             type="radio"
-            aria-label="Checkbox for following text input"
+            value={answer.answerText}
+            onChange={e => {
+              /* onEditQuestion({
+                text: e.target.value,
+                answers: question.answers
+              }) */
+            }}
           />
         </InputGroupText>
       </InputGroupAddon>

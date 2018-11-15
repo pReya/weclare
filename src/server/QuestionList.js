@@ -14,7 +14,7 @@ import {
 
 function QuestionList(props) {
   const { questions, onSelect, selectedQuestion, onAddQuestion } = props;
-
+  console.log("QuestionList received these questions: ", questions);
   return (
     <Card className="shadow">
       <CardHeader>
@@ -27,19 +27,21 @@ function QuestionList(props) {
       </CardHeader>
 
       <ListGroup flush>
-        {questions.map((q, i) => (
+        {questions.map(q => (
           <ListGroupItem
-            key={`question-${i}`}
+            key={`question-${q[0]}`}
             tag="a"
             href="#"
             onClick={e => {
               e.preventDefault();
-              onSelect(i);
+              onSelect(parseInt(q[0], 10));
             }}
             action
-            active={selectedQuestion === i}
+            active={selectedQuestion === parseInt(q[0], 10)}
           >
-            <ListGroupItemText className="mb-0">{q.text}</ListGroupItemText>
+            <ListGroupItemText className="mb-0">
+              {q[1].questionText}
+            </ListGroupItemText>
           </ListGroupItem>
         ))}
         {questions.length === 0 && (
@@ -52,7 +54,7 @@ function QuestionList(props) {
         tag="button"
         className="cardFooterButton"
         onClick={() => {
-          onAddQuestion(`Question ${questions.length + 1}`);
+          onAddQuestion();
         }}
       >
         <AddIcon className="text-success" style={{ paddingBottom: "3px" }} />
@@ -63,7 +65,7 @@ function QuestionList(props) {
 }
 
 QuestionList.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.object),
+  questions: PropTypes.arrayOf(PropTypes.array),
   onSelect: PropTypes.func.isRequired,
   selectedQuestion: PropTypes.number,
   onAddQuestion: PropTypes.func.isRequired
