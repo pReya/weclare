@@ -21,14 +21,9 @@ export default () => (
         )}
       </ServerContext.Consumer>
       <Container>
-        <Row className="justify-content-center">
-          <Route exact path="/server/createId" component={ServerIdCreator} />
-          <Route
-            exact
-            path="/server/questionEditor"
-            component={QuestionEditor}
-          />
-        </Row>
+        <Route exact path="/server/createId" component={ServerIdCreator} />
+        <Route exact path="/server/questionEditor" component={QuestionEditor} />
+
         <Footer />
       </Container>
     </ServerProvider>

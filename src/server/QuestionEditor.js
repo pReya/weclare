@@ -1,6 +1,6 @@
 import React from "react";
 import "../scss/App.scss";
-import { Col } from "reactstrap";
+import { Col, Row, Button } from "reactstrap";
 import QuestionContent from "./QuestionContent";
 
 import QuestionList from "./QuestionList";
@@ -97,21 +97,30 @@ class QuestionEditor extends React.Component {
     console.log("selectedQuestion", selectedQuestion);
     return (
       <React.Fragment>
-        <Col md="4">
-          <QuestionList
-            questions={Object.entries(questions)}
-            onSelect={this.changeSelection}
-            onAddQuestion={this.addQuestion}
-            selectedQuestion={selectedQuestion}
-          />
-        </Col>
-        <Col md="8">
-          <QuestionContent
-            question={questions[selectedQuestion]}
-            onEditQuestion={this.editQuestion}
-            selectedQuestion={selectedQuestion}
-          />
-        </Col>
+        <Row className="justify-content-center mb-4">
+          <Col md="4">
+            <QuestionList
+              questions={Object.entries(questions)}
+              onSelect={this.changeSelection}
+              onAddQuestion={this.addQuestion}
+              selectedQuestion={selectedQuestion}
+            />
+          </Col>
+          <Col md="8">
+            <QuestionContent
+              question={questions[selectedQuestion]}
+              onEditQuestion={this.editQuestion}
+              selectedQuestion={selectedQuestion}
+            />
+          </Col>
+        </Row>
+        <Row className="justify-content-end">
+          <Col md="2">
+            <Button outline block color="success">
+              Continue
+            </Button>
+          </Col>
+        </Row>
       </React.Fragment>
     );
   }

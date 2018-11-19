@@ -50,7 +50,7 @@ export default props => {
                 <SingleChoiceAnswer answer={a.answerText} key={`answer-${i}`} />
               ))}
               <Button outline block color="success">
-                Add question
+                Add answer
               </Button>
             </FormGroup>
           </Form>
@@ -65,7 +65,7 @@ export default props => {
 const SingleChoiceAnswer = props => {
   const { answer } = props;
   return (
-    <InputGroup>
+    <InputGroup className="mb-2">
       <InputGroupAddon addonType="prepend">
         <InputGroupText>
           <Input
@@ -82,6 +82,11 @@ const SingleChoiceAnswer = props => {
         </InputGroupText>
       </InputGroupAddon>
       <Input value={answer} />
+      <InputGroupAddon addonType="append">
+        <InputGroupText>
+          <Button outline close />
+        </InputGroupText>
+      </InputGroupAddon>
     </InputGroup>
   );
 };
