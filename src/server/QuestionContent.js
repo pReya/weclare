@@ -18,7 +18,7 @@ import {
 } from "reactstrap";
 
 export default props => {
-  const { question, onEditQuestion, selectedQuestion } = props;
+  const { question, onEditQuestion, selectedQuestion, onEditAnswer } = props;
   console.log("QuestionContent received question: ", question);
   return (
     <Card className="shadow">
@@ -35,19 +35,21 @@ export default props => {
               <Input
                 id="question"
                 type="text"
-                onChange={e =>
-                  onEditQuestion({
-                    text: e.target.value,
-                    answers: question.answers
-                  })
-                }
+                onChange={e => onEditQuestion(e.target.value)}
                 value={question.questionText}
               />
             </FormGroup>
             <FormGroup row className="form-row">
               <Label sm={2}>Answers</Label>
               {Object.values(question.answers).map((a, i) => (
-                <SingleChoiceAnswer answer={a.answerText} key={`answer-${i}`} />
+                <SingleChoiceAnswer
+                  answer={a.answerText}
+                  key={`answer-${i}`}
+                  onChange={e => {
+                    console.log(e.target.value);
+                    onEditAnswer(e.target.value, i + 1);
+                  }}
+                />
               ))}
               <Button outline block color="success">
                 Add answer
@@ -63,7 +65,7 @@ export default props => {
 };
 
 const SingleChoiceAnswer = props => {
-  const { answer } = props;
+  const { answer, onChange } = props;
   return (
     <InputGroup className="mb-2">
       <InputGroupAddon addonType="prepend">
@@ -72,16 +74,11 @@ const SingleChoiceAnswer = props => {
             addon
             type="radio"
             value={answer.answerText}
-            onChange={e => {
-              /* onEditQuestion({
-                text: e.target.value,
-                answers: question.answers
-              }) */
-            }}
+            onChange={e => {}}
           />
         </InputGroupText>
       </InputGroupAddon>
-      <Input value={answer} />
+      <Input value={answer} onChange={onChange} />
       <InputGroupAddon addonType="append">
         <InputGroupText>
           <Button outline close />

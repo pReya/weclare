@@ -1,6 +1,8 @@
 import React from "react";
 import "../scss/App.scss";
 import { Col, Row, Button } from "reactstrap";
+import update from "immutability-helper";
+
 import QuestionContent from "./QuestionContent";
 
 import QuestionList from "./QuestionList";
@@ -8,76 +10,39 @@ import QuestionList from "./QuestionList";
 class QuestionEditor extends React.Component {
   state = {
     selectedQuestion: null,
-    questions: {
-      1: {
-        questionType: "singleChoice",
-        questionText: "Wie ist die Antwort?",
-        answers: {
-          1: {
-            answerText: "Antwort A"
-          },
-          2: {
-            answerText: "Antwort B"
-          },
-          3: {
-            answerText: "Antwort C"
-          }
-        }
-      },
-      2: {
-        questionType: "singleChoice",
-        questionText: "Wie ist die Antwort2?",
-        answers: {
-          1: {
-            answerText: "Lol"
-          },
-          2: {
-            answerText: "Haha"
-          },
-          3: {
-            answerText: "Dies das"
-          }
-        }
-      }
-    }
+    questions: {}
   };
 
   changeSelection = s => {
     this.setState({ selectedQuestion: s });
   };
 
-  editQuestion = q => {
-    const { questions, selectedQuestion } = this.state;
-    const clonedQuestions = questions.slice();
-    clonedQuestions[selectedQuestion] = q;
-    this.setState({
-      questions: q
+  editQuestion = newText => {
+    const { selectedQuestion } = this.state;
+    const modState = update(this.state, {
+      questions: { [selectedQuestion]: { questionText: { $set: newText } } }
     });
+    this.setState(modState);
   };
 
-  editAnswers = (a, i) => {
+  editAnswer = (a, i) => {
     const { questions, selectedQuestion } = this.state;
-    const clonedQuestions = questions.slice();
-    const clonedAnswers = (clonedQuestions[selectedQuestion].answers[i] = a);
-    this.setState({
-      questions: clonedAnswers
+    const modState = update(this.state, {
+      questions: {
+        [selectedQuestion]: { answers: { [i]: { answerText: { $set: a } } } }
+      }
     });
+    this.setState(modState, () => console.log("New state: ", this.state));
   };
 
   addQuestion = () => {
     this.setState(prevState => {
       const newQuestion = {
         questionType: "singleChoice",
-        questionText: "Wie ist die Antwort?",
+        questionText: "New question",
         answers: {
           1: {
-            answerText: "Antwort A"
-          },
-          2: {
-            answerText: "Antwort B"
-          },
-          3: {
-            answerText: "Antwort C"
+            answerText: "Answer"
           }
         }
       };
@@ -111,6 +76,7 @@ class QuestionEditor extends React.Component {
               question={questions[selectedQuestion]}
               onEditQuestion={this.editQuestion}
               selectedQuestion={selectedQuestion}
+              onEditAnswer={this.editAnswer}
             />
           </Col>
         </Row>
