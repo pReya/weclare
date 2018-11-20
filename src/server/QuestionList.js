@@ -12,9 +12,9 @@ import {
   ListGroupItemText
 } from "reactstrap";
 
-function QuestionList(props) {
+const QuestionList = props => {
   const { questions, onSelect, selectedQuestion, onAddQuestion } = props;
-  console.log("QuestionList received these questions: ", questions);
+  console.log("QuestionList received questions: ", questions);
   return (
     <Card className="shadow">
       <CardHeader>
@@ -62,7 +62,7 @@ function QuestionList(props) {
       </CardFooter>
     </Card>
   );
-}
+};
 
 QuestionList.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.array),

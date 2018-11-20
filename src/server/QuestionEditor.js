@@ -31,11 +31,23 @@ class QuestionEditor extends React.Component {
     this.setState(modState, () => console.log("New state: ", this.state));
   };
 
-  editAnswer = (a, i) => {
+  editAnswerText = (newAnswerText, i) => {
     const { selectedQuestion } = this.state;
     const modState = update(this.state, {
       questions: {
-        [selectedQuestion]: { answers: { [i]: { answerText: { $set: a } } } }
+        [selectedQuestion]: {
+          answers: { [i]: { answerText: { $set: newAnswerText } } }
+        }
+      }
+    });
+    this.setState(modState, () => console.log("New state: ", this.state));
+  };
+
+  editCorrectAnswer = i => {
+    const { selectedQuestion } = this.state;
+    const modState = update(this.state, {
+      questions: {
+        [selectedQuestion]: { correctAnswer: { $set: i } }
       }
     });
     this.setState(modState, () => console.log("New state: ", this.state));
@@ -63,7 +75,7 @@ class QuestionEditor extends React.Component {
     });
   };
 
-  editQuestion = newText => {
+  editQuestionText = newText => {
     const { selectedQuestion } = this.state;
     const modState = update(this.state, {
       questions: { [selectedQuestion]: { questionText: { $set: newText } } }
@@ -71,9 +83,20 @@ class QuestionEditor extends React.Component {
     this.setState(modState);
   };
 
+  deleteAnswer = i => {
+    const { selectedQuestion } = this.state;
+    const modState = update(this.state, {
+      questions: {
+        [selectedQuestion]: { answers: { $unset: [i.toString()] } }
+      }
+    });
+    this.setState(modState);
+  };
+
+  deleteQuestion = () => {};
+
   render() {
     const { selectedQuestion, questions } = this.state;
-    console.log("selectedQuestion", selectedQuestion);
     return (
       <React.Fragment>
         <Row className="justify-content-center mb-4">
@@ -88,10 +111,12 @@ class QuestionEditor extends React.Component {
           <Col md="8">
             <QuestionContent
               question={questions[selectedQuestion]}
-              onEditQuestion={this.editQuestion}
               selectedQuestion={selectedQuestion}
-              onEditAnswer={this.editAnswer}
+              onEditQuestionText={this.editQuestionText}
+              onEditAnswerText={this.editAnswerText}
               onAddAnswer={this.addAnswer}
+              onEditCorrectAnswer={this.editCorrectAnswer}
+              onDeleteAnswer={this.deleteAnswer}
             />
           </Col>
         </Row>

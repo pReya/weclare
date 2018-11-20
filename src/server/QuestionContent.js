@@ -15,13 +15,15 @@ import {
   Label
 } from "reactstrap";
 
-export default props => {
+const QuestionContent = props => {
   const {
     question,
     selectedQuestion,
-    onEditAnswer,
-    onEditQuestion,
-    onAddAnswer
+    onEditAnswerText,
+    onEditQuestionText,
+    onAddAnswer,
+    onEditCorrectAnswer,
+    onDeleteAnswer
   } = props;
   return (
     <Card className="shadow">
@@ -38,7 +40,7 @@ export default props => {
               <Input
                 id="question"
                 type="text"
-                onChange={e => onEditQuestion(e.target.value)}
+                onChange={e => onEditQuestionText(e.target.value)}
                 value={question.questionText}
               />
             </FormGroup>
@@ -46,11 +48,15 @@ export default props => {
               <Label sm={2}>Answers</Label>
               {Object.values(question.answers).map((a, i) => (
                 <SingleChoiceAnswer
+                  correctAnswer={question.correctAnswer === i + 1}
+                  number={i + 1}
                   answer={a.answerText}
                   key={`answer-${i}`}
-                  onChange={e => {
-                    onEditAnswer(e.target.value, i + 1);
+                  onEditAnswerText={e => {
+                    onEditAnswerText(e.target.value, i + 1);
                   }}
+                  onEditCorrectAnswer={onEditCorrectAnswer}
+                  onDeleteAnswer={onDeleteAnswer}
                 />
               ))}
               <Button outline block color="success" onClick={onAddAnswer}>
@@ -66,26 +72,64 @@ export default props => {
   );
 };
 
+QuestionContent.propTypes = {
+  question: PropTypes.shape({
+    questionType: PropTypes.string,
+    questionText: PropTypes.string,
+    answers: PropTypes.object
+  }),
+  selectedQuestion: PropTypes.number,
+  onEditAnswerText: PropTypes.func.isRequired,
+  onEditQuestionText: PropTypes.func.isRequired,
+  onAddAnswer: PropTypes.func.isRequired,
+  onEditCorrectAnswer: PropTypes.func.isRequired
+};
+
+QuestionContent.defaultProps = {
+  question: {},
+  selectedQuestion: 0
+};
+
 const SingleChoiceAnswer = props => {
-  const { answer, onChange } = props;
+  const {
+    answer,
+    onEditAnswerText,
+    number,
+    correctAnswer,
+    onEditCorrectAnswer,
+    onDeleteAnswer
+  } = props;
   return (
     <InputGroup className="mb-2">
       <InputGroupAddon addonType="prepend">
         <InputGroupText>
           <Input
             addon
+            checked={correctAnswer}
             type="radio"
-            value={answer.answerText}
-            onChange={e => {}}
+            name="answer"
+            onChange={() => {
+              onEditCorrectAnswer(number);
+            }}
           />
         </InputGroupText>
       </InputGroupAddon>
-      <Input value={answer} onChange={onChange} />
+      <Input value={answer} onChange={onEditAnswerText} />
       <InputGroupAddon addonType="append">
         <InputGroupText>
-          <Button outline close />
+          <Button outline close onClick={() => onDeleteAnswer(number)} />
         </InputGroupText>
       </InputGroupAddon>
     </InputGroup>
   );
 };
+
+SingleChoiceAnswer.propTypes = {
+  answer: PropTypes.string.isRequired,
+  onEditAnswerText: PropTypes.func.isRequired,
+  number: PropTypes.number.isRequired,
+  correctAnswer: PropTypes.bool.isRequired,
+  onEditCorrectAnswer: PropTypes.func.isRequired
+};
+
+export default QuestionContent;
