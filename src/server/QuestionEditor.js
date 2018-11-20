@@ -17,16 +17,22 @@ class QuestionEditor extends React.Component {
     this.setState({ selectedQuestion: s });
   };
 
-  editQuestion = newText => {
-    const { selectedQuestion } = this.state;
+  addAnswer = () => {
+    const { questions, selectedQuestion } = this.state;
+    const answerCount = Object.keys(questions[selectedQuestion].answers).length;
+    const answer = "Answer";
     const modState = update(this.state, {
-      questions: { [selectedQuestion]: { questionText: { $set: newText } } }
+      questions: {
+        [selectedQuestion]: {
+          answers: { $merge: { [answerCount + 1]: { answerText: answer } } }
+        }
+      }
     });
-    this.setState(modState);
+    this.setState(modState, () => console.log("New state: ", this.state));
   };
 
   editAnswer = (a, i) => {
-    const { questions, selectedQuestion } = this.state;
+    const { selectedQuestion } = this.state;
     const modState = update(this.state, {
       questions: {
         [selectedQuestion]: { answers: { [i]: { answerText: { $set: a } } } }
@@ -57,6 +63,14 @@ class QuestionEditor extends React.Component {
     });
   };
 
+  editQuestion = newText => {
+    const { selectedQuestion } = this.state;
+    const modState = update(this.state, {
+      questions: { [selectedQuestion]: { questionText: { $set: newText } } }
+    });
+    this.setState(modState);
+  };
+
   render() {
     const { selectedQuestion, questions } = this.state;
     console.log("selectedQuestion", selectedQuestion);
@@ -77,6 +91,7 @@ class QuestionEditor extends React.Component {
               onEditQuestion={this.editQuestion}
               selectedQuestion={selectedQuestion}
               onEditAnswer={this.editAnswer}
+              onAddAnswer={this.addAnswer}
             />
           </Col>
         </Row>

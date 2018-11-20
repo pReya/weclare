@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import {
   Card,
   CardBody,
-  CardText,
   CardHeader,
   Form,
   FormGroup,
@@ -13,13 +12,17 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Col,
   Label
 } from "reactstrap";
 
 export default props => {
-  const { question, onEditQuestion, selectedQuestion, onEditAnswer } = props;
-  console.log("QuestionContent received question: ", question);
+  const {
+    question,
+    selectedQuestion,
+    onEditAnswer,
+    onEditQuestion,
+    onAddAnswer
+  } = props;
   return (
     <Card className="shadow">
       <CardHeader>
@@ -46,12 +49,11 @@ export default props => {
                   answer={a.answerText}
                   key={`answer-${i}`}
                   onChange={e => {
-                    console.log(e.target.value);
                     onEditAnswer(e.target.value, i + 1);
                   }}
                 />
               ))}
-              <Button outline block color="success">
+              <Button outline block color="success" onClick={onAddAnswer}>
                 Add answer
               </Button>
             </FormGroup>
