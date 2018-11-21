@@ -22,8 +22,13 @@ export function selectQuestion(questionIdx) {
 }
 
 export function addQuestion() {
-  return {
-    type: ADD_QUESTION
+  return (dispatch, getState) => {
+    // 1: add question to `questions` state
+    dispatch({ type: ADD_QUESTION });
+
+    // 2: select newest question as `selectedQuestion`
+    const { questions } = getState();
+    dispatch(selectQuestion(questions.length - 1));
   };
 }
 

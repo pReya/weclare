@@ -1,3 +1,5 @@
+import { combineReducers } from "redux";
+
 import {
   ADD_QUESTION,
   EDIT_QUESTION_TEXT,
@@ -8,11 +10,6 @@ import {
   SET_CORRECT_ANSWER,
   SELECT_QUESTION
 } from "./actions";
-
-const initialState = {
-  selectedQuestion: null,
-  questions: []
-};
 
 const newQuestion = {
   questionType: "singleChoice",
@@ -31,43 +28,61 @@ const newAnswer = {
   answerText: "Answer A"
 };
 
-const updateInArray = (arr, ind, updater) =>
-  arr.map((item, index) => (ind === index ? updater(item) : item));
-
-function questionReducer(state = initialState, action) {
+function selectedQuestion(state = null, action) {
   switch (action.type) {
     case SELECT_QUESTION:
-      return Object.assign(state, {
-        selectedQuestion: action.payload.questionIdx
-      });
+      return action.payload.questionIdx;
+
+    default:
+      return state;
+  }
+}
+
+function questions(state = [], action) {
+  switch (action.type) {
     case ADD_QUESTION:
-      return {
-        selectedQuestion: state.questions.length,
-        questions: [...state.questions, newQuestion]
-      };
+      return [...state, newQuestion];
+
     case EDIT_QUESTION_TEXT: {
-      const clonedQuestions = state.questions.slice();
-      clonedQuestions[state.selectedQuestion] = {
-        questionText: action.payload.questionText,
-        answers: { ...state.questions[state.selectedQuestion].answers }
+      // const changeInArray = (array, index, changer) =>
+      //   array.map((item, i) => index === i ? changer(item) : item)
+
+      // return changeInArray(
+      //   state.questions,
+      //   state.selectedQuestion,
+      //   q => ({
+      //     ...q,
+      //     questionText: action.payload.questionText
+      //   })
+      // );
+
+      const { questionIdx, questionText } = action.payload;
+
+      const clonedQuestions = state.slice();
+      clonedQuestions[questionIdx] = {
+        ...clonedQuestions[questionIdx],
+        questionText
       };
-      return Object.assign(state, { questions: clonedQuestions });
+
+      return clonedQuestions;
     }
     case DELETE_QUESTION: {
       const clonedQuestions = [
-        ...state.questions.slice(0, state.payload.questionIdx),
-        ...state.questions.slice(state.payload.questionIdx + 1)
+        ...state.slice(0, action.payload.questionIdx),
+        ...state.slice(action.payload.questionIdx + 1)
       ];
 
-      return Object.assign(state, { questions: clonedQuestions });
+      return clonedQuestions;
     }
     case ADD_ANSWER: {
-      const clonedQuestions = state.questions.slice();
-      clonedQuestions[state.selectedQuestion] = {
-        questionText: state.questions[state.selectedQuestion].questionText,
-        answers: [...state.questions[state.selectedQuestion].answers, newAnswer]
+      const { questionIdx } = action.payload;
+
+      const clonedQuestions = state.slice();
+      clonedQuestions[questionIdx] = {
+        ...state[questionIdx],
+        answers: [...state[questionIdx].answers, newAnswer]
       };
-      return Object.assign(state, { questions: clonedQuestions });
+      return clonedQuestions;
     }
 
     case EDIT_ANSWER_TEXT:
@@ -78,4 +93,7 @@ function questionReducer(state = initialState, action) {
   }
 }
 
-export default questionReducer;
+export default combineReducers({
+  questions,
+  selectedQuestion
+});
