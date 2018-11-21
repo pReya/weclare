@@ -1,12 +1,17 @@
 import React from "react";
 import "../scss/App.scss";
-import { Container, Row } from "reactstrap";
+import { Container } from "reactstrap";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import { Route } from "react-router-dom";
 import Footer from "../shared/Footer";
 import Header from "../shared/Header";
 import ServerProvider, { ServerContext } from "./ServerProvider";
 import ServerIdCreator from "./ServerIdCreator";
 import QuestionEditor from "./QuestionEditor";
+import questionReducer from "./reducers";
+
+const store = createStore(questionReducer);
 
 export default () => (
   <div>
@@ -21,9 +26,14 @@ export default () => (
         )}
       </ServerContext.Consumer>
       <Container>
-        <Route exact path="/server/createId" component={ServerIdCreator} />
-        <Route exact path="/server/questionEditor" component={QuestionEditor} />
-
+        <Provider store={store}>
+          <Route exact path="/server/createId" component={ServerIdCreator} />
+          <Route
+            exact
+            path="/server/questionEditor"
+            component={QuestionEditor}
+          />
+        </Provider>
         <Footer />
       </Container>
     </ServerProvider>

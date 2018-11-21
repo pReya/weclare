@@ -1,100 +1,10 @@
 import React from "react";
 import "../scss/App.scss";
 import { Col, Row, Button } from "reactstrap";
-import update from "immutability-helper";
-
 import QuestionContent from "./QuestionContent";
-
 import QuestionList from "./QuestionList";
 
 class QuestionEditor extends React.Component {
-  state = {
-    selectedQuestion: null,
-    questions: {}
-  };
-
-  changeSelection = s => {
-    this.setState({ selectedQuestion: s });
-  };
-
-  addAnswer = () => {
-    const { questions, selectedQuestion } = this.state;
-    const answerCount = Object.keys(questions[selectedQuestion].answers).length;
-    const answer = "Answer";
-    const modState = update(this.state, {
-      questions: {
-        [selectedQuestion]: {
-          answers: { $merge: { [answerCount + 1]: { answerText: answer } } }
-        }
-      }
-    });
-    this.setState(modState, () => console.log("New state: ", this.state));
-  };
-
-  editAnswerText = (newAnswerText, i) => {
-    const { selectedQuestion } = this.state;
-    const modState = update(this.state, {
-      questions: {
-        [selectedQuestion]: {
-          answers: { [i]: { answerText: { $set: newAnswerText } } }
-        }
-      }
-    });
-    this.setState(modState, () => console.log("New state: ", this.state));
-  };
-
-  editCorrectAnswer = i => {
-    const { selectedQuestion } = this.state;
-    const modState = update(this.state, {
-      questions: {
-        [selectedQuestion]: { correctAnswer: { $set: i } }
-      }
-    });
-    this.setState(modState, () => console.log("New state: ", this.state));
-  };
-
-  addQuestion = () => {
-    this.setState(prevState => {
-      const newQuestion = {
-        questionType: "singleChoice",
-        questionText: "New question",
-        answers: {
-          1: {
-            answerText: "Answer"
-          }
-        }
-      };
-      const oldNumberOfQuestions = Object.keys(prevState.questions).length;
-      return {
-        selectedQuestion: oldNumberOfQuestions + 1,
-        questions: {
-          ...prevState.questions,
-          [oldNumberOfQuestions + 1]: newQuestion
-        }
-      };
-    });
-  };
-
-  editQuestionText = newText => {
-    const { selectedQuestion } = this.state;
-    const modState = update(this.state, {
-      questions: { [selectedQuestion]: { questionText: { $set: newText } } }
-    });
-    this.setState(modState);
-  };
-
-  deleteAnswer = i => {
-    const { selectedQuestion } = this.state;
-    const modState = update(this.state, {
-      questions: {
-        [selectedQuestion]: { answers: { $unset: [i.toString()] } }
-      }
-    });
-    this.setState(modState);
-  };
-
-  deleteQuestion = () => {};
-
   render() {
     const { selectedQuestion, questions } = this.state;
     return (
