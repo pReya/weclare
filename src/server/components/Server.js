@@ -1,18 +1,22 @@
 import React from "react";
-import "../scss/App.scss";
+import "../../scss/App.scss";
 import { Container } from "reactstrap";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Route } from "react-router-dom";
-import Footer from "../shared/Footer";
-import Header from "../shared/Header";
+import { composeWithDevTools } from "redux-devtools-extension";
+import Footer from "../../shared/Footer";
+import Header from "../../shared/Header";
 import ServerProvider, { ServerContext } from "./ServerProvider";
 import ServerIdCreator from "./ServerIdCreator";
 import QuestionEditor from "./QuestionEditor";
-import mainReducer from "./reducers";
+import mainReducer from "../reducers/reducers";
 
-const store = createStore(mainReducer, applyMiddleware(thunk));
+const store = createStore(
+  mainReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 export default () => (
   <div>

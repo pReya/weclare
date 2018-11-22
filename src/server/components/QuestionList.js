@@ -1,7 +1,8 @@
 import React from "react";
-import "../scss/App.scss";
+import "../../scss/App.scss";
 import PropTypes from "prop-types";
 import AddIcon from "@material-ui/icons/Add";
+
 import {
   Badge,
   Card,
@@ -13,7 +14,12 @@ import {
 } from "reactstrap";
 
 const QuestionList = props => {
-  const { questions, onSelect, selectedQuestion, onAddQuestion } = props;
+  const {
+    questions,
+    onSelectQuestion,
+    selectedQuestion,
+    onAddQuestion
+  } = props;
   console.log("QuestionList received questions: ", questions);
   return (
     <Card className="shadow">
@@ -27,20 +33,20 @@ const QuestionList = props => {
       </CardHeader>
 
       <ListGroup flush>
-        {questions.map(q => (
+        {questions.map((q, i) => (
           <ListGroupItem
-            key={`question-${q[0]}`}
+            key={i}
             tag="a"
             href="#"
             onClick={e => {
               e.preventDefault();
-              onSelect(parseInt(q[0], 10));
+              onSelectQuestion(i);
             }}
             action
-            active={selectedQuestion === parseInt(q[0], 10)}
+            active={selectedQuestion === i}
           >
             <ListGroupItemText className="mb-0">
-              {q[1].questionText}
+              {q.questionText}
             </ListGroupItemText>
           </ListGroupItem>
         ))}
@@ -65,9 +71,9 @@ const QuestionList = props => {
 };
 
 QuestionList.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.array),
-  onSelect: PropTypes.func.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object),
   selectedQuestion: PropTypes.number,
+  onSelectQuestion: PropTypes.func.isRequired,
   onAddQuestion: PropTypes.func.isRequired
 };
 

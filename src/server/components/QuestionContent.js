@@ -1,5 +1,5 @@
 import React from "react";
-import "../scss/App.scss";
+import "../../scss/App.scss";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -22,9 +22,11 @@ const QuestionContent = props => {
     onEditAnswerText,
     onEditQuestionText,
     onAddAnswer,
-    onEditCorrectAnswer,
-    onDeleteAnswer
+    onSetCorrectAnswer,
+    onDeleteAnswer,
+    onDeleteQuestion
   } = props;
+  console.log("QuestionContent received question: ", question);
   return (
     <Card className="shadow">
       <CardHeader>
@@ -40,27 +42,43 @@ const QuestionContent = props => {
               <Input
                 id="question"
                 type="text"
-                onChange={e => onEditQuestionText(e.target.value)}
+                onChange={e =>
+                  onEditQuestionText(selectedQuestion, e.target.value)
+                }
                 value={question.questionText}
               />
             </FormGroup>
             <FormGroup row className="form-row">
               <Label sm={2}>Answers</Label>
-              {Object.values(question.answers).map((a, i) => (
+              {question.answers.map((a, i) => (
                 <SingleChoiceAnswer
-                  correctAnswer={question.correctAnswer === i + 1}
-                  number={i + 1}
+                  isCorrectAnswer={question.correctAnswer === i}
+                  selectedQuestion={selectedQuestion}
+                  number={i}
                   answer={a.answerText}
-                  key={`answer-${i}`}
+                  key={i}
                   onEditAnswerText={e => {
-                    onEditAnswerText(e.target.value, i + 1);
+                    onEditAnswerText(selectedQuestion, e.target.value, i);
                   }}
-                  onEditCorrectAnswer={onEditCorrectAnswer}
+                  onSetCorrectAnswer={onSetCorrectAnswer}
                   onDeleteAnswer={onDeleteAnswer}
                 />
               ))}
-              <Button outline block color="success" onClick={onAddAnswer}>
+              <Button
+                outline
+                block
+                color="success"
+                onClick={() => onAddAnswer(selectedQuestion)}
+              >
                 Add answer
+              </Button>
+              <Button
+                outline
+                block
+                color="danger"
+                onClick={() => onDeleteQuestion(selectedQuestion)}
+              >
+                Delete Question
               </Button>
             </FormGroup>
           </Form>
@@ -76,13 +94,15 @@ QuestionContent.propTypes = {
   question: PropTypes.shape({
     questionType: PropTypes.string,
     questionText: PropTypes.string,
-    answers: PropTypes.object
+    answers: PropTypes.arrayOf(PropTypes.object)
   }),
   selectedQuestion: PropTypes.number,
   onEditAnswerText: PropTypes.func.isRequired,
   onEditQuestionText: PropTypes.func.isRequired,
   onAddAnswer: PropTypes.func.isRequired,
-  onEditCorrectAnswer: PropTypes.func.isRequired
+  onSetCorrectAnswer: PropTypes.func.isRequired,
+  onDeleteAnswer: PropTypes.func.isRequired,
+  onDeleteQuestion: PropTypes.func.isRequired
 };
 
 QuestionContent.defaultProps = {
@@ -93,10 +113,11 @@ QuestionContent.defaultProps = {
 const SingleChoiceAnswer = props => {
   const {
     answer,
-    onEditAnswerText,
     number,
-    correctAnswer,
-    onEditCorrectAnswer,
+    selectedQuestion,
+    isCorrectAnswer,
+    onEditAnswerText,
+    onSetCorrectAnswer,
     onDeleteAnswer
   } = props;
   return (
@@ -105,11 +126,11 @@ const SingleChoiceAnswer = props => {
         <InputGroupText>
           <Input
             addon
-            checked={correctAnswer}
+            checked={isCorrectAnswer}
             type="radio"
             name="answer"
             onChange={() => {
-              onEditCorrectAnswer(number);
+              onSetCorrectAnswer(number);
             }}
           />
         </InputGroupText>
@@ -117,7 +138,14 @@ const SingleChoiceAnswer = props => {
       <Input value={answer} onChange={onEditAnswerText} />
       <InputGroupAddon addonType="append">
         <InputGroupText>
-          <Button outline close onClick={() => onDeleteAnswer(number)} />
+          <Button
+            outline
+            close
+            onClick={() => {
+              console.log("CLICK DELETE", selectedQuestion, number);
+              onDeleteAnswer(selectedQuestion, number);
+            }}
+          />
         </InputGroupText>
       </InputGroupAddon>
     </InputGroup>
@@ -125,11 +153,13 @@ const SingleChoiceAnswer = props => {
 };
 
 SingleChoiceAnswer.propTypes = {
+  selectedQuestion: PropTypes.number.isRequired,
   answer: PropTypes.string.isRequired,
   onEditAnswerText: PropTypes.func.isRequired,
   number: PropTypes.number.isRequired,
-  correctAnswer: PropTypes.bool.isRequired,
-  onEditCorrectAnswer: PropTypes.func.isRequired
+  isCorrectAnswer: PropTypes.bool.isRequired,
+  onSetCorrectAnswer: PropTypes.func.isRequired,
+  onDeleteAnswer: PropTypes.func.isRequired
 };
 
 export default QuestionContent;

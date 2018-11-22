@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Server from "./server/Server";
+import Server from "./server/components/Server";
 import Client from "./client/Client";
 
 import StartPage from "./StartPage";

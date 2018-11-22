@@ -1,7 +1,11 @@
 module.exports = {
   parser: "babel-eslint",
-  extends: ["airbnb", "plugin:prettier/recommended"],
-  plugins: ["prettier"],
+  extends: [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "plugin:react-redux/recommended"
+  ],
+  plugins: ["prettier", "react-redux"],
   rules: {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],

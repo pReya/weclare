@@ -7,7 +7,7 @@ export const DELETE_QUESTION = "DELETE_ANSWER";
 // Answer Actions
 export const ADD_ANSWER = "ADD_ANSWER";
 export const EDIT_ANSWER_TEXT = "EDIT_ANSWER_TEXT";
-export const DELETE_ANSWER = "DELETE_ANSWER";
+export const ANSWER_DELETE = "ANSWER_DELETE";
 export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER";
 
 // Action Creators
@@ -32,7 +32,7 @@ export function addQuestion() {
   };
 }
 
-export function editQuestionText(questionText, questionIdx) {
+export function editQuestionText(questionIdx, questionText) {
   return {
     type: EDIT_QUESTION_TEXT,
     payload: {
@@ -43,21 +43,30 @@ export function editQuestionText(questionText, questionIdx) {
 }
 
 export function deleteQuestion(questionIdx) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: DELETE_QUESTION,
+      payload: {
+        questionIdx
+      }
+    });
+
+    // 2: select newest question as `selectedQuestion`
+    const { selectedQuestion } = getState();
+    dispatch(selectQuestion(selectedQuestion - 1));
+  };
+}
+
+export function addAnswer(questionIdx) {
   return {
-    type: DELETE_ANSWER,
+    type: ADD_ANSWER,
     payload: {
       questionIdx
     }
   };
 }
 
-export function addAnswer() {
-  return {
-    type: ADD_ANSWER
-  };
-}
-
-export function editAnswerText(answerText, questionIdx, answerIdx) {
+export function editAnswerText(questionIdx, answerText, answerIdx) {
   return {
     type: EDIT_ANSWER_TEXT,
     payload: {
@@ -70,7 +79,7 @@ export function editAnswerText(answerText, questionIdx, answerIdx) {
 
 export function deleteAnswer(questionIdx, answerIdx) {
   return {
-    type: DELETE_ANSWER,
+    type: ANSWER_DELETE,
     payload: {
       questionIdx,
       answerIdx

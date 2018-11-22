@@ -6,14 +6,15 @@ import {
   DELETE_QUESTION,
   ADD_ANSWER,
   EDIT_ANSWER_TEXT,
-  DELETE_ANSWER,
+  ANSWER_DELETE,
   SET_CORRECT_ANSWER,
   SELECT_QUESTION
-} from "./actions";
+} from "../actions/actions";
 
 const newQuestion = {
   questionType: "singleChoice",
   questionText: "New question",
+  correctAnswer: null,
   answers: [
     {
       answerText: "Answer A"
@@ -25,8 +26,13 @@ const newQuestion = {
 };
 
 const newAnswer = {
-  answerText: "Answer A"
+  answerText: "New answer"
 };
+
+const changeInArray = (array, index, changer) =>
+  array.map((item, i) => (index === i ? changer(item) : item));
+
+const deleteInArray = (array, index) => array.filter((item, i) => index !== i);
 
 function selectedQuestion(state = null, action) {
   switch (action.type) {
@@ -44,9 +50,6 @@ function questions(state = [], action) {
       return [...state, newQuestion];
 
     case EDIT_QUESTION_TEXT: {
-      // const changeInArray = (array, index, changer) =>
-      //   array.map((item, i) => index === i ? changer(item) : item)
-
       // return changeInArray(
       //   state.questions,
       //   state.selectedQuestion,
@@ -85,11 +88,45 @@ function questions(state = [], action) {
       return clonedQuestions;
     }
 
-    case EDIT_ANSWER_TEXT:
-    case DELETE_ANSWER:
-    case SET_CORRECT_ANSWER:
-    default:
+    case EDIT_ANSWER_TEXT: {
+      const { questionIdx, answerText, answerIdx } = action.payload;
+
+      // const clonedQuestions = state.slice();
+      // const clonedQuestion = Object.assign({}, clonedQuestions[questionIdx]);
+      // const clonedAnswers = clonedQuestion.answers.slice();
+      // const clonedAnswer = Object.assign({}, clonedAnswers[answerIdx]);
+      // clonedAnswer.answerText = answerText;
+      // clonedAnswers[answerIdx] = clonedAnswer;
+      // clonedQuestion.answers = clonedAnswers;
+      // clonedQuestions[questionIdx] = clonedQuestion;
+
+      // return clonedQuestions;
+
+      return changeInArray(state, questionIdx, q => ({
+        ...q,
+        answers: changeInArray(q.answers, answerIdx, a => ({
+          ...a,
+          answerText
+        }))
+      }));
+    }
+
+    case ANSWER_DELETE: {
+      const { questionIdx, answerIdx } = action.payload;
+      return changeInArray(state, questionIdx, q => ({
+        ...q,
+        answers: deleteInArray(q.answers, answerIdx)
+      }));
+    }
+
+    case SET_CORRECT_ANSWER: {
+      console.log("SETCORRECTANSWER");
       return state;
+    }
+
+    default: {
+      return state;
+    }
   }
 }
 
