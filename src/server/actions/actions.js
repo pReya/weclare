@@ -3,6 +3,7 @@ export const SELECT_QUESTION = "SELECT_QUESTION";
 export const ADD_QUESTION = "ADD_QUESTION";
 export const EDIT_QUESTION_TEXT = "EDIT_QUESTION_TEXT";
 export const DELETE_QUESTION = "DELETE_QUESTION";
+export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 
 // Answer Actions
 export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER";
@@ -78,7 +79,6 @@ export function editAnswerText(questionIdx, answerText, answerIdx) {
 }
 
 export function deleteAnswer(questionIdx, answerIdx) {
-  console.log("ARRIVED IN ACTION CREATOR");
   return {
     type: DELETE_ANSWER,
     payload: {
@@ -94,6 +94,15 @@ export function setCorrectAnswer(questionIdx, answerIdx) {
     payload: {
       questionIdx,
       answerIdx
+    }
+  };
+}
+
+export function loadQuestions(newQuestions) {
+  return {
+    type: LOAD_QUESTIONS,
+    payload: {
+      newQuestions
     }
   };
 }

@@ -8,7 +8,8 @@ import {
   EDIT_ANSWER_TEXT,
   SET_CORRECT_ANSWER,
   DELETE_ANSWER,
-  SELECT_QUESTION
+  SELECT_QUESTION,
+  LOAD_QUESTIONS
 } from "../actions/actions";
 
 const newQuestion = {
@@ -126,6 +127,11 @@ function questions(state = [], action) {
         ...q,
         correctAnswers: answerIdx
       }));
+    }
+
+    case LOAD_QUESTIONS: {
+      const { newQuestions } = action.payload;
+      return newQuestions;
     }
 
     default: {

@@ -142,7 +142,6 @@ const SingleChoiceAnswer = props => {
             outline
             close
             onClick={() => {
-              console.log("CLICK DELETE", selectedQuestion, number);
               onDeleteAnswer(selectedQuestion, number);
             }}
           />
