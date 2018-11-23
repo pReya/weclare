@@ -37,7 +37,7 @@ const QuestionContent = props => {
           <Form>
             <FormGroup row className="form-row">
               <Label for="question" sm={2}>
-                Question
+                Question Text
               </Label>
               <Input
                 id="question"
@@ -49,10 +49,10 @@ const QuestionContent = props => {
               />
             </FormGroup>
             <FormGroup row className="form-row">
-              <Label sm={2}>Answers</Label>
+              <Label sm={8}>Answers (Check the correct answer)</Label>
               {question.answers.map((a, i) => (
                 <SingleChoiceAnswer
-                  isCorrectAnswer={question.correctAnswer === i}
+                  isCorrectAnswer={question.correctAnswers === i}
                   selectedQuestion={selectedQuestion}
                   number={i}
                   answer={a.answerText}
@@ -130,7 +130,7 @@ const SingleChoiceAnswer = props => {
             type="radio"
             name="answer"
             onChange={() => {
-              onSetCorrectAnswer(number);
+              onSetCorrectAnswer(selectedQuestion, number);
             }}
           />
         </InputGroupText>

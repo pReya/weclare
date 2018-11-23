@@ -14,7 +14,7 @@ import {
 const newQuestion = {
   questionType: "singleChoice",
   questionText: "New question",
-  correctAnswer: null,
+  correctAnswers: null,
   answers: [
     {
       answerText: "Answer A"
@@ -121,8 +121,11 @@ function questions(state = [], action) {
     }
 
     case SET_CORRECT_ANSWER: {
-      console.log("SETCORRECTANSWER");
-      return state;
+      const { questionIdx, answerIdx } = action.payload;
+      return changeInArray(state, questionIdx, q => ({
+        ...q,
+        correctAnswers: answerIdx
+      }));
     }
 
     default: {
