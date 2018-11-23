@@ -6,8 +6,8 @@ import {
   DELETE_QUESTION,
   ADD_ANSWER,
   EDIT_ANSWER_TEXT,
-  ANSWER_DELETE,
   SET_CORRECT_ANSWER,
+  DELETE_ANSWER,
   SELECT_QUESTION
 } from "../actions/actions";
 
@@ -77,6 +77,15 @@ function questions(state = [], action) {
 
       return clonedQuestions;
     }
+
+    case DELETE_ANSWER: {
+      const { questionIdx, answerIdx } = action.payload;
+      return changeInArray(state, questionIdx, q => ({
+        ...q,
+        answers: deleteInArray(q.answers, answerIdx)
+      }));
+    }
+
     case ADD_ANSWER: {
       const { questionIdx } = action.payload;
 
@@ -108,14 +117,6 @@ function questions(state = [], action) {
           ...a,
           answerText
         }))
-      }));
-    }
-
-    case ANSWER_DELETE: {
-      const { questionIdx, answerIdx } = action.payload;
-      return changeInArray(state, questionIdx, q => ({
-        ...q,
-        answers: deleteInArray(q.answers, answerIdx)
       }));
     }
 
