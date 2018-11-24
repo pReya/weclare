@@ -1,9 +1,9 @@
 import React from "react";
-import "../scss/App.scss";
+import "../../scss/App.scss";
 import { Form, FormGroup, Button, Input, Col, Row } from "reactstrap";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import DefaultCard from "../shared/DefaultCard";
+import DefaultCard from "../../shared/DefaultCard";
 import { ServerContext } from "./ServerProvider";
 
 const ServerIdCreator = ({ history }) => (

@@ -1,8 +1,8 @@
 import React from "react";
-import "../scss/App.scss";
+import "../../scss/App.scss";
 import Peer from "peerjs";
 import PropTypes from "prop-types";
-import Logger from "../util/Logger";
+import Logger from "../../util/Logger";
 
 export const ServerContext = React.createContext();
 
