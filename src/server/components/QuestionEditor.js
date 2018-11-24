@@ -4,7 +4,7 @@ import { Col, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import QuestionContent from "./QuestionContent";
 import QuestionList from "./QuestionList";
-import * as actions from "../actions/actions";
+import * as actions from "../actions/questions";
 
 const mapStateToProps = state => ({
   questions: state.questions,

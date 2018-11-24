@@ -5,14 +5,6 @@ export const EDIT_QUESTION_TEXT = "EDIT_QUESTION_TEXT";
 export const DELETE_QUESTION = "DELETE_QUESTION";
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 
-// Answer Actions
-export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER";
-export const ADD_ANSWER = "ADD_ANSWER";
-export const EDIT_ANSWER_TEXT = "EDIT_ANSWER_TEXT";
-export const DELETE_ANSWER = "DELETE_ANSWER";
-
-// Action Creators
-
 export function selectQuestion(questionIdx) {
   return {
     type: SELECT_QUESTION,
@@ -58,6 +50,31 @@ export function deleteQuestion(questionIdx) {
   };
 }
 
+export function loadQuestions(newQuestions) {
+  return {
+    type: LOAD_QUESTIONS,
+    payload: {
+      newQuestions
+    }
+  };
+}
+
+// Answer Actions
+export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER";
+export const ADD_ANSWER = "ADD_ANSWER";
+export const EDIT_ANSWER_TEXT = "EDIT_ANSWER_TEXT";
+export const DELETE_ANSWER = "DELETE_ANSWER";
+
+export function setCorrectAnswer(questionIdx, answerIdx) {
+  return {
+    type: SET_CORRECT_ANSWER,
+    payload: {
+      questionIdx,
+      answerIdx
+    }
+  };
+}
+
 export function addAnswer(questionIdx) {
   return {
     type: ADD_ANSWER,
@@ -84,25 +101,6 @@ export function deleteAnswer(questionIdx, answerIdx) {
     payload: {
       questionIdx,
       answerIdx
-    }
-  };
-}
-
-export function setCorrectAnswer(questionIdx, answerIdx) {
-  return {
-    type: SET_CORRECT_ANSWER,
-    payload: {
-      questionIdx,
-      answerIdx
-    }
-  };
-}
-
-export function loadQuestions(newQuestions) {
-  return {
-    type: LOAD_QUESTIONS,
-    payload: {
-      newQuestions
     }
   };
 }

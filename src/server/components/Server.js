@@ -11,7 +11,7 @@ import Header from "../../shared/Header";
 import ServerProvider, { ServerContext } from "./ServerProvider";
 import ServerIdCreator from "./ServerIdCreator";
 import QuestionEditor from "./QuestionEditor";
-import mainReducer from "../reducers/reducers";
+import mainReducer from "../reducers/main";
 
 const store = createStore(
   mainReducer,

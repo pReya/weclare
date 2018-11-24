@@ -1,5 +1,3 @@
-import { combineReducers } from "redux";
-
 import {
   ADD_QUESTION,
   EDIT_QUESTION_TEXT,
@@ -10,7 +8,9 @@ import {
   DELETE_ANSWER,
   SELECT_QUESTION,
   LOAD_QUESTIONS
-} from "../actions/actions";
+} from "../actions/questions";
+
+import { changeInArray, deleteInArray } from "./helpers";
 
 const newQuestion = {
   questionType: "singleChoice",
@@ -30,12 +30,9 @@ const newAnswer = {
   answerText: "New answer"
 };
 
-const changeInArray = (array, index, changer) =>
-  array.map((item, i) => (index === i ? changer(item) : item));
+// Reducers
 
-const deleteInArray = (array, index) => array.filter((item, i) => index !== i);
-
-function selectedQuestion(state = null, action) {
+export const selectedQuestion = (state = null, action) => {
   switch (action.type) {
     case SELECT_QUESTION:
       return action.payload.questionIdx;
@@ -43,9 +40,9 @@ function selectedQuestion(state = null, action) {
     default:
       return state;
   }
-}
+};
 
-function questions(state = [], action) {
+export const questions = (state = [], action) => {
   switch (action.type) {
     case ADD_QUESTION:
       return [...state, newQuestion];
@@ -138,9 +135,4 @@ function questions(state = [], action) {
       return state;
     }
   }
-}
-
-export default combineReducers({
-  questions,
-  selectedQuestion
-});
+};
