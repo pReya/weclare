@@ -5,8 +5,6 @@ import {
   SET_PEER
 } from "../actions/server";
 
-import { changeInArray, deleteInArray } from "./helpers";
-
 export const server = (
   state = {
     peer: null,
@@ -19,12 +17,18 @@ export const server = (
   switch (action.type) {
     case SET_SERVER_STATUS:
       return { ...state, status: action.payload.newStatus };
+
     case ADD_CONNECTION:
-      return state;
+      return {
+        ...state,
+        connections: [...state.connections, action.payload.connection]
+      };
+
     case SET_SERVER_ID:
       return { ...state, ownServerId: action.payload.newId };
+
     case SET_PEER:
-      return state;
+      return { ...state, peer: action.payload.peer };
 
     default:
       return state;

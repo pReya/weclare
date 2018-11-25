@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {
   Container,
   Input,
@@ -11,16 +12,24 @@ import {
   NavLink
 } from "reactstrap";
 
-export default function Header(props) {
-  const { status, isServer } = props;
+const mapStateToProps = state => ({
+  server: state.server
+});
+
+const Header = props => {
+  const { server, isServer } = props;
   return (
     <div>
       <Navbar expand="lg" className="mb-4 border-bottom shadow-sm">
         <Container>
           <NavbarBrand className="mr-auto" tag={Link} to="/">
-            Weclare
+            Weclare {isServer ? "Server" : "Client"}
           </NavbarBrand>
-          <ConnectionIndicator isServer={isServer} status={status} {...props} />
+          <ConnectionIndicator
+            isServer={isServer}
+            status={server.status}
+            {...props}
+          />
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink tag={Link} to="/">
@@ -37,7 +46,8 @@ export default function Header(props) {
       </Navbar>
     </div>
   );
-}
+};
+export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
   isServer: PropTypes.bool,

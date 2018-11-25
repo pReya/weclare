@@ -21,22 +21,6 @@ const mapStateToProps = state => ({
   selectedQuestion: state.selectedQuestion
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   selectQuestion: questionIdx => dispatch(actions.selectQuestion(questionIdx)),
-//   addQuestion: () => dispatch(actions.addQuestion()),
-//   editQuestionText: (questionIdx, questionText) =>
-//     dispatch(actions.editQuestionText(questionIdx, questionText)),
-//   deleteQuestion: questionIdx => dispatch(actions.deleteQuestion(questionIdx)),
-//   addAnswer: questionIdx => dispatch(actions.addAnswer(questionIdx)),
-//   editAnswerText: (questionIdx, answerText, answerIdx) =>
-//     dispatch(actions.editAnswerText(questionIdx, answerText, answerIdx)),
-//   deleteAnswer: (questionIdx, answerIdx) =>
-//     dispatch(actions.deleteAnswer(questionIdx, answerIdx)),
-//   setCorrectAnswer: (questionIdx, answerIdx) =>
-//     dispatch(actions.setCorrectAnswer(questionIdx, answerIdx)),
-//   loadQuestions: newQuestions => dispatch(actions.loadQuestions(newQuestions))
-// });
-
 const mapDispatchToProps = {
   selectQuestion,
   addQuestion,
