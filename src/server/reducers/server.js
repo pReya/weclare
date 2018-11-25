@@ -7,7 +7,7 @@ import {
 
 import { changeInArray, deleteInArray } from "./helpers";
 
-const server = (
+export const server = (
   state = {
     peer: null,
     status: 0,
