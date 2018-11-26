@@ -1,9 +1,9 @@
-import { ADD_CONNECTION, SET_SERVER_ID } from "../actions/server";
+import { ADD_CONNECTION, SET_REMOTE_SERVER_ID } from "../actions/client";
 
-export const server = (
+export const client = (
   state = {
     connections: [],
-    ownServerId: ""
+    remoteServerId: ""
   },
   action
 ) => {
@@ -14,12 +14,12 @@ export const server = (
         connections: [...state.connections, action.payload.connection]
       };
 
-    case SET_SERVER_ID:
-      return { ...state, ownServerId: action.payload.newId };
+    case SET_REMOTE_SERVER_ID:
+      return { ...state, remoteServerId: action.payload.newId };
 
     default:
       return state;
   }
 };
 
-export default server;
+export default client;

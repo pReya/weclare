@@ -1,6 +1,6 @@
 // Server Actions
 export const ADD_CONNECTION = "ADD_CONNCECTION";
-export const SET_SERVER_ID = "SET_SERVER_ID";
+export const SET_REMOTE_SERVER_ID = "SET_REMOTE_SERVER_ID";
 
 export function addConnection(connection) {
   return {
@@ -11,9 +11,9 @@ export function addConnection(connection) {
   };
 }
 
-export function setServerId(newId) {
+export function setRemoteServerId(newId) {
   return {
-    type: SET_SERVER_ID,
+    type: SET_REMOTE_SERVER_ID,
     payload: {
       newId
     }

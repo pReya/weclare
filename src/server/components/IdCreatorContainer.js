@@ -3,13 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Peer from "peerjs";
 import IdCreator from "./IdCreator";
-
-import {
-  setServerStatus,
-  addConnection,
-  setServerId,
-  setPeer
-} from "../actions/server";
+import { addConnection, setServerId } from "../actions/server";
+import { setPeer, setServerStatus } from "../../shared/actions/connection";
 
 const createPeer = (ownServerId, dispatch) => {
   const peer = new Peer(ownServerId, { debug: 3, secure: true });

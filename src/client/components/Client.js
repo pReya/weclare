@@ -1,37 +1,33 @@
 import React from "react";
 import "../../scss/App.scss";
-import { Container } from "reactstrap";
 import { Provider } from "react-redux";
+import { Container } from "reactstrap";
 import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { Route } from "react-router-dom";
-import { composeWithDevTools } from "redux-devtools-extension";
+import mainReducer from "../reducers/main";
 import Footer from "../../shared/Footer";
 import Header from "../../shared/Header";
-import IdCreatorContainer from "./IdCreatorContainer";
-import QuestionEditor from "./QuestionEditor";
-import mainReducer from "../reducers/main";
+import IdConnector from "./IdConnector";
 
 const store = createStore(
   mainReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-export default () => (
+const Client = () => (
   <div>
     <Provider store={store}>
       <>
-        <Header isServer />
+        <Header />
         <Container>
-          <Route exact path="/server/createId" component={IdCreatorContainer} />
-          <Route
-            exact
-            path="/server/questionEditor"
-            component={QuestionEditor}
-          />
+          <Route exact path="/client/connectId" component={IdConnector} />
           <Footer />
         </Container>
       </>
     </Provider>
   </div>
 );
+
+export default Client;

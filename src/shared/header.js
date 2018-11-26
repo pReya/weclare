@@ -13,23 +13,20 @@ import {
 } from "reactstrap";
 
 const mapStateToProps = state => ({
-  server: state.server
+  status: state.connection.status
 });
 
 const Header = props => {
-  const { server, isServer } = props;
+  const { status, isServer } = props;
   return (
     <div>
       <Navbar expand="lg" className="mb-4 border-bottom shadow-sm">
         <Container>
           <NavbarBrand className="mr-auto" tag={Link} to="/">
-            Weclare {isServer ? "Server" : "Client"}
+            Weclare
+            {isServer ? " Server" : " Client"}
           </NavbarBrand>
-          <ConnectionIndicator
-            isServer={isServer}
-            status={server.status}
-            {...props}
-          />
+          <ConnectionIndicator isServer={isServer} status={status} {...props} />
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink tag={Link} to="/">
@@ -47,6 +44,7 @@ const Header = props => {
     </div>
   );
 };
+
 export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
@@ -64,7 +62,7 @@ function ConnectionIndicator(props) {
     client: ["⌨️ Ready", "Trying to connect", "✅ Connected", "❌ Error"],
     server: [
       "⌨️ Ready",
-      "Waiting for connections",
+      "❓ Waiting for connections",
       `✅ ${numberOfClients} Clients Connected`,
       "❌ Error"
     ]
