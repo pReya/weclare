@@ -1,5 +1,4 @@
 import React from "react";
-import "../scss/App.scss";
 import { Card, CardHeader, CardBody, CardText, Col } from "reactstrap";
 import PropTypes from "prop-types";
 

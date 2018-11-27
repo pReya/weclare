@@ -3,7 +3,7 @@ import "../../scss/App.scss";
 import { Form, FormGroup, Button, Input, Col, Row } from "reactstrap";
 import PropTypes from "prop-types";
 import ReactRouterPropTypes from "react-router-prop-types";
-import DefaultCard from "../../shared/DefaultCard";
+import DefaultCard from "../../shared/components/DefaultCard";
 
 const ServerIdCreator = props => {
   const {
