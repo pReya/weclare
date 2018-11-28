@@ -1,8 +1,9 @@
-import "../../scss/App.scss";
+import React from "react";
+import { Row } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Peer from "peerjs";
-import IdCreator from "./IdCreator";
+import ConnectForm from "../../shared/components/ConnectForm";
 import { addConnection, setServerId } from "../actions/server";
 import { setPeer, setServerStatus } from "../../shared/actions/connection";
 
@@ -11,7 +12,7 @@ const createPeer = (ownServerId, dispatch) => {
   dispatch(setPeer(peer));
 
   peer.on("open", () => {
-    console.log("Open");
+    console.log("Connection Opened");
     dispatch(setServerStatus(1));
   });
 
@@ -24,17 +25,28 @@ const createPeer = (ownServerId, dispatch) => {
 
 const mapDispatchToProps = dispatch => ({
   onChangeServerId: newServerId => dispatch(setServerId(newServerId)),
-  onClickCreate: ownServerId => createPeer(ownServerId, dispatch)
+  onClickConnect: ownServerId => createPeer(ownServerId, dispatch)
 });
 
 const mapStateToProps = state => ({
-  ownServerId: state.ownServerId,
+  ownServerId: state.server.ownServerId,
   location: "/server/questionEditor"
 });
+
+const staticProps = {
+  title: "Create a New Server Id",
+  text:
+    "Please define your individual Server Id that you can give to participants.",
+  buttonText: "Create"
+};
 
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(IdCreator)
+  )(props => (
+    <Row className="justify-content-center">
+      <ConnectForm {...props} {...staticProps} />
+    </Row>
+  ))
 );

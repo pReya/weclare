@@ -26,7 +26,6 @@ const QuestionContent = props => {
     onDeleteAnswer,
     onDeleteQuestion
   } = props;
-  console.log("QuestionContent received question: ", question);
   return (
     <Card className="shadow">
       <CardHeader>

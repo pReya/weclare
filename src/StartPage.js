@@ -41,7 +41,7 @@ const StartPage = () => (
           >
             <Button
               tag={Link}
-              to="/client/connectId"
+              to="/client/connect"
               className="btn btn-lg btn-block btn-outline-primary"
             >
               Join Quiz

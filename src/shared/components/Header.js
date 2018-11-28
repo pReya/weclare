@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import {
   Container,
   Input,
@@ -12,12 +11,8 @@ import {
   NavLink
 } from "reactstrap";
 
-const mapStateToProps = state => ({
-  status: state.connection.status
-});
-
 const Header = props => {
-  const { status, isServer } = props;
+  const { status, numberOfClients, isServer } = props;
   return (
     <div>
       <Navbar expand="lg" className="mb-4 border-bottom shadow-sm">
@@ -26,7 +21,11 @@ const Header = props => {
             Weclare
             {isServer ? " Server" : " Client"}
           </NavbarBrand>
-          <ConnectionIndicator isServer={isServer} status={status} {...props} />
+          <ConnectionIndicator
+            isServer={isServer}
+            status={status}
+            numberOfClients={numberOfClients}
+          />
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink tag={Link} to="/">
@@ -45,18 +44,18 @@ const Header = props => {
   );
 };
 
-export default connect(mapStateToProps)(Header);
-
 Header.propTypes = {
   isServer: PropTypes.bool,
-  status: PropTypes.number.isRequired
+  status: PropTypes.number.isRequired,
+  numberOfClients: PropTypes.number
 };
 
 Header.defaultProps = {
-  isServer: false
+  isServer: false,
+  numberOfClients: 0
 };
 
-function ConnectionIndicator(props) {
+const ConnectionIndicator = props => {
   const { status, isServer, numberOfClients } = props;
   const statusDescriptions = {
     client: ["⌨️ Ready", "Trying to connect", "✅ Connected", "❌ Error"],
@@ -70,7 +69,7 @@ function ConnectionIndicator(props) {
   const componentRole = isServer ? "server" : "client";
   const value = statusDescriptions[componentRole][status];
   return <Input className="text-center col-3" value={value} disabled />;
-}
+};
 
 ConnectionIndicator.propTypes = {
   isServer: PropTypes.bool,
@@ -82,3 +81,5 @@ ConnectionIndicator.defaultProps = {
   isServer: false,
   numberOfClients: 0
 };
+
+export default Header;

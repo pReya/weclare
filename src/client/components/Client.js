@@ -7,9 +7,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { Route } from "react-router-dom";
 import mainReducer from "../reducers/main";
-import Footer from "../../shared/Footer";
-import Header from "../../shared/Header";
-import IdConnector from "./IdConnector";
+import Footer from "../../shared/components/Footer";
+import Header from "./ClientHeaderContainer";
+import ConnectorContainer from "./ConnectorContainer";
 
 const store = createStore(
   mainReducer,
@@ -22,7 +22,7 @@ const Client = () => (
       <>
         <Header />
         <Container>
-          <Route exact path="/client/connectId" component={IdConnector} />
+          <Route exact path="/client/connect" component={ConnectorContainer} />
           <Footer />
         </Container>
       </>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Form, FormGroup, Button, Input, Col } from "reactstrap";
 import PropTypes from "prop-types";
-import DefaultCard from "../../shared/components/DefaultCard";
+import ReactRouterPropTypes from "react-router-prop-types";
+import DefaultCard from "./DefaultCard";
 
 const ConnectForm = props => {
   const {
@@ -10,7 +11,9 @@ const ConnectForm = props => {
     serverId,
     title,
     text,
-    buttonText
+    buttonText,
+    history,
+    location
   } = props;
 
   return (
@@ -22,7 +25,7 @@ const ConnectForm = props => {
               id="serverId"
               type="text"
               value={serverId}
-              onChange={onChangeServerId}
+              onChange={e => onChangeServerId(e.target.value)}
             />
           </Col>
           <Col md={3}>
@@ -30,7 +33,12 @@ const ConnectForm = props => {
               type="button"
               id="connect"
               className="btn-block"
-              onClick={onClickConnect}
+              onClick={() => {
+                onClickConnect(serverId);
+                if (history && location) {
+                  history.push(location);
+                }
+              }}
             >
               {buttonText}
             </Button>
@@ -47,7 +55,13 @@ ConnectForm.propTypes = {
   serverId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  buttonText: PropTypes.string.isRequired
+  buttonText: PropTypes.string,
+  history: ReactRouterPropTypes.history.isRequired,
+  location: PropTypes.string.isRequired
+};
+
+ConnectForm.defaultProps = {
+  buttonText: "Connect"
 };
 
 export default ConnectForm;

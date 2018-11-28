@@ -7,8 +7,8 @@ import thunk from "redux-thunk";
 import { Route } from "react-router-dom";
 import { composeWithDevTools } from "redux-devtools-extension";
 import Footer from "../../shared/components/Footer";
-import Header from "../../shared/components/Header";
-import IdCreatorContainer from "./IdCreatorContainer";
+import Header from "./ServerHeaderContainer";
+import CreatorContainer from "./CreatorContainer";
 import QuestionEditor from "./QuestionEditor";
 import mainReducer from "../reducers/main";
 
@@ -21,9 +21,9 @@ export default () => (
   <div>
     <Provider store={store}>
       <>
-        <Header isServer />
+        <Header />
         <Container>
-          <Route exact path="/server/createId" component={IdCreatorContainer} />
+          <Route exact path="/server/createId" component={CreatorContainer} />
           <Route
             exact
             path="/server/questionEditor"

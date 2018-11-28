@@ -20,7 +20,6 @@ const QuestionList = props => {
     selectedQuestion,
     onAddQuestion
   } = props;
-  console.log("QuestionList received questions: ", questions);
   return (
     <Card className="shadow">
       <CardHeader>
