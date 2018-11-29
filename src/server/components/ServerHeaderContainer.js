@@ -6,7 +6,8 @@ const mapStateToProps = state => ({
   status: state.connection.status,
   numberOfClients: state.connection.peer
     ? Object.keys(state.connection.peer.connections).length
-    : null
+    : null,
+  ownServerId: state.server.ownServerId
 });
 
 export default connect(mapStateToProps)(props => (

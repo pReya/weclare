@@ -10,6 +10,7 @@ import Footer from "../../shared/components/Footer";
 import Header from "./ServerHeaderContainer";
 import CreatorContainer from "./CreatorContainer";
 import QuestionEditor from "./QuestionEditor";
+import Waiter from "./Waiter";
 import mainReducer from "../reducers/main";
 
 const store = createStore(
@@ -23,12 +24,9 @@ export default () => (
       <>
         <Header />
         <Container>
-          <Route exact path="/server/createId" component={CreatorContainer} />
-          <Route
-            exact
-            path="/server/questionEditor"
-            component={QuestionEditor}
-          />
+          <Route exact path="/server/create" component={CreatorContainer} />
+          <Route exact path="/server/editor" component={QuestionEditor} />
+          <Route exact path="/server/wait" component={Waiter} />
           <Footer />
         </Container>
       </>

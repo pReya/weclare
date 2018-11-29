@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   Container,
-  Input,
   Navbar,
   NavbarBrand,
   Nav,
   NavItem,
   NavLink
 } from "reactstrap";
+import ConnectionIndicator from "./ConnectionIndicator";
 
 const Header = props => {
-  const { status, numberOfClients, isServer } = props;
+  const { status, numberOfClients, isServer, ownServerId } = props;
   return (
     <div>
       <Navbar expand="lg" className="mb-4 border-bottom shadow-sm">
@@ -25,6 +25,7 @@ const Header = props => {
             isServer={isServer}
             status={status}
             numberOfClients={numberOfClients}
+            ownServerId={ownServerId}
           />
           <Nav className="ml-auto" navbar>
             <NavItem>
@@ -51,33 +52,6 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  isServer: false,
-  numberOfClients: 0
-};
-
-const ConnectionIndicator = props => {
-  const { status, isServer, numberOfClients } = props;
-  const statusDescriptions = {
-    client: ["⌨️ Ready", "Trying to connect", "✅ Connected", "❌ Error"],
-    server: [
-      "⌨️ Ready",
-      "❓ Waiting for connections",
-      `✅ ${numberOfClients} Clients Connected`,
-      "❌ Error"
-    ]
-  };
-  const componentRole = isServer ? "server" : "client";
-  const value = statusDescriptions[componentRole][status];
-  return <Input className="text-center col-3" value={value} disabled />;
-};
-
-ConnectionIndicator.propTypes = {
-  isServer: PropTypes.bool,
-  status: PropTypes.number.isRequired,
-  numberOfClients: PropTypes.number
-};
-
-ConnectionIndicator.defaultProps = {
   isServer: false,
   numberOfClients: 0
 };

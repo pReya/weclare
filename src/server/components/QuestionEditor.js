@@ -1,7 +1,7 @@
 import React from "react";
-import "../../scss/App.scss";
 import { Col, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import QuestionContent from "./QuestionContent";
 import QuestionList from "./QuestionList";
 import {
@@ -48,6 +48,8 @@ class QuestionEditor extends React.Component {
       // props
       selectedQuestion,
       questions,
+      history,
+      location,
       // actions
       addQuestion,
       selectQuestion,
@@ -90,10 +92,13 @@ class QuestionEditor extends React.Component {
               onClick={() => {
                 localStorage.setItem("weclare", JSON.stringify(questions));
                 console.log("Saved to Storage");
+                if (history) {
+                  history.push("/server/create");
+                }
               }}
               color="success"
             >
-              Continue
+              Save & Continue
             </Button>
           </Col>
         </Row>
@@ -102,7 +107,9 @@ class QuestionEditor extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(QuestionEditor);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(QuestionEditor)
+);

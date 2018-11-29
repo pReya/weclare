@@ -24,9 +24,8 @@ const clickConnect = (serverId, dispatch) => {
   connection.on("open", () => {
     console.log("Client Connected");
     dispatch(setServerStatus(2));
+    connection.on("data", data => console.log("Received Data: ", data));
   });
-
-  connection.on("data", data => console.log("Received Data: ", data));
 };
 
 const mapDispatchToProps = dispatch => ({

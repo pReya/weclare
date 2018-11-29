@@ -16,10 +16,10 @@ const createPeer = (ownServerId, dispatch) => {
     dispatch(setServerStatus(1));
   });
 
-  peer.on("connection", c => {
-    c.on("data", data => console.log(data));
+  peer.on("connection", connection => {
+    connection.on("data", data => console.log(data));
     dispatch(setServerStatus(2));
-    dispatch(addConnection(c));
+    dispatch(addConnection(connection));
   });
 };
 
@@ -29,15 +29,15 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  ownServerId: state.server.ownServerId,
-  location: "/server/questionEditor"
+  ownServerId: state.server.ownServerId
 });
 
 const staticProps = {
   title: "Create a New Server Id",
   text:
     "Please define your individual Server Id that you can give to participants.",
-  buttonText: "Create"
+  buttonText: "Create",
+  location: "/server/wait"
 };
 
 export default withRouter(
