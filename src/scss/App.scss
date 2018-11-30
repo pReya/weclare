@@ -24,3 +24,16 @@ hr {
   box-shadow: none;
   cursor: pointer;
 }
+
+.resetInput {
+  background: transparent;
+  color: white;
+  border: 0;
+  outline: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}

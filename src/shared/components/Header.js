@@ -48,12 +48,14 @@ const Header = props => {
 Header.propTypes = {
   isServer: PropTypes.bool,
   status: PropTypes.number.isRequired,
-  numberOfClients: PropTypes.number
+  numberOfClients: PropTypes.number,
+  ownServerId: PropTypes.string
 };
 
 Header.defaultProps = {
   isServer: false,
-  numberOfClients: 0
+  numberOfClients: 0,
+  ownServerId: ""
 };
 
 export default Header;

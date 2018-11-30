@@ -60,7 +60,7 @@ class QuestionEditor extends React.Component {
       deleteAnswer,
       setCorrectAnswer
     } = this.props;
-    console.log(this.props);
+
     return (
       <React.Fragment>
         <Row className="justify-content-center mb-4">

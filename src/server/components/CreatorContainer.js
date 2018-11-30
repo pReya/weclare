@@ -26,7 +26,6 @@ const createPeer = (ownServerId, dispatch) => {
 const mapDispatchToProps = dispatch => ({
   onChangeServerId: newServerId => dispatch(setServerId(newServerId)),
   onClickConnect: ownServerId => {
-    console.log(ownServerId);
     createPeer(ownServerId, dispatch);
   }
 });

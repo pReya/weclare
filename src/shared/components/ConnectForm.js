@@ -16,7 +16,6 @@ const ConnectForm = props => {
     location
   } = props;
 
-  console.log("ownServerId: ", serverId);
   return (
     <DefaultCard title={title} text={text}>
       <Form>

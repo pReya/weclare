@@ -9,7 +9,6 @@ const mapStateToProps = state => ({
 
 const AnswerScreen = props => {
   const { currentQuestion } = props;
-  console.log(currentQuestion);
   return (
     <Row className="justify-content-center">
       <DefaultCard title="Answer question">

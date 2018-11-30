@@ -5,6 +5,7 @@ import DefaultCard from "../../shared/components/DefaultCard";
 import { setCurrentQuestion } from "../actions/server";
 
 const sendNextQuestion = (connections, questions, currentQuestion) => {
+  console.log({ connections, questions, currentQuestion });
   if (connections.length > 0 && questions.length > 0) {
     connections.forEach(connection =>
       connection.send(JSON.stringify(questions[currentQuestion]))
@@ -14,7 +15,6 @@ const sendNextQuestion = (connections, questions, currentQuestion) => {
 
 const Waiter = props => {
   const { connections, questions, currentQuestion } = props;
-  console.log(props);
   return (
     <Row className="justify-content-center">
       <DefaultCard title="Waiting for participants" text="Your ID: xyz">

@@ -28,7 +28,10 @@ const clickConnect = (serverId, dispatch) => {
   connection.on("open", () => {
     console.log("Client Connected");
     dispatch(setServerStatus(2));
-    connection.on("data", data => dispatch(setCurrentQuestion(data)));
+    connection.on("data", data => {
+      console.log("Received data: ", data);
+      dispatch(setCurrentQuestion(JSON.parse(data)));
+    });
   });
 };
 

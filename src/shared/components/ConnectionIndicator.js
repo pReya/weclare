@@ -8,6 +8,19 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+import LinkIcon from "mdi-react/LinkIcon";
+import ClipboardTextIcon from "mdi-react/ClipboardTextIcon";
+import QrcodeIcon from "mdi-react/QrcodeIcon";
+
+const copyToClipboard = content => {
+  const tempInput = document.createElement("input");
+  tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+  tempInput.value = content;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+};
 
 export default class ConnectionIndicator extends React.Component {
   constructor(props) {
@@ -55,9 +68,28 @@ export default class ConnectionIndicator extends React.Component {
             <DropdownMenu>
               <DropdownItem header>Share</DropdownItem>
               <DropdownItem divider />
-              <DropdownItem>Show QR Code</DropdownItem>
-              <DropdownItem>Copy ID</DropdownItem>
-              <DropdownItem>Copy Link</DropdownItem>
+              <DropdownItem style={{ cursor: "pointer" }}>
+                <QrcodeIcon className="text-muted" />
+                {`  `}
+                Show QR Code
+              </DropdownItem>
+              {document.queryCommandSupported("copy") && (
+                <DropdownItem
+                  onClick={() => {
+                    copyToClipboard(ownServerId);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <ClipboardTextIcon className="text-muted" />
+                  {`  `}
+                  Copy ID
+                </DropdownItem>
+              )}
+              <DropdownItem style={{ cursor: "pointer" }}>
+                <LinkIcon className="text-muted" />
+                {`  `}
+                Copy Link
+              </DropdownItem>
             </DropdownMenu>
           </InputGroupButtonDropdown>
         ) : null}
@@ -70,10 +102,12 @@ export default class ConnectionIndicator extends React.Component {
 ConnectionIndicator.propTypes = {
   isServer: PropTypes.bool,
   status: PropTypes.number.isRequired,
-  numberOfClients: PropTypes.number
+  numberOfClients: PropTypes.number,
+  ownServerId: PropTypes.string
 };
 
 ConnectionIndicator.defaultProps = {
   isServer: false,
-  numberOfClients: 0
+  numberOfClients: 0,
+  ownServerId: ""
 };
