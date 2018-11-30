@@ -8,7 +8,7 @@ import StartPage from "./StartPage";
 import "./scss/App.scss";
 
 const App = () => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <div className="App">
       <Switch>
         <Route path="/" exact component={StartPage} />
