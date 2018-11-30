@@ -24,12 +24,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-Bold-Pi.230d65b2.woff2"
   },
   {
-    "revision": "d0370c8c55ca8c06cb8cff171bcfa016",
-    "url": "/weclare/static/media/IBMPlexMono-BoldItalic-Pi.d0370c8c.woff2"
-  },
-  {
     "revision": "88704ce94c66b06bae7e65222de59fe8",
     "url": "/weclare/static/media/IBMPlexMono-BoldItalic-Latin3.88704ce9.woff2"
+  },
+  {
+    "revision": "d0370c8c55ca8c06cb8cff171bcfa016",
+    "url": "/weclare/static/media/IBMPlexMono-BoldItalic-Pi.d0370c8c.woff2"
   },
   {
     "revision": "9bab714ebc49ba4acf54aef74855f17f",
@@ -72,28 +72,28 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-LightItalic-Latin3.b5fa3a41.woff2"
   },
   {
-    "revision": "03fc1edeb349ae96c00b84b6fc948ec7",
-    "url": "/weclare/static/media/IBMPlexMono-Medium-Latin3.03fc1ede.woff2"
-  },
-  {
     "revision": "800e7b2c82435571982acef03e5b1bef",
     "url": "/weclare/static/media/IBMPlexMono-Medium-Pi.800e7b2c.woff2"
   },
   {
-    "revision": "a40c11ce3861e0102cf69080caf8bf1e",
-    "url": "/weclare/static/media/IBMPlexMono-MediumItalic-Pi.a40c11ce.woff2"
+    "revision": "03fc1edeb349ae96c00b84b6fc948ec7",
+    "url": "/weclare/static/media/IBMPlexMono-Medium-Latin3.03fc1ede.woff2"
   },
   {
     "revision": "710b42ce229308d3c66d29d4629458d2",
     "url": "/weclare/static/media/IBMPlexMono-MediumItalic-Latin3.710b42ce.woff2"
   },
   {
-    "revision": "7e0a5dea4e0861c3cf788f20011d6d2f",
-    "url": "/weclare/static/media/IBMPlexMono-Regular-Latin3.7e0a5dea.woff2"
+    "revision": "a40c11ce3861e0102cf69080caf8bf1e",
+    "url": "/weclare/static/media/IBMPlexMono-MediumItalic-Pi.a40c11ce.woff2"
   },
   {
     "revision": "b024110273eb09386fd098eaffea950e",
     "url": "/weclare/static/media/IBMPlexMono-Regular-Pi.b0241102.woff2"
+  },
+  {
+    "revision": "7e0a5dea4e0861c3cf788f20011d6d2f",
+    "url": "/weclare/static/media/IBMPlexMono-Regular-Latin3.7e0a5dea.woff2"
   },
   {
     "revision": "dfd522ce7a40ca24d923fda2fa66e022",
@@ -120,20 +120,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-Text-Latin3.0648b8bf.woff2"
   },
   {
-    "revision": "168e52d03955bbef69fba398df5400f7",
-    "url": "/weclare/static/media/IBMPlexMono-TextItalic-Latin3.168e52d0.woff2"
-  },
-  {
     "revision": "3688d537d4a130385ca656a4d6a6f803",
     "url": "/weclare/static/media/IBMPlexMono-TextItalic-Pi.3688d537.woff2"
   },
   {
-    "revision": "fcb075c26002c5a293e1fcb6f710688d",
-    "url": "/weclare/static/media/IBMPlexMono-Thin-Latin3.fcb075c2.woff2"
+    "revision": "168e52d03955bbef69fba398df5400f7",
+    "url": "/weclare/static/media/IBMPlexMono-TextItalic-Latin3.168e52d0.woff2"
   },
   {
     "revision": "4ce3dbc4fca7815bb0196bd026cebebd",
     "url": "/weclare/static/media/IBMPlexMono-Thin-Pi.4ce3dbc4.woff2"
+  },
+  {
+    "revision": "fcb075c26002c5a293e1fcb6f710688d",
+    "url": "/weclare/static/media/IBMPlexMono-Thin-Latin3.fcb075c2.woff2"
   },
   {
     "revision": "785ea8b7d2257989361171557472cb87",
@@ -144,6 +144,10 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-ThinItalic-Latin3.79e6f604.woff2"
   },
   {
+    "revision": "8c1e99abafe62bef8f770eb735a02b35",
+    "url": "/weclare/static/media/IBMPlexMono-Bold-Cyrillic.8c1e99ab.woff2"
+  },
+  {
     "revision": "0659dcf1762da1d98a7fe9be67ec0549",
     "url": "/weclare/static/media/IBMPlexMono-Bold-Latin2.0659dcf1.woff2"
   },
@@ -152,12 +156,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-Bold-Latin1.0bded8e6.woff2"
   },
   {
-    "revision": "8c1e99abafe62bef8f770eb735a02b35",
-    "url": "/weclare/static/media/IBMPlexMono-Bold-Cyrillic.8c1e99ab.woff2"
+    "revision": "c0392d850fbc910ca2f37d13cd2ef16a",
+    "url": "/weclare/static/media/IBMPlexMono-BoldItalic-Cyrillic.c0392d85.woff2"
   },
   {
     "revision": "0e3246d59a0a8c5e2d98b1d6589433a7",
     "url": "/weclare/static/media/IBMPlexMono-BoldItalic-Latin2.0e3246d5.woff2"
+  },
+  {
+    "revision": "a5d908bc8639e578c00bdebba10fc23c",
+    "url": "/weclare/static/media/IBMPlexMono-BoldItalic-Latin1.a5d908bc.woff2"
   },
   {
     "revision": "5cd4c2ffe5e92a2eb04b4def0b1eb92c",
@@ -168,28 +176,28 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-ExtraLight-Latin2.60db626e.woff2"
   },
   {
-    "revision": "c0392d850fbc910ca2f37d13cd2ef16a",
-    "url": "/weclare/static/media/IBMPlexMono-BoldItalic-Cyrillic.c0392d85.woff2"
+    "revision": "fca4ca6eed0ac55cf0816e7954a77650",
+    "url": "/weclare/static/media/IBMPlexMono-ExtraLightItalic-Cyrillic.fca4ca6e.woff2"
   },
   {
-    "revision": "a5d908bc8639e578c00bdebba10fc23c",
-    "url": "/weclare/static/media/IBMPlexMono-BoldItalic-Latin1.a5d908bc.woff2"
+    "revision": "8670a51bc0286186d7f03c81b6b732e0",
+    "url": "/weclare/static/media/IBMPlexMono-Italic-Cyrillic.8670a51b.woff2"
   },
   {
     "revision": "bdc4f4a0e37ec8e00c69216461bca749",
     "url": "/weclare/static/media/IBMPlexMono-ExtraLightItalic-Latin1.bdc4f4a0.woff2"
   },
   {
-    "revision": "fca4ca6eed0ac55cf0816e7954a77650",
-    "url": "/weclare/static/media/IBMPlexMono-ExtraLightItalic-Cyrillic.fca4ca6e.woff2"
-  },
-  {
     "revision": "3f998277549836827fb5517d4ad6995b",
     "url": "/weclare/static/media/IBMPlexMono-ExtraLight-Latin1.3f998277.woff2"
   },
   {
-    "revision": "8670a51bc0286186d7f03c81b6b732e0",
-    "url": "/weclare/static/media/IBMPlexMono-Italic-Cyrillic.8670a51b.woff2"
+    "revision": "c85491d5ededc31247d1a5e0212ed6bc",
+    "url": "/weclare/static/media/IBMPlexMono-Italic-Latin2.c85491d5.woff2"
+  },
+  {
+    "revision": "036615def1065f81059dd00b1ca84c27",
+    "url": "/weclare/static/media/IBMPlexMono-Light-Cyrillic.036615de.woff2"
   },
   {
     "revision": "5be7a0c0318db696d6176c3c368e06af",
@@ -200,10 +208,6 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-Light-Latin1.40c7574d.woff2"
   },
   {
-    "revision": "c85491d5ededc31247d1a5e0212ed6bc",
-    "url": "/weclare/static/media/IBMPlexMono-Italic-Latin2.c85491d5.woff2"
-  },
-  {
     "revision": "898fa600dcc6bfc69cdcaf82d37e2990",
     "url": "/weclare/static/media/IBMPlexMono-Light-Latin2.898fa600.woff2"
   },
@@ -212,32 +216,28 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-LightItalic-Cyrillic.bd38b610.woff2"
   },
   {
-    "revision": "036615def1065f81059dd00b1ca84c27",
-    "url": "/weclare/static/media/IBMPlexMono-Light-Cyrillic.036615de.woff2"
+    "revision": "75e25966e693a007be3125eff64326c9",
+    "url": "/weclare/static/media/IBMPlexMono-LightItalic-Latin2.75e25966.woff2"
   },
   {
     "revision": "174c15688676b69a726d5ae69b2fb74b",
     "url": "/weclare/static/media/IBMPlexMono-Medium-Cyrillic.174c1568.woff2"
   },
   {
-    "revision": "75e25966e693a007be3125eff64326c9",
-    "url": "/weclare/static/media/IBMPlexMono-LightItalic-Latin2.75e25966.woff2"
-  },
-  {
-    "revision": "ff61ba46640c107410db39023c199493",
-    "url": "/weclare/static/media/IBMPlexMono-LightItalic-Latin1.ff61ba46.woff2"
-  },
-  {
     "revision": "b719cb249808caff4748164f40c03cdd",
     "url": "/weclare/static/media/IBMPlexMono-Medium-Latin2.b719cb24.woff2"
+  },
+  {
+    "revision": "5525f8bd324fbdd572613e0116efeaaf",
+    "url": "/weclare/static/media/IBMPlexMono-MediumItalic-Cyrillic.5525f8bd.woff2"
   },
   {
     "revision": "4cda1aaf71e0547b4090d4183f78ffdc",
     "url": "/weclare/static/media/IBMPlexMono-Medium-Latin1.4cda1aaf.woff2"
   },
   {
-    "revision": "5525f8bd324fbdd572613e0116efeaaf",
-    "url": "/weclare/static/media/IBMPlexMono-MediumItalic-Cyrillic.5525f8bd.woff2"
+    "revision": "ff61ba46640c107410db39023c199493",
+    "url": "/weclare/static/media/IBMPlexMono-LightItalic-Latin1.ff61ba46.woff2"
   },
   {
     "revision": "f86f0c89c01011765586b10fc0ef7456",
@@ -248,20 +248,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-Regular-Latin2.460741d3.woff2"
   },
   {
-    "revision": "c17beaaf0c1b72f744b586aae39f50bf",
-    "url": "/weclare/static/media/IBMPlexMono-Regular-Latin1.c17beaaf.woff2"
-  },
-  {
     "revision": "463b30307eb127a2929fbe6baecbd761",
     "url": "/weclare/static/media/IBMPlexMono-MediumItalic-Latin1.463b3030.woff2"
   },
   {
-    "revision": "48323f1416937f7b85ff86805dcb98c6",
-    "url": "/weclare/static/media/IBMPlexMono-SemiBold-Latin2.48323f14.woff2"
+    "revision": "c17beaaf0c1b72f744b586aae39f50bf",
+    "url": "/weclare/static/media/IBMPlexMono-Regular-Latin1.c17beaaf.woff2"
   },
   {
-    "revision": "78d805e36c198865c22a49f56420b984",
-    "url": "/weclare/static/media/IBMPlexMono-SemiBoldItalic-Cyrillic.78d805e3.woff2"
+    "revision": "48323f1416937f7b85ff86805dcb98c6",
+    "url": "/weclare/static/media/IBMPlexMono-SemiBold-Latin2.48323f14.woff2"
   },
   {
     "revision": "4c44201f06eba7acc9a849e79f19b938",
@@ -270,6 +266,10 @@ self.__precacheManifest = [
   {
     "revision": "f2f37acb9647df8b18175ba154d20897",
     "url": "/weclare/static/media/IBMPlexMono-SemiBold-Latin1.f2f37acb.woff2"
+  },
+  {
+    "revision": "78d805e36c198865c22a49f56420b984",
+    "url": "/weclare/static/media/IBMPlexMono-SemiBoldItalic-Cyrillic.78d805e3.woff2"
   },
   {
     "revision": "ff7aac6c05f7c7e882e74ce692dab830",
@@ -312,12 +312,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-ThinItalic-Cyrillic.af0c9d7b.woff2"
   },
   {
-    "revision": "6121e36ea4d30952b6d91f7686745c3e",
-    "url": "/weclare/static/media/IBMPlexMono-ThinItalic-Latin1.6121e36e.woff2"
-  },
-  {
     "revision": "921a710815f1f2875f4f050ac34ea128",
     "url": "/weclare/static/media/IBMPlexMono-ThinItalic-Latin2.921a7108.woff2"
+  },
+  {
+    "revision": "6121e36ea4d30952b6d91f7686745c3e",
+    "url": "/weclare/static/media/IBMPlexMono-ThinItalic-Latin1.6121e36e.woff2"
   },
   {
     "revision": "b2be50a6ecbf563377f16dd5906caabf",
@@ -344,16 +344,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-ThinItalic-Latin1.b8cdd66e.woff2"
   },
   {
-    "revision": "7d8358ec4c4b5ddfa6f0dac4f66605ff",
-    "url": "/weclare/static/media/IBMPlexMono-ExtraLight.7d8358ec.woff"
+    "revision": "0cc0d044dbb4bff360916bceb8f288d0",
+    "url": "/weclare/static/media/IBMPlexMono-BoldItalic.0cc0d044.woff"
   },
   {
     "revision": "e497c7d84d1cd863756c67d4772e18de",
     "url": "/weclare/static/media/IBMPlexMono-Bold.e497c7d8.woff"
-  },
-  {
-    "revision": "0cc0d044dbb4bff360916bceb8f288d0",
-    "url": "/weclare/static/media/IBMPlexMono-BoldItalic.0cc0d044.woff"
   },
   {
     "revision": "8d9e2105faa9d73cd8f4b4d9aa9bcae0",
@@ -364,8 +360,8 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-ExtraLightItalic.65608dfc.woff"
   },
   {
-    "revision": "35b488c379854c9042e153d3e9334b3e",
-    "url": "/weclare/static/media/IBMPlexMono-Light.35b488c3.woff"
+    "revision": "7d8358ec4c4b5ddfa6f0dac4f66605ff",
+    "url": "/weclare/static/media/IBMPlexMono-ExtraLight.7d8358ec.woff"
   },
   {
     "revision": "cb143f1453de62a6febc058dfc352f0f",
@@ -376,12 +372,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-Medium.8987a961.woff"
   },
   {
-    "revision": "be9dac77961fa6673bd4f33415e5fab5",
-    "url": "/weclare/static/media/IBMPlexMono-SemiBold.be9dac77.woff"
+    "revision": "35b488c379854c9042e153d3e9334b3e",
+    "url": "/weclare/static/media/IBMPlexMono-Light.35b488c3.woff"
   },
   {
     "revision": "3bbb37eb2e29eed031eaaf63664b21aa",
     "url": "/weclare/static/media/IBMPlexMono-Regular.3bbb37eb.woff"
+  },
+  {
+    "revision": "be9dac77961fa6673bd4f33415e5fab5",
+    "url": "/weclare/static/media/IBMPlexMono-SemiBold.be9dac77.woff"
+  },
+  {
+    "revision": "64dde8e156b3a36a472e0a6f4138f3c8",
+    "url": "/weclare/static/media/IBMPlexMono-Thin.64dde8e1.woff"
   },
   {
     "revision": "fd67727ae6849b504b1c93ecc3c0d216",
@@ -392,20 +396,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexMono-Text.2e2733bc.woff"
   },
   {
-    "revision": "64dde8e156b3a36a472e0a6f4138f3c8",
-    "url": "/weclare/static/media/IBMPlexMono-Thin.64dde8e1.woff"
-  },
-  {
     "revision": "863608bc79ea22bc55c531b3cc7aef59",
     "url": "/weclare/static/media/IBMPlexMono-SemiBoldItalic.863608bc.woff"
   },
   {
-    "revision": "1342710474bb1dbe5c6c996fc7cdb2a6",
-    "url": "/weclare/static/media/IBMPlexMono-TextItalic.13427104.woff"
-  },
-  {
     "revision": "5b31cde507337374e46acc31e73f8e9e",
     "url": "/weclare/static/media/IBMPlexMono-MediumItalic.5b31cde5.woff"
+  },
+  {
+    "revision": "1342710474bb1dbe5c6c996fc7cdb2a6",
+    "url": "/weclare/static/media/IBMPlexMono-TextItalic.13427104.woff"
   },
   {
     "revision": "55e40e45d5785fe420b201cd7a99d1a2",
@@ -472,12 +472,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-MediumItalic-Latin3.31fda7be.woff2"
   },
   {
-    "revision": "cd131c0f6733da6a67f0aba53ce780c6",
-    "url": "/weclare/static/media/IBMPlexSerif-MediumItalic-Pi.cd131c0f.woff2"
-  },
-  {
     "revision": "6173f445ee0e3b8d7d3df5ea4c714ef0",
     "url": "/weclare/static/media/IBMPlexSerif-Thin-Cyrillic.6173f445.woff2"
+  },
+  {
+    "revision": "cd131c0f6733da6a67f0aba53ce780c6",
+    "url": "/weclare/static/media/IBMPlexSerif-MediumItalic-Pi.cd131c0f.woff2"
   },
   {
     "revision": "de6f9aaaf7c1dbda6cff3a3d96a35658",
@@ -524,16 +524,8 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-ThinItalic-Cyrillic.376fe3ce.woff2"
   },
   {
-    "revision": "8fa4649877d66bb77656b6deea97b273",
-    "url": "/weclare/static/media/IBMPlexSerif-Thin-Latin2.8fa46498.woff2"
-  },
-  {
     "revision": "f38575993ebdd2b82e586bab4ae044f5",
     "url": "/weclare/static/media/IBMPlexSerif-Thin-Latin1.f3857599.woff2"
-  },
-  {
-    "revision": "6761c4ff12880e531b69a12c985b049f",
-    "url": "/weclare/static/media/IBMPlexSerif-TextItalic-Latin1.6761c4ff.woff2"
   },
   {
     "revision": "0141a1ae75fd4b94390cacfd812bf245",
@@ -544,6 +536,14 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-TextItalic-Cyrillic.fdbcf119.woff2"
   },
   {
+    "revision": "8fa4649877d66bb77656b6deea97b273",
+    "url": "/weclare/static/media/IBMPlexSerif-Thin-Latin2.8fa46498.woff2"
+  },
+  {
+    "revision": "6761c4ff12880e531b69a12c985b049f",
+    "url": "/weclare/static/media/IBMPlexSerif-TextItalic-Latin1.6761c4ff.woff2"
+  },
+  {
     "revision": "4bd4963a29535be11c11cabc29700856",
     "url": "/weclare/static/media/IBMPlexSerif-Text-Latin2.4bd4963a.woff2"
   },
@@ -552,16 +552,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-ExtraLight-Latin3.ad29698d.woff2"
   },
   {
-    "revision": "2de3e64f93b4a46e42d924ef93d5869e",
-    "url": "/weclare/static/media/IBMPlexSerif-Text-Latin1.2de3e64f.woff2"
-  },
-  {
     "revision": "057269bcd063fafff6fa5939daa64a7d",
     "url": "/weclare/static/media/IBMPlexSerif-SemiBoldItalic-Latin1.057269bc.woff2"
   },
   {
-    "revision": "6f9353a93b8b7a57917ef641e850ef60",
-    "url": "/weclare/static/media/IBMPlexSerif-ExtraLight-Pi.6f9353a9.woff2"
+    "revision": "2de3e64f93b4a46e42d924ef93d5869e",
+    "url": "/weclare/static/media/IBMPlexSerif-Text-Latin1.2de3e64f.woff2"
   },
   {
     "revision": "70d477c6fabec9b84c40d07ccee69391",
@@ -572,8 +568,8 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-SemiBoldItalic-Latin2.00afa0f8.woff2"
   },
   {
-    "revision": "27642e30741894e123068a30692fbf16",
-    "url": "/weclare/static/media/IBMPlexSerif-SemiBold-Latin2.27642e30.woff2"
+    "revision": "6f9353a93b8b7a57917ef641e850ef60",
+    "url": "/weclare/static/media/IBMPlexSerif-ExtraLight-Pi.6f9353a9.woff2"
   },
   {
     "revision": "b44dd3213338691de8669e593de76088",
@@ -584,36 +580,40 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-SemiBold-Latin1.718d978b.woff2"
   },
   {
-    "revision": "21cb2ec3e9ad2d0bdac3c742524ece0b",
-    "url": "/weclare/static/media/IBMPlexSans-Bold.21cb2ec3.woff"
+    "revision": "27642e30741894e123068a30692fbf16",
+    "url": "/weclare/static/media/IBMPlexSerif-SemiBold-Latin2.27642e30.woff2"
   },
   {
-    "revision": "14250dd5fa27798956ab1198a5ec9272",
-    "url": "/weclare/static/media/IBMPlexSerif-SemiBold-Cyrillic.14250dd5.woff2"
+    "revision": "21cb2ec3e9ad2d0bdac3c742524ece0b",
+    "url": "/weclare/static/media/IBMPlexSans-Bold.21cb2ec3.woff"
   },
   {
     "revision": "029d73fd897831a72f43310ac2d28baf",
     "url": "/weclare/static/media/IBMPlexSerif-Regular-Latin2.029d73fd.woff2"
   },
   {
+    "revision": "14250dd5fa27798956ab1198a5ec9272",
+    "url": "/weclare/static/media/IBMPlexSerif-SemiBold-Cyrillic.14250dd5.woff2"
+  },
+  {
     "revision": "7dffa30ba2ee9858aa2562f0bc859162",
     "url": "/weclare/static/media/IBMPlexSerif-Regular-Latin1.7dffa30b.woff2"
-  },
-  {
-    "revision": "0568fa5f8e317120065892c510bad84a",
-    "url": "/weclare/static/media/IBMPlexSerif-MediumItalic-Latin2.0568fa5f.woff2"
-  },
-  {
-    "revision": "8d9bfb77b4177f5d73243e07a412d57a",
-    "url": "/weclare/static/media/IBMPlexSerif-MediumItalic-Latin1.8d9bfb77.woff2"
   },
   {
     "revision": "a3be3dda3bdb6321f6e3f0c0e4d0a384",
     "url": "/weclare/static/media/IBMPlexSerif-Regular-Cyrillic.a3be3dda.woff2"
   },
   {
-    "revision": "8e21bf50ceef99b708552c21888f581e",
-    "url": "/weclare/static/media/IBMPlexSerif-Medium-Cyrillic.8e21bf50.woff2"
+    "revision": "8d9bfb77b4177f5d73243e07a412d57a",
+    "url": "/weclare/static/media/IBMPlexSerif-MediumItalic-Latin1.8d9bfb77.woff2"
+  },
+  {
+    "revision": "0568fa5f8e317120065892c510bad84a",
+    "url": "/weclare/static/media/IBMPlexSerif-MediumItalic-Latin2.0568fa5f.woff2"
+  },
+  {
+    "revision": "607cbf79886e474c918e3a82eb61e434",
+    "url": "/weclare/static/media/IBMPlexSerif-Medium-Latin1.607cbf79.woff2"
   },
   {
     "revision": "1758bcf71f7d7472cebb7120676bd33e",
@@ -624,16 +624,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-Medium-Latin2.186e5bf2.woff2"
   },
   {
-    "revision": "607cbf79886e474c918e3a82eb61e434",
-    "url": "/weclare/static/media/IBMPlexSerif-Medium-Latin1.607cbf79.woff2"
-  },
-  {
-    "revision": "86dbb0312f4f5b2e1aec213f1c2b0d1b",
-    "url": "/weclare/static/media/IBMPlexSerif-LightItalic-Latin1.86dbb031.woff2"
+    "revision": "8e21bf50ceef99b708552c21888f581e",
+    "url": "/weclare/static/media/IBMPlexSerif-Medium-Cyrillic.8e21bf50.woff2"
   },
   {
     "revision": "838228c5ee0afbf7ebb17b81aa1f3231",
     "url": "/weclare/static/media/IBMPlexSerif-LightItalic-Latin2.838228c5.woff2"
+  },
+  {
+    "revision": "86dbb0312f4f5b2e1aec213f1c2b0d1b",
+    "url": "/weclare/static/media/IBMPlexSerif-LightItalic-Latin1.86dbb031.woff2"
   },
   {
     "revision": "904ba0dfb8c503357d292aafff9758f8",
@@ -644,20 +644,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-Light-Latin1.15219d3c.woff2"
   },
   {
-    "revision": "348e3e79a1b3fda103f8752451fee8e5",
-    "url": "/weclare/static/media/IBMPlexSerif-Light-Latin2.348e3e79.woff2"
-  },
-  {
     "revision": "437dc462b39f3b21efeae9a6bada77c9",
     "url": "/weclare/static/media/IBMPlexSerif-Light-Cyrillic.437dc462.woff2"
   },
   {
-    "revision": "3f7d86a06094b6fd20be97e375a1b517",
-    "url": "/weclare/static/media/IBMPlexSerif-Italic-Latin1.3f7d86a0.woff2"
+    "revision": "348e3e79a1b3fda103f8752451fee8e5",
+    "url": "/weclare/static/media/IBMPlexSerif-Light-Latin2.348e3e79.woff2"
   },
   {
     "revision": "6508dab23b62a4d4f0625198cadfd5b1",
     "url": "/weclare/static/media/IBMPlexSerif-Italic-Latin2.6508dab2.woff2"
+  },
+  {
+    "revision": "3f7d86a06094b6fd20be97e375a1b517",
+    "url": "/weclare/static/media/IBMPlexSerif-Italic-Latin1.3f7d86a0.woff2"
   },
   {
     "revision": "6f45e3c11d1985d27cae40f3a8823fce",
@@ -696,20 +696,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-BoldItalic-Pi.90141e78.woff2"
   },
   {
-    "revision": "78bac5f34720c2e3de9cc9ef2bc8ee77",
-    "url": "/weclare/static/media/IBMPlexSerif-Bold-Latin3.78bac5f3.woff2"
-  },
-  {
     "revision": "d35c225a478b10380fda7a74a92206ef",
     "url": "/weclare/static/media/IBMPlexSerif-Bold-Pi.d35c225a.woff2"
   },
   {
-    "revision": "23962c1cff4dc3bd2ceca61a43d7279d",
-    "url": "/weclare/static/media/IBMPlexSerif-Bold-Cyrillic.23962c1c.woff2"
+    "revision": "78bac5f34720c2e3de9cc9ef2bc8ee77",
+    "url": "/weclare/static/media/IBMPlexSerif-Bold-Latin3.78bac5f3.woff2"
   },
   {
-    "revision": "13217a3ba03fb32a9393e625ee1b41bd",
-    "url": "/weclare/static/media/IBMPlexSerif-BoldItalic-Latin1.13217a3b.woff2"
+    "revision": "23962c1cff4dc3bd2ceca61a43d7279d",
+    "url": "/weclare/static/media/IBMPlexSerif-Bold-Cyrillic.23962c1c.woff2"
   },
   {
     "revision": "92b27eea39a31f78b71854feb818ed9c",
@@ -720,12 +716,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-Bold-Latin1.03aa3095.woff2"
   },
   {
+    "revision": "13217a3ba03fb32a9393e625ee1b41bd",
+    "url": "/weclare/static/media/IBMPlexSerif-BoldItalic-Latin1.13217a3b.woff2"
+  },
+  {
     "revision": "fb76ee164caa4e997e611d49aef273f5",
     "url": "/weclare/static/media/IBMPlexSerif-BoldItalic-Cyrillic.fb76ee16.woff2"
   },
   {
     "revision": "9ccb66e363512b4580479d3c104e0e89",
     "url": "/weclare/static/media/IBMPlexSerif-Bold-Latin2.9ccb66e3.woff2"
+  },
+  {
+    "revision": "5fc6a6616ef73f8efbf57d0aa26af023",
+    "url": "/weclare/static/media/IBMPlexSerif-Text.5fc6a661.woff"
   },
   {
     "revision": "0496ca63b279df93e2cfed44adcbba75",
@@ -736,28 +740,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-ThinItalic.d8afdf00.woff"
   },
   {
-    "revision": "5fc6a6616ef73f8efbf57d0aa26af023",
-    "url": "/weclare/static/media/IBMPlexSerif-Text.5fc6a661.woff"
+    "revision": "71055eb458bb49c43e658985a3fed354",
+    "url": "/weclare/static/media/IBMPlexSerif-Regular.71055eb4.woff"
   },
   {
     "revision": "62288a616acd0915cb793744005c31ce",
     "url": "/weclare/static/media/IBMPlexSerif-Light.62288a61.woff"
   },
   {
-    "revision": "71055eb458bb49c43e658985a3fed354",
-    "url": "/weclare/static/media/IBMPlexSerif-Regular.71055eb4.woff"
-  },
-  {
     "revision": "dba49ad92355571cee06d8694483a6ea",
     "url": "/weclare/static/media/IBMPlexSerif-Medium.dba49ad9.woff"
-  },
-  {
-    "revision": "c8cd384854274cdaaaa78507f502e752",
-    "url": "/weclare/static/media/IBMPlexSerif-ExtraLight.c8cd3848.woff"
-  },
-  {
-    "revision": "6ffe8dbd67bb8161021419f8d1e21e2c",
-    "url": "/weclare/static/media/IBMPlexSerif-SemiBoldItalic.6ffe8dbd.woff"
   },
   {
     "revision": "ebded73ce7c9d9786f12666543f98d1e",
@@ -768,32 +760,36 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSerif-SemiBold.ab39f75e.woff"
   },
   {
-    "revision": "ab7e643f379860980cbca1fab4a76b94",
-    "url": "/weclare/static/media/IBMPlexSerif-MediumItalic.ab7e643f.woff"
+    "revision": "6ffe8dbd67bb8161021419f8d1e21e2c",
+    "url": "/weclare/static/media/IBMPlexSerif-SemiBoldItalic.6ffe8dbd.woff"
   },
   {
     "revision": "a6b5a34b10d51b8e75a04e073e239db1",
     "url": "/weclare/static/media/IBMPlexSerif-LightItalic.a6b5a34b.woff"
   },
   {
-    "revision": "e7636c8587a1f55c085971c020180d5e",
-    "url": "/weclare/static/media/IBMPlexSerif-Italic.e7636c85.woff"
+    "revision": "ab7e643f379860980cbca1fab4a76b94",
+    "url": "/weclare/static/media/IBMPlexSerif-MediumItalic.ab7e643f.woff"
   },
   {
     "revision": "50b408d4890816c106dbda9f99ba653b",
     "url": "/weclare/static/media/IBMPlexSerif-ExtraLightItalic.50b408d4.woff"
   },
   {
-    "revision": "43ff12af2bfb72b50838f52dbac58eea",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-ThinItalic-Latin3.43ff12af.woff2"
+    "revision": "e7636c8587a1f55c085971c020180d5e",
+    "url": "/weclare/static/media/IBMPlexSerif-Italic.e7636c85.woff"
+  },
+  {
+    "revision": "c8cd384854274cdaaaa78507f502e752",
+    "url": "/weclare/static/media/IBMPlexSerif-ExtraLight.c8cd3848.woff"
   },
   {
     "revision": "7f3bf09635d42289bebc465049097b63",
     "url": "/weclare/static/media/IBMPlexSansCondensed-ThinItalic-Pi.7f3bf096.woff2"
   },
   {
-    "revision": "ba7e83980392439ebcd6063b655af93a",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Thin-Pi.ba7e8398.woff2"
+    "revision": "43ff12af2bfb72b50838f52dbac58eea",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-ThinItalic-Latin3.43ff12af.woff2"
   },
   {
     "revision": "af5ed5fad4e8c3ce358a3b79ce8f0f56",
@@ -808,16 +804,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-TextItalic-Pi.4fa4f6b8.woff2"
   },
   {
+    "revision": "ba7e83980392439ebcd6063b655af93a",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Thin-Pi.ba7e8398.woff2"
+  },
+  {
     "revision": "55be1165e07f6f0c6af1",
     "url": "/weclare/static/js/main.55be1165.chunk.js"
   },
   {
-    "revision": "6d184e71f4b7c3b69a5daf5f9c9b96f2",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBoldItalic-Latin3.6d184e71.woff2"
-  },
-  {
     "revision": "bcc723e860a9303aca48f01b682dda35",
     "url": "/weclare/static/media/IBMPlexSansCondensed-Text-Pi.bcc723e8.woff2"
+  },
+  {
+    "revision": "6d184e71f4b7c3b69a5daf5f9c9b96f2",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBoldItalic-Latin3.6d184e71.woff2"
   },
   {
     "revision": "3f49abb5f5c9a3c51588140873c7c6e1",
@@ -828,16 +828,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBold-Pi.b139cd34.woff2"
   },
   {
-    "revision": "538cd8a0bed9685181cb901587971c1a",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Regular-Latin3.538cd8a0.woff2"
-  },
-  {
     "revision": "7432dd661719d74581a6484b05a3e3eb",
     "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBold-Latin3.7432dd66.woff2"
   },
   {
     "revision": "ad92ee09701aa4f3701c3848d9489436",
     "url": "/weclare/static/media/IBMPlexSansCondensed-Regular-Pi.ad92ee09.woff2"
+  },
+  {
+    "revision": "538cd8a0bed9685181cb901587971c1a",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Regular-Latin3.538cd8a0.woff2"
   },
   {
     "revision": "189fbf89c1d5a477b0acacbc5883c7e9",
@@ -884,10 +884,6 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-ThinItalic-Latin1.da834b02.woff2"
   },
   {
-    "revision": "1141f7130ef4e65a41d89efd901bd546",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Thin-Latin2.1141f713.woff2"
-  },
-  {
     "revision": "f3562a24bf2ed7ed1032c8ea632985c4",
     "url": "/weclare/static/media/IBMPlexSansCondensed-ThinItalic-Latin2.f3562a24.woff2"
   },
@@ -904,36 +900,32 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-TextItalic-Latin2.0c336337.woff2"
   },
   {
-    "revision": "9b74eed363426e6f917e77484b58025b",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Text-Latin2.9b74eed3.woff2"
+    "revision": "1141f7130ef4e65a41d89efd901bd546",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Thin-Latin2.1141f713.woff2"
   },
   {
     "revision": "f1d735475a8da2adbd525e3fd52e82d0",
     "url": "/weclare/static/media/IBMPlexSansCondensed-Text-Latin1.f1d73547.woff2"
   },
   {
-    "revision": "568c9009adfacc2138e4a7be87135f98",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBold-Latin1.568c9009.woff2"
-  },
-  {
     "revision": "228b1688240f45a207173f63f1a7ca5c",
     "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBoldItalic-Latin2.228b1688.woff2"
   },
   {
-    "revision": "b06a8100617b0da2ff6b55e3f7db0e6a",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBold-Latin2.b06a8100.woff2"
+    "revision": "9b74eed363426e6f917e77484b58025b",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Text-Latin2.9b74eed3.woff2"
   },
   {
     "revision": "4658ca529bb33af580aff145b9f9ac17",
     "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBoldItalic-Latin1.4658ca52.woff2"
   },
   {
-    "revision": "794f3579e30f442f1f143d97b3bb0c3b",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Regular-Latin2.794f3579.woff2"
+    "revision": "568c9009adfacc2138e4a7be87135f98",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBold-Latin1.568c9009.woff2"
   },
   {
-    "revision": "5c81e539406304c140cc9ed5e361475b",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-MediumItalic-Latin2.5c81e539.woff2"
+    "revision": "b06a8100617b0da2ff6b55e3f7db0e6a",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBold-Latin2.b06a8100.woff2"
   },
   {
     "revision": "8ae505b3b8e5b7b82eaacba9afe33f8b",
@@ -944,8 +936,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-MediumItalic-Latin1.bedcccfc.woff2"
   },
   {
+    "revision": "794f3579e30f442f1f143d97b3bb0c3b",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Regular-Latin2.794f3579.woff2"
+  },
+  {
+    "revision": "5c81e539406304c140cc9ed5e361475b",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-MediumItalic-Latin2.5c81e539.woff2"
+  },
+  {
     "revision": "bd38fa9fa6476997dc34acc61956a21a",
     "url": "/weclare/static/media/IBMPlexSansCondensed-Medium-Latin2.bd38fa9f.woff2"
+  },
+  {
+    "revision": "9f203e1a67c2792e70b5041907f723a5",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-LightItalic-Latin2.9f203e1a.woff2"
   },
   {
     "revision": "065688f632cb34ad8e3641cae90833f9",
@@ -960,10 +964,6 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-Light-Latin1.f52ef5f2.woff2"
   },
   {
-    "revision": "9f203e1a67c2792e70b5041907f723a5",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-LightItalic-Latin2.9f203e1a.woff2"
-  },
-  {
     "revision": "f127d24e9279fa6e6aba34cd86d8ada4",
     "url": "/weclare/static/media/IBMPlexSansCondensed-Light-Latin2.f127d24e.woff2"
   },
@@ -972,12 +972,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-Italic-Latin1.568a5a36.woff2"
   },
   {
-    "revision": "c35fee6856107f8c8f49fcd1c1c2c1b8",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Italic-Latin2.c35fee68.woff2"
-  },
-  {
     "revision": "f2c9c18fbaba3959e400d26593325f2f",
     "url": "/weclare/static/media/IBMPlexSansCondensed-ExtraLightItalic-Latin3.f2c9c18f.woff2"
+  },
+  {
+    "revision": "c35fee6856107f8c8f49fcd1c1c2c1b8",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Italic-Latin2.c35fee68.woff2"
   },
   {
     "revision": "07f82021dadd86bdcee95db733585607",
@@ -996,24 +996,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-ExtraLight-Latin3.06e9e7d2.woff2"
   },
   {
-    "revision": "9c2c1b47a54b5408bfe960c6532ce076",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-ExtraLightItalic-Latin2.9c2c1b47.woff2"
-  },
-  {
     "revision": "5efbd26ced4cb2b5cf12c76c036d8e3c",
     "url": "/weclare/static/media/IBMPlexSansCondensed-ExtraLightItalic-Latin1.5efbd26c.woff2"
   },
   {
-    "revision": "908e198e05a625db080409986a8ec37b",
-    "url": "/weclare/static/media/IBMPlexThai-Thin.908e198e.woff"
-  },
-  {
-    "revision": "95e60ea542d972ee48af40be1a31c7e4",
-    "url": "/weclare/static/media/IBMPlexThai-Text.95e60ea5.woff"
+    "revision": "9c2c1b47a54b5408bfe960c6532ce076",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-ExtraLightItalic-Latin2.9c2c1b47.woff2"
   },
   {
     "revision": "95b7e25d1b12885c807885aac68ac102",
     "url": "/weclare/static/media/IBMPlexThai-SemiBold.95b7e25d.woff"
+  },
+  {
+    "revision": "95e60ea542d972ee48af40be1a31c7e4",
+    "url": "/weclare/static/media/IBMPlexThai-Text.95e60ea5.woff"
   },
   {
     "revision": "13a99731619be014d5e5b96fefea6a3d",
@@ -1024,52 +1020,56 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexThai-Medium.985408ba.woff"
   },
   {
-    "revision": "7ace80dd7a558d5448b74b549922d80b",
-    "url": "/weclare/static/media/IBMPlexSansHebrew-Regular.7ace80dd.woff"
+    "revision": "cebc6113e9d2ffa9f8f07d0299c5c934",
+    "url": "/weclare/static/media/IBMPlexThai-ExtraLight.cebc6113.woff"
   },
   {
-    "revision": "5709a5fe4d9b2aba9ba8f3404a59ed36",
-    "url": "/weclare/static/media/IBMPlexSansHebrew-Thin.5709a5fe.woff"
-  },
-  {
-    "revision": "2437ea253b6bdfae35895c9e9bd9971f",
-    "url": "/weclare/static/media/IBMPlexSansHebrew-Text.2437ea25.woff"
-  },
-  {
-    "revision": "526b8cbadbd86727e8236feaeacbadaa",
-    "url": "/weclare/static/media/IBMPlexSansHebrew-SemiBold.526b8cba.woff"
-  },
-  {
-    "revision": "74ddb8b2f9ab5f6f6a744f2c6c426ed5",
-    "url": "/weclare/static/media/IBMPlexSansHebrew-Light.74ddb8b2.woff"
-  },
-  {
-    "revision": "cb2e0aac6c5432d20f5fef3059cd73d0",
-    "url": "/weclare/static/media/IBMPlexSansHebrew-Medium.cb2e0aac.woff"
-  },
-  {
-    "revision": "ab46d1c6cb6eca64f2780a0f7eca927a",
-    "url": "/weclare/static/media/IBMPlexSansHebrew-ExtraLight.ab46d1c6.woff"
-  },
-  {
-    "revision": "9d396011a1e1e6e3ae1d39eb38a832de",
-    "url": "/weclare/static/media/IBMPlexSansHebrew-Bold.9d396011.woff"
+    "revision": "908e198e05a625db080409986a8ec37b",
+    "url": "/weclare/static/media/IBMPlexThai-Thin.908e198e.woff"
   },
   {
     "revision": "2ce267dba8d085fcbba3078ed1ec7b14",
     "url": "/weclare/static/media/IBMPlexThai-Light.2ce267db.woff"
   },
   {
-    "revision": "08acafbbb31141caee2e0cd8745c4f33",
-    "url": "/weclare/static/media/IBMPlexThai-Bold.08acafbb.woff"
+    "revision": "2437ea253b6bdfae35895c9e9bd9971f",
+    "url": "/weclare/static/media/IBMPlexSansHebrew-Text.2437ea25.woff"
   },
   {
-    "revision": "cebc6113e9d2ffa9f8f07d0299c5c934",
-    "url": "/weclare/static/media/IBMPlexThai-ExtraLight.cebc6113.woff"
+    "revision": "7ace80dd7a558d5448b74b549922d80b",
+    "url": "/weclare/static/media/IBMPlexSansHebrew-Regular.7ace80dd.woff"
+  },
+  {
+    "revision": "526b8cbadbd86727e8236feaeacbadaa",
+    "url": "/weclare/static/media/IBMPlexSansHebrew-SemiBold.526b8cba.woff"
+  },
+  {
+    "revision": "5709a5fe4d9b2aba9ba8f3404a59ed36",
+    "url": "/weclare/static/media/IBMPlexSansHebrew-Thin.5709a5fe.woff"
+  },
+  {
+    "revision": "cb2e0aac6c5432d20f5fef3059cd73d0",
+    "url": "/weclare/static/media/IBMPlexSansHebrew-Medium.cb2e0aac.woff"
+  },
+  {
+    "revision": "74ddb8b2f9ab5f6f6a744f2c6c426ed5",
+    "url": "/weclare/static/media/IBMPlexSansHebrew-Light.74ddb8b2.woff"
+  },
+  {
+    "revision": "9d396011a1e1e6e3ae1d39eb38a832de",
+    "url": "/weclare/static/media/IBMPlexSansHebrew-Bold.9d396011.woff"
+  },
+  {
+    "revision": "ab46d1c6cb6eca64f2780a0f7eca927a",
+    "url": "/weclare/static/media/IBMPlexSansHebrew-ExtraLight.ab46d1c6.woff"
   },
   {
     "revision": "3e652d694cb4b80e29027d6b2312923f",
     "url": "/weclare/static/media/IBMPlexSansCondensed-Regular.3e652d69.woff"
+  },
+  {
+    "revision": "08acafbbb31141caee2e0cd8745c4f33",
+    "url": "/weclare/static/media/IBMPlexThai-Bold.08acafbb.woff"
   },
   {
     "revision": "156dbea41a0b17c208826acbf242a85b",
@@ -1092,20 +1092,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSansCondensed-BoldItalic-Latin3.33120c0b.woff2"
   },
   {
-    "revision": "72d7f2e2ff31857bb35041634df06393",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-ThinItalic.72d7f2e2.woff"
-  },
-  {
     "revision": "93fbe40da916fdbf3e1113ae125b6517",
     "url": "/weclare/static/media/IBMPlexSansCondensed-TextItalic.93fbe40d.woff"
   },
   {
-    "revision": "c8c4012d96c6b93c717ee4bc89042b7d",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Thin.c8c4012d.woff"
-  },
-  {
     "revision": "debb7ef9160deea91c960c405b3e39a1",
     "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBoldItalic.debb7ef9.woff"
+  },
+  {
+    "revision": "c8c4012d96c6b93c717ee4bc89042b7d",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Thin.c8c4012d.woff"
   },
   {
     "revision": "45be7007dff16f748b5cb4f7021290f9",
@@ -1114,6 +1110,10 @@ self.__precacheManifest = [
   {
     "revision": "36da55a643eabf89be425946040b94fc",
     "url": "/weclare/static/media/IBMPlexSansCondensed-SemiBold.36da55a6.woff"
+  },
+  {
+    "revision": "72d7f2e2ff31857bb35041634df06393",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-ThinItalic.72d7f2e2.woff"
   },
   {
     "revision": "ae0c99beb14d4bf1e44e862adf814111",
@@ -1188,12 +1188,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-ThinItalic-Cyrillic.11de0f7e.woff2"
   },
   {
-    "revision": "5b560d287b127f4a0e1bc1cb84a0d78c",
-    "url": "/weclare/static/media/IBMPlexSans-Thin-Cyrillic.5b560d28.woff2"
-  },
-  {
     "revision": "c0af24df230cbe1a99257d84ae56cb2b",
     "url": "/weclare/static/media/IBMPlexSans-Thin-Greek.c0af24df.woff2"
+  },
+  {
+    "revision": "5b560d287b127f4a0e1bc1cb84a0d78c",
+    "url": "/weclare/static/media/IBMPlexSans-Thin-Cyrillic.5b560d28.woff2"
   },
   {
     "revision": "9c22a26685dfedb3675bbaa5c711b0e2",
@@ -1208,12 +1208,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-Text-Pi.124e2499.woff2"
   },
   {
-    "revision": "a478b9c07a6073d8b9c63e9bba1fcbe6",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Bold-Latin1.a478b9c0.woff2"
-  },
-  {
     "revision": "61939b79ebcde848e15cd6840944545d",
     "url": "/weclare/static/media/IBMPlexSansCondensed-Bold-Latin2.61939b79.woff2"
+  },
+  {
+    "revision": "a478b9c07a6073d8b9c63e9bba1fcbe6",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Bold-Latin1.a478b9c0.woff2"
   },
   {
     "revision": "30b4867bbd4577720bf1598fd8eec942",
@@ -1224,12 +1224,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-ThinItalic-Latin2.f5825807.woff2"
   },
   {
-    "revision": "ad0cfc5350733dfd8af98a5fa9e45ccc",
-    "url": "/weclare/static/media/IBMPlexSans-Thin-Latin1.ad0cfc53.woff2"
-  },
-  {
     "revision": "ac09a63900cf3d3c16025e5a176553f9",
     "url": "/weclare/static/media/IBMPlexSans-SemiBoldItalic-Latin3.ac09a639.woff2"
+  },
+  {
+    "revision": "ad0cfc5350733dfd8af98a5fa9e45ccc",
+    "url": "/weclare/static/media/IBMPlexSans-Thin-Latin1.ad0cfc53.woff2"
   },
   {
     "revision": "1a939d309e683c2ae18ab9ac9498fb9e",
@@ -1240,12 +1240,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-Thin-Latin2.a544a550.woff2"
   },
   {
-    "revision": "75f7640bc12b6cd252664a5fc0d7f008",
-    "url": "/weclare/static/media/IBMPlexSans-SemiBold-Latin3.75f7640b.woff2"
-  },
-  {
     "revision": "2722621d64f871f2258a225f9df7ac62",
     "url": "/weclare/static/media/IBMPlexSans-TextItalic-Latin1.2722621d.woff2"
+  },
+  {
+    "revision": "75f7640bc12b6cd252664a5fc0d7f008",
+    "url": "/weclare/static/media/IBMPlexSans-SemiBold-Latin3.75f7640b.woff2"
   },
   {
     "revision": "141150bc379fc17a5e91db8e449382c7",
@@ -1256,12 +1256,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-TextItalic-Cyrillic.3be8319c.woff2"
   },
   {
-    "revision": "53b71016d19530165fa9407b46e550b2",
-    "url": "/weclare/static/media/IBMPlexSans-Text-Latin1.53b71016.woff2"
-  },
-  {
     "revision": "511285a719c889c00eb65890fbe9d01d",
     "url": "/weclare/static/media/IBMPlexSans-TextItalic-Latin2.511285a7.woff2"
+  },
+  {
+    "revision": "53b71016d19530165fa9407b46e550b2",
+    "url": "/weclare/static/media/IBMPlexSans-Text-Latin1.53b71016.woff2"
   },
   {
     "revision": "4f6289a4af8e092effe0b35f7084d8a0",
@@ -1300,20 +1300,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-Regular-Greek.edc17bdb.woff2"
   },
   {
-    "revision": "7abf0d0bb6573635b5ece6d695718958",
-    "url": "/weclare/static/media/IBMPlexSans-Regular-Cyrillic.7abf0d0b.woff2"
-  },
-  {
     "revision": "4e0456ed0d5c9efa78f740a20f784dc0",
     "url": "/weclare/static/media/IBMPlexSans-MediumItalic-Latin3.4e0456ed.woff2"
   },
   {
-    "revision": "b55564df193d1d4076ba9f5323dee44a",
-    "url": "/weclare/static/media/IBMPlexSans-MediumItalic-Greek.b55564df.woff2"
+    "revision": "7abf0d0bb6573635b5ece6d695718958",
+    "url": "/weclare/static/media/IBMPlexSans-Regular-Cyrillic.7abf0d0b.woff2"
   },
   {
     "revision": "b75420fe88c8e6b4190e822f15c2fb37",
     "url": "/weclare/static/media/IBMPlexSans-MediumItalic-Pi.b75420fe.woff2"
+  },
+  {
+    "revision": "b55564df193d1d4076ba9f5323dee44a",
+    "url": "/weclare/static/media/IBMPlexSans-MediumItalic-Greek.b55564df.woff2"
   },
   {
     "revision": "88dc4f2f8bb838c2ba6ffeb41c2625b8",
@@ -1344,22 +1344,6 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-Regular-Latin2.67e3efe8.woff2"
   },
   {
-    "revision": "8f06a82930fca76b838793bab2090b6d",
-    "url": "/weclare/static/media/IBMPlexSans-MediumItalic-Latin1.8f06a829.woff2"
-  },
-  {
-    "revision": "2dc8c04b60b164cd45ac3d63e399326a",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-ExtraLight.2dc8c04b.woff"
-  },
-  {
-    "revision": "05231c4f469bea782b7936e845f6cdfe",
-    "url": "/weclare/static/media/IBMPlexSansCondensed-Bold.05231c4f.woff"
-  },
-  {
-    "revision": "f51fc5fa311d726a357c148f0f1ec8e8",
-    "url": "/weclare/static/media/IBMPlexSans-Medium-Greek.f51fc5fa.woff2"
-  },
-  {
     "revision": "f07f771e3ec8a9c53bc0896f663e2e95",
     "url": "/weclare/static/media/IBMPlexSans-Medium-Latin3.f07f771e.woff2"
   },
@@ -1368,8 +1352,20 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-Medium-Pi.7d53caf4.woff2"
   },
   {
-    "revision": "52c3597e56a22c386caf30e4d6e583f7",
-    "url": "/weclare/static/media/IBMPlexSans-LightItalic-Latin3.52c3597e.woff2"
+    "revision": "2dc8c04b60b164cd45ac3d63e399326a",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-ExtraLight.2dc8c04b.woff"
+  },
+  {
+    "revision": "f51fc5fa311d726a357c148f0f1ec8e8",
+    "url": "/weclare/static/media/IBMPlexSans-Medium-Greek.f51fc5fa.woff2"
+  },
+  {
+    "revision": "8f06a82930fca76b838793bab2090b6d",
+    "url": "/weclare/static/media/IBMPlexSans-MediumItalic-Latin1.8f06a829.woff2"
+  },
+  {
+    "revision": "05231c4f469bea782b7936e845f6cdfe",
+    "url": "/weclare/static/media/IBMPlexSansCondensed-Bold.05231c4f.woff"
   },
   {
     "revision": "793ffc48255fd72809fe76185d77c7f7",
@@ -1378,6 +1374,10 @@ self.__precacheManifest = [
   {
     "revision": "debf867db96222f655a3e0aace159c6d",
     "url": "/weclare/static/media/IBMPlexSans-LightItalic-Pi.debf867d.woff2"
+  },
+  {
+    "revision": "52c3597e56a22c386caf30e4d6e583f7",
+    "url": "/weclare/static/media/IBMPlexSans-LightItalic-Latin3.52c3597e.woff2"
   },
   {
     "revision": "30e1b088e99a31874749e99328497e34",
@@ -1396,36 +1396,32 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-MediumItalic-Cyrillic.22778a4f.woff2"
   },
   {
-    "revision": "eb63d8a8506a7eff4062707d9dac953e",
-    "url": "/weclare/static/media/IBMPlexSans-LightItalic-Greek.eb63d8a8.woff2"
-  },
-  {
     "revision": "0d7696db2a1763e9c7ac984746a54a20",
     "url": "/weclare/static/media/IBMPlexSans-Medium-Cyrillic.0d7696db.woff2"
+  },
+  {
+    "revision": "eb63d8a8506a7eff4062707d9dac953e",
+    "url": "/weclare/static/media/IBMPlexSans-LightItalic-Greek.eb63d8a8.woff2"
   },
   {
     "revision": "c3d7421a3a62da4442c1245db558d2af",
     "url": "/weclare/static/media/IBMPlexSans-Light-Greek.c3d7421a.woff2"
   },
   {
-    "revision": "6545dbecac51fe611016b96631853679",
-    "url": "/weclare/static/media/IBMPlexSans-Italic-Latin3.6545dbec.woff2"
-  },
-  {
     "revision": "9d48901ee7718d1b46120435333a8ebf",
     "url": "/weclare/static/media/IBMPlexSans-Italic-Pi.9d48901e.woff2"
   },
   {
-    "revision": "fd9f96aa53ff309f25db14bc27a15ebd",
-    "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic-Latin3.fd9f96aa.woff2"
+    "revision": "6545dbecac51fe611016b96631853679",
+    "url": "/weclare/static/media/IBMPlexSans-Italic-Latin3.6545dbec.woff2"
   },
   {
     "revision": "c47abd553d6a082036dd2eb9bddff58b",
     "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic-Pi.c47abd55.woff2"
   },
   {
-    "revision": "e8ded9c255b522397cc1a41f51d3358f",
-    "url": "/weclare/static/media/IBMPlexSans-Medium-Latin1.e8ded9c2.woff2"
+    "revision": "fd9f96aa53ff309f25db14bc27a15ebd",
+    "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic-Latin3.fd9f96aa.woff2"
   },
   {
     "revision": "e70330c70c2e7fccba55cfbe3a7d4462",
@@ -1436,12 +1432,16 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-Light-Cyrillic.186608ae.woff2"
   },
   {
-    "revision": "e9fd153262d949636d18a996d90f4da1",
-    "url": "/weclare/static/media/IBMPlexSans-Italic-Greek.e9fd1532.woff2"
+    "revision": "e8ded9c255b522397cc1a41f51d3358f",
+    "url": "/weclare/static/media/IBMPlexSans-Medium-Latin1.e8ded9c2.woff2"
   },
   {
     "revision": "fd7c41c8d73469b2e38859244f46d82c",
     "url": "/weclare/static/media/IBMPlexSans-LightItalic-Latin1.fd7c41c8.woff2"
+  },
+  {
+    "revision": "e9fd153262d949636d18a996d90f4da1",
+    "url": "/weclare/static/media/IBMPlexSans-Italic-Greek.e9fd1532.woff2"
   },
   {
     "revision": "43a6a0e685c124ba6afacae67782e880",
@@ -1452,12 +1452,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-LightItalic-Cyrillic.6c942740.woff2"
   },
   {
-    "revision": "120eb63d3e397f9180b2f68ccaf75f86",
-    "url": "/weclare/static/media/IBMPlexSans-Light-Latin2.120eb63d.woff2"
-  },
-  {
     "revision": "204f8867be52d900979f4e5a3da2f80d",
     "url": "/weclare/static/media/IBMPlexSans-Light-Latin1.204f8867.woff2"
+  },
+  {
+    "revision": "9ef3a81f3efcb77a6345b3133b705c4f",
+    "url": "/weclare/static/media/IBMPlexSans-ExtraLight-Pi.9ef3a81f.woff2"
   },
   {
     "revision": "f80cd108d19644b2307ab15b96252998",
@@ -1468,28 +1468,28 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-Italic-Cyrillic.8ec4cb6d.woff2"
   },
   {
-    "revision": "9ef3a81f3efcb77a6345b3133b705c4f",
-    "url": "/weclare/static/media/IBMPlexSans-ExtraLight-Pi.9ef3a81f.woff2"
-  },
-  {
     "revision": "42b26a84b93adb6aaa22fbfecf846c08",
     "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic-Greek.42b26a84.woff2"
+  },
+  {
+    "revision": "120eb63d3e397f9180b2f68ccaf75f86",
+    "url": "/weclare/static/media/IBMPlexSans-Light-Latin2.120eb63d.woff2"
   },
   {
     "revision": "37b025ab304cb176739cf8ac6ab7425c",
     "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Latin3.37b025ab.woff2"
   },
   {
-    "revision": "e44edb0c0b410ea91850adaad5b3f090",
-    "url": "/weclare/static/media/IBMPlexSans-ExtraLight-Greek.e44edb0c.woff2"
+    "revision": "4b06e62d2eb7fa13b9e45abce4428f7c",
+    "url": "/weclare/static/media/IBMPlexSans-Italic-Latin1.4b06e62d.woff2"
   },
   {
     "revision": "36f65dcdb97d0b5d5dfe4509c1347b53",
     "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Pi.36f65dcd.woff2"
   },
   {
-    "revision": "4b06e62d2eb7fa13b9e45abce4428f7c",
-    "url": "/weclare/static/media/IBMPlexSans-Italic-Latin1.4b06e62d.woff2"
+    "revision": "e44edb0c0b410ea91850adaad5b3f090",
+    "url": "/weclare/static/media/IBMPlexSans-ExtraLight-Greek.e44edb0c.woff2"
   },
   {
     "revision": "4498541328a69b30788e578344bd88c5",
@@ -1508,20 +1508,24 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic-Latin1.831073fd.woff2"
   },
   {
-    "revision": "f42f1b16034264b4a65844f7d02a8588",
-    "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic-Cyrillic.f42f1b16.woff2"
-  },
-  {
-    "revision": "7abb57ac842c6bff61c1d32706ae0e79",
-    "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Greek.7abb57ac.woff2"
-  },
-  {
     "revision": "5d5ff1217b2d605f457c034e411dd2b6",
     "url": "/weclare/static/media/IBMPlexSans-Bold-Latin3.5d5ff121.woff2"
   },
   {
     "revision": "7df0384481f8e1b5dfc8c7838ad0e087",
     "url": "/weclare/static/media/IBMPlexSans-Bold-Pi.7df03844.woff2"
+  },
+  {
+    "revision": "7abb57ac842c6bff61c1d32706ae0e79",
+    "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Greek.7abb57ac.woff2"
+  },
+  {
+    "revision": "f42f1b16034264b4a65844f7d02a8588",
+    "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic-Cyrillic.f42f1b16.woff2"
+  },
+  {
+    "revision": "f678fabfa7030298ed7d7469cfb21d07",
+    "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Cyrillic.f678fabf.woff2"
   },
   {
     "revision": "bafe09e59eb29f6710d66d24d39c007c",
@@ -1536,10 +1540,6 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-ExtraLight-Latin2.786c01d8.woff2"
   },
   {
-    "revision": "f678fabfa7030298ed7d7469cfb21d07",
-    "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Cyrillic.f678fabf.woff2"
-  },
-  {
     "revision": "e5de3c5e80decc2569d9e5e5a1877109",
     "url": "/weclare/static/media/IBMPlexSans-Bold-Greek.e5de3c5e.woff2"
   },
@@ -1548,24 +1548,24 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Latin1.a8cdd5ca.woff2"
   },
   {
-    "revision": "7e38feb08a460283a7e93c204c284789",
-    "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Latin2.7e38feb0.woff2"
-  },
-  {
     "revision": "3c3082268865f8bc205bd4c37e6d7804",
     "url": "/weclare/static/media/IBMPlexSans-ThinItalic.3c308226.woff"
+  },
+  {
+    "revision": "7e38feb08a460283a7e93c204c284789",
+    "url": "/weclare/static/media/IBMPlexSans-BoldItalic-Latin2.7e38feb0.woff2"
   },
   {
     "revision": "cfc50a4d50fd6e0e122c0f6064988ac4",
     "url": "/weclare/static/media/IBMPlexSans-TextItalic.cfc50a4d.woff"
   },
   {
-    "revision": "45a69f5faeb811760954c1cd050ca422",
-    "url": "/weclare/static/media/IBMPlexSans-Bold-Latin1.45a69f5f.woff2"
-  },
-  {
     "revision": "a4c645a3d758784c1aa87881404f2cbe",
     "url": "/weclare/static/media/IBMPlexSans-Bold-Latin2.a4c645a3.woff2"
+  },
+  {
+    "revision": "45a69f5faeb811760954c1cd050ca422",
+    "url": "/weclare/static/media/IBMPlexSans-Bold-Latin1.45a69f5f.woff2"
   },
   {
     "revision": "965cefb4d676da04eca6da4d8e8f670a",
@@ -1604,12 +1604,12 @@ self.__precacheManifest = [
     "url": "/weclare/static/media/IBMPlexSans-Italic.f3d22b22.woff"
   },
   {
-    "revision": "7090d226ca1908ecab1205e7fb50b008",
-    "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic.7090d226.woff"
-  },
-  {
     "revision": "da3adef2cf96e94865594bc86f936f69",
     "url": "/weclare/static/media/IBMPlexSans-ExtraLight.da3adef2.woff"
+  },
+  {
+    "revision": "7090d226ca1908ecab1205e7fb50b008",
+    "url": "/weclare/static/media/IBMPlexSans-ExtraLightItalic.7090d226.woff"
   },
   {
     "revision": "a183af96ae526e00113312510a559f77",
