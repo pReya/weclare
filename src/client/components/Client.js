@@ -10,6 +10,7 @@ import mainReducer from "../reducers/main";
 import Footer from "../../shared/components/Footer";
 import Header from "./ClientHeaderContainer";
 import ConnectorContainer from "./ConnectorContainer";
+import AnswerScreen from "./AnswerScreen";
 
 const store = createStore(
   mainReducer,
@@ -23,6 +24,7 @@ const Client = () => (
         <Header />
         <Container>
           <Route exact path="/client/connect" component={ConnectorContainer} />
+          <Route exact path="/client/answer" component={AnswerScreen} />
           <Footer />
         </Container>
       </>

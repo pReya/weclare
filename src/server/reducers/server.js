@@ -1,9 +1,14 @@
-import { ADD_CONNECTION, SET_SERVER_ID } from "../actions/server";
+import {
+  ADD_CONNECTION,
+  SET_SERVER_ID,
+  SET_CURRENT_QUESTION
+} from "../actions/server";
 
 export const server = (
   state = {
     connections: [],
-    ownServerId: ""
+    ownServerId: "",
+    currentQuestion: null
   },
   action
 ) => {
@@ -16,6 +21,9 @@ export const server = (
 
     case SET_SERVER_ID:
       return { ...state, ownServerId: action.payload.newId };
+
+    case SET_CURRENT_QUESTION:
+      return { ...state, currentQuestion: action.payload.questionIdx };
 
     default:
       return state;

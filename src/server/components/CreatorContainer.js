@@ -25,11 +25,14 @@ const createPeer = (ownServerId, dispatch) => {
 
 const mapDispatchToProps = dispatch => ({
   onChangeServerId: newServerId => dispatch(setServerId(newServerId)),
-  onClickConnect: ownServerId => createPeer(ownServerId, dispatch)
+  onClickConnect: ownServerId => {
+    console.log(ownServerId);
+    createPeer(ownServerId, dispatch);
+  }
 });
 
 const mapStateToProps = state => ({
-  ownServerId: state.server.ownServerId
+  serverId: state.server.ownServerId
 });
 
 const staticProps = {

@@ -1,6 +1,7 @@
 // Server Actions
 export const ADD_CONNECTION = "ADD_CONNCECTION";
 export const SET_SERVER_ID = "SET_SERVER_ID";
+export const SET_CURRENT_QUESTION = "SET_CURRENT_QUESTION";
 
 export function addConnection(connection) {
   return {
@@ -16,6 +17,15 @@ export function setServerId(newId) {
     type: SET_SERVER_ID,
     payload: {
       newId
+    }
+  };
+}
+
+export function setCurrentQuestion(questionIdx) {
+  return {
+    type: SET_CURRENT_QUESTION,
+    payload: {
+      questionIdx
     }
   };
 }

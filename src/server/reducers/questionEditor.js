@@ -8,7 +8,7 @@ import {
   DELETE_ANSWER,
   SELECT_QUESTION,
   LOAD_QUESTIONS
-} from "../actions/questions";
+} from "../actions/questionEditor";
 
 import { changeInArray, deleteInArray } from "./helpers";
 
@@ -42,7 +42,7 @@ export const selectedQuestion = (state = null, action) => {
   }
 };
 
-export const questions = (state = [], action) => {
+export const questionEditor = (state = [], action) => {
   switch (action.type) {
     case ADD_QUESTION:
       return [...state, newQuestion];

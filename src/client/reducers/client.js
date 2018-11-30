@@ -1,9 +1,19 @@
-import { ADD_CONNECTION, SET_REMOTE_SERVER_ID } from "../actions/client";
+import {
+  ADD_CONNECTION,
+  SET_REMOTE_SERVER_ID,
+  SET_CURRENT_QUESTION
+} from "../actions/client";
 
 export const client = (
   state = {
     connections: [],
-    remoteServerId: ""
+    remoteServerId: "",
+    currentQuestion: {
+      // questionType: "singleChoice",
+      // questionText: "Hallo Erste Frage?",
+      // correctAnswers: 1,
+      // answers: [{ answerText: "Answer A" }, { answerText: "Answer B" }]
+    }
   },
   action
 ) => {
@@ -16,6 +26,9 @@ export const client = (
 
     case SET_REMOTE_SERVER_ID:
       return { ...state, remoteServerId: action.payload.newId };
+
+    case SET_CURRENT_QUESTION:
+      return { ...state, currentQuestion: action.payload.newQuestion };
 
     default:
       return state;

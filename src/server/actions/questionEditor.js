@@ -1,4 +1,4 @@
-// Question Actions
+// Question Editor Actions
 export const SELECT_QUESTION = "SELECT_QUESTION";
 export const ADD_QUESTION = "ADD_QUESTION";
 export const EDIT_QUESTION_TEXT = "EDIT_QUESTION_TEXT";
@@ -20,8 +20,8 @@ export function addQuestion() {
     dispatch({ type: ADD_QUESTION });
 
     // 2: select newest question as `selectedQuestion`
-    const { questions } = getState();
-    dispatch(selectQuestion(questions.length - 1));
+    const { questionEditor } = getState();
+    dispatch(selectQuestion(questionEditor.length - 1));
   };
 }
 

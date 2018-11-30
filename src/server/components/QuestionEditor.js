@@ -14,10 +14,10 @@ import {
   addAnswer,
   editAnswerText,
   deleteAnswer
-} from "../actions/questions";
+} from "../actions/questionEditor";
 
 const mapStateToProps = state => ({
-  questions: state.questions,
+  questions: state.questionEditor,
   selectedQuestion: state.selectedQuestion
 });
 
@@ -60,6 +60,7 @@ class QuestionEditor extends React.Component {
       deleteAnswer,
       setCorrectAnswer
     } = this.props;
+    console.log(this.props);
     return (
       <React.Fragment>
         <Row className="justify-content-center mb-4">

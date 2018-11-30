@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import Peer from "peerjs";
 import ConnectForm from "../../shared/components/ConnectForm";
 import { setServerStatus, setPeer } from "../../shared/actions/connection";
-import { addConnection, setRemoteServerId } from "../actions/client";
+import {
+  addConnection,
+  setRemoteServerId,
+  setCurrentQuestion
+} from "../actions/client";
 
 const clickConnect = (serverId, dispatch) => {
   const peer = new Peer({ debug: 3, secure: true });
@@ -24,7 +28,7 @@ const clickConnect = (serverId, dispatch) => {
   connection.on("open", () => {
     console.log("Client Connected");
     dispatch(setServerStatus(2));
-    connection.on("data", data => console.log("Received Data: ", data));
+    connection.on("data", data => dispatch(setCurrentQuestion(data)));
   });
 };
 
@@ -41,7 +45,8 @@ const staticProps = {
   title: "Connect to Server",
   text:
     "Please enter a valid Server ID. You should receive this ID from your instructor.",
-  buttonText: "Connect"
+  buttonText: "Connect",
+  location: "/client/answer"
 };
 
 export default connect(
