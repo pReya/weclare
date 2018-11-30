@@ -1,7 +1,7 @@
 {
   "main.css": "/weclare/static/css/main.00a9de85.chunk.css",
-  "main.js": "/weclare/static/js/main.a14b0c9d.chunk.js",
-  "main.js.map": "/weclare/static/js/main.a14b0c9d.chunk.js.map",
+  "main.js": "/weclare/static/js/main.55be1165.chunk.js",
+  "main.js.map": "/weclare/static/js/main.55be1165.chunk.js.map",
   "static/js/1.d49bb467.chunk.js": "/weclare/static/js/1.d49bb467.chunk.js",
   "static/js/1.d49bb467.chunk.js.map": "/weclare/static/js/1.d49bb467.chunk.js.map",
   "runtime~main.js": "/weclare/static/js/runtime~main.05880e56.js",
@@ -9,6 +9,6 @@
   "static/media/App.scss": "/weclare/static/media/IBMPlexSans-BoldItalic.a183af96.woff",
   "static/css/main.00a9de85.chunk.css.map": "/weclare/static/css/main.00a9de85.chunk.css.map",
   "index.html": "/weclare/index.html",
-  "precache-manifest.f948196dffe8b3d1b69b7976d2ff029a.js": "/weclare/precache-manifest.f948196dffe8b3d1b69b7976d2ff029a.js",
+  "precache-manifest.ff58bac2840c7917e3c83d0537c5bb59.js": "/weclare/precache-manifest.ff58bac2840c7917e3c83d0537c5bb59.js",
   "service-worker.js": "/weclare/service-worker.js"
 }
