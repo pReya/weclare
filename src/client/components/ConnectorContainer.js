@@ -16,6 +16,7 @@ const clickConnect = (serverId, dispatch) => {
 
   peer.on("error", err => {
     console.error(err);
+    dispatch(setServerStatus(3));
   });
 
   const connection = peer.connect(
@@ -30,7 +31,8 @@ const clickConnect = (serverId, dispatch) => {
     dispatch(setServerStatus(2));
     connection.on("data", data => {
       console.log("Received data: ", data);
-      dispatch(setCurrentQuestion(JSON.parse(data)));
+      const msg = JSON.parse(data);
+      dispatch(setCurrentQuestion(msg.question));
     });
   });
 };

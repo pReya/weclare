@@ -40,6 +40,11 @@ export default class ConnectionIndicator extends React.Component {
     });
   }
 
+  // "<span role='img' aria-label='keyboard'>🎮</span> Ready",
+  // "<span role='img' aria-label='questionmark'>❓</span> Waiting for connections",
+  // `<span role='img' aria-label='success'>✅</span> ${numberOfClients} Clients Connected`,
+  // "<span role='img' aria-label='cross'>❌</span> Error"
+
   render() {
     const { status, isServer, numberOfClients, ownServerId } = this.props;
     const { dropdownOpen } = this.state;

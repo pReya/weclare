@@ -21,6 +21,11 @@ const createPeer = (ownServerId, dispatch) => {
     dispatch(setServerStatus(2));
     dispatch(addConnection(connection));
   });
+
+  peer.on("error", err => {
+    console.log("FEHLER: ", err);
+    dispatch(setServerStatus(3));
+  });
 };
 
 const mapDispatchToProps = dispatch => ({

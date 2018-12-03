@@ -1,5 +1,5 @@
 // Server Actions
-export const ADD_CONNECTION = "ADD_CONNCECTION";
+export const ADD_CONNECTION = "ADD_CONNECTION";
 export const SET_REMOTE_SERVER_ID = "SET_REMOTE_SERVER_ID";
 export const SET_CURRENT_QUESTION = "SET_CURRENT_QUESTION";
 

@@ -8,6 +8,7 @@ export const client = (
   state = {
     connections: [],
     remoteServerId: "",
+    questionIdx: null,
     currentQuestion: {
       // questionType: "singleChoice",
       // questionText: "Hallo Erste Frage?",

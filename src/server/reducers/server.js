@@ -1,7 +1,7 @@
 import {
   ADD_CONNECTION,
   SET_SERVER_ID,
-  SET_CURRENT_QUESTION
+  SET_CURRENT_QUESTION_IDX
 } from "../actions/server";
 
 export const server = (
@@ -22,8 +22,10 @@ export const server = (
     case SET_SERVER_ID:
       return { ...state, ownServerId: action.payload.newId };
 
-    case SET_CURRENT_QUESTION:
+    case SET_CURRENT_QUESTION_IDX: {
+      console.log("Arrived in reducer");
       return { ...state, currentQuestion: action.payload.questionIdx };
+    }
 
     default:
       return state;

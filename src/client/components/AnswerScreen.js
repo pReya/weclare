@@ -4,14 +4,15 @@ import { connect } from "react-redux";
 import DefaultCard from "../../shared/components/DefaultCard";
 
 const mapStateToProps = state => ({
-  currentQuestion: state.client.currentQuestion
+  currentQuestion: state.client.currentQuestion,
+  questionIdx: state.client.questionIdx
 });
 
 const AnswerScreen = props => {
   const { currentQuestion } = props;
   return (
     <Row className="justify-content-center">
-      <DefaultCard title="Answer question">
+      <DefaultCard title="Answer question" badge={currentQuestion.questionIdx}>
         <h4 className="text-center mb-4">{currentQuestion.questionText}</h4>
         {currentQuestion.answers &&
           currentQuestion.answers.map((question, i) => (
