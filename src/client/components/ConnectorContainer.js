@@ -11,7 +11,7 @@ import {
 } from "../actions/client";
 
 const clickConnect = (serverId, dispatch) => {
-  const peer = new Peer({ debug: 3, secure: true });
+  const peer = new Peer({ debug: 3, secure: true, port: 443 });
   dispatch(setPeer(peer));
 
   peer.on("error", err => {
@@ -30,8 +30,8 @@ const clickConnect = (serverId, dispatch) => {
     console.log("Client Connected");
     dispatch(setServerStatus(2));
     connection.on("data", data => {
-      console.log("Received data: ", data);
       const msg = JSON.parse(data);
+      console.log("Received data: ", msg);
       dispatch(setCurrentQuestion(msg.question));
     });
   });

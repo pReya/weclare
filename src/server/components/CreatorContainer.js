@@ -8,7 +8,7 @@ import { addConnection, setServerId } from "../actions/server";
 import { setPeer, setServerStatus } from "../../shared/actions/connection";
 
 const createPeer = (ownServerId, dispatch) => {
-  const peer = new Peer(ownServerId, { debug: 3, secure: true });
+  const peer = new Peer(ownServerId, { debug: 3, secure: true, port: 443 });
   dispatch(setPeer(peer));
 
   peer.on("open", () => {

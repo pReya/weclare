@@ -5,18 +5,22 @@ import { Helmet } from "react-helmet";
 import DefaultCard from "../../shared/components/DefaultCard";
 import { setCurrentQuestionIdx } from "../actions/server";
 
-const sendCurrentQuestion = (connections, questions, currentQuestion) => {
-  console.log({ connections, questions, currentQuestion });
-  const msg = {
-    question: {
-      ...questions[currentQuestion],
-      questionIdx: String(currentQuestion)
+const sendCurrentQuestion = (connections, questions, currentQuestionIdx) => {
+  const question = questions[currentQuestionIdx];
+  if (question) {
+    const { correctAnswers, ...questionWithoutAnswer } = question;
+    const msg = {
+      question: {
+        ...questionWithoutAnswer,
+        questionIdx: String(currentQuestionIdx)
+      }
+    };
+    if (connections.length > 0 && questions.length > 0) {
+      connections.forEach(connection => connection.send(JSON.stringify(msg)));
     }
-  };
-  if (connections.length > 0 && questions.length > 0) {
-    connections.forEach(connection => connection.send(JSON.stringify(msg)));
+  } else {
+    console.error("Can't send question to clients");
   }
-  console.log("TEST1");
 };
 
 const Waiter = props => {
