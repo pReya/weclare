@@ -23,7 +23,7 @@ export function setServerId(newId) {
 
 export function setCurrentQuestionIdx(questionIdx) {
   return {
-    type: SET_CURRENT_QUESTION_IDX,
+    type: "SET_CURRENT_QUESTION_IDX",
     payload: {
       questionIdx
     }

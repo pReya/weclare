@@ -61,7 +61,7 @@ export default class ConnectionIndicator extends React.Component {
     const value = statusDescriptions[componentRole][status];
     return (
       <InputGroup className="justify-content-center col-md-8">
-        {isServer && status === 1 ? (
+        {isServer && [1, 2, 3].includes(status) ? (
           <InputGroupButtonDropdown
             addonType="prepend"
             isOpen={dropdownOpen}

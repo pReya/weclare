@@ -13,6 +13,10 @@ export const server = (
   action
 ) => {
   switch (action.type) {
+    case SET_CURRENT_QUESTION_IDX: {
+      return { ...state, currentQuestion: action.payload.questionIdx };
+    }
+
     case ADD_CONNECTION:
       return {
         ...state,
@@ -21,11 +25,6 @@ export const server = (
 
     case SET_SERVER_ID:
       return { ...state, ownServerId: action.payload.newId };
-
-    case SET_CURRENT_QUESTION_IDX: {
-      console.log("Arrived in reducer");
-      return { ...state, currentQuestion: action.payload.questionIdx };
-    }
 
     default:
       return state;

@@ -12,7 +12,7 @@ import {
 import ConnectionIndicator from "./ConnectionIndicator";
 
 const Header = props => {
-  const { status, numberOfClients, isServer, ownServerId } = props;
+  const { status, numberOfClients, isServer, isClient, ownServerId } = props;
   return (
     <>
       <Navbar
@@ -24,12 +24,15 @@ const Header = props => {
             Weclare
             {isServer ? " Server" : " Client"}
           </NavbarBrand>
-          <ConnectionIndicator
-            isServer={isServer}
-            status={status}
-            numberOfClients={numberOfClients}
-            ownServerId={ownServerId}
-          />
+          {(isServer || isClient) && (
+            <ConnectionIndicator
+              isServer={isServer}
+              status={status}
+              numberOfClients={numberOfClients}
+              ownServerId={ownServerId}
+            />
+          )}
+
           <Nav className="flex-row">
             <NavItem>
               <NavLink tag={Link} to="/">
@@ -37,7 +40,7 @@ const Header = props => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/">
+              <NavLink tag={Link} to="/about">
                 About
               </NavLink>
             </NavItem>
@@ -50,15 +53,18 @@ const Header = props => {
 
 Header.propTypes = {
   isServer: PropTypes.bool,
-  status: PropTypes.number.isRequired,
+  isClient: PropTypes.bool,
+  status: PropTypes.number,
   numberOfClients: PropTypes.number,
   ownServerId: PropTypes.string
 };
 
 Header.defaultProps = {
   isServer: false,
+  isClient: false,
   numberOfClients: 0,
-  ownServerId: ""
+  ownServerId: "",
+  status: 0
 };
 
 export default Header;

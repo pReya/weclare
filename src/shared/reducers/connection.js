@@ -1,4 +1,4 @@
-import { SET_SERVER_STATUS, SET_PEER } from "../actions/connection";
+import { SET_CONNECTION_STATUS, SET_PEER } from "../actions/connection";
 
 export const connection = (
   state = {
@@ -8,7 +8,7 @@ export const connection = (
   action
 ) => {
   switch (action.type) {
-    case SET_SERVER_STATUS:
+    case SET_CONNECTION_STATUS:
       return { ...state, status: action.payload.newStatus };
 
     case SET_PEER:

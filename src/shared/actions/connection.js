@@ -1,9 +1,9 @@
 export const SET_PEER = "SET_PEER";
-export const SET_SERVER_STATUS = "SET_SERVER_STATUS";
+export const SET_CONNECTION_STATUS = "SET_CONNECTION_STATUS";
 
 export function setServerStatus(newStatus) {
   return {
-    type: SET_SERVER_STATUS,
+    type: SET_CONNECTION_STATUS,
     payload: {
       newStatus
     }

@@ -6,4 +6,6 @@ const mapStateToProps = state => ({
   status: state.connection.status
 });
 
-export default connect(mapStateToProps)(props => <Header {...props} />);
+export default connect(mapStateToProps)(props => (
+  <Header isClient {...props} />
+));
