@@ -60,7 +60,7 @@ export default class ConnectionIndicator extends React.Component {
     const componentRole = isServer ? "server" : "client";
     const value = statusDescriptions[componentRole][status];
     return (
-      <InputGroup className="justify-content-center">
+      <InputGroup className="justify-content-center col-md-8">
         {isServer && status === 1 ? (
           <InputGroupButtonDropdown
             addonType="prepend"
@@ -98,7 +98,7 @@ export default class ConnectionIndicator extends React.Component {
             </DropdownMenu>
           </InputGroupButtonDropdown>
         ) : null}
-        <Input className="text-center col-3" value={value} disabled />
+        <Input className="text-center col-5" value={value} disabled />
       </InputGroup>
     );
   }

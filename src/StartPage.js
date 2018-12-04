@@ -17,23 +17,8 @@ const StartPage = () => (
     </div>
 
     <Row>
-      <div className="card-deck mb-3 text-center">
-        <Col>
-          <SelectBox
-            header="For Instructors"
-            text="Start the server app, which allows you to create new question sets and accept connections from students."
-            emoji="👩‍🏫"
-          >
-            <Button
-              tag={Link}
-              to="/server/editor"
-              className="btn btn-lg btn-block btn-outline-primary"
-            >
-              Create Quiz
-            </Button>
-          </SelectBox>
-        </Col>
-        <Col>
+      <Col sm="6">
+        <div className="card-deck mb-3 text-center">
           <SelectBox
             header="For Students"
             text="Start the client app, which allows you to connect to an existing session and answer questions."
@@ -47,8 +32,25 @@ const StartPage = () => (
               Join Quiz
             </Button>
           </SelectBox>
-        </Col>
-      </div>
+        </div>
+      </Col>
+      <Col sm="6">
+        <div className="card-deck mb-3 text-center">
+          <SelectBox
+            header="For Instructors"
+            text="Start the server app, which allows you to create new question sets and accept connections from students."
+            emoji="👩‍🏫"
+          >
+            <Button
+              tag={Link}
+              to="/server/editor"
+              className="btn btn-lg btn-block btn-outline-primary"
+            >
+              Create Quiz
+            </Button>
+          </SelectBox>
+        </div>
+      </Col>
     </Row>
     <Footer />
   </Container>

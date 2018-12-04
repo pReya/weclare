@@ -14,10 +14,13 @@ import ConnectionIndicator from "./ConnectionIndicator";
 const Header = props => {
   const { status, numberOfClients, isServer, ownServerId } = props;
   return (
-    <div>
-      <Navbar expand="lg" className="mb-4 border-bottom shadow-sm">
+    <>
+      <Navbar
+        expand="sm"
+        className="mb-4 border-bottom shadow-sm d-flex flex-row justify-content-between"
+      >
         <Container>
-          <NavbarBrand className="mr-auto" tag={Link} to="/">
+          <NavbarBrand tag={Link} to="/">
             Weclare
             {isServer ? " Server" : " Client"}
           </NavbarBrand>
@@ -27,7 +30,7 @@ const Header = props => {
             numberOfClients={numberOfClients}
             ownServerId={ownServerId}
           />
-          <Nav className="ml-auto" navbar>
+          <Nav className="flex-row">
             <NavItem>
               <NavLink tag={Link} to="/">
                 Help
@@ -41,7 +44,7 @@ const Header = props => {
           </Nav>
         </Container>
       </Navbar>
-    </div>
+    </>
   );
 };
 
