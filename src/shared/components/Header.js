@@ -20,7 +20,7 @@ const Header = props => {
         className="mb-4 border-bottom shadow-sm d-flex flex-row justify-content-between"
       >
         <Container>
-          <NavbarBrand tag={Link} to="/">
+          <NavbarBrand href="/">
             Weclare
             {isServer ? " Server" : " Client"}
           </NavbarBrand>

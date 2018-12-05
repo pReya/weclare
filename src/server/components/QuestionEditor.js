@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import Logger from "../../util/Logger";
 import QuestionContent from "./QuestionContent";
 import QuestionList from "./QuestionList";
 import {
@@ -92,7 +93,7 @@ class QuestionEditor extends React.Component {
               block
               onClick={() => {
                 localStorage.setItem("weclare", JSON.stringify(questions));
-                console.log("Saved to Storage");
+                Logger.info("Saved questionset to local Storage");
                 if (history) {
                   history.push("/server/create");
                 }
