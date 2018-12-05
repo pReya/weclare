@@ -3,6 +3,7 @@ import { Row, Col, Card, CardHeader, CardBody, Container } from "reactstrap";
 import snarkdown from "snarkdown";
 import Header from "./shared/components/Header";
 import Footer from "./shared/components/Footer";
+import "github-markdown-css/github-markdown.css";
 
 class About extends React.Component {
   constructor(props) {
@@ -33,7 +34,13 @@ class About extends React.Component {
                   <h6 className="my-0">About</h6>
                 </CardHeader>
                 <CardBody>
-                  <div dangerouslySetInnerHTML={{ __html: data }} />
+                  <div
+                    className="markdown-body"
+                    style={{
+                      fontFamily: "IBM Plex Sans"
+                    }}
+                    dangerouslySetInnerHTML={{ __html: data }}
+                  />
                 </CardBody>
               </Card>
             </Col>
