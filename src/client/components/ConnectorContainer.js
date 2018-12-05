@@ -11,7 +11,18 @@ import {
 } from "../actions/client";
 
 const clickConnect = (serverId, dispatch) => {
-  const peer = new Peer({ debug: 3, secure: true, port: 443 });
+  const {
+    REACT_APP_PEERJS_SERVER: server,
+    REACT_APP_PEERJS_SECURE: secure,
+    REACT_APP_PEERJS_DEBUG: debug
+  } = process.env;
+
+  const peer = new Peer({
+    host: server,
+    secure: secure === "true",
+    debug: parseInt(debug, 10)
+  });
+
   dispatch(setPeer(peer));
 
   peer.on("error", err => {

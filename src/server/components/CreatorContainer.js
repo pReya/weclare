@@ -8,7 +8,16 @@ import { addConnection, setServerId } from "../actions/server";
 import { setPeer, setServerStatus } from "../../shared/actions/connection";
 
 const createPeer = (ownServerId, dispatch) => {
-  const peer = new Peer(ownServerId, { debug: 3, secure: true, port: 443 });
+  const {
+    REACT_APP_PEERJS_SERVER: server,
+    REACT_APP_PEERJS_SECURE: secure,
+    REACT_APP_PEERJS_DEBUG: debug
+  } = process.env;
+  const peer = new Peer(ownServerId, {
+    host: server,
+    secure: secure === "true",
+    debug: parseInt(debug, 10)
+  });
   dispatch(setPeer(peer));
 
   peer.on("open", () => {
