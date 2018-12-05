@@ -22,12 +22,13 @@
     "reactstrap": "^6.5.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "snarkdown": "^1.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "secureStart": "export HTTPS=true&&npm start",
-    "build": "react-scripts build",
+    "build": "cp README.MD public/ && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

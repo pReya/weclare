@@ -22,3 +22,5 @@ yarn-error.log*
 
 # user specific
 /.vscode
+
+/public/README.MD
