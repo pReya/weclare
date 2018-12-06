@@ -87,7 +87,7 @@ class QuestionEditor extends React.Component {
           </Col>
         </Row>
         <Row className="justify-content-end">
-          <Col md="2">
+          <Col xs="auto">
             <Button
               outline
               block

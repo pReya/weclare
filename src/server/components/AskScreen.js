@@ -11,10 +11,13 @@ const sendCurrentQuestion = (connections, questions, currentQuestionIdx) => {
   const question = questions[currentQuestionIdx];
   if (question) {
     const { correctAnswers, ...questionWithoutAnswer } = question;
+    const currentQuestionIdxString = String(currentQuestionIdx + 1);
+    const questionsCount = Object.keys(questions).length;
     const msg = {
       question: {
         ...questionWithoutAnswer,
-        questionIdx: String(currentQuestionIdx + 1)
+        questionIdx: currentQuestionIdx + 1,
+        progress: `${currentQuestionIdxString}/${questionsCount}`
       }
     };
     if (connections.length > 0 && questions.length > 0) {
@@ -25,7 +28,7 @@ const sendCurrentQuestion = (connections, questions, currentQuestionIdx) => {
   }
 };
 
-function Waiter(props) {
+function AskScreen(props) {
   const {
     connections,
     questions,
@@ -92,4 +95,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Waiter));
+)(withRouter(AskScreen));
