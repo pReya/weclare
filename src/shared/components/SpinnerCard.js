@@ -6,7 +6,7 @@ import DefaultCard from "./DefaultCard";
 import { TSpinnerCard, DSpinnerCard } from "../types";
 
 const SpinnerCard = props => {
-  const { title } = props;
+  const { title, size } = props;
 
   return (
     <>
@@ -21,7 +21,7 @@ const SpinnerCard = props => {
               color2="#f44336"
               color3="#dc9125"
               color4="#5fa15d"
-              size={30}
+              size={size}
             />
           </div>
         </DefaultCard>

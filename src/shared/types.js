@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 
 export const TSpinnerCard = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  size: PropTypes.number
 };
 
 export const DSpinnerCard = {
-  title: "Waiting"
+  title: "Waiting",
+  size: 30
 };
 
 export const TQuestion = PropTypes.shape({

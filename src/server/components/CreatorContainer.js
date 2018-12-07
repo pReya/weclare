@@ -55,7 +55,7 @@ const staticProps = {
   text:
     "Please define your individual Server Id that you can give to participants.",
   buttonText: "Create",
-  location: "/server/ask"
+  location: "/server/wait"
 };
 
 export default withRouter(

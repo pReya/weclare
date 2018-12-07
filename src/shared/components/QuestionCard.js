@@ -13,7 +13,11 @@ const QuestionCard = props => {
         <title>Answer question</title>
       </Helmet>
       <Row className="justify-content-center">
-        <DefaultCard title="Answer question" badge={question.progress}>
+        <DefaultCard
+          title="Answer question"
+          badge={question.progress}
+          {...props}
+        >
           {question.questionText && (
             <h4 className="text-center mb-4">{question.questionText}</h4>
           )}

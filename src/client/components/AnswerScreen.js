@@ -15,7 +15,7 @@ const AnswerScreen = props => {
   return hasQuestion ? (
     <QuestionCard question={currentQuestion} />
   ) : (
-    <SpinnerCard title="Waiting for participants" />
+    <SpinnerCard title="Waiting for question" />
   );
 };
 
