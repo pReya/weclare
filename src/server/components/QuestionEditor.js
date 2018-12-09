@@ -63,7 +63,7 @@ class QuestionEditor extends React.Component {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Row className="justify-content-center mb-4">
           <Col md="4">
             <QuestionList
@@ -104,7 +104,7 @@ class QuestionEditor extends React.Component {
             </Button>
           </Col>
         </Row>
-      </React.Fragment>
+      </>
     );
   }
 }

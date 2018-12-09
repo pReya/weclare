@@ -3,7 +3,7 @@ import { Row, Col, Button, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import Footer from "./shared/components/Footer";
-import SelectBox from "./SelectBox";
+import SelectBox from "./shared/components/SelectBox";
 import "./scss/App.scss";
 
 const StartPage = () => (

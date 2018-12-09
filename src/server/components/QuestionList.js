@@ -1,7 +1,7 @@
 import React from "react";
 import "../../scss/App.scss";
 import PropTypes from "prop-types";
-import AddIcon from "@material-ui/icons/Add";
+import AddCircleOutlineIcon from "mdi-react/AddCircleOutlineIcon";
 
 import {
   Badge,
@@ -62,7 +62,10 @@ const QuestionList = props => {
           onAddQuestion();
         }}
       >
-        <AddIcon className="text-success" style={{ paddingBottom: "3px" }} />
+        <AddCircleOutlineIcon
+          className="text-success"
+          style={{ paddingBottom: "3px" }}
+        />
         Add
       </CardFooter>
     </Card>

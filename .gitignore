@@ -22,5 +22,5 @@ yarn-error.log*
 
 # user specific
 /.vscode
-
+# this file will be copied and overwritten on deploy
 /public/README.MD

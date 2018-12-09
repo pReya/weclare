@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import PlayIcon from "mdi-react/PlayIcon";
 import SpinnerCard from "../../shared/components/SpinnerCard";
 import QuestionCard from "../../shared/components/QuestionCard";
 import { setCurrentQuestionIdx } from "../actions/server";
@@ -34,7 +35,7 @@ const sendQuestion = (formattedQuestion, connections) => {
   }
 };
 
-function AskScreen(props) {
+const AskScreen = props => {
   const {
     connections,
     questions,
@@ -44,12 +45,18 @@ function AskScreen(props) {
     status
   } = props;
   const hasClients = connections.length > 0;
-  const nextQuestionIdx = currentQuestionIdx + 1;
-  const formattedQuestion = getFormattedQuestion(questions, currentQuestionIdx);
-  console.log(formattedQuestion);
+  const currentQuestionIdxNoNull = currentQuestionIdx ? currentQuestionIdx : 0;
+  const nextQuestionIdx = currentQuestionIdxNoNull + 1;
+  const formattedQuestion = getFormattedQuestion(
+    questions,
+    currentQuestionIdxNoNull
+  );
+  console.log("CurrentQuestionIdx: ", currentQuestionIdx);
+  console.log("CurrentQuestionIdxNoNull: ", currentQuestionIdxNoNull);
+  console.log("NextQuestionIdx: ", nextQuestionIdx);
 
   return (
-    <>
+    <Row className="justify-content-center">
       {hasClients ? (
         <QuestionCard
           question={formattedQuestion.question}
@@ -60,10 +67,13 @@ function AskScreen(props) {
                 block
                 onClick={() => {
                   sendQuestion(formattedQuestion, connections);
-                  setCurrentQuestionIdx(nextQuestionIdx);
+                  // setCurrentQuestionIdx(nextQuestionIdx);
+                  // Start receive period for answers
+                  // Click second time:
+                  // Stop receive period for answers
                 }}
               >
-                Send Question
+                <PlayIcon style={{ paddingBottom: "3px" }} /> Start Question
               </Button>
             )
           }
@@ -71,9 +81,9 @@ function AskScreen(props) {
       ) : (
         <SpinnerCard title="Waiting for participants" />
       )}
-    </>
+    </Row>
   );
-}
+};
 
 const mapStateToProps = state => ({
   status: state.connection.status,

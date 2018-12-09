@@ -8,7 +8,7 @@ export const server = (
   state = {
     connections: [],
     ownServerId: "",
-    currentQuestion: 0
+    currentQuestion: null
   },
   action
 ) => {

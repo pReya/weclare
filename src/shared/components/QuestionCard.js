@@ -12,23 +12,17 @@ const QuestionCard = props => {
       <Helmet>
         <title>Answer question</title>
       </Helmet>
-      <Row className="justify-content-center">
-        <DefaultCard
-          title="Answer question"
-          badge={question.progress}
-          {...props}
-        >
-          {question.questionText && (
-            <h4 className="text-center mb-4">{question.questionText}</h4>
-          )}
-          {question.answers &&
-            question.answers.map((answer, i) => (
-              <Button outline key={i} block color="success">
-                {answer.answerText}
-              </Button>
-            ))}
-        </DefaultCard>
-      </Row>
+      <DefaultCard title="Answer question" badge={question.progress} {...props}>
+        {question.questionText && (
+          <h4 className="text-center mb-4">{question.questionText}</h4>
+        )}
+        {question.answers &&
+          question.answers.map((answer, i) => (
+            <Button outline key={i} block color="success">
+              {answer.answerText}
+            </Button>
+          ))}
+      </DefaultCard>
     </>
   );
 };

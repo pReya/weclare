@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Row } from "reactstrap";
 import QuestionCard from "../../shared/components/QuestionCard";
 import SpinnerCard from "../../shared/components/SpinnerCard";
 
@@ -12,10 +13,14 @@ const mapStateToProps = state => ({
 const AnswerScreen = props => {
   const { currentQuestion } = props;
   const hasQuestion = Object.keys(currentQuestion).length > 0;
-  return hasQuestion ? (
-    <QuestionCard question={currentQuestion} />
-  ) : (
-    <SpinnerCard title="Waiting for question" />
+  return (
+    <Row className="justify-content-center">
+      {hasQuestion ? (
+        <QuestionCard question={currentQuestion} />
+      ) : (
+        <SpinnerCard title="Waiting for question" />
+      )}
+    </Row>
   );
 };
 

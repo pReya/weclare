@@ -1,22 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Button, Row } from "reactstrap";
 import SpinnerCard from "../../shared/components/SpinnerCard";
 import DefaultCard from "../../shared/components/DefaultCard";
 
 function WaitScreen(props) {
   const { connections, history } = props;
   const hasClients = connections.length > 0;
+  const pluralizeClient = connections.length === 1 ? "client" : "clients";
+  const pluralizeVerb = connections.length === 1 ? "is" : "are";
 
   return (
-    <>
+    <Row className="justify-content-center">
       {hasClients ? (
         <DefaultCard
           title="Start the quiz"
-          text={`Currently there are ${
+          text={`Currently there ${pluralizeVerb} ${
             connections.length
-          } clients connected. Do you want to start the quiz?`}
+          } ${pluralizeClient} connected. You can choose to wait for more participants or go ahead and start the quiz.`}
         >
           <Button
             color="secondary"
@@ -25,13 +27,13 @@ function WaitScreen(props) {
               history.push("/server/ask");
             }}
           >
-            Send Question
+            Start Quiz
           </Button>
         </DefaultCard>
       ) : (
         <SpinnerCard title="Waiting for participants" />
       )}
-    </>
+    </Row>
   );
 }
 

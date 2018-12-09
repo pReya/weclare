@@ -13,19 +13,17 @@ const SpinnerCard = props => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <Row className="justify-content-center">
-        <DefaultCard title={title}>
-          <div className="d-flex justify-content-center">
-            <MDSpinner
-              color1="#8a817c"
-              color2="#f44336"
-              color3="#dc9125"
-              color4="#5fa15d"
-              size={size}
-            />
-          </div>
-        </DefaultCard>
-      </Row>
+      <DefaultCard title={title}>
+        <div className="d-flex justify-content-center">
+          <MDSpinner
+            color1="#8a817c"
+            color2="#f44336"
+            color3="#dc9125"
+            color4="#5fa15d"
+            size={size}
+          />
+        </div>
+      </DefaultCard>
     </>
   );
 };
