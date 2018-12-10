@@ -17,7 +17,7 @@ const getFormattedQuestion = (questions, currentQuestionIdx) => {
     return {
       question: {
         ...questionWithoutAnswer,
-        questionIdx: currentQuestionIdx + 1,
+        questionIdx: currentQuestionIdx,
         progress: `${currentQuestionIdxString}/${questionsCount}`
       }
     };
@@ -51,15 +51,13 @@ const AskScreen = props => {
     questions,
     currentQuestionIdxNoNull
   );
-  console.log("CurrentQuestionIdx: ", currentQuestionIdx);
-  console.log("CurrentQuestionIdxNoNull: ", currentQuestionIdxNoNull);
-  console.log("NextQuestionIdx: ", nextQuestionIdx);
 
   return (
     <Row className="justify-content-center">
       {hasClients ? (
         <QuestionCard
           question={formattedQuestion.question}
+          disabled
           footer={
             hasClients && (
               <Button

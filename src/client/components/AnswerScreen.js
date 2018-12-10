@@ -11,10 +11,17 @@ const mapStateToProps = state => ({
   connection: state.client.connection
 });
 
-const sendAnswer = (connection, answerIdx) => {
+const sendAnswer = (connection, answerIdx, questionIdx) => {
+  console.log("questionIdx", questionIdx);
   if (connection) {
-    console.log("Sent");
-    connection.send(answerIdx);
+    console.log("My ID", connection.provider.id);
+    connection.send({
+      answer: {
+        questionIdx,
+        answerIdx,
+        peer: connection.provider.id
+      }
+    });
   }
 };
 
@@ -27,8 +34,8 @@ const AnswerScreen = props => {
         <QuestionCard
           question={currentQuestion}
           onClickAnswer={answerIdx => {
-            console.log("Sending back answer ", answerIdx);
-            sendAnswer(connection, answerIdx);
+            console.log("Sending back answer ", answerIdx, currentQuestion);
+            sendAnswer(connection, answerIdx, currentQuestion.questionIdx);
           }}
         />
       ) : (
