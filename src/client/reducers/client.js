@@ -6,7 +6,7 @@ import {
 
 export const client = (
   state = {
-    connections: [],
+    connection: null,
     remoteServerId: "",
     questionIdx: null,
     currentQuestion: {
@@ -22,7 +22,7 @@ export const client = (
     case ADD_CONNECTION:
       return {
         ...state,
-        connections: [...state.connections, action.payload.connection]
+        connection: action.payload.connection
       };
 
     case SET_REMOTE_SERVER_ID:

@@ -1,11 +1,11 @@
 import React from "react";
-import { Row, Button } from "reactstrap";
+import { Button } from "reactstrap";
 import { Helmet } from "react-helmet";
 import DefaultCard from "./DefaultCard";
 import { TQuestion, DQuestion } from "../types";
 
 const QuestionCard = props => {
-  const { question } = props;
+  const { question, onClickAnswer } = props;
 
   return (
     <>
@@ -18,7 +18,17 @@ const QuestionCard = props => {
         )}
         {question.answers &&
           question.answers.map((answer, i) => (
-            <Button outline key={i} block color="success">
+            <Button
+              outline
+              id={i}
+              key={i}
+              block
+              onClick={e => {
+                console.log("Target ID: ", e.target.id);
+                onClickAnswer(e.target.id);
+              }}
+              color="success"
+            >
               {answer.answerText}
             </Button>
           ))}

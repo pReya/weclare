@@ -32,7 +32,7 @@ const clickConnect = (serverId, dispatch) => {
 
   const connection = peer.connect(
     serverId,
-    { reliable: true }
+    { reliable: false }
   );
   dispatch(addConnection(connection));
   dispatch(setServerStatus(1));
