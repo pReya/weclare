@@ -6,8 +6,10 @@ import { changeInArray } from "../../shared/util/Helpers";
 
 export const registeredAnswers = (state = [], action) => {
   switch (action.type) {
-    case INIT_ANSWERS:
+    case INIT_ANSWERS: {
+      console.log("HELLO REDUCER");
       return action.payload.array;
+    }
     case REGISTER_ANSWER: {
       console.log("Reducer", action.payload);
       return changeInArray(state, action.payload.questionIdx, q =>

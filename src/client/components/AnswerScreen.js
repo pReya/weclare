@@ -12,9 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const sendAnswer = (connection, answerIdx, questionIdx) => {
-  console.log("questionIdx", questionIdx);
   if (connection) {
-    console.log("My ID", connection.provider.id);
     connection.send({
       type: "answer",
       payload: {

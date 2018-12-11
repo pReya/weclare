@@ -7,12 +7,16 @@ import { TQuestion, DQuestion } from "../types";
 class QuestionCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isDisabled: false || props.disabled };
+    this.state = {
+      isDisabled: false || props.disabled,
+      selectedAnswerIdx: null,
+      correctAnswerIdx: null
+    };
   }
 
   render() {
     const { question, onClickAnswer } = this.props;
-    const { isDisabled } = this.state;
+    const { isDisabled, selectedAnswerIdx } = this.state;
 
     return (
       <>
@@ -30,21 +34,26 @@ class QuestionCard extends React.Component {
           {question.answers &&
             question.answers.map((answer, i) => (
               <Button
-                outline
+                outline={selectedAnswerIdx !== i}
                 id={i}
                 key={i}
                 block
                 onClick={
                   onClickAnswer
                     ? e => {
-                        onClickAnswer(parseInt(e.target.id, 10));
-                        this.setState({
-                          isDisabled: true
-                        });
+                        const selectedAnswer = parseInt(e.target.id, 10);
+                        onClickAnswer(selectedAnswer);
+                        this.setState(
+                          {
+                            isDisabled: true,
+                            selectedAnswerIdx: selectedAnswer
+                          },
+                          () => console.log("newState: ", this.state)
+                        );
                       }
                     : null
                 }
-                color="success"
+                color="secondary"
                 disabled={isDisabled}
               >
                 {answer.answerText}

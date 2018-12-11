@@ -5,7 +5,10 @@ import { withRouter } from "react-router-dom";
 import PlayIcon from "mdi-react/PlayIcon";
 import SpinnerCard from "../../shared/components/SpinnerCard";
 import QuestionCard from "../../shared/components/QuestionCard";
-import { setCurrentQuestionIdx } from "../actions/server";
+import {
+  setCurrentQuestionIdx,
+  toggleAcceptingAnswers
+} from "../actions/server";
 
 const getFormattedQuestion = (questions, currentQuestionIdx) => {
   if (questions && questions[currentQuestionIdx]) {
@@ -41,6 +44,7 @@ const AskScreen = props => {
     questions,
     currentQuestionIdx,
     setCurrentQuestionIdx,
+    toggleAcceptingAnswers,
     history,
     status
   } = props;
@@ -65,6 +69,7 @@ const AskScreen = props => {
                 block
                 onClick={() => {
                   sendQuestion(formattedQuestion, connections);
+                  toggleAcceptingAnswers();
                   // setCurrentQuestionIdx(nextQuestionIdx);
                   // Start receive period for answers
                   // Click second time:
@@ -91,7 +96,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCurrentQuestionIdx
+  setCurrentQuestionIdx,
+  toggleAcceptingAnswers
 };
 
 export default connect(

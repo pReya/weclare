@@ -1,14 +1,16 @@
 import {
   ADD_CONNECTION,
   SET_SERVER_ID,
-  SET_CURRENT_QUESTION_IDX
+  SET_CURRENT_QUESTION_IDX,
+  TOGGLE_ACCEPTING_ANSWERS
 } from "../actions/server";
 
 export const server = (
   state = {
     connections: [],
     ownServerId: "",
-    currentQuestion: null
+    currentQuestion: null,
+    acceptingAnswers: false
   },
   action
 ) => {
@@ -25,6 +27,9 @@ export const server = (
 
     case SET_SERVER_ID:
       return { ...state, ownServerId: action.payload.newId };
+
+    case TOGGLE_ACCEPTING_ANSWERS:
+      return { ...state, acceptingAnswers: !state.acceptingAnswers };
 
     default:
       return state;
