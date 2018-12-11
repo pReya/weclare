@@ -1,5 +1,4 @@
 import React from "react";
-import { Row } from "reactstrap";
 import { Helmet } from "react-helmet";
 import MDSpinner from "react-md-spinner";
 import DefaultCard from "./DefaultCard";

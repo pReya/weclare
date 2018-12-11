@@ -10,7 +10,7 @@ import {
   LOAD_QUESTIONS
 } from "../actions/questionEditor";
 
-import { changeInArray, deleteInArray } from "./helpers";
+import { changeInArray, deleteInArray } from "../../shared/util/Helpers";
 
 const newQuestion = {
   questionType: "singleChoice",

@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Logger from "../../util/Logger";
+import Logger from "../../shared/util/Logger";
 import QuestionContent from "./QuestionContent";
 import QuestionList from "./QuestionList";
 import {
@@ -16,6 +16,7 @@ import {
   editAnswerText,
   deleteAnswer
 } from "../actions/questionEditor";
+import { initAnswers } from "../actions/answers";
 
 const mapStateToProps = state => ({
   questions: state.questionEditor,
@@ -31,7 +32,8 @@ const mapDispatchToProps = {
   editAnswerText,
   deleteAnswer,
   setCorrectAnswer,
-  loadQuestions
+  loadQuestions,
+  initAnswers
 };
 
 class QuestionEditor extends React.Component {
@@ -50,7 +52,6 @@ class QuestionEditor extends React.Component {
       selectedQuestion,
       questions,
       history,
-      location,
       // actions
       addQuestion,
       selectQuestion,
@@ -59,7 +60,8 @@ class QuestionEditor extends React.Component {
       addAnswer,
       editAnswerText,
       deleteAnswer,
-      setCorrectAnswer
+      setCorrectAnswer,
+      initAnswers
     } = this.props;
 
     return (
@@ -92,6 +94,7 @@ class QuestionEditor extends React.Component {
               outline
               block
               onClick={() => {
+                initAnswers();
                 localStorage.setItem("weclare", JSON.stringify(questions));
                 Logger.info("Saved questionset to local Storage");
                 if (history) {

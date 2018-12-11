@@ -3,10 +3,26 @@ import { Row } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Peer from "peerjs";
-import Logger from "../../util/Logger";
+import Logger from "../../shared/util/Logger";
 import ConnectForm from "../../shared/components/ConnectForm";
 import { addConnection, setServerId } from "../actions/server";
+import { registerAnswer } from "../actions/answers";
 import { setPeer, setServerStatus } from "../../shared/actions/connection";
+
+const dataHandler = (data, dispatch) => {
+  const { type, payload } = data;
+  Logger.info("Received Data: ", data);
+  switch (type) {
+    case "answer":
+      console.log("Received answer", payload);
+      dispatch(
+        registerAnswer(payload.questionIdx, payload.answerIdx, payload.userId)
+      );
+      break;
+    default:
+      console.log("Default");
+  }
+};
 
 const createPeer = (ownServerId, dispatch) => {
   const {
@@ -28,7 +44,7 @@ const createPeer = (ownServerId, dispatch) => {
 
   peer.on("connection", connection => {
     Logger.info("New client connected with id: ", connection.peer);
-    connection.on("data", data => Logger.info("Received Data: ", data));
+    connection.on("data", data => dataHandler(data, dispatch));
     dispatch(setServerStatus(2));
     dispatch(addConnection(connection));
   });

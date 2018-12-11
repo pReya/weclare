@@ -16,10 +16,11 @@ const sendAnswer = (connection, answerIdx, questionIdx) => {
   if (connection) {
     console.log("My ID", connection.provider.id);
     connection.send({
-      answer: {
+      type: "answer",
+      payload: {
         questionIdx,
         answerIdx,
-        peer: connection.provider.id
+        userId: connection.provider.id
       }
     });
   }
