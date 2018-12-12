@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "reactstrap";
+import { Button, Badge } from "reactstrap";
 import { Helmet } from "react-helmet";
 import DefaultCard from "./DefaultCard";
 import { TQuestion, DQuestion } from "../types";
@@ -15,7 +15,7 @@ class QuestionCard extends React.Component {
   }
 
   render() {
-    const { question, onClickAnswer } = this.props;
+    const { question, onClickAnswer, countedAnswers } = this.props;
     const { isDisabled, selectedAnswerIdx } = this.state;
 
     return (
@@ -43,13 +43,10 @@ class QuestionCard extends React.Component {
                     ? e => {
                         const selectedAnswer = parseInt(e.target.id, 10);
                         onClickAnswer(selectedAnswer);
-                        this.setState(
-                          {
-                            isDisabled: true,
-                            selectedAnswerIdx: selectedAnswer
-                          },
-                          () => console.log("newState: ", this.state)
-                        );
+                        this.setState({
+                          isDisabled: true,
+                          selectedAnswerIdx: selectedAnswer
+                        });
                       }
                     : null
                 }
@@ -57,6 +54,9 @@ class QuestionCard extends React.Component {
                 disabled={isDisabled}
               >
                 {answer.answerText}
+                <Badge className="float-right" color="secondary">
+                  {countedAnswers && countedAnswers[i]}
+                </Badge>
               </Button>
             ))}
         </DefaultCard>
