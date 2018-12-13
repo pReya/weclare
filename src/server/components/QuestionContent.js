@@ -1,5 +1,6 @@
 import React from "react";
-import "../../scss/App.scss";
+import ReactQuill from "react-quill";
+import "../../scss/quill.scss";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -26,6 +27,7 @@ const QuestionContent = props => {
     onDeleteAnswer,
     onDeleteQuestion
   } = props;
+  console.log("New props: ", props);
   return (
     <Card className="shadow">
       <CardHeader>
@@ -33,54 +35,72 @@ const QuestionContent = props => {
       </CardHeader>
       <CardBody>
         {selectedQuestion != null ? (
-          <Form>
-            <FormGroup row className="form-row">
-              <Label for="question" sm={2}>
-                Question Text
-              </Label>
-              <Input
+          <>
+            <Label for="question">Question Text</Label>
+            {/* <Input
                 id="question"
                 type="text"
                 onChange={e =>
                   onEditQuestionText(selectedQuestion, e.target.value)
                 }
                 value={question.questionText}
-              />
-            </FormGroup>
-            <FormGroup row className="form-row">
-              <Label sm={8}>Answers (Check the correct answer)</Label>
-              {question.answers.map((a, i) => (
-                <SingleChoiceAnswer
-                  isCorrectAnswer={question.correctAnswers === i}
-                  selectedQuestion={selectedQuestion}
-                  number={i}
-                  answer={a.answerText}
-                  key={i}
-                  onEditAnswerText={e => {
-                    onEditAnswerText(selectedQuestion, e.target.value, i);
-                  }}
-                  onSetCorrectAnswer={onSetCorrectAnswer}
-                  onDeleteAnswer={onDeleteAnswer}
-                />
-              ))}
-              <Button
-                outline
-                block
-                color="success"
-                onClick={() => onAddAnswer(selectedQuestion)}
-              >
-                Add answer
-              </Button>
-              <Button
-                outline
-                block
-                color="danger"
-                onClick={() => onDeleteQuestion(selectedQuestion)}
-              >
-                Delete Question
-              </Button>
-            </FormGroup>
-          </Form>
+              /> */}
+
+            <ReactQuill
+              className="mb-4"
+              id="question"
+              value={question.questionText}
+              modules={{
+                toolbar: [
+                  ["bold", "italic", "underline"],
+                  [{ list: "ordered" }, { list: "bullet" }],
+                  ["link"],
+                  ["clean"]
+                ]
+              }}
+              onChange={(newValue, delta, source) => {
+                if (source === "user") {
+                  console.log("Text edited: ", newValue);
+                  onEditQuestionText(selectedQuestion, newValue);
+                }
+              }}
+            />
+            <Form>
+              <FormGroup>
+                <Label>Answers (Check the correct answer)</Label>
+                {question.answers.map((a, i) => (
+                  <SingleChoiceAnswer
+                    isCorrectAnswer={question.correctAnswers === i}
+                    selectedQuestion={selectedQuestion}
+                    number={i}
+                    answer={a.answerText}
+                    key={i}
+                    onEditAnswerText={e => {
+                      onEditAnswerText(selectedQuestion, e.target.value, i);
+                    }}
+                    onSetCorrectAnswer={onSetCorrectAnswer}
+                    onDeleteAnswer={onDeleteAnswer}
+                  />
+                ))}
+                <Button
+                  outline
+                  block
+                  color="success"
+                  onClick={() => onAddAnswer(selectedQuestion)}
+                >
+                  Add answer
+                </Button>
+                <Button
+                  outline
+                  block
+                  color="danger"
+                  onClick={() => onDeleteQuestion(selectedQuestion)}
+                >
+                  Delete Question
+                </Button>
+              </FormGroup>
+            </Form>
+          </>
         ) : (
           "No question selected"
         )}
