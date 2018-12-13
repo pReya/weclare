@@ -24,25 +24,57 @@ const sendAnswer = (connection, answerIdx, questionIdx) => {
   }
 };
 
-const AnswerScreen = props => {
-  const { currentQuestion, connection } = props;
-  const hasQuestion = Object.keys(currentQuestion).length > 0;
-  return (
-    <Row className="justify-content-center">
-      {hasQuestion ? (
-        <QuestionCard
-          question={currentQuestion}
-          onClickAnswer={answerIdx => {
-            console.log("Sending back answer ", answerIdx, currentQuestion);
-            sendAnswer(connection, answerIdx, currentQuestion.questionIdx);
-          }}
-        />
-      ) : (
-        <SpinnerCard title="Waiting for question" />
-      )}
-    </Row>
-  );
-};
+class AnswerScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.initialState = {
+      disabled: false,
+      selectedAnswerIdx: null
+    };
+    this.state = this.initialState;
+  }
+
+  componentDidUpdate(prevProps) {
+    const { currentQuestion } = this.props;
+    if (currentQuestion !== prevProps.currentQuestion) {
+      this.resetState();
+    }
+  }
+
+  resetState() {
+    this.setState(this.initialState);
+  }
+
+  render() {
+    const { currentQuestion, connection } = this.props;
+    const { disabled, selectedAnswerIdx } = this.state;
+    const hasQuestion = Object.keys(currentQuestion).length > 0;
+    return (
+      <Row className="justify-content-center">
+        {hasQuestion ? (
+          <QuestionCard
+            question={currentQuestion}
+            disabled={disabled}
+            selectedAnswerIdx={selectedAnswerIdx}
+            onClickAnswer={answerIdx => {
+              console.log("Sending back answer ", answerIdx, currentQuestion);
+              sendAnswer(connection, answerIdx, currentQuestion.questionIdx);
+              this.setState(
+                {
+                  disabled: true,
+                  selectedAnswerIdx: answerIdx
+                },
+                () => console.log("New state", this.state)
+              );
+            }}
+          />
+        ) : (
+          <SpinnerCard title="Waiting for question" />
+        )}
+      </Row>
+    );
+  }
+}
 
 AnswerScreen.propTypes = {
   currentQuestion: TQuestion

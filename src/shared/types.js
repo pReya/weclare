@@ -27,5 +27,7 @@ export const DQuestion = {
     questionText: null,
     questionType: null,
     answers: null
-  }
+  },
+  disabled: false,
+  selectedAnswerIdx: null
 };
