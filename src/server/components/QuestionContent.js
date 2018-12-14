@@ -16,28 +16,35 @@ import {
   Label
 } from "reactstrap";
 
-const QuestionContent = props => {
-  const {
-    question,
-    selectedQuestion,
-    onEditAnswerText,
-    onEditQuestionText,
-    onAddAnswer,
-    onSetCorrectAnswer,
-    onDeleteAnswer,
-    onDeleteQuestion
-  } = props;
-  console.log("New props: ", props);
-  return (
-    <Card className="shadow">
-      <CardHeader>
-        <h6 className="my-0">Edit Question</h6>
-      </CardHeader>
-      <CardBody>
-        {selectedQuestion != null ? (
-          <>
-            <Label for="question">Question Text</Label>
-            {/* <Input
+class QuestionContent extends React.Component {
+  state = {
+    typingTimeout: null
+  };
+
+  onFieldChange(event) {}
+
+  render() {
+    const {
+      question,
+      selectedQuestion,
+      onEditAnswerText,
+      onEditQuestionText,
+      onAddAnswer,
+      onSetCorrectAnswer,
+      onDeleteAnswer,
+      onDeleteQuestion
+    } = this.props;
+
+    return (
+      <Card className="shadow">
+        <CardHeader>
+          <h6 className="my-0">Edit Question</h6>
+        </CardHeader>
+        <CardBody>
+          {selectedQuestion != null ? (
+            <>
+              <Label for="question">Question Text</Label>
+              {/* <Input
                 id="question"
                 type="text"
                 onChange={e =>
@@ -46,68 +53,72 @@ const QuestionContent = props => {
                 value={question.questionText}
               /> */}
 
-            <ReactQuill
-              className="mb-4"
-              id="question"
-              value={question.questionText}
-              modules={{
-                toolbar: [
-                  ["bold", "italic", "underline"],
-                  [{ list: "ordered" }, { list: "bullet" }],
-                  ["link"],
-                  ["clean"]
-                ]
-              }}
-              onChange={(newValue, delta, source) => {
-                if (source === "user") {
-                  console.log("Text edited: ", newValue);
-                  onEditQuestionText(selectedQuestion, newValue);
-                }
-              }}
-            />
-            <Form>
-              <FormGroup>
-                <Label>Answers (Check the correct answer)</Label>
-                {question.answers.map((a, i) => (
-                  <SingleChoiceAnswer
-                    isCorrectAnswer={question.correctAnswers === i}
-                    selectedQuestion={selectedQuestion}
-                    number={i}
-                    answer={a.answerText}
-                    key={i}
-                    onEditAnswerText={e => {
-                      onEditAnswerText(selectedQuestion, e.target.value, i);
-                    }}
-                    onSetCorrectAnswer={onSetCorrectAnswer}
-                    onDeleteAnswer={onDeleteAnswer}
-                  />
-                ))}
-                <Button
-                  outline
-                  block
-                  color="success"
-                  onClick={() => onAddAnswer(selectedQuestion)}
-                >
-                  Add answer
-                </Button>
-                <Button
-                  outline
-                  block
-                  color="danger"
-                  onClick={() => onDeleteQuestion(selectedQuestion)}
-                >
-                  Delete Question
-                </Button>
-              </FormGroup>
-            </Form>
-          </>
-        ) : (
-          "No question selected"
-        )}
-      </CardBody>
-    </Card>
-  );
-};
+              <ReactQuill
+                className="mb-4"
+                id="question"
+                value={question.questionText}
+                modules={{
+                  toolbar: [
+                    ["bold", "italic", "underline"],
+                    [{ list: "ordered" }, { list: "bullet" }],
+                    ["link"],
+                    ["clean"]
+                  ]
+                }}
+                onChange={(newValue, delta, source) => {
+                  if (source === "user") {
+                    clearTimeout(this.typingTimeout);
+                    this.typingTimeout = setTimeout(
+                      () => onEditQuestionText(selectedQuestion, newValue),
+                      300
+                    );
+                  }
+                }}
+              />
+              <Form>
+                <FormGroup>
+                  <Label>Answers (Check the correct answer)</Label>
+                  {question.answers.map((a, i) => (
+                    <SingleChoiceAnswer
+                      isCorrectAnswer={question.correctAnswers === i}
+                      selectedQuestion={selectedQuestion}
+                      number={i}
+                      answer={a.answerText}
+                      key={i}
+                      onEditAnswerText={e => {
+                        onEditAnswerText(selectedQuestion, e.target.value, i);
+                      }}
+                      onSetCorrectAnswer={onSetCorrectAnswer}
+                      onDeleteAnswer={onDeleteAnswer}
+                    />
+                  ))}
+                  <Button
+                    outline
+                    block
+                    color="success"
+                    onClick={() => onAddAnswer(selectedQuestion)}
+                  >
+                    Add answer
+                  </Button>
+                  <Button
+                    outline
+                    block
+                    color="danger"
+                    onClick={() => onDeleteQuestion(selectedQuestion)}
+                  >
+                    Delete Question
+                  </Button>
+                </FormGroup>
+              </Form>
+            </>
+          ) : (
+            "No question selected"
+          )}
+        </CardBody>
+      </Card>
+    );
+  }
+}
 
 QuestionContent.propTypes = {
   question: PropTypes.shape({
