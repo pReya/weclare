@@ -13,6 +13,11 @@ import {
   ListGroupItemText
 } from "reactstrap";
 
+const strip = html => {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return doc.body.textContent || "";
+};
+
 const QuestionList = props => {
   const {
     questions,
@@ -45,7 +50,7 @@ const QuestionList = props => {
             active={selectedQuestion === i}
           >
             <ListGroupItemText className="mb-0">
-              {q.questionText}
+              {strip(q.questionText)}
             </ListGroupItemText>
           </ListGroupItem>
         ))}

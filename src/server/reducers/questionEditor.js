@@ -14,7 +14,7 @@ import { changeInArray, deleteInArray } from "../../shared/util/Helpers";
 
 const newQuestion = {
   questionType: "singleChoice",
-  questionText: "New question",
+  questionText: "<p>New question</p>",
   correctAnswers: null,
   answers: [
     {
