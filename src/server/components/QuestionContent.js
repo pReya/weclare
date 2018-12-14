@@ -21,8 +21,6 @@ class QuestionContent extends React.Component {
     typingTimeout: null
   };
 
-  onFieldChange(event) {}
-
   render() {
     const {
       question,
@@ -44,14 +42,6 @@ class QuestionContent extends React.Component {
           {selectedQuestion != null ? (
             <>
               <Label for="question">Question Text</Label>
-              {/* <Input
-                id="question"
-                type="text"
-                onChange={e =>
-                  onEditQuestionText(selectedQuestion, e.target.value)
-                }
-                value={question.questionText}
-              /> */}
 
               <ReactQuill
                 className="mb-4"

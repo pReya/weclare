@@ -1,4 +1,4 @@
-import ShortUniqueId from "short-unique-id";
+import nanoid from "nanoid";
 import {
   ADD_QUESTION,
   EDIT_QUESTION_TEXT,
@@ -12,24 +12,20 @@ import {
 } from "../actions/questionEditor";
 import { changeInArray, deleteInArray } from "../../shared/util/Helpers";
 
-const newQuestion = () => {
-  const uid = new ShortUniqueId();
-
-  return {
-    id: uid.randomUUID(6),
-    questionType: "singleChoice",
-    questionText: "<p>New question</p>",
-    correctAnswers: null,
-    answers: [
-      {
-        answerText: "Answer A"
-      },
-      {
-        answerText: "Answer B"
-      }
-    ]
-  };
-};
+const newQuestion = () => ({
+  id: nanoid(6),
+  questionType: "singleChoice",
+  questionText: "<p>New question</p>",
+  correctAnswers: null,
+  answers: [
+    {
+      answerText: "Answer A"
+    },
+    {
+      answerText: "Answer B"
+    }
+  ]
+});
 
 const newAnswer = {
   answerText: "New answer"
@@ -50,7 +46,7 @@ export const selectedQuestion = (state = null, action) => {
 export const questionEditor = (state = [], action) => {
   switch (action.type) {
     case ADD_QUESTION:
-      return [...state, newQuestion];
+      return [...state, newQuestion()];
 
     case EDIT_QUESTION_TEXT: {
       // return changeInArray(
