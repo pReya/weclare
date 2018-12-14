@@ -1,3 +1,4 @@
+import ShortUniqueId from "short-unique-id";
 import {
   ADD_QUESTION,
   EDIT_QUESTION_TEXT,
@@ -9,21 +10,25 @@ import {
   SELECT_QUESTION,
   LOAD_QUESTIONS
 } from "../actions/questionEditor";
-
 import { changeInArray, deleteInArray } from "../../shared/util/Helpers";
 
-const newQuestion = {
-  questionType: "singleChoice",
-  questionText: "<p>New question</p>",
-  correctAnswers: null,
-  answers: [
-    {
-      answerText: "Answer A"
-    },
-    {
-      answerText: "Answer B"
-    }
-  ]
+const newQuestion = () => {
+  const uid = new ShortUniqueId();
+
+  return {
+    id: uid.randomUUID(6),
+    questionType: "singleChoice",
+    questionText: "<p>New question</p>",
+    correctAnswers: null,
+    answers: [
+      {
+        answerText: "Answer A"
+      },
+      {
+        answerText: "Answer B"
+      }
+    ]
+  };
 };
 
 const newAnswer = {
