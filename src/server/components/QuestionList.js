@@ -1,5 +1,4 @@
 import React from "react";
-import "../../scss/App.scss";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AddCircleOutlineIcon from "mdi-react/AddCircleOutlineIcon";
