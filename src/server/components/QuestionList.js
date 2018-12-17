@@ -112,7 +112,7 @@ const QuestionList = props => {
       </DragDropContext>
       <CardFooter
         tag="button"
-        className="cardFooterButton"
+        className="cardFooterButton btn btn-light"
         onClick={() => {
           onAddQuestion();
         }}
@@ -121,7 +121,7 @@ const QuestionList = props => {
           className="text-success"
           style={{ paddingBottom: "3px" }}
         />
-        Add
+        Add Question
       </CardFooter>
     </Card>
   );

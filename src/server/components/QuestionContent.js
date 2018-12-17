@@ -7,9 +7,11 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Col,
   Form,
   FormGroup,
   Button,
+  ButtonGroup,
   Input,
   InputGroup,
   InputGroupAddon,
@@ -42,8 +44,39 @@ class QuestionContent extends React.Component {
         <CardBody>
           {selectedQuestion != null ? (
             <>
-              <Label for="question">Question Text</Label>
-
+              <FormGroup row className="justify-content-between">
+                <Label for="question" sm={4}>
+                  Question Text
+                </Label>
+                <Col sm="auto">
+                  <ButtonGroup size="sm">
+                    <Button
+                      outline
+                      color="primary"
+                      onClick={() => this.onRadioBtnClick(1)}
+                      active={this.state.rSelected === 1}
+                    >
+                      Single
+                    </Button>
+                    <Button
+                      outline
+                      color="primary"
+                      onClick={() => this.onRadioBtnClick(2)}
+                      active={this.state.rSelected === 2}
+                    >
+                      Multiple
+                    </Button>
+                    <Button
+                      outline
+                      color="primary"
+                      onClick={() => this.onRadioBtnClick(3)}
+                      active={this.state.rSelected === 3}
+                    >
+                      Text
+                    </Button>
+                  </ButtonGroup>
+                </Col>
+              </FormGroup>
               <ReactQuill
                 className="mb-4"
                 id="question"
@@ -68,7 +101,12 @@ class QuestionContent extends React.Component {
               />
               <Form>
                 <FormGroup>
-                  <Label>Answers (Check the correct answer)</Label>
+                  <Label>
+                    Answers{" "}
+                    <span className="small text-muted">
+                      (Check the correct answer)
+                    </span>
+                  </Label>
                   {question.answers.map((a, i) => (
                     <SingleChoiceAnswer
                       isCorrectAnswer={question.correctAnswers === i}

@@ -21,7 +21,7 @@ const newQuestion = () => ({
   id: nanoid(6),
   questionType: "singleChoice",
   questionText: "<p>New question</p>",
-  correctAnswers: null,
+  correctAnswers: 0,
   answers: [
     {
       answerText: "Answer A"
