@@ -14,7 +14,8 @@ import {
   setCorrectAnswer,
   addAnswer,
   editAnswerText,
-  deleteAnswer
+  deleteAnswer,
+  sortQuestion
 } from "../actions/questionEditor";
 import { initAnswers } from "../actions/answers";
 
@@ -33,7 +34,8 @@ const mapDispatchToProps = {
   deleteAnswer,
   setCorrectAnswer,
   loadQuestions,
-  initAnswers
+  initAnswers,
+  sortQuestion
 };
 
 class QuestionEditor extends React.Component {
@@ -61,7 +63,8 @@ class QuestionEditor extends React.Component {
       editAnswerText,
       deleteAnswer,
       setCorrectAnswer,
-      initAnswers
+      initAnswers,
+      sortQuestion
     } = this.props;
 
     return (
@@ -73,6 +76,7 @@ class QuestionEditor extends React.Component {
               selectedQuestion={selectedQuestion}
               onSelectQuestion={selectQuestion}
               onAddQuestion={addQuestion}
+              onSortQuestion={sortQuestion}
             />
           </Col>
           <Col md="8">

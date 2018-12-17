@@ -20,6 +20,7 @@ hr {
 .cardFooterButton,
 .cardFooterButton:focus,
 .cardFooterButton:active {
+  border: 0;
   outline: none !important;
   box-shadow: none;
   cursor: pointer;
@@ -36,4 +37,22 @@ hr {
   border-radius: 0;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
+}
+
+.hover {
+  &:hover &__no-hover {
+    opacity: 0;
+  }
+
+  &:hover &__hover {
+    opacity: 1;
+  }
+
+  &__hover {
+    opacity: 0;
+  }
+
+  &__no-hover {
+    opacity: 1;
+  }
 }

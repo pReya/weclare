@@ -8,9 +8,14 @@ import {
   SET_CORRECT_ANSWER,
   DELETE_ANSWER,
   SELECT_QUESTION,
-  LOAD_QUESTIONS
+  LOAD_QUESTIONS,
+  SORT_QUESTION
 } from "../actions/questionEditor";
-import { changeInArray, deleteInArray } from "../../shared/util/Helpers";
+import {
+  changeInArray,
+  deleteInArray,
+  reorderArray
+} from "../../shared/util/Helpers";
 
 const newQuestion = () => ({
   id: nanoid(6),
@@ -45,41 +50,37 @@ export const selectedQuestion = (state = null, action) => {
 
 export const questionEditor = (state = [], action) => {
   switch (action.type) {
-    case ADD_QUESTION:
-      return [...state, newQuestion()];
+    case ADD_QUESTION: {
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+      deepClonedState.push(newQuestion());
+      return deepClonedState;
+    }
 
     case EDIT_QUESTION_TEXT: {
-      // return changeInArray(
-      //   state.questions,
-      //   state.selectedQuestion,
-      //   q => ({
-      //     ...q,
-      //     questionText: action.payload.questionText
-      //   })
-      // );
-
       const { questionIdx, questionText } = action.payload;
 
-      const clonedQuestions = state.slice();
-      clonedQuestions[questionIdx] = {
-        ...clonedQuestions[questionIdx],
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+      deepClonedState[questionIdx] = {
+        ...deepClonedState[questionIdx],
         questionText
       };
 
-      return clonedQuestions;
+      return deepClonedState;
     }
     case DELETE_QUESTION: {
-      const clonedQuestions = [
-        ...state.slice(0, action.payload.questionIdx),
-        ...state.slice(action.payload.questionIdx + 1)
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+      const updatedQuestions = [
+        ...deepClonedState.slice(0, action.payload.questionIdx),
+        ...deepClonedState.slice(action.payload.questionIdx + 1)
       ];
 
-      return clonedQuestions;
+      return updatedQuestions;
     }
 
     case DELETE_ANSWER: {
       const { questionIdx, answerIdx } = action.payload;
-      return changeInArray(state, questionIdx, q => ({
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+      return changeInArray(deepClonedState, questionIdx, q => ({
         ...q,
         answers: deleteInArray(q.answers, answerIdx)
       }));
@@ -87,30 +88,19 @@ export const questionEditor = (state = [], action) => {
 
     case ADD_ANSWER: {
       const { questionIdx } = action.payload;
-
-      const clonedQuestions = state.slice();
-      clonedQuestions[questionIdx] = {
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+      deepClonedState[questionIdx] = {
         ...state[questionIdx],
         answers: [...state[questionIdx].answers, newAnswer]
       };
-      return clonedQuestions;
+      return deepClonedState;
     }
 
     case EDIT_ANSWER_TEXT: {
       const { questionIdx, answerText, answerIdx } = action.payload;
+      const deepClonedState = JSON.parse(JSON.stringify(state));
 
-      // const clonedQuestions = state.slice();
-      // const clonedQuestion = Object.assign({}, clonedQuestions[questionIdx]);
-      // const clonedAnswers = clonedQuestion.answers.slice();
-      // const clonedAnswer = Object.assign({}, clonedAnswers[answerIdx]);
-      // clonedAnswer.answerText = answerText;
-      // clonedAnswers[answerIdx] = clonedAnswer;
-      // clonedQuestion.answers = clonedAnswers;
-      // clonedQuestions[questionIdx] = clonedQuestion;
-
-      // return clonedQuestions;
-
-      return changeInArray(state, questionIdx, q => ({
+      return changeInArray(deepClonedState, questionIdx, q => ({
         ...q,
         answers: changeInArray(q.answers, answerIdx, a => ({
           ...a,
@@ -121,7 +111,8 @@ export const questionEditor = (state = [], action) => {
 
     case SET_CORRECT_ANSWER: {
       const { questionIdx, answerIdx } = action.payload;
-      return changeInArray(state, questionIdx, q => ({
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+      return changeInArray(deepClonedState, questionIdx, q => ({
         ...q,
         correctAnswers: answerIdx
       }));
@@ -130,6 +121,15 @@ export const questionEditor = (state = [], action) => {
     case LOAD_QUESTIONS: {
       const { newQuestions } = action.payload;
       return newQuestions;
+    }
+
+    case SORT_QUESTION: {
+      const { newQuestionIdx, oldQuestionIdx } = action.payload;
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+
+      reorderArray(deepClonedState, oldQuestionIdx, newQuestionIdx);
+
+      return deepClonedState;
     }
 
     default: {

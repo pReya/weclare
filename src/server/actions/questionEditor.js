@@ -4,6 +4,7 @@ export const ADD_QUESTION = "ADD_QUESTION";
 export const EDIT_QUESTION_TEXT = "EDIT_QUESTION_TEXT";
 export const DELETE_QUESTION = "DELETE_QUESTION";
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
+export const SORT_QUESTION = "SORT_QUESTION";
 
 export function selectQuestion(questionIdx) {
   return {
@@ -44,7 +45,6 @@ export function deleteQuestion(questionIdx) {
       }
     });
 
-    // 2: select newest question as `selectedQuestion`
     const { selectedQuestion } = getState();
     dispatch(selectQuestion(selectedQuestion - 1));
   };
@@ -55,6 +55,22 @@ export function loadQuestions(newQuestions) {
     type: LOAD_QUESTIONS,
     payload: {
       newQuestions
+    }
+  };
+}
+
+export function sortQuestion(oldQuestionIdx, newQuestionIdx) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: SORT_QUESTION,
+      payload: {
+        oldQuestionIdx,
+        newQuestionIdx
+      }
+    });
+    const { selectedQuestion } = getState();
+    if (selectedQuestion === oldQuestionIdx) {
+      dispatch(selectQuestion(newQuestionIdx));
     }
   };
 }

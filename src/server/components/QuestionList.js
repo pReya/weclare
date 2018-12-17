@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AddCircleOutlineIcon from "mdi-react/AddCircleOutlineIcon";
-
+import DragIcon from "mdi-react/DragIcon";
 import {
   Badge,
   Card,
@@ -31,6 +31,7 @@ const QuestionList = props => {
   const {
     questions,
     onSelectQuestion,
+    onSortQuestion,
     selectedQuestion,
     onAddQuestion
   } = props;
@@ -44,18 +45,33 @@ const QuestionList = props => {
           </Badge>
         </h6>
       </CardHeader>
-      <DragDropContext onDragEnd={() => console.log("Drag End")}>
+      <DragDropContext
+        onDragEnd={result => {
+          const { destination, source } = result;
+          if (!destination) {
+            return;
+          }
+
+          if (
+            destination.droppableId === source.droppableId &&
+            destination.index === source.inde
+          ) {
+            return;
+          }
+          onSortQuestion(source.index, destination.index);
+        }}
+      >
         <Droppable droppableId="list">
           {provided => (
             <ListGroup flush>
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {questions.map((q, i) => (
-                  <Draggable draggableId={q.id} index={i}>
-                    {provided => (
+                  <Draggable draggableId={q.id} index={i} key={q.id}>
+                    {provided2 => (
                       <div
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
+                        {...provided2.draggableProps}
+                        ref={provided2.innerRef}
+                        key={q.id}
                       >
                         <ListGroupItem
                           key={q.id}
@@ -67,10 +83,15 @@ const QuestionList = props => {
                           }}
                           action
                           active={selectedQuestion === i}
+                          className="d-flex justify-content-between align-items-center hover"
                         >
-                          <ListGroupItemText className="mb-0">
-                            {truncate(strip(q.questionText), 6, "...")}
-                          </ListGroupItemText>
+                          {truncate(strip(q.questionText), 6, "...")}
+                          <div
+                            className="hover__hover"
+                            {...provided2.dragHandleProps}
+                          >
+                            <DragIcon style={{ paddingBottom: "3px" }} />
+                          </div>
                         </ListGroupItem>
                       </div>
                     )}
