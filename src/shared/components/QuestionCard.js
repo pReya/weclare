@@ -20,8 +20,8 @@ const QuestionCard = props => {
         <title>Answer question</title>
       </Helmet>
       <DefaultCard title="Answer question" badge={question.progress} {...props}>
-        {question.questionText && (
-          <h4 className="text-center mb-4">{question.questionText}</h4>
+        {question.text && (
+          <h4 className="text-center mb-4">{question.textext}</h4>
         )}
         {question.answers &&
           question.answers.map((answer, i) => (
@@ -41,7 +41,7 @@ const QuestionCard = props => {
               color="secondary"
               disabled={disabled}
             >
-              {answer.answerText}
+              {answer.text}
               {countedAnswers && (
                 <Badge className="float-right" color="secondary">
                   {countedAnswers[i] !== 0 && countedAnswers[i]}

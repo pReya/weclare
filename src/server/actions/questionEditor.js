@@ -2,6 +2,7 @@
 export const SELECT_QUESTION = "SELECT_QUESTION";
 export const ADD_QUESTION = "ADD_QUESTION";
 export const EDIT_QUESTION_TEXT = "EDIT_QUESTION_TEXT";
+export const EDIT_QUESTION_TYPE = "EDIT_QUESTION_TYPE";
 export const DELETE_QUESTION = "DELETE_QUESTION";
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 export const SORT_QUESTION = "SORT_QUESTION";
@@ -26,12 +27,22 @@ export function addQuestion() {
   };
 }
 
-export function editQuestionText(questionIdx, questionText) {
+export function editQuestionText(questionIdx, text) {
   return {
     type: EDIT_QUESTION_TEXT,
     payload: {
       questionIdx,
-      questionText
+      text
+    }
+  };
+}
+
+export function editQuestionType(questionIdx, newType) {
+  return {
+    type: EDIT_QUESTION_TYPE,
+    payload: {
+      questionIdx,
+      newType
     }
   };
 }
@@ -46,7 +57,11 @@ export function deleteQuestion(questionIdx) {
     });
 
     const { selectedQuestion } = getState();
-    dispatch(selectQuestion(selectedQuestion - 1));
+    if (selectedQuestion <= 0) {
+      dispatch(selectQuestion(0));
+    } else {
+      dispatch(selectQuestion(selectedQuestion - 1));
+    }
   };
 }
 
@@ -80,6 +95,7 @@ export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER";
 export const ADD_ANSWER = "ADD_ANSWER";
 export const EDIT_ANSWER_TEXT = "EDIT_ANSWER_TEXT";
 export const DELETE_ANSWER = "DELETE_ANSWER";
+export const SORT_ANSWER = "SORT_ANSWER";
 
 export function setCorrectAnswer(questionIdx, answerIdx) {
   return {
@@ -100,12 +116,12 @@ export function addAnswer(questionIdx) {
   };
 }
 
-export function editAnswerText(questionIdx, answerText, answerIdx) {
+export function editAnswerText(questionIdx, text, answerIdx) {
   return {
     type: EDIT_ANSWER_TEXT,
     payload: {
       questionIdx,
-      answerText,
+      text,
       answerIdx
     }
   };
@@ -118,5 +134,18 @@ export function deleteAnswer(questionIdx, answerIdx) {
       questionIdx,
       answerIdx
     }
+  };
+}
+
+export function sortAnswer(questionIdx, oldAnswerIdx, newAnswerIdx) {
+  return dispatch => {
+    dispatch({
+      type: SORT_ANSWER,
+      payload: {
+        questionIdx,
+        oldAnswerIdx,
+        newAnswerIdx
+      }
+    });
   };
 }

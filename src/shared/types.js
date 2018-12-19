@@ -14,8 +14,8 @@ export const TQuestion = PropTypes.shape({
   question: PropTypes.shape({
     progress: PropTypes.string,
     questionIdx: PropTypes.number,
-    questionText: PropTypes.string,
-    questionType: PropTypes.string,
+    text: PropTypes.string,
+    type: PropTypes.string,
     answers: PropTypes.arrayOf(PropTypes.object)
   })
 });
@@ -24,8 +24,8 @@ export const DQuestion = {
   question: {
     progress: "",
     questionIdx: null,
-    questionText: null,
-    questionType: null,
+    text: null,
+    type: null,
     answers: null
   },
   disabled: false,

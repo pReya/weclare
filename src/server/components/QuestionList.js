@@ -35,11 +35,12 @@ const QuestionList = props => {
     selectedQuestion,
     onAddQuestion
   } = props;
+
   return (
     <Card className="shadow">
       <CardHeader>
         <h6 className="my-0 d-flex justify-content-between">
-          Questions{" "}
+          Questions
           <Badge color="dark" pill>
             {questions.length}
           </Badge>
@@ -61,20 +62,27 @@ const QuestionList = props => {
           onSortQuestion(source.index, destination.index);
         }}
       >
-        <Droppable droppableId="list">
-          {provided => (
+        <Droppable droppableId="questionList">
+          {providedDroppable => (
             <ListGroup flush>
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                {questions.map((q, i) => (
-                  <Draggable draggableId={q.id} index={i} key={q.id}>
-                    {provided2 => (
+              <div
+                {...providedDroppable.droppableProps}
+                ref={providedDroppable.innerRef}
+              >
+                {questions.map((question, i) => (
+                  <Draggable
+                    draggableId={question.id}
+                    index={i}
+                    key={question.id}
+                  >
+                    {providedDraggable => (
                       <div
-                        {...provided2.draggableProps}
-                        ref={provided2.innerRef}
-                        key={q.id}
+                        {...providedDraggable.draggableProps}
+                        ref={providedDraggable.innerRef}
+                        key={question.id}
                       >
                         <ListGroupItem
-                          key={q.id}
+                          key={question.id}
                           tag="a"
                           href="#"
                           onClick={e => {
@@ -85,10 +93,10 @@ const QuestionList = props => {
                           active={selectedQuestion === i}
                           className="d-flex justify-content-between align-items-center hover"
                         >
-                          {truncate(strip(q.questionText), 6, "...")}
+                          {truncate(strip(question.text), 6, "...")}
                           <div
                             className="hover__hover"
-                            {...provided2.dragHandleProps}
+                            {...providedDraggable.dragHandleProps}
                           >
                             <DragIcon style={{ paddingBottom: "3px" }} />
                           </div>
@@ -97,7 +105,7 @@ const QuestionList = props => {
                     )}
                   </Draggable>
                 ))}
-                {provided.placeholder}
+                {providedDroppable.placeholder}
               </div>
               {questions.length === 0 && (
                 <ListGroupItem disabled>

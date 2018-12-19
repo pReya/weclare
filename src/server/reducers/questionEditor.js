@@ -1,15 +1,20 @@
 import nanoid from "nanoid";
 import {
+  // Question
   ADD_QUESTION,
-  EDIT_QUESTION_TEXT,
+  SORT_QUESTION,
   DELETE_QUESTION,
+  EDIT_QUESTION_TYPE,
+  EDIT_QUESTION_TEXT,
+  // Answers
   ADD_ANSWER,
+  SORT_ANSWER,
+  DELETE_ANSWER,
   EDIT_ANSWER_TEXT,
   SET_CORRECT_ANSWER,
-  DELETE_ANSWER,
+  // Current Question
   SELECT_QUESTION,
-  LOAD_QUESTIONS,
-  SORT_QUESTION
+  LOAD_QUESTIONS
 } from "../actions/questionEditor";
 import {
   changeInArray,
@@ -19,21 +24,24 @@ import {
 
 const newQuestion = () => ({
   id: nanoid(6),
-  questionType: "singleChoice",
-  questionText: "<p>New question</p>",
+  type: "single",
+  text: "<p>New question</p>",
   correctAnswers: 0,
   answers: [
     {
-      answerText: "Answer A"
+      id: nanoid(6),
+      text: "Answer A"
     },
     {
-      answerText: "Answer B"
+      id: nanoid(6),
+      text: "Answer B"
     }
   ]
 });
 
 const newAnswer = {
-  answerText: "New answer"
+  id: nanoid(6),
+  text: "New answer"
 };
 
 // Reducers
@@ -57,12 +65,23 @@ export const questionEditor = (state = [], action) => {
     }
 
     case EDIT_QUESTION_TEXT: {
-      const { questionIdx, questionText } = action.payload;
+      const { questionIdx, text } = action.payload;
 
       const deepClonedState = JSON.parse(JSON.stringify(state));
       deepClonedState[questionIdx] = {
         ...deepClonedState[questionIdx],
-        questionText
+        text
+      };
+
+      return deepClonedState;
+    }
+    case EDIT_QUESTION_TYPE: {
+      const { questionIdx, newType } = action.payload;
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+
+      deepClonedState[questionIdx] = {
+        ...deepClonedState[questionIdx],
+        type: newType
       };
 
       return deepClonedState;
@@ -97,14 +116,14 @@ export const questionEditor = (state = [], action) => {
     }
 
     case EDIT_ANSWER_TEXT: {
-      const { questionIdx, answerText, answerIdx } = action.payload;
+      const { questionIdx, text, answerIdx } = action.payload;
       const deepClonedState = JSON.parse(JSON.stringify(state));
 
       return changeInArray(deepClonedState, questionIdx, q => ({
         ...q,
         answers: changeInArray(q.answers, answerIdx, a => ({
           ...a,
-          answerText
+          text
         }))
       }));
     }
@@ -128,6 +147,20 @@ export const questionEditor = (state = [], action) => {
       const deepClonedState = JSON.parse(JSON.stringify(state));
 
       reorderArray(deepClonedState, oldQuestionIdx, newQuestionIdx);
+
+      return deepClonedState;
+    }
+
+    case SORT_ANSWER: {
+      const { questionIdx, newAnswerIdx, oldAnswerIdx } = action.payload;
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+
+      reorderArray(
+        deepClonedState[questionIdx].answers,
+        oldAnswerIdx,
+        newAnswerIdx
+      );
+      console.log("New state", deepClonedState);
 
       return deepClonedState;
     }

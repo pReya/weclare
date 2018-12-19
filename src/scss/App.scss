@@ -39,6 +39,10 @@ hr {
   -webkit-border-radius: 0;
 }
 
+.pointerCursor {
+  cursor: pointer;
+}
+
 .hover {
   &:hover &__no-hover {
     opacity: 0;

@@ -9,9 +9,11 @@ import {
   selectQuestion,
   addQuestion,
   editQuestionText,
+  editQuestionType,
   deleteQuestion,
   loadQuestions,
   setCorrectAnswer,
+  sortAnswer,
   addAnswer,
   editAnswerText,
   deleteAnswer,
@@ -28,11 +30,13 @@ const mapDispatchToProps = {
   selectQuestion,
   addQuestion,
   editQuestionText,
+  editQuestionType,
   deleteQuestion,
   addAnswer,
   editAnswerText,
   deleteAnswer,
   setCorrectAnswer,
+  sortAnswer,
   loadQuestions,
   initAnswers,
   sortQuestion
@@ -58,13 +62,15 @@ class QuestionEditor extends React.Component {
       addQuestion,
       selectQuestion,
       editQuestionText,
+      editQuestionType,
       deleteQuestion,
       addAnswer,
       editAnswerText,
       deleteAnswer,
       setCorrectAnswer,
       initAnswers,
-      sortQuestion
+      sortQuestion,
+      sortAnswer
     } = this.props;
 
     return (
@@ -84,9 +90,11 @@ class QuestionEditor extends React.Component {
               question={questions[selectedQuestion]}
               selectedQuestion={selectedQuestion}
               onEditQuestionText={editQuestionText}
+              onEditQuestionType={editQuestionType}
               onEditAnswerText={editAnswerText}
               onAddAnswer={addAnswer}
               onSetCorrectAnswer={setCorrectAnswer}
+              onSortAnswer={sortAnswer}
               onDeleteAnswer={deleteAnswer}
               onDeleteQuestion={deleteQuestion}
             />

@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../../scss/quill.scss";
 import PropTypes from "prop-types";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
   Card,
   CardBody,
@@ -12,17 +13,15 @@ import {
   FormGroup,
   Button,
   ButtonGroup,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Label
 } from "reactstrap";
+import SingleChoiceAnswer from "./SingleChoiceAnswer";
 
 class QuestionContent extends React.Component {
-  state = {
-    typingTimeout: null
-  };
+  constructor(props) {
+    super(props);
+    this.typingTimeout = null;
+  }
 
   render() {
     const {
@@ -30,7 +29,9 @@ class QuestionContent extends React.Component {
       selectedQuestion,
       onEditAnswerText,
       onEditQuestionText,
+      onEditQuestionType,
       onAddAnswer,
+      onSortAnswer,
       onSetCorrectAnswer,
       onDeleteAnswer,
       onDeleteQuestion
@@ -53,24 +54,42 @@ class QuestionContent extends React.Component {
                     <Button
                       outline
                       color="primary"
-                      onClick={() => this.onRadioBtnClick(1)}
-                      active={this.state.rSelected === 1}
+                      onClick={() => {
+                        console.log("Click Single");
+                        if (question.type !== "single") {
+                          console.log("Passed Single");
+                          onEditQuestionType(selectedQuestion, "single");
+                        }
+                      }}
+                      active={question.type === "single"}
                     >
                       Single
                     </Button>
                     <Button
                       outline
                       color="primary"
-                      onClick={() => this.onRadioBtnClick(2)}
-                      active={this.state.rSelected === 2}
+                      onClick={() => {
+                        console.log("Click Multi");
+                        if (question.type !== "multi") {
+                          console.log("Passed Multi");
+                          onEditQuestionType(selectedQuestion, "multi");
+                        }
+                      }}
+                      active={question.type === "multi"}
                     >
                       Multiple
                     </Button>
                     <Button
                       outline
                       color="primary"
-                      onClick={() => this.onRadioBtnClick(3)}
-                      active={this.state.rSelected === 3}
+                      onClick={() => {
+                        console.log("Click Text");
+                        if (question.type !== "text") {
+                          console.log("Passed Text");
+                          onEditQuestionType(selectedQuestion, "text");
+                        }
+                      }}
+                      active={question.type === "text"}
                     >
                       Text
                     </Button>
@@ -80,7 +99,7 @@ class QuestionContent extends React.Component {
               <ReactQuill
                 className="mb-4"
                 id="question"
-                value={question.questionText}
+                value={question.text}
                 modules={{
                   toolbar: [
                     ["bold", "italic", "underline"],
@@ -107,20 +126,75 @@ class QuestionContent extends React.Component {
                       (Check the correct answer)
                     </span>
                   </Label>
-                  {question.answers.map((a, i) => (
-                    <SingleChoiceAnswer
-                      isCorrectAnswer={question.correctAnswers === i}
-                      selectedQuestion={selectedQuestion}
-                      number={i}
-                      answer={a.answerText}
-                      key={i}
-                      onEditAnswerText={e => {
-                        onEditAnswerText(selectedQuestion, e.target.value, i);
-                      }}
-                      onSetCorrectAnswer={onSetCorrectAnswer}
-                      onDeleteAnswer={onDeleteAnswer}
-                    />
-                  ))}
+                  <DragDropContext
+                    onDragEnd={result => {
+                      const { destination, source } = result;
+                      if (!destination) {
+                        return;
+                      }
+
+                      if (
+                        destination.droppableId === source.droppableId &&
+                        destination.index === source.inde
+                      ) {
+                        return;
+                      }
+
+                      onSortAnswer(
+                        selectedQuestion,
+                        source.index,
+                        destination.index
+                      );
+                    }}
+                  >
+                    <Droppable droppableId="answerList">
+                      {providedDroppable => (
+                        <div
+                          {...providedDroppable.droppableProps}
+                          ref={providedDroppable.innerRef}
+                        >
+                          {question.answers.map((answer, i) => (
+                            <Draggable
+                              draggableId={answer.id}
+                              index={i}
+                              key={answer.id}
+                            >
+                              {providedDraggable => (
+                                <div
+                                  {...providedDraggable.draggableProps}
+                                  ref={providedDraggable.innerRef}
+                                  key={answer.id}
+                                >
+                                  <SingleChoiceAnswer
+                                    isCorrectAnswer={
+                                      question.correctAnswers === i
+                                    }
+                                    dragHandleProps={
+                                      providedDraggable.dragHandleProps
+                                    }
+                                    selectedQuestion={selectedQuestion}
+                                    number={i}
+                                    answer={answer.text}
+                                    key={answer.id}
+                                    onEditAnswerText={e =>
+                                      onEditAnswerText(
+                                        selectedQuestion,
+                                        e.target.value,
+                                        i
+                                      )
+                                    }
+                                    onSetCorrectAnswer={onSetCorrectAnswer}
+                                    onDeleteAnswer={onDeleteAnswer}
+                                  />
+                                </div>
+                              )}
+                            </Draggable>
+                          ))}
+                          {providedDroppable.placeholder}
+                        </div>
+                      )}
+                    </Droppable>
+                  </DragDropContext>
                   <Button
                     outline
                     block
@@ -151,13 +225,14 @@ class QuestionContent extends React.Component {
 
 QuestionContent.propTypes = {
   question: PropTypes.shape({
-    questionType: PropTypes.string,
-    questionText: PropTypes.string,
+    type: PropTypes.string,
+    text: PropTypes.string,
     answers: PropTypes.arrayOf(PropTypes.object)
   }),
   selectedQuestion: PropTypes.number,
   onEditAnswerText: PropTypes.func.isRequired,
   onEditQuestionText: PropTypes.func.isRequired,
+  onEditQuestionType: PropTypes.func.isRequired,
   onAddAnswer: PropTypes.func.isRequired,
   onSetCorrectAnswer: PropTypes.func.isRequired,
   onDeleteAnswer: PropTypes.func.isRequired,
@@ -167,57 +242,6 @@ QuestionContent.propTypes = {
 QuestionContent.defaultProps = {
   question: {},
   selectedQuestion: 0
-};
-
-const SingleChoiceAnswer = props => {
-  const {
-    answer,
-    number,
-    selectedQuestion,
-    isCorrectAnswer,
-    onEditAnswerText,
-    onSetCorrectAnswer,
-    onDeleteAnswer
-  } = props;
-  return (
-    <InputGroup className="mb-2">
-      <InputGroupAddon addonType="prepend">
-        <InputGroupText>
-          <Input
-            addon
-            checked={isCorrectAnswer}
-            type="radio"
-            name="answer"
-            onChange={() => {
-              onSetCorrectAnswer(selectedQuestion, number);
-            }}
-          />
-        </InputGroupText>
-      </InputGroupAddon>
-      <Input value={answer} onChange={onEditAnswerText} />
-      <InputGroupAddon addonType="append">
-        <InputGroupText>
-          <Button
-            outline
-            close
-            onClick={() => {
-              onDeleteAnswer(selectedQuestion, number);
-            }}
-          />
-        </InputGroupText>
-      </InputGroupAddon>
-    </InputGroup>
-  );
-};
-
-SingleChoiceAnswer.propTypes = {
-  selectedQuestion: PropTypes.number.isRequired,
-  answer: PropTypes.string.isRequired,
-  onEditAnswerText: PropTypes.func.isRequired,
-  number: PropTypes.number.isRequired,
-  isCorrectAnswer: PropTypes.bool.isRequired,
-  onSetCorrectAnswer: PropTypes.func.isRequired,
-  onDeleteAnswer: PropTypes.func.isRequired
 };
 
 export default QuestionContent;
