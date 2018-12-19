@@ -7,7 +7,6 @@ import { changeInArray } from "../../shared/util/Helpers";
 export const registeredAnswers = (state = [], action) => {
   switch (action.type) {
     case INIT_ANSWERS: {
-      console.log("HELLO REDUCER");
       return action.payload.array;
     }
     case REGISTER_ANSWER: {

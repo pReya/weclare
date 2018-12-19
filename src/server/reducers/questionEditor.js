@@ -26,23 +26,25 @@ const newQuestion = () => ({
   id: nanoid(6),
   type: "single",
   text: "<p>New question</p>",
-  correctAnswers: 0,
   answers: [
     {
       id: nanoid(6),
-      text: "Answer A"
+      text: "Answer A",
+      isCorrect: true
     },
     {
       id: nanoid(6),
-      text: "Answer B"
+      text: "Answer B",
+      isCorrect: false
     }
   ]
 });
 
-const newAnswer = {
+const newAnswer = () => ({
   id: nanoid(6),
-  text: "New answer"
-};
+  text: "New answer",
+  isCorrect: false
+});
 
 // Reducers
 
@@ -110,7 +112,7 @@ export const questionEditor = (state = [], action) => {
       const deepClonedState = JSON.parse(JSON.stringify(state));
       deepClonedState[questionIdx] = {
         ...state[questionIdx],
-        answers: [...state[questionIdx].answers, newAnswer]
+        answers: [...state[questionIdx].answers, newAnswer()]
       };
       return deepClonedState;
     }
@@ -131,10 +133,22 @@ export const questionEditor = (state = [], action) => {
     case SET_CORRECT_ANSWER: {
       const { questionIdx, answerIdx } = action.payload;
       const deepClonedState = JSON.parse(JSON.stringify(state));
-      return changeInArray(deepClonedState, questionIdx, q => ({
-        ...q,
-        correctAnswers: answerIdx
-      }));
+
+      const modAnswers = deepClonedState[questionIdx].answers.map(
+        (answer, i) =>
+          i === answerIdx
+            ? {
+                ...answer,
+                isCorrect: true
+              }
+            : {
+                ...answer,
+                isCorrect: false
+              }
+      );
+
+      deepClonedState[questionIdx].answers = modAnswers;
+      return deepClonedState;
     }
 
     case LOAD_QUESTIONS: {
@@ -160,7 +174,6 @@ export const questionEditor = (state = [], action) => {
         oldAnswerIdx,
         newAnswerIdx
       );
-      console.log("New state", deepClonedState);
 
       return deepClonedState;
     }

@@ -31,7 +31,6 @@ export function registerAnswer(questionIdx, answerIdx, userId) {
 // };
 
 export function initAnswers() {
-  console.log("Arrived in initAnswers Action Creator");
   return (dispatch, getState) => {
     const { questionEditor } = getState();
     const emptyAnswerArray = questionEditor.map(question =>

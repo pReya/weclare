@@ -166,9 +166,7 @@ class QuestionContent extends React.Component {
                                   key={answer.id}
                                 >
                                   <SingleChoiceAnswer
-                                    isCorrectAnswer={
-                                      question.correctAnswers === i
-                                    }
+                                    isCorrectAnswer={answer.isCorrect}
                                     dragHandleProps={
                                       providedDraggable.dragHandleProps
                                     }

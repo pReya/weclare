@@ -138,14 +138,12 @@ export function deleteAnswer(questionIdx, answerIdx) {
 }
 
 export function sortAnswer(questionIdx, oldAnswerIdx, newAnswerIdx) {
-  return dispatch => {
-    dispatch({
-      type: SORT_ANSWER,
-      payload: {
-        questionIdx,
-        oldAnswerIdx,
-        newAnswerIdx
-      }
-    });
+  return {
+    type: SORT_ANSWER,
+    payload: {
+      questionIdx,
+      oldAnswerIdx,
+      newAnswerIdx
+    }
   };
 }
