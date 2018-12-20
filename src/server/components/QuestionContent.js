@@ -18,7 +18,7 @@ import {
   Label,
   Row
 } from "reactstrap";
-import SingleChoiceAnswer from "./SingleChoiceAnswer";
+import EditorAnswerInput from "./EditorAnswerInput";
 
 class QuestionContent extends React.Component {
   constructor(props) {
@@ -173,13 +173,14 @@ class QuestionContent extends React.Component {
                                   ref={providedDraggable.innerRef}
                                   key={answer.id}
                                 >
-                                  <SingleChoiceAnswer
+                                  <EditorAnswerInput
                                     isCorrectAnswer={answer.isCorrect}
                                     dragHandleProps={
                                       providedDraggable.dragHandleProps
                                     }
                                     selectedQuestion={selectedQuestion}
                                     number={i}
+                                    type={question.type}
                                     answer={answer.text}
                                     key={answer.id}
                                     onEditAnswerText={e =>

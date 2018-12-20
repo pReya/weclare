@@ -5,7 +5,7 @@ import DeleteIcon from "mdi-react/DeleteIcon";
 import DragIcon from "mdi-react/DragIcon";
 import PencilIcon from "mdi-react/PencilIcon";
 
-class SingleChoiceAnswer extends React.Component {
+class EditorAnswerInput extends React.Component {
   state = {
     isHovered: false
   };
@@ -14,6 +14,7 @@ class SingleChoiceAnswer extends React.Component {
     const {
       answer,
       number,
+      type,
       selectedQuestion,
       isCorrectAnswer,
       onEditAnswerText,
@@ -22,6 +23,49 @@ class SingleChoiceAnswer extends React.Component {
       dragHandleProps
     } = this.props;
     const { isHovered } = this.state;
+
+    const getHtmlType = questionType =>
+      ({
+        single: "radio",
+        multi: "checkbox"
+      }[questionType]);
+
+    const inputTypeSwitch = questionType => {
+      switch (questionType) {
+        case "single":
+          return (
+            <Input
+              addon
+              checked={isCorrectAnswer}
+              type="checkbox"
+              name={`answer-${index}`}
+              onChange={() => {
+                onSetCorrectAnswer(selectedQuestion, index);
+              }}
+            />
+          );
+
+        case "multi":
+          return (
+            <Input
+              addon
+              checked={isCorrectAnswer}
+              type="checkbox"
+              name={`answer-${index}`}
+              onChange={() => {
+                onSetCorrectAnswer(selectedQuestion, index);
+              }}
+            />
+          );
+
+        case "text":
+          console.log("Text");
+          return null;
+
+        default:
+          return null;
+      }
+    };
 
     return (
       <>
@@ -33,10 +77,11 @@ class SingleChoiceAnswer extends React.Component {
         >
           <InputGroupAddon addonType="prepend">
             <InputGroupText>
+              {}
               <Input
                 addon
                 checked={isCorrectAnswer}
-                type="radio"
+                type={getHtmlType(type)}
                 name="answer"
                 onChange={() => {
                   onSetCorrectAnswer(selectedQuestion, number);
@@ -70,7 +115,7 @@ class SingleChoiceAnswer extends React.Component {
   }
 }
 
-SingleChoiceAnswer.propTypes = {
+EditorAnswerInput.propTypes = {
   selectedQuestion: PropTypes.number.isRequired,
   answer: PropTypes.string.isRequired,
   onEditAnswerText: PropTypes.func.isRequired,
@@ -80,4 +125,46 @@ SingleChoiceAnswer.propTypes = {
   onDeleteAnswer: PropTypes.func.isRequired
 };
 
-export default SingleChoiceAnswer;
+export default EditorAnswerInput;
+
+const SingleChoiceInput = props => {
+  const {
+    isCorrectAnswer,
+    selectedQuestion,
+    number,
+    onSetCorrectAnswer,
+    isCorrectAnswer
+  } = props;
+  return (
+    <Input
+      addon
+      checked={isCorrectAnswer}
+      type="radio"
+      name="answer"
+      onChange={() => {
+        onSetCorrectAnswer(selectedQuestion, number);
+      }}
+    />
+  );
+};
+
+const MultiChoiceInput = props => {
+  const {
+    isCorrectAnswer,
+    selectedQuestion,
+    index,
+    onSetCorrectAnswer,
+    isCorrectAnswer
+  } = props;
+  return (
+    <Input
+      addon
+      checked={isCorrectAnswer}
+      type="checkbox"
+      name={`answer-${index}`}
+      onChange={() => {
+        onSetCorrectAnswer(selectedQuestion, index);
+      }}
+    />
+  );
+};
