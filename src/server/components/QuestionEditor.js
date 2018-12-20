@@ -2,45 +2,19 @@ import React from "react";
 import { Col, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 import Logger from "../../shared/util/Logger";
 import QuestionContent from "./QuestionContent";
 import QuestionList from "./QuestionList";
-import {
-  selectQuestion,
-  addQuestion,
-  editQuestionText,
-  editQuestionType,
-  deleteQuestion,
-  loadQuestions,
-  setCorrectAnswer,
-  sortAnswer,
-  addAnswer,
-  editAnswerText,
-  deleteAnswer,
-  sortQuestion
-} from "../actions/questionEditor";
-import { initAnswers } from "../actions/answers";
+import * as questionEditorActions from "../actions/questionEditor";
+import * as answerActions from "../actions/answers";
 
 const mapStateToProps = state => ({
   questions: state.questionEditor,
   selectedQuestion: state.selectedQuestion
 });
 
-const mapDispatchToProps = {
-  selectQuestion,
-  addQuestion,
-  editQuestionText,
-  editQuestionType,
-  deleteQuestion,
-  addAnswer,
-  editAnswerText,
-  deleteAnswer,
-  setCorrectAnswer,
-  sortAnswer,
-  loadQuestions,
-  initAnswers,
-  sortQuestion
-};
+const mapDispatchToProps = { ...questionEditorActions, ...answerActions };
 
 class QuestionEditor extends React.Component {
   constructor(props) {
@@ -130,3 +104,23 @@ export default withRouter(
     mapDispatchToProps
   )(QuestionEditor)
 );
+
+QuestionEditor.propTypes = {
+  selectedQuestion: PropTypes.number,
+  questions: PropTypes.array.isRequired,
+  // Questions
+  loadQuestions: PropTypes.func.isRequired,
+  selectQuestion: PropTypes.func.isRequired,
+  addQuestion: PropTypes.func.isRequired,
+  editQuestionText: PropTypes.func.isRequired,
+  editQuestionType: PropTypes.func.isRequired,
+  deleteQuestion: PropTypes.func.isRequired,
+  sortQuestion: PropTypes.func.isRequired,
+  // Answers
+  addAnswer: PropTypes.func.isRequired,
+  editAnswerText: PropTypes.func.isRequired,
+  deleteAnswer: PropTypes.func.isRequired,
+  setCorrectAnswer: PropTypes.func.isRequired,
+  sortAnswer: PropTypes.func.isRequired,
+  initAnswers: PropTypes.func.isRequired
+};

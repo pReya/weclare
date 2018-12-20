@@ -4,6 +4,8 @@ import "react-quill/dist/quill.snow.css";
 import "../../scss/quill.scss";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import PlaylistPlusIcon from "mdi-react/PlaylistPlusIcon";
+import DeleteIcon from "mdi-react/DeleteIcon";
 import {
   Card,
   CardBody,
@@ -13,7 +15,8 @@ import {
   FormGroup,
   Button,
   ButtonGroup,
-  Label
+  Label,
+  Row
 } from "reactstrap";
 import SingleChoiceAnswer from "./SingleChoiceAnswer";
 
@@ -45,80 +48,85 @@ class QuestionContent extends React.Component {
         <CardBody>
           {selectedQuestion != null ? (
             <>
-              <FormGroup row className="justify-content-between">
-                <Label for="question" sm={4}>
-                  Question Text
-                </Label>
-                <Col sm="auto">
-                  <ButtonGroup size="sm">
-                    <Button
-                      outline
-                      color="primary"
-                      onClick={() => {
-                        console.log("Click Single");
-                        if (question.type !== "single") {
-                          console.log("Passed Single");
-                          onEditQuestionType(selectedQuestion, "single");
-                        }
-                      }}
-                      active={question.type === "single"}
-                    >
-                      Single
-                    </Button>
-                    <Button
-                      outline
-                      color="primary"
-                      onClick={() => {
-                        console.log("Click Multi");
-                        if (question.type !== "multi") {
-                          console.log("Passed Multi");
-                          onEditQuestionType(selectedQuestion, "multi");
-                        }
-                      }}
-                      active={question.type === "multi"}
-                    >
-                      Multiple
-                    </Button>
-                    <Button
-                      outline
-                      color="primary"
-                      onClick={() => {
-                        console.log("Click Text");
-                        if (question.type !== "text") {
-                          console.log("Passed Text");
-                          onEditQuestionType(selectedQuestion, "text");
-                        }
-                      }}
-                      active={question.type === "text"}
-                    >
-                      Text
-                    </Button>
-                  </ButtonGroup>
-                </Col>
-              </FormGroup>
-              <ReactQuill
-                className="mb-4"
-                id="question"
-                value={question.text}
-                modules={{
-                  toolbar: [
-                    ["bold", "italic", "underline"],
-                    [{ list: "ordered" }, { list: "bullet" }],
-                    ["link"],
-                    ["clean"]
-                  ]
-                }}
-                onChange={(newValue, delta, source) => {
-                  if (source === "user") {
-                    clearTimeout(this.typingTimeout);
-                    this.typingTimeout = setTimeout(
-                      () => onEditQuestionText(selectedQuestion, newValue),
-                      300
-                    );
-                  }
-                }}
-              />
               <Form>
+                <FormGroup>
+                  <Row form className="justify-content-between">
+                    <Label for="question" sm={4}>
+                      Question Text
+                    </Label>
+                    <Col sm="auto">
+                      <ButtonGroup size="sm">
+                        <Button
+                          outline
+                          color="primary"
+                          onClick={() => {
+                            if (question.type !== "single") {
+                              console.log("Passed Single");
+                              onEditQuestionType(selectedQuestion, "single");
+                            }
+                          }}
+                          active={question.type === "single"}
+                        >
+                          Single
+                        </Button>
+                        <Button
+                          outline
+                          color="primary"
+                          onClick={() => {
+                            if (question.type !== "multi") {
+                              console.log("Passed Multi");
+                              onEditQuestionType(selectedQuestion, "multi");
+                            }
+                          }}
+                          active={question.type === "multi"}
+                        >
+                          Multiple
+                        </Button>
+                        <Button
+                          outline
+                          color="primary"
+                          onClick={() => {
+                            if (question.type !== "text") {
+                              console.log("Passed Text");
+                              onEditQuestionType(selectedQuestion, "text");
+                            }
+                          }}
+                          active={question.type === "text"}
+                        >
+                          Text
+                        </Button>
+                      </ButtonGroup>
+                    </Col>
+                  </Row>
+                  <Row form>
+                    <Col>
+                      <ReactQuill
+                        className="mb-4"
+                        id="question"
+                        value={question.text}
+                        modules={{
+                          toolbar: [
+                            ["bold", "italic", "underline"],
+                            [{ list: "ordered" }, { list: "bullet" }],
+                            ["link"],
+                            ["clean"]
+                          ]
+                        }}
+                        onChange={(newValue, delta, source) => {
+                          if (source === "user") {
+                            clearTimeout(this.typingTimeout);
+                            this.typingTimeout = setTimeout(
+                              () =>
+                                onEditQuestionText(selectedQuestion, newValue),
+                              300
+                            );
+                          }
+                        }}
+                      />
+                    </Col>
+                  </Row>
+                </FormGroup>
+
                 <FormGroup>
                   <Label>
                     Answers{" "}
@@ -193,13 +201,15 @@ class QuestionContent extends React.Component {
                       )}
                     </Droppable>
                   </DragDropContext>
+                </FormGroup>
+                <FormGroup>
                   <Button
                     outline
                     block
-                    color="success"
+                    color="primary"
                     onClick={() => onAddAnswer(selectedQuestion)}
                   >
-                    Add answer
+                    <PlaylistPlusIcon /> Add answer
                   </Button>
                   <Button
                     outline
@@ -207,7 +217,7 @@ class QuestionContent extends React.Component {
                     color="danger"
                     onClick={() => onDeleteQuestion(selectedQuestion)}
                   >
-                    Delete Question
+                    <DeleteIcon /> Delete Question
                   </Button>
                 </FormGroup>
               </Form>
