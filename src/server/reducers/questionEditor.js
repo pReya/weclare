@@ -11,7 +11,8 @@ import {
   SORT_ANSWER,
   DELETE_ANSWER,
   EDIT_ANSWER_TEXT,
-  SET_CORRECT_ANSWER,
+  SET_CORRECT_SINGLE_ANSWER,
+  SET_CORRECT_MULTI_ANSWER,
   // Current Question
   SELECT_QUESTION,
   LOAD_QUESTIONS
@@ -83,6 +84,12 @@ export const questionEditor = (state = [], action) => {
 
       deepClonedState[questionIdx] = {
         ...deepClonedState[questionIdx],
+        answers: state[questionIdx].answers.map(
+          (answer, i) =>
+            i === 0
+              ? { ...answer, isCorrect: true }
+              : { ...answer, isCorrect: false }
+        ),
         type: newType
       };
 
@@ -130,7 +137,7 @@ export const questionEditor = (state = [], action) => {
       }));
     }
 
-    case SET_CORRECT_ANSWER: {
+    case SET_CORRECT_SINGLE_ANSWER: {
       const { questionIdx, answerIdx } = action.payload;
       const deepClonedState = JSON.parse(JSON.stringify(state));
 
@@ -145,6 +152,26 @@ export const questionEditor = (state = [], action) => {
                 ...answer,
                 isCorrect: false
               }
+      );
+
+      deepClonedState[questionIdx].answers = modAnswers;
+      return deepClonedState;
+    }
+
+    case SET_CORRECT_MULTI_ANSWER: {
+      const { questionIdx, answerIdx } = action.payload;
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+
+      console.log("Multi reducer: ", action.payload);
+
+      const modAnswers = deepClonedState[questionIdx].answers.map(
+        (answer, i) =>
+          i === answerIdx
+            ? {
+                ...answer,
+                isCorrect: true
+              }
+            : answer
       );
 
       deepClonedState[questionIdx].answers = modAnswers;

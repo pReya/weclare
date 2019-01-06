@@ -91,15 +91,26 @@ export function sortQuestion(oldQuestionIdx, newQuestionIdx) {
 }
 
 // Answer Actions
-export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER";
+export const SET_CORRECT_SINGLE_ANSWER = "SET_CORRECT_SINGLE_ANSWER";
+export const SET_CORRECT_MULTI_ANSWER = "SET_CORRECT_MULTI_ANSWER";
 export const ADD_ANSWER = "ADD_ANSWER";
 export const EDIT_ANSWER_TEXT = "EDIT_ANSWER_TEXT";
 export const DELETE_ANSWER = "DELETE_ANSWER";
 export const SORT_ANSWER = "SORT_ANSWER";
 
-export function setCorrectAnswer(questionIdx, answerIdx) {
+export function setCorrectSingleAnswer(questionIdx, answerIdx) {
   return {
-    type: SET_CORRECT_ANSWER,
+    type: SET_CORRECT_SINGLE_ANSWER,
+    payload: {
+      questionIdx,
+      answerIdx
+    }
+  };
+}
+
+export function setCorrectMultiAnswer(questionIdx, answerIdx) {
+  return {
+    type: SET_CORRECT_MULTI_ANSWER,
     payload: {
       questionIdx,
       answerIdx

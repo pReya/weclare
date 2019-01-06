@@ -18,53 +18,17 @@ class EditorAnswerInput extends React.Component {
       selectedQuestion,
       isCorrectAnswer,
       onEditAnswerText,
-      onSetCorrectAnswer,
+      onSetCorrectSingleAnswer,
+      onSetCorrectMultiAnswer,
       onDeleteAnswer,
       dragHandleProps
     } = this.props;
     const { isHovered } = this.state;
 
-    const getHtmlType = questionType =>
-      ({
-        single: "radio",
-        multi: "checkbox"
-      }[questionType]);
-
-    const inputTypeSwitch = questionType => {
-      switch (questionType) {
-        case "single":
-          return (
-            <Input
-              addon
-              checked={isCorrectAnswer}
-              type="checkbox"
-              name={`answer-${index}`}
-              onChange={() => {
-                onSetCorrectAnswer(selectedQuestion, index);
-              }}
-            />
-          );
-
-        case "multi":
-          return (
-            <Input
-              addon
-              checked={isCorrectAnswer}
-              type="checkbox"
-              name={`answer-${index}`}
-              onChange={() => {
-                onSetCorrectAnswer(selectedQuestion, index);
-              }}
-            />
-          );
-
-        case "text":
-          console.log("Text");
-          return null;
-
-        default:
-          return null;
-      }
+    const commonProps = {
+      isCorrectAnswer,
+      selectedQuestion,
+      number
     };
 
     return (
@@ -77,16 +41,23 @@ class EditorAnswerInput extends React.Component {
         >
           <InputGroupAddon addonType="prepend">
             <InputGroupText>
-              {}
-              <Input
-                addon
-                checked={isCorrectAnswer}
-                type={getHtmlType(type)}
-                name="answer"
-                onChange={() => {
-                  onSetCorrectAnswer(selectedQuestion, number);
-                }}
-              />
+              {type === "single" ? (
+                <RadioInput
+                  {...commonProps}
+                  onSetCorrectAnswer={() => {
+                    console.log("Click Single");
+                    onSetCorrectSingleAnswer(selectedQuestion, number);
+                  }}
+                />
+              ) : (
+                <CheckboxInput
+                  {...commonProps}
+                  onSetCorrectAnswer={() => {
+                    console.log("Click Multi");
+                    onSetCorrectMultiAnswer(selectedQuestion, number);
+                  }}
+                />
+              )}
             </InputGroupText>
           </InputGroupAddon>
           <Input value={answer} onChange={onEditAnswerText} />
@@ -121,50 +92,35 @@ EditorAnswerInput.propTypes = {
   onEditAnswerText: PropTypes.func.isRequired,
   number: PropTypes.number.isRequired,
   isCorrectAnswer: PropTypes.bool.isRequired,
-  onSetCorrectAnswer: PropTypes.func.isRequired,
+  onSetCorrectSingleAnswer: PropTypes.func.isRequired,
+  onSetCorrectMultiAnswer: PropTypes.func.isRequired,
   onDeleteAnswer: PropTypes.func.isRequired
 };
 
 export default EditorAnswerInput;
 
-const SingleChoiceInput = props => {
-  const {
-    isCorrectAnswer,
-    selectedQuestion,
-    number,
-    onSetCorrectAnswer,
-    isCorrectAnswer
-  } = props;
+const RadioInput = props => {
+  const { isCorrectAnswer, number, onSetCorrectAnswer } = props;
   return (
     <Input
       addon
       checked={isCorrectAnswer}
       type="radio"
       name="answer"
-      onChange={() => {
-        onSetCorrectAnswer(selectedQuestion, number);
-      }}
+      onChange={onSetCorrectAnswer}
     />
   );
 };
 
-const MultiChoiceInput = props => {
-  const {
-    isCorrectAnswer,
-    selectedQuestion,
-    index,
-    onSetCorrectAnswer,
-    isCorrectAnswer
-  } = props;
+const CheckboxInput = props => {
+  const { isCorrectAnswer, number, onSetCorrectAnswer } = props;
   return (
     <Input
       addon
       checked={isCorrectAnswer}
       type="checkbox"
-      name={`answer-${index}`}
-      onChange={() => {
-        onSetCorrectAnswer(selectedQuestion, index);
-      }}
+      name={`answer-${number}`}
+      onChange={onSetCorrectAnswer}
     />
   );
 };

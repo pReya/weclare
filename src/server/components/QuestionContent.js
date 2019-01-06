@@ -35,7 +35,8 @@ class QuestionContent extends React.Component {
       onEditQuestionType,
       onAddAnswer,
       onSortAnswer,
-      onSetCorrectAnswer,
+      onSetCorrectSingleAnswer,
+      onSetCorrectMultiAnswer,
       onDeleteAnswer,
       onDeleteQuestion
     } = this.props;
@@ -131,7 +132,9 @@ class QuestionContent extends React.Component {
                   <Label>
                     Answers{" "}
                     <span className="small text-muted">
-                      (Check the correct answer)
+                      {question.type === "multi"
+                        ? "(Check the correct answers)"
+                        : "(Select the correct answer)"}
                     </span>
                   </Label>
                   <DragDropContext
@@ -190,7 +193,12 @@ class QuestionContent extends React.Component {
                                         i
                                       )
                                     }
-                                    onSetCorrectAnswer={onSetCorrectAnswer}
+                                    onSetCorrectSingleAnswer={
+                                      onSetCorrectSingleAnswer
+                                    }
+                                    onSetCorrectMultiAnswer={
+                                      onSetCorrectMultiAnswer
+                                    }
                                     onDeleteAnswer={onDeleteAnswer}
                                   />
                                 </div>
@@ -243,7 +251,8 @@ QuestionContent.propTypes = {
   onEditQuestionText: PropTypes.func.isRequired,
   onEditQuestionType: PropTypes.func.isRequired,
   onAddAnswer: PropTypes.func.isRequired,
-  onSetCorrectAnswer: PropTypes.func.isRequired,
+  onSetCorrectSingleAnswer: PropTypes.func.isRequired,
+  onSetCorrectMultiAnswer: PropTypes.func.isRequired,
   onDeleteAnswer: PropTypes.func.isRequired,
   onDeleteQuestion: PropTypes.func.isRequired
 };
