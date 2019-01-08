@@ -169,7 +169,7 @@ export const questionEditor = (state = [], action) => {
           i === answerIdx
             ? {
                 ...answer,
-                isCorrect: true
+                isCorrect: !answer.isCorrect
               }
             : answer
       );

@@ -21,7 +21,10 @@ const QuestionCard = props => {
       </Helmet>
       <DefaultCard title="Answer question" badge={question.progress} {...props}>
         {question.text && (
-          <h4 className="text-center mb-4">{question.textext}</h4>
+          <div
+            className="text-center mb-4 h4"
+            dangerouslySetInnerHTML={{ __html: question.text }}
+          />
         )}
         {question.answers &&
           question.answers.map((answer, i) => (

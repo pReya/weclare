@@ -83,7 +83,7 @@ class QuestionContent extends React.Component {
                         >
                           Multiple
                         </Button>
-                        <Button
+                        {/* <Button
                           outline
                           color="primary"
                           onClick={() => {
@@ -95,7 +95,7 @@ class QuestionContent extends React.Component {
                           active={question.type === "text"}
                         >
                           Text
-                        </Button>
+                        </Button> */}
                       </ButtonGroup>
                     </Col>
                   </Row>
