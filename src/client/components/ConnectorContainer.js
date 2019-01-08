@@ -3,12 +3,40 @@ import { Row } from "reactstrap";
 import { connect } from "react-redux";
 import Peer from "peerjs";
 import ConnectForm from "../../shared/components/ConnectForm";
+import Logger from "../../shared/util/Logger";
 import { setServerStatus, setPeer } from "../../shared/actions/connection";
 import {
   addConnection,
   setRemoteServerId,
   setCurrentQuestion
 } from "../actions/client";
+
+// Source: https://github.com/peers/peerjs/issues/227#issue-39009356
+const makePeerHeartbeater = peer => {
+  let timeoutId = 0;
+  function heartbeat() {
+    timeoutId = setTimeout(heartbeat, 20000);
+    // eslint-disable-next-line
+    if (peer.socket._wsOpen()) {
+      peer.socket.send({ type: "HEARTBEAT" });
+      Logger.info("Sent heartbeat");
+    }
+  }
+  // Start
+  heartbeat();
+  // return
+  return {
+    start() {
+      if (timeoutId === 0) {
+        heartbeat();
+      }
+    },
+    stop() {
+      clearTimeout(timeoutId);
+      timeoutId = 0;
+    }
+  };
+};
 
 const clickConnect = (serverId, dispatch) => {
   const {
@@ -22,6 +50,8 @@ const clickConnect = (serverId, dispatch) => {
     secure: secure === "true",
     debug: parseInt(debug, 10)
   });
+
+  const heartbeater = makePeerHeartbeater(peer);
 
   dispatch(setPeer(peer));
 
