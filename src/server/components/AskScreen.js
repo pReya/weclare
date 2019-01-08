@@ -75,7 +75,6 @@ class AskScreen extends React.Component {
       questions,
       currentQuestionIdxNoNull
     );
-
     return (
       <Row className="justify-content-center">
         {hasClients ? (

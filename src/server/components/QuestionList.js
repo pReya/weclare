@@ -33,7 +33,8 @@ const QuestionList = props => {
     onSelectQuestion,
     onSortQuestion,
     selectedQuestion,
-    onAddQuestion
+    onAddQuestion,
+    toggleQuillRerenderFlag
   } = props;
 
   return (
