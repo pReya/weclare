@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AddCircleOutlineIcon from "mdi-react/AddCircleOutlineIcon";
+import DownloadIcon from "mdi-react/DownloadIcon";
+import UploadIcon from "mdi-react/UploadIcon";
 import DragIcon from "mdi-react/DragIcon";
 import {
   Badge,
@@ -12,6 +14,7 @@ import {
   ListGroupItem,
   ListGroupItemText
 } from "reactstrap";
+import SingleFileInput from "../../shared/components/SingleFileInput";
 
 const truncate = (text, limit, after) => {
   const words = text.trim().split(" ");
@@ -34,7 +37,8 @@ const QuestionList = props => {
     onSortQuestion,
     selectedQuestion,
     onAddQuestion,
-    toggleQuillRerenderFlag
+    onDownloadFile,
+    onUploadFile
   } = props;
 
   return (
@@ -131,6 +135,19 @@ const QuestionList = props => {
           style={{ paddingBottom: "3px" }}
         />
         Add Question
+      </CardFooter>
+      <CardFooter tag="button" className="cardFooterButton btn btn-light">
+        <SingleFileInput onFile={file => onUploadFile(file)}>
+          <UploadIcon className="text-secondary" /> Import Questions
+        </SingleFileInput>
+      </CardFooter>
+
+      <CardFooter
+        tag="button"
+        className="cardFooterButton btn btn-light"
+        onClick={onDownloadFile}
+      >
+        <DownloadIcon className="text-secondary" /> Export Questions
       </CardFooter>
     </Card>
   );

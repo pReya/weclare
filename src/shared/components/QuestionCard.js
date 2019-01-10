@@ -12,8 +12,6 @@ const QuestionCard = props => {
     disabled,
     selectedAnswerIdx
   } = props;
-
-  console.log(props);
   return (
     <>
       <Helmet>

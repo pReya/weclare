@@ -55,7 +55,6 @@ const QuestionContent = props => {
                         color="primary"
                         onClick={() => {
                           if (question.type !== "single") {
-                            console.log("Passed Single");
                             onEditQuestionType(selectedQuestion, "single");
                           }
                         }}
@@ -68,7 +67,6 @@ const QuestionContent = props => {
                         color="primary"
                         onClick={() => {
                           if (question.type !== "multi") {
-                            console.log("Passed Multi");
                             onEditQuestionType(selectedQuestion, "multi");
                           }
                         }}

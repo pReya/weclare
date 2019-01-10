@@ -45,7 +45,6 @@ class EditorAnswerInput extends React.Component {
                 <RadioInput
                   {...commonProps}
                   onSetCorrectAnswer={() => {
-                    console.log("Click Single");
                     onSetCorrectSingleAnswer(selectedQuestion, number);
                   }}
                 />
@@ -53,7 +52,6 @@ class EditorAnswerInput extends React.Component {
                 <CheckboxInput
                   {...commonProps}
                   onSetCorrectAnswer={() => {
-                    console.log("Click Multi");
                     onSetCorrectMultiAnswer(selectedQuestion, number);
                   }}
                 />

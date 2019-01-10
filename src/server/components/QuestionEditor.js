@@ -3,9 +3,11 @@ import { Col, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import tv4 from "tv4";
 import Logger from "../../shared/util/Logger";
 import QuestionContent from "./QuestionContent";
 import QuestionList from "./QuestionList";
+import QuestionSchema from "../../shared/util/questionsSchema";
 import * as questionEditorActions from "../actions/questionEditor";
 import * as answerActions from "../actions/answers";
 
@@ -19,12 +21,70 @@ const mapDispatchToProps = { ...questionEditorActions, ...answerActions };
 class QuestionEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.loadQuestionsFromStorage();
+  }
+
+  loadQuestionsFromStorage = () => {
     const { loadQuestions } = this.props;
     const newQuestions = localStorage.getItem("weclare");
     if (newQuestions) {
       loadQuestions(JSON.parse(newQuestions));
     }
-  }
+  };
+
+  getFormattedDate = () => {
+    const today = new Date();
+    let dd = today.getDate();
+
+    let mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd = `0${dd}`;
+    }
+
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
+    return `${dd}-${mm}-${yyyy}`;
+  };
+
+  downloadFile = data => {
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(
+      JSON.stringify(data)
+    )}`;
+    const downloadAnchorNode = document.createElement("a");
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute(
+      "download",
+      `weclare-${this.getFormattedDate()}.json`
+    );
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+    Logger.info("Created and started file download");
+  };
+
+  saveToStorage = data => {
+    localStorage.setItem("weclare", data);
+    Logger.info("Saved questionset to local storage");
+  };
+
+  saveFileToStorage = file => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      Logger.info("Successfully read questionset from file");
+      const valid = tv4.validate(JSON.parse(reader.result), QuestionSchema);
+      if (valid) {
+        Logger.info("Questionset was successfully validated");
+        this.saveToStorage(reader.result);
+        this.loadQuestionsFromStorage();
+      } else {
+        Logger.error("Imported file was invalid", tv4.error);
+      }
+    };
+    reader.readAsText(file);
+  };
 
   render() {
     const {
@@ -58,6 +118,11 @@ class QuestionEditor extends React.Component {
               onSelectQuestion={selectQuestion}
               onAddQuestion={addQuestion}
               onSortQuestion={sortQuestion}
+              onDownloadFile={() => {
+                this.saveToStorage(JSON.stringify(questions));
+                this.downloadFile(questions);
+              }}
+              onUploadFile={this.saveFileToStorage}
             />
           </Col>
           <Col md="8">
@@ -83,8 +148,7 @@ class QuestionEditor extends React.Component {
               block
               onClick={() => {
                 initAnswers();
-                localStorage.setItem("weclare", JSON.stringify(questions));
-                Logger.info("Saved questionset to local Storage");
+                this.saveToStorage(JSON.stringify(questions));
                 if (history) {
                   history.push("/server/create");
                 }
