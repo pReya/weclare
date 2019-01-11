@@ -40,10 +40,12 @@ const schema = {
               type: "boolean",
               title: "Flag if the answer is correct"
             }
-          }
+          },
+          additionalProperties: false
         }
       }
-    }
+    },
+    additionalProperties: false
   }
 };
 
