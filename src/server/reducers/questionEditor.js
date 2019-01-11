@@ -4,7 +4,7 @@ import {
   ADD_QUESTION,
   SORT_QUESTION,
   DELETE_QUESTION,
-  EDIT_QUESTION_TYPE,
+  EDIT_QUESTION_MODE,
   EDIT_QUESTION_TEXT,
   // Answers
   ADD_ANSWER,
@@ -25,13 +25,14 @@ import {
 
 const newQuestion = () => ({
   id: nanoid(6),
-  type: "single",
+  type: "question",
+  mode: "single",
   text: "<p>New question</p>",
   answers: [
     {
       id: nanoid(6),
       text: "Answer A",
-      isCorrect: false
+      isCorrect: true
     },
     {
       id: nanoid(6),
@@ -78,7 +79,7 @@ export const questionEditor = (state = [], action) => {
 
       return deepClonedState;
     }
-    case EDIT_QUESTION_TYPE: {
+    case EDIT_QUESTION_MODE: {
       const { questionIdx, newType } = action.payload;
       const deepClonedState = JSON.parse(JSON.stringify(state));
 

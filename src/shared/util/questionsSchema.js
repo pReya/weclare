@@ -16,6 +16,10 @@ const schema = {
         type: "string",
         title: "Type of question (e.g. single, multi, text)"
       },
+      mode: {
+        type: "string",
+        title: "Mode of question (e.g. a vote or question)"
+      },
       text: {
         type: "string",
         title: "The question text"

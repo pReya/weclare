@@ -15,7 +15,7 @@ import {
   Label,
   Row
 } from "reactstrap";
-
+import InfoPopoverIcon from "../../shared/components/InfoPopoverIcon";
 import EditorAnswerInput from "./EditorAnswerInput";
 import QuillWrapper from "./QuillWrapper";
 
@@ -25,7 +25,7 @@ const QuestionContent = props => {
     selectedQuestion,
     onEditAnswerText,
     onEditQuestionText,
-    onEditQuestionType,
+    onEditQuestionMode,
     onAddAnswer,
     onSortAnswer,
     onSetCorrectSingleAnswer,
@@ -46,6 +46,18 @@ const QuestionContent = props => {
               <Row form className="justify-content-between">
                 <Label sm="auto">Question Text</Label>
                 <Col sm="auto">
+                  <InfoPopoverIcon
+                    text={
+                      <>
+                        A <strong>question</strong> does have a set of correct
+                        answers. A <strong>vote</strong> does not have any
+                        correct answers. It will just show the distribution of
+                        all given answers.
+                      </>
+                    }
+                    id="info-question-type"
+                    placement="left"
+                  />
                   <ButtonGroup size="sm">
                     <Button outline color="primary">
                       Question
@@ -57,12 +69,12 @@ const QuestionContent = props => {
                           outline
                           color="primary"
                           onClick={() => {
-                            if (question.type !== "text") {
+                            if (question.mode !== "text") {
                               console.log("Passed Text");
-                              onEditQuestionType(selectedQuestion, "text");
+                              onEditQuestionMode(selectedQuestion, "text");
                             }
                           }}
-                          active={question.type === "text"}
+                          active={question.mode === "text"}
                         >
                           Text
                         </Button> */}
@@ -85,23 +97,34 @@ const QuestionContent = props => {
                 <Label sm="auto">
                   Answers{" "}
                   <span className="small text-muted">
-                    {question.type === "multi"
+                    {question.mode === "multi"
                       ? "(Check the correct answers)"
                       : "(Select the correct answer)"}
                   </span>
                 </Label>
 
                 <Col sm="auto">
+                  <InfoPopoverIcon
+                    text={
+                      <>
+                        Choose if you want to allow users to pick just a{" "}
+                        <strong>single</strong> or <strong>multiple</strong>{" "}
+                        answers.
+                      </>
+                    }
+                    id="info-question-mode"
+                    placement="left"
+                  />
                   <ButtonGroup size="sm">
                     <Button
                       outline
                       color="primary"
                       onClick={() => {
-                        if (question.type !== "single") {
-                          onEditQuestionType(selectedQuestion, "single");
+                        if (question.mode !== "single") {
+                          onEditQuestionMode(selectedQuestion, "single");
                         }
                       }}
-                      active={question.type === "single"}
+                      active={question.mode === "single"}
                     >
                       Single
                     </Button>
@@ -109,11 +132,11 @@ const QuestionContent = props => {
                       outline
                       color="primary"
                       onClick={() => {
-                        if (question.type !== "multi") {
-                          onEditQuestionType(selectedQuestion, "multi");
+                        if (question.mode !== "multi") {
+                          onEditQuestionMode(selectedQuestion, "multi");
                         }
                       }}
-                      active={question.type === "multi"}
+                      active={question.mode === "multi"}
                     >
                       Multiple
                     </Button>
@@ -121,12 +144,12 @@ const QuestionContent = props => {
                           outline
                           color="primary"
                           onClick={() => {
-                            if (question.type !== "text") {
+                            if (question.mode !== "text") {
                               console.log("Passed Text");
-                              onEditQuestionType(selectedQuestion, "text");
+                              onEditQuestionMode(selectedQuestion, "text");
                             }
                           }}
-                          active={question.type === "text"}
+                          active={question.mode === "text"}
                         >
                           Text
                         </Button> */}
@@ -182,7 +205,7 @@ const QuestionContent = props => {
                                     }
                                     selectedQuestion={selectedQuestion}
                                     number={i}
-                                    type={question.type}
+                                    type={question.mode}
                                     answer={answer.text}
                                     key={answer.id}
                                     onEditAnswerText={e =>
@@ -247,7 +270,7 @@ QuestionContent.propTypes = {
   selectedQuestion: PropTypes.number,
   onEditAnswerText: PropTypes.func.isRequired,
   onEditQuestionText: PropTypes.func.isRequired,
-  onEditQuestionType: PropTypes.func.isRequired,
+  onEditQuestionMode: PropTypes.func.isRequired,
   onAddAnswer: PropTypes.func.isRequired,
   onSetCorrectSingleAnswer: PropTypes.func.isRequired,
   onSetCorrectMultiAnswer: PropTypes.func.isRequired,
