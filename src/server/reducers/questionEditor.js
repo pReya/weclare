@@ -31,7 +31,7 @@ const newQuestion = () => ({
     {
       id: nanoid(6),
       text: "Answer A",
-      isCorrect: true
+      isCorrect: false
     },
     {
       id: nanoid(6),

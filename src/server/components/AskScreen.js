@@ -17,7 +17,7 @@ const getFormattedQuestion = (questions, currentQuestionIdx) => {
   if (questions && questions[currentQuestionIdx]) {
     const question = questions[currentQuestionIdx];
 
-    const { correctAnswers, ...questionWithoutAnswer } = question;
+    const { ...questionWithoutAnswer } = question;
     const currentQuestionIdxString = String(currentQuestionIdx + 1);
     const questionsCount = Object.keys(questions).length;
     return {

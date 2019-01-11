@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class SingleFileInput extends React.Component {
   constructor(props) {
@@ -33,5 +34,10 @@ class SingleFileInput extends React.Component {
     );
   }
 }
+
+SingleFileInput.propTypes = {
+  onSelectFile: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired
+};
 
 export default SingleFileInput;
