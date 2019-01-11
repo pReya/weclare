@@ -136,11 +136,11 @@ const QuestionList = props => {
         />
         Add Question
       </CardFooter>
-      <CardFooter tag="button" className="cardFooterButton btn btn-light">
-        <SingleFileInput onFile={file => onUploadFile(file)}>
+      <SingleFileInput onSelectFile={file => onUploadFile(file)}>
+        <CardFooter tag="button" className="cardFooterButton btn btn-light">
           <UploadIcon className="text-secondary" /> Import Questions
-        </SingleFileInput>
-      </CardFooter>
+        </CardFooter>
+      </SingleFileInput>
 
       <CardFooter
         tag="button"

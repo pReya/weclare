@@ -7,9 +7,9 @@ class SingleFileInput extends React.Component {
   }
 
   handleSubmit = event => {
-    const { onFile } = this.props;
+    const { onSelectFile } = this.props;
     event.preventDefault();
-    onFile(this.fileInput.current.files[0]);
+    onSelectFile(this.fileInput.current.files[0]);
   };
 
   render() {
@@ -23,14 +23,12 @@ class SingleFileInput extends React.Component {
           style={{ display: "none" }}
           onChange={this.handleSubmit}
         />
-        <span
-          onClick={e => {
+        {React.cloneElement(children, {
+          onClick: e => {
             e.preventDefault();
             this.fileInput.current.click();
-          }}
-        >
-          {children}
-        </span>
+          }
+        })}
       </>
     );
   }
