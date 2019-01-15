@@ -96,14 +96,14 @@ const QuestionList = props => {
                           }}
                           action
                           active={selectedQuestion === i}
-                          className="d-flex justify-content-between align-items-center hover"
+                          className="d-flex justify-content-between align-items-center hover-container"
                         >
-                          {truncate(strip(question.text), 6, "...")}
+                          {truncate(strip(question.text), 7, "...")}
                           <div
-                            className="hover__hover"
+                            className="hover-hide"
                             {...providedDraggable.dragHandleProps}
                           >
-                            <DragIcon style={{ paddingBottom: "3px" }} />
+                            <DragIcon style={{ marginBottom: "3px" }} />
                           </div>
                         </ListGroupItem>
                       </div>

@@ -18,7 +18,7 @@ function WaitScreen(props) {
           title="Start the quiz"
           text={`Currently there ${pluralizeVerb} ${
             connections.length
-          } ${pluralizeClient} connected. You can choose to wait for more participants or go ahead and start the quiz.`}
+          } ${pluralizeClient} connected. You can choose to wait for more participants or just go ahead and start the quiz.`}
         >
           <Button
             color="secondary"

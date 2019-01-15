@@ -43,20 +43,12 @@ hr {
   cursor: pointer;
 }
 
-.hover {
-  &:hover &__no-hover {
-    opacity: 0;
+.hover-container {
+  &:hover .hover-hide {
+    display: block;
   }
+}
 
-  &:hover &__hover {
-    opacity: 1;
-  }
-
-  &__hover {
-    opacity: 0;
-  }
-
-  &__no-hover {
-    opacity: 1;
-  }
+.hover-hide {
+  display: none;
 }

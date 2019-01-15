@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import tv4 from "tv4";
+import ContentSaveIcon from "mdi-react/ContentSaveIcon";
 import Logger from "../../shared/util/Logger";
 import QuestionContent from "./QuestionContent";
 import QuestionList from "./QuestionList";
@@ -155,7 +156,8 @@ class QuestionEditor extends React.Component {
               }}
               color="success"
             >
-              Save & Continue
+              <ContentSaveIcon style={{ paddingBottom: "3px" }} /> Save &
+              Continue
             </Button>
           </Col>
         </Row>

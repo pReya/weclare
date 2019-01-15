@@ -59,10 +59,18 @@ const QuestionContent = props => {
                     placement="left"
                   />
                   <ButtonGroup size="sm">
-                    <Button outline color="primary">
+                    <Button
+                      outline
+                      color="primary"
+                      active={question.type === "question"}
+                    >
                       Question
                     </Button>
-                    <Button outline color="primary">
+                    <Button
+                      outline
+                      color="primary"
+                      active={question.type === "vote"}
+                    >
                       Vote
                     </Button>
                     {/* <Button
@@ -254,7 +262,7 @@ const QuestionContent = props => {
             </Button>
           </Form>
         ) : (
-          "No question selected"
+          <span className="text-muted">No question selected</span>
         )}
       </CardBody>
     </Card>
