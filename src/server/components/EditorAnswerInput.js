@@ -14,21 +14,23 @@ class EditorAnswerInput extends React.Component {
     const {
       answer,
       number,
-      type,
+      mode,
       selectedQuestion,
       isCorrectAnswer,
       onEditAnswerText,
       onSetCorrectSingleAnswer,
       onSetCorrectMultiAnswer,
       onDeleteAnswer,
-      dragHandleProps
+      dragHandleProps,
+      disabled
     } = this.props;
     const { isHovered } = this.state;
 
     const commonProps = {
       isCorrectAnswer,
       selectedQuestion,
-      number
+      number,
+      disabled
     };
 
     return (
@@ -41,7 +43,7 @@ class EditorAnswerInput extends React.Component {
         >
           <InputGroupAddon addonType="prepend">
             <InputGroupText>
-              {type === "single" ? (
+              {mode === "single" ? (
                 <RadioInput
                   {...commonProps}
                   onSetCorrectAnswer={() => {
@@ -98,7 +100,7 @@ EditorAnswerInput.propTypes = {
 export default EditorAnswerInput;
 
 const RadioInput = props => {
-  const { isCorrectAnswer, number, onSetCorrectAnswer } = props;
+  const { isCorrectAnswer, number, onSetCorrectAnswer, disabled } = props;
   return (
     <Input
       addon
@@ -106,12 +108,24 @@ const RadioInput = props => {
       type="radio"
       name="answer"
       onChange={onSetCorrectAnswer}
+      disabled={disabled}
     />
   );
 };
 
+RadioInput.propTypes = {
+  isCorrectAnswer: PropTypes.bool.isRequired,
+  number: PropTypes.number.isRequired,
+  onSetCorrectAnswer: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
+};
+
+RadioInput.defaultProps = {
+  disabled: false
+};
+
 const CheckboxInput = props => {
-  const { isCorrectAnswer, number, onSetCorrectAnswer } = props;
+  const { isCorrectAnswer, number, onSetCorrectAnswer, disabled } = props;
   return (
     <Input
       addon
@@ -119,6 +133,18 @@ const CheckboxInput = props => {
       type="checkbox"
       name={`answer-${number}`}
       onChange={onSetCorrectAnswer}
+      disabled={disabled}
     />
   );
+};
+
+CheckboxInput.propTypes = {
+  isCorrectAnswer: PropTypes.bool.isRequired,
+  number: PropTypes.number.isRequired,
+  onSetCorrectAnswer: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
+};
+
+CheckboxInput.defaultProps = {
+  disabled: false
 };

@@ -3,6 +3,7 @@ export const SELECT_QUESTION = "SELECT_QUESTION";
 export const ADD_QUESTION = "ADD_QUESTION";
 export const EDIT_QUESTION_TEXT = "EDIT_QUESTION_TEXT";
 export const EDIT_QUESTION_MODE = "EDIT_QUESTION_MODE";
+export const EDIT_QUESTION_TYPE = "EDIT_QUESTION_TYPE";
 export const DELETE_QUESTION = "DELETE_QUESTION";
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 export const SORT_QUESTION = "SORT_QUESTION";
@@ -37,12 +38,24 @@ export function editQuestionText(questionIdx, text) {
   };
 }
 
-export function editQuestionMode(questionIdx, newType) {
+export function editQuestionMode(questionIdx, newMode, oldMode) {
   return {
     type: EDIT_QUESTION_MODE,
     payload: {
       questionIdx,
-      newType
+      newMode,
+      oldMode
+    }
+  };
+}
+
+export function editQuestionType(questionIdx, newType, oldType) {
+  return {
+    type: EDIT_QUESTION_TYPE,
+    payload: {
+      questionIdx,
+      newType,
+      oldType
     }
   };
 }

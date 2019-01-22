@@ -97,6 +97,7 @@ class QuestionEditor extends React.Component {
       addQuestion,
       selectQuestion,
       editQuestionText,
+      editQuestionType,
       editQuestionMode,
       deleteQuestion,
       addAnswer,
@@ -132,6 +133,7 @@ class QuestionEditor extends React.Component {
               selectedQuestion={selectedQuestion}
               onEditQuestionText={editQuestionText}
               onEditQuestionMode={editQuestionMode}
+              onEditQuestionType={editQuestionType}
               onEditAnswerText={editAnswerText}
               onAddAnswer={addAnswer}
               onSetCorrectSingleAnswer={setCorrectSingleAnswer}
@@ -182,6 +184,7 @@ QuestionEditor.propTypes = {
   addQuestion: PropTypes.func.isRequired,
   editQuestionText: PropTypes.func.isRequired,
   editQuestionMode: PropTypes.func.isRequired,
+  editQuestionType: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
   sortQuestion: PropTypes.func.isRequired,
   // Answers

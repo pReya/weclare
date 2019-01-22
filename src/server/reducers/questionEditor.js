@@ -5,6 +5,7 @@ import {
   SORT_QUESTION,
   DELETE_QUESTION,
   EDIT_QUESTION_MODE,
+  EDIT_QUESTION_TYPE,
   EDIT_QUESTION_TEXT,
   // Answers
   ADD_ANSWER,
@@ -80,17 +81,37 @@ export const questionEditor = (state = [], action) => {
       return deepClonedState;
     }
     case EDIT_QUESTION_MODE: {
+      console.log("Mode reducer: ", action.payload);
+      const { questionIdx, newMode, oldMode } = action.payload;
+      const deepClonedState = JSON.parse(JSON.stringify(state));
+      let firstAnswerFound = false;
+
+      deepClonedState[questionIdx] = {
+        ...deepClonedState[questionIdx],
+        answers: state[questionIdx].answers.map(answer => {
+          if (answer.isCorrect && !firstAnswerFound) {
+            firstAnswerFound = true;
+            return { ...answer, isCorrect: true };
+          }
+
+          return { ...answer, isCorrect: false };
+        }),
+        mode: newMode
+      };
+
+      return deepClonedState;
+    }
+    case EDIT_QUESTION_TYPE: {
+      console.log("Type reducer: ", action.payload);
       const { questionIdx, newType } = action.payload;
       const deepClonedState = JSON.parse(JSON.stringify(state));
 
       deepClonedState[questionIdx] = {
         ...deepClonedState[questionIdx],
-        answers: state[questionIdx].answers.map(
-          (answer, i) =>
-            i === 0
-              ? { ...answer, isCorrect: true }
-              : { ...answer, isCorrect: false }
-        ),
+        answers: state[questionIdx].answers.map(answer => ({
+          ...answer,
+          isCorrect: false
+        })),
         type: newType
       };
 
@@ -162,8 +183,6 @@ export const questionEditor = (state = [], action) => {
     case SET_CORRECT_MULTI_ANSWER: {
       const { questionIdx, answerIdx } = action.payload;
       const deepClonedState = JSON.parse(JSON.stringify(state));
-
-      console.log("Multi reducer: ", action.payload);
 
       const modAnswers = deepClonedState[questionIdx].answers.map(
         (answer, i) =>

@@ -26,6 +26,7 @@ const QuestionContent = props => {
     onEditAnswerText,
     onEditQuestionText,
     onEditQuestionMode,
+    onEditQuestionType,
     onAddAnswer,
     onSortAnswer,
     onSetCorrectSingleAnswer,
@@ -63,6 +64,15 @@ const QuestionContent = props => {
                       outline
                       color="primary"
                       active={question.type === "question"}
+                      onClick={() => {
+                        if (question.type !== "question") {
+                          onEditQuestionType(
+                            selectedQuestion,
+                            "question",
+                            "vote"
+                          );
+                        }
+                      }}
                     >
                       Question
                     </Button>
@@ -70,6 +80,15 @@ const QuestionContent = props => {
                       outline
                       color="primary"
                       active={question.type === "vote"}
+                      onClick={() => {
+                        if (question.type !== "vote") {
+                          onEditQuestionType(
+                            selectedQuestion,
+                            "vote",
+                            "question"
+                          );
+                        }
+                      }}
                     >
                       Vote
                     </Button>
@@ -129,7 +148,11 @@ const QuestionContent = props => {
                       color="primary"
                       onClick={() => {
                         if (question.mode !== "single") {
-                          onEditQuestionMode(selectedQuestion, "single");
+                          onEditQuestionMode(
+                            selectedQuestion,
+                            "single",
+                            "multi"
+                          );
                         }
                       }}
                       active={question.mode === "single"}
@@ -141,7 +164,11 @@ const QuestionContent = props => {
                       color="primary"
                       onClick={() => {
                         if (question.mode !== "multi") {
-                          onEditQuestionMode(selectedQuestion, "multi");
+                          onEditQuestionMode(
+                            selectedQuestion,
+                            "multi",
+                            "single"
+                          );
                         }
                       }}
                       active={question.mode === "multi"}
@@ -213,7 +240,7 @@ const QuestionContent = props => {
                                     }
                                     selectedQuestion={selectedQuestion}
                                     number={i}
-                                    type={question.mode}
+                                    mode={question.mode}
                                     answer={answer.text}
                                     key={answer.id}
                                     onEditAnswerText={e =>
@@ -230,6 +257,7 @@ const QuestionContent = props => {
                                       onSetCorrectMultiAnswer
                                     }
                                     onDeleteAnswer={onDeleteAnswer}
+                                    disabled={question.type === "vote"}
                                   />
                                 </div>
                               )}
@@ -279,6 +307,7 @@ QuestionContent.propTypes = {
   onEditAnswerText: PropTypes.func.isRequired,
   onEditQuestionText: PropTypes.func.isRequired,
   onEditQuestionMode: PropTypes.func.isRequired,
+  onEditQuestionType: PropTypes.func.isRequired,
   onAddAnswer: PropTypes.func.isRequired,
   onSetCorrectSingleAnswer: PropTypes.func.isRequired,
   onSetCorrectMultiAnswer: PropTypes.func.isRequired,
