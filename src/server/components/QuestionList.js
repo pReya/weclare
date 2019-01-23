@@ -4,17 +4,25 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AddCircleOutlineIcon from "mdi-react/AddCircleOutlineIcon";
 import DownloadIcon from "mdi-react/DownloadIcon";
 import UploadIcon from "mdi-react/UploadIcon";
+import FileUploadIcon from "mdi-react/FileUploadIcon";
+import DropboxIcon from "mdi-react/DropboxIcon";
 import DragIcon from "mdi-react/DragIcon";
 import {
+  Button,
   Badge,
   Card,
   CardHeader,
   CardFooter,
   ListGroup,
   ListGroupItem,
-  ListGroupItemText
+  ListGroupItemText,
+  UncontrolledButtonDropdown,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle
 } from "reactstrap";
 import SingleFileInput from "../../shared/components/SingleFileInput";
+import DropboxChooser from "./DropboxChooser";
 
 const truncate = (text, limit, after) => {
   const words = text.trim().split(" ");
@@ -38,7 +46,8 @@ const QuestionList = props => {
     selectedQuestion,
     onAddQuestion,
     onDownloadFile,
-    onUploadFile
+    onUploadFile,
+    onUploadDropbox
   } = props;
 
   return (
@@ -136,18 +145,40 @@ const QuestionList = props => {
         />
         Add Question
       </CardFooter>
-      <SingleFileInput onSelectFile={file => onUploadFile(file)}>
-        <CardFooter tag="button" className="cardFooterButton btn btn-light">
-          <UploadIcon className="text-secondary" /> Import Questions
-        </CardFooter>
-      </SingleFileInput>
+      <CardFooter>
+        <div className="text-center">
+          <UncontrolledButtonDropdown>
+            <DropdownToggle color="light" caret>
+              <UploadIcon className="text-secondary" /> Import{" "}
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>
+                <SingleFileInput onSelectFile={file => onUploadFile(file)}>
+                  <div>
+                    <FileUploadIcon className="text-secondary" /> File
+                  </div>
+                </SingleFileInput>
+              </DropdownItem>
+              <DropdownItem>
+                <DropboxChooser
+                  appKey={process.env.REACT_APP_DROPBOX_APP_KEY}
+                  linkType="direct"
+                  success={e => {
+                    fetch(e[0].link)
+                      .then(response => response.text())
+                      .then(text => onUploadDropbox(text));
+                  }}
+                >
+                  <DropboxIcon className="text-secondary" /> Dropbox
+                </DropboxChooser>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledButtonDropdown>
 
-      <CardFooter
-        tag="button"
-        className="cardFooterButton btn btn-light"
-        onClick={onDownloadFile}
-      >
-        <DownloadIcon className="text-secondary" /> Export Questions
+          <Button color="light" onClick={onDownloadFile}>
+            <DownloadIcon className="text-secondary" /> Export
+          </Button>
+        </div>
       </CardFooter>
     </Card>
   );

@@ -25,15 +25,7 @@ class QuestionEditor extends React.Component {
     this.loadQuestionsFromStorage();
   }
 
-  loadQuestionsFromStorage = () => {
-    const { loadQuestions } = this.props;
-    const newQuestions = localStorage.getItem("weclare");
-    if (newQuestions) {
-      loadQuestions(JSON.parse(newQuestions));
-    }
-  };
-
-  getFormattedDate = () => {
+  static getFormattedDate = () => {
     const today = new Date();
     let dd = today.getDate();
 
@@ -50,6 +42,14 @@ class QuestionEditor extends React.Component {
     return `${dd}-${mm}-${yyyy}`;
   };
 
+  loadQuestionsFromStorage = () => {
+    const { loadQuestions } = this.props;
+    const newQuestions = localStorage.getItem("weclare");
+    if (newQuestions) {
+      loadQuestions(JSON.parse(newQuestions));
+    }
+  };
+
   downloadFile = data => {
     const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(
       JSON.stringify(data)
@@ -58,7 +58,7 @@ class QuestionEditor extends React.Component {
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute(
       "download",
-      `weclare-${this.getFormattedDate()}.json`
+      `weclare-${QuestionEditor.getFormattedDate()}.json`
     );
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
@@ -71,18 +71,21 @@ class QuestionEditor extends React.Component {
     Logger.info("Saved questionset to local storage");
   };
 
+  validateAndSaveToStorage = data => {
+    const valid = tv4.validate(JSON.parse(data), QuestionSchema);
+    if (valid) {
+      Logger.info("Questionset was successfully validated");
+      this.saveToStorage(data);
+      this.loadQuestionsFromStorage();
+    } else {
+      Logger.error("Imported file was invalid", tv4.error);
+    }
+  };
+
   saveFileToStorage = file => {
     const reader = new FileReader();
     reader.onload = () => {
-      Logger.info("Successfully read questionset from file");
-      const valid = tv4.validate(JSON.parse(reader.result), QuestionSchema);
-      if (valid) {
-        Logger.info("Questionset was successfully validated");
-        this.saveToStorage(reader.result);
-        this.loadQuestionsFromStorage();
-      } else {
-        Logger.error("Imported file was invalid", tv4.error);
-      }
+      this.validateAndSaveToStorage(reader.result);
     };
     reader.readAsText(file);
   };
@@ -125,6 +128,7 @@ class QuestionEditor extends React.Component {
                 this.downloadFile(questions);
               }}
               onUploadFile={this.saveFileToStorage}
+              onUploadDropbox={this.validateAndSaveToStorage}
             />
           </Col>
           <Col md="8">
