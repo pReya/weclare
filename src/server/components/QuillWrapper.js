@@ -1,6 +1,6 @@
 import React from "react";
 import "react-quill/dist/quill.snow.css";
-import "../../scss/quill.scss";
+import "../../shared/scss/quill.scss";
 import "highlight.js/styles/atom-one-light.css";
 import hljs from "highlight.js";
 import ReactQuill from "react-quill";

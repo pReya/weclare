@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import Footer from "./shared/components/Footer";
 import SelectBox from "./shared/components/SelectBox";
-import "./scss/App.scss";
 
 const StartPage = () => (
   <Container>

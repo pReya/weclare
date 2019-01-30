@@ -1,5 +1,4 @@
 import React from "react";
-import "../../scss/App.scss";
 import { Container } from "reactstrap";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -12,16 +11,16 @@ import CreatorContainer from "./CreatorContainer";
 import QuestionEditor from "./QuestionEditor";
 import WaitScreen from "./WaitScreen";
 import AskScreen from "./AskScreen";
-import mainReducer from "../reducers/main";
+import mainServerReducer from "../reducers/main";
 
-const store = createStore(
-  mainReducer,
+const serverStore = createStore(
+  mainServerReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
 export default () => (
   <div>
-    <Provider store={store}>
+    <Provider store={serverStore}>
       <>
         <Header />
         <Container>

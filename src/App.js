@@ -6,7 +6,7 @@ import Server from "./server/components/Server";
 import Client from "./client/components/Client";
 import About from "./About";
 import StartPage from "./StartPage";
-import "./scss/App.scss";
+import "./shared/scss/App.scss";
 
 const App = () => (
   <Router basename={process.env.PUBLIC_URL}>
