@@ -17,7 +17,7 @@ const Header = props => {
     <>
       <Navbar
         expand="sm"
-        className="mb-4 border-bottom shadow-sm d-flex flex-row justify-content-between"
+        className="mb-4 border-bottom shadow-sm d-flex flex-row justify-content-between bg-white"
       >
         <Container>
           <NavbarBrand href="/">
