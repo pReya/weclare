@@ -4,7 +4,7 @@ import { Container } from "reactstrap";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import mainClientReducer from "../reducers/main";
 import Footer from "../../shared/components/Footer";
 import Header from "./ClientHeaderContainer";
@@ -22,8 +22,14 @@ const Client = () => (
       <>
         <Header />
         <Container>
-          <Route exact path="/client/connect" component={ConnectorContainer} />
-          <Route exact path="/client/answer" component={AnswerScreen} />
+          <Switch>
+            <Route
+              exact
+              path="/client/connect/:serverId?"
+              component={ConnectorContainer}
+            />
+            <Route exact path="/client/answer" component={AnswerScreen} />
+          </Switch>
           <Footer />
         </Container>
       </>

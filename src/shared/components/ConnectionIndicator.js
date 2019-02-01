@@ -11,6 +11,7 @@ import {
 import LinkIcon from "mdi-react/LinkIcon";
 import ClipboardTextIcon from "mdi-react/ClipboardTextIcon";
 import QrcodeIcon from "mdi-react/QrcodeIcon";
+import ModalOverlay from "../components/ModalOverlay";
 
 const copyToClipboard = content => {
   const tempInput = document.createElement("input");
@@ -71,13 +72,15 @@ export default class ConnectionIndicator extends React.Component {
               {`${ownServerId} `}
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem header>Share</DropdownItem>
+              <DropdownItem header>Share with client</DropdownItem>
               <DropdownItem divider />
-              <DropdownItem style={{ cursor: "pointer" }}>
-                <QrcodeIcon className="text-muted" />
-                {`  `}
-                Show QR Code
-              </DropdownItem>
+              <ModalOverlay>
+                <DropdownItem style={{ cursor: "pointer" }}>
+                  <QrcodeIcon className="text-muted" />
+                  {`  `}
+                  Show QR Code
+                </DropdownItem>
+              </ModalOverlay>
               {document.queryCommandSupported("copy") && (
                 <DropdownItem
                   onClick={() => {
@@ -90,7 +93,14 @@ export default class ConnectionIndicator extends React.Component {
                   Copy ID
                 </DropdownItem>
               )}
-              <DropdownItem style={{ cursor: "pointer" }}>
+              <DropdownItem
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  copyToClipboard(
+                    `${window.location.origin}/client/connect/${ownServerId}`
+                  );
+                }}
+              >
                 <LinkIcon className="text-muted" />
                 {`  `}
                 Copy Link

@@ -5,7 +5,9 @@ import ReactRouterPropTypes from "react-router-prop-types";
 import DefaultCard from "./DefaultCard";
 
 const ConnectForm = props => {
+  console.log(props);
   const {
+    match,
     onChangeServerId,
     onClickConnect,
     serverId,
@@ -15,6 +17,10 @@ const ConnectForm = props => {
     history,
     location
   } = props;
+
+  if (match && match.params && match.params.serverId) {
+    onChangeServerId(match.params.serverId);
+  }
 
   return (
     <DefaultCard title={title} text={text}>
