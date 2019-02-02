@@ -6,12 +6,17 @@ import {
   InputGroupButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button
 } from "reactstrap";
 import LinkIcon from "mdi-react/LinkIcon";
 import ClipboardTextIcon from "mdi-react/ClipboardTextIcon";
 import QrcodeIcon from "mdi-react/QrcodeIcon";
-import ModalOverlay from "../components/ModalOverlay";
+import QRCode from "qrcode.react";
 
 const copyToClipboard = content => {
   const tempInput = document.createElement("input");
@@ -27,28 +32,28 @@ export default class ConnectionIndicator extends React.Component {
   constructor(props) {
     super(props);
 
-    this.toggleDropDown = this.toggleDropDown.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
 
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      showModal: false
     };
   }
 
-  toggleDropDown() {
-    const { dropdownOpen } = this.state;
-    this.setState({
-      dropdownOpen: !dropdownOpen
-    });
+  toggleDropdown() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
   }
 
-  // "<span role='img' aria-label='keyboard'>🎮</span> Ready",
-  // "<span role='img' aria-label='questionmark'>❓</span> Waiting for connections",
-  // `<span role='img' aria-label='success'>✅</span> ${numberOfClients} Clients Connected`,
-  // "<span role='img' aria-label='cross'>❌</span> Error"
+  toggleModal() {
+    this.setState(prevState => ({ showModal: !prevState.showModal }));
+  }
 
   render() {
     const { status, isServer, numberOfClients, ownServerId } = this.props;
-    const { dropdownOpen } = this.state;
+    const { dropdownOpen, showModal } = this.state;
     const statusDescriptions = {
       client: ["⌨️ Ready", "Trying to connect", "✅ Connected", "❌ Error"],
       server: [
@@ -66,7 +71,7 @@ export default class ConnectionIndicator extends React.Component {
           <InputGroupButtonDropdown
             addonType="prepend"
             isOpen={dropdownOpen}
-            toggle={this.toggleDropDown}
+            toggle={this.toggleDropdown}
           >
             <DropdownToggle caret className="font-weight-bold">
               {`${ownServerId} `}
@@ -74,13 +79,33 @@ export default class ConnectionIndicator extends React.Component {
             <DropdownMenu>
               <DropdownItem header>Share with client</DropdownItem>
               <DropdownItem divider />
-              <ModalOverlay>
-                <DropdownItem style={{ cursor: "pointer" }}>
-                  <QrcodeIcon className="text-muted" />
-                  {`  `}
-                  Show QR Code
-                </DropdownItem>
-              </ModalOverlay>
+
+              <DropdownItem
+                style={{ cursor: "pointer" }}
+                onClick={this.toggleModal}
+              >
+                <QrcodeIcon className="text-muted" />
+                {`  `}
+                Show QR Code
+              </DropdownItem>
+              <Modal isOpen={showModal} toggle={this.toggleModal} size="lg">
+                <ModalHeader toggle={this.toggleModal}>
+                  Share QR Code
+                </ModalHeader>
+                <ModalBody>
+                  <QRCode
+                    value={`${
+                      window.location.origin
+                    }/client/connect/${ownServerId}`}
+                    size={400}
+                  />
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="secondary" onClick={this.toggleModal}>
+                    Close
+                  </Button>
+                </ModalFooter>
+              </Modal>
               {document.queryCommandSupported("copy") && (
                 <DropdownItem
                   onClick={() => {

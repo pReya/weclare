@@ -8,24 +8,24 @@ class ModalOverlay extends React.Component {
       showModal: false
     };
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggle() {
+  toggleModal() {
     this.setState(prevState => ({ showModal: !prevState.showModal }));
   }
 
   render() {
-    const { className, children } = this.props;
+    const { children } = this.props;
     const { showModal } = this.state;
     console.log(children);
     return (
-      <div>
+      <>
         {React.cloneElement(React.Children.only(children), {
-          onClick: this.toggle
+          onClick: this.toggleModal
         })}
-        <Modal isOpen={showModal} toggle={this.toggle} className={className}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+        <Modal isOpen={showModal} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
           <ModalBody>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -36,15 +36,12 @@ class ModalOverlay extends React.Component {
             culpa qui officia deserunt mollit anim id est laborum.
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>
-              Do Something
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggle}>
+            <Button color="secondary" onClick={this.toggleModal}>
               Cancel
             </Button>
           </ModalFooter>
         </Modal>
-      </div>
+      </>
     );
   }
 }
