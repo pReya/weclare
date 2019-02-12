@@ -81,8 +81,7 @@ export const questionEditor = (state = [], action) => {
       return deepClonedState;
     }
     case EDIT_QUESTION_MODE: {
-      console.log("Mode reducer: ", action.payload);
-      const { questionIdx, newMode, oldMode } = action.payload;
+      const { questionIdx, newMode } = action.payload;
       const deepClonedState = JSON.parse(JSON.stringify(state));
       let firstAnswerFound = false;
 
@@ -102,8 +101,7 @@ export const questionEditor = (state = [], action) => {
       return deepClonedState;
     }
     case EDIT_QUESTION_TYPE: {
-      console.log("Type reducer: ", action.payload);
-      const { questionIdx, newType } = action.payload;
+      const { questionIdx, newType, oldType } = action.payload;
       const deepClonedState = JSON.parse(JSON.stringify(state));
 
       deepClonedState[questionIdx] = {
@@ -114,6 +112,11 @@ export const questionEditor = (state = [], action) => {
         })),
         type: newType
       };
+
+      // Make sure, there is at least one correct answer
+      if (newType === "question" && oldType === "vote") {
+        deepClonedState[questionIdx].answers[0].isCorrect = true;
+      }
 
       return deepClonedState;
     }

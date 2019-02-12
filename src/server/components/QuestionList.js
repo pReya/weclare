@@ -112,7 +112,12 @@ const QuestionList = props => {
                             className="hover-hide"
                             {...providedDraggable.dragHandleProps}
                           >
-                            <DragIcon style={{ marginBottom: "3px" }} />
+                            <DragIcon
+                              style={{
+                                marginBottom: "3px",
+                                marginRight: "-6px"
+                              }}
+                            />
                           </div>
                         </ListGroupItem>
                       </div>

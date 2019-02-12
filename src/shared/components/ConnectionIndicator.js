@@ -9,9 +9,7 @@ import {
   DropdownItem,
   Modal,
   ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button
+  ModalBody
 } from "reactstrap";
 import LinkIcon from "mdi-react/LinkIcon";
 import ClipboardTextIcon from "mdi-react/ClipboardTextIcon";
@@ -97,14 +95,10 @@ export default class ConnectionIndicator extends React.Component {
                     value={`${
                       window.location.origin
                     }/client/connect/${ownServerId}`}
-                    size={400}
+                    style={{ width: "100%", height: "100%" }}
+                    renderAs="svg"
                   />
                 </ModalBody>
-                <ModalFooter>
-                  <Button color="secondary" onClick={this.toggleModal}>
-                    Close
-                  </Button>
-                </ModalFooter>
               </Modal>
               {document.queryCommandSupported("copy") && (
                 <DropdownItem
