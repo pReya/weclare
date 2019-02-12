@@ -152,13 +152,12 @@ const QuestionList = props => {
               <UploadIcon className="text-secondary" /> Import{" "}
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>
-                <SingleFileInput onSelectFile={file => onUploadFile(file)}>
-                  <div>
-                    <FileUploadIcon className="text-secondary" /> File
-                  </div>
-                </SingleFileInput>
-              </DropdownItem>
+              <SingleFileInput onSelectFile={file => onUploadFile(file)}>
+                <div>
+                  <FileUploadIcon className="text-secondary" /> File
+                </div>
+              </SingleFileInput>
+
               <DropdownItem>
                 <DropboxChooser
                   appKey={process.env.REACT_APP_DROPBOX_APP_KEY}
