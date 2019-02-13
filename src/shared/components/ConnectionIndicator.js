@@ -116,7 +116,9 @@ export default class ConnectionIndicator extends React.Component {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   copyToClipboard(
-                    `${window.location.origin}/client/connect/${ownServerId}`
+                    encodeURI(
+                      `${window.location.origin}/client/connect/${ownServerId}`
+                    )
                   );
                 }}
               >

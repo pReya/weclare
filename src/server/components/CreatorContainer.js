@@ -40,6 +40,8 @@ const createPeer = (ownServerId, dispatch) => {
   peer.on("open", id => {
     Logger.info("Successfully created Peer with id ", id);
     dispatch(setServerStatus(1));
+    // Set Server ID again, in case the input was empty and PeerJS used a random ID
+    dispatch(setServerId(id));
   });
 
   peer.on("connection", connection => {
@@ -67,11 +69,12 @@ const mapStateToProps = state => ({
 });
 
 const staticProps = {
-  title: "Create a New Server Id",
+  title: "Choose a Server Id",
   text:
-    "Please define your individual Server Id that you can give to participants.",
+    "Please pick a server ID that uniquely identifies your quiz session (e.g. 'algorithms_2_june_2018') or leave it empty to generate a random ID.",
   buttonText: "Create",
-  location: "/server/wait"
+  location: "/server/wait",
+  validationError: "Only alphanumeric characters and -,_ or spaces are allowed."
 };
 
 export default withRouter(

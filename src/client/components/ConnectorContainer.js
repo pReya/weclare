@@ -92,7 +92,8 @@ const staticProps = {
   text:
     "Please enter a valid Server ID. You should receive this ID from your instructor.",
   buttonText: "Connect",
-  location: "/client/answer"
+  location: "/client/answer",
+  validationError: "Only alphanumeric characters and -,_ or spaces are allowed."
 };
 
 export default connect(
