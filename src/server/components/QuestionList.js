@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AddCircleOutlineIcon from "mdi-react/AddCircleOutlineIcon";
 import DownloadIcon from "mdi-react/DownloadIcon";
-import UploadIcon from "mdi-react/UploadIcon";
-import FileUploadIcon from "mdi-react/FileUploadIcon";
-import DropboxIcon from "mdi-react/DropboxIcon";
 import DragIcon from "mdi-react/DragIcon";
 import {
   Button,
@@ -15,14 +12,9 @@ import {
   CardFooter,
   ListGroup,
   ListGroupItem,
-  ListGroupItemText,
-  UncontrolledButtonDropdown,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle
+  ListGroupItemText
 } from "reactstrap";
-import SingleFileInput from "../../shared/components/SingleFileInput";
-import DropboxChooser from "./DropboxChooser";
+import QuestionListDropdown from "./QuestionListDropdown";
 
 const truncate = (text, limit, after) => {
   const words = text.trim().split(" ");
@@ -152,33 +144,10 @@ const QuestionList = props => {
       </CardFooter>
       <CardFooter>
         <div className="text-center">
-          <UncontrolledButtonDropdown>
-            <DropdownToggle color="light" caret>
-              <UploadIcon className="text-secondary" /> Import{" "}
-            </DropdownToggle>
-            <DropdownMenu>
-              <SingleFileInput onSelectFile={file => onUploadFile(file)}>
-                <div>
-                  <FileUploadIcon className="text-secondary" /> File
-                </div>
-              </SingleFileInput>
-
-              <DropdownItem>
-                <DropboxChooser
-                  appKey={process.env.REACT_APP_DROPBOX_APP_KEY}
-                  linkType="direct"
-                  success={e => {
-                    fetch(e[0].link)
-                      .then(response => response.text())
-                      .then(text => onUploadDropbox(text));
-                  }}
-                >
-                  <DropboxIcon className="text-secondary" /> Dropbox
-                </DropboxChooser>
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledButtonDropdown>
-
+          <QuestionListDropdown
+            onUploadFile={onUploadFile}
+            onUploadDropbox={onUploadDropbox}
+          />
           <Button color="light" onClick={onDownloadFile}>
             <DownloadIcon className="text-secondary" /> Export
           </Button>

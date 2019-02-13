@@ -8,9 +8,12 @@ class SingleFileInput extends React.Component {
   }
 
   handleSubmit = event => {
-    const { onSelectFile } = this.props;
+    const { onSelectFile, closeDropdown } = this.props;
     event.preventDefault();
     onSelectFile(this.fileInput.current.files[0]);
+    if (typeof closeDropdown === "function") {
+      closeDropdown();
+    }
   };
 
   render() {
@@ -37,7 +40,12 @@ class SingleFileInput extends React.Component {
 
 SingleFileInput.propTypes = {
   onSelectFile: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  closeDropdown: PropTypes.func
+};
+
+SingleFileInput.defaultProps = {
+  closeDropdown: null
 };
 
 export default SingleFileInput;
