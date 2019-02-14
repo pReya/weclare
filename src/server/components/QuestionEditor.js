@@ -9,7 +9,7 @@ import Logger from "../../shared/util/Logger";
 import QuestionContent from "./QuestionContent";
 import QuestionList from "./QuestionList";
 import QuestionSchema from "../../shared/util/questionsSchema";
-import * as questionEditorActions from "../actions/questionEditor";
+import * as questionEditorActions from "../actions/questions";
 import * as answerActions from "../actions/answers";
 
 const mapStateToProps = state => ({

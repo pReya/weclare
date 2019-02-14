@@ -26,7 +26,7 @@ export default () => (
         <Container>
           <Route exact path="/server/create" component={CreatorContainer} />
           <Route exact path="/server/editor" component={QuestionEditor} />
-          <Route exact path="/server/wait" component={WaitScreen} />
+          {/* <Route exact path="/server/wait" component={WaitScreen} /> */}
           <Route exact path="/server/ask" component={AskScreen} />
           <Footer />
         </Container>

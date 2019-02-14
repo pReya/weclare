@@ -6,6 +6,8 @@ $font-prefix: "~@ibm/plex";
 
 body {
   font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-color: map-get($theme-colors, light);
 }
 

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { questionEditor, selectedQuestion } from "./questionEditor";
+import { questionEditor, selectedQuestion } from "./questions";
 import { server } from "./server";
-import { registeredAnswers } from "./registeredAnswers";
+import { registeredAnswers } from "./answers";
 import { connection } from "../../shared/reducers/connection";
 
 export default combineReducers({

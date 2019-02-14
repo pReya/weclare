@@ -17,18 +17,20 @@ import {
   // Current Question
   SELECT_QUESTION,
   LOAD_QUESTIONS
-} from "../actions/questionEditor";
+} from "../actions/questions";
 import {
   changeInArray,
   deleteInArray,
-  reorderArray
+  reorderArray,
+  updateQuestionIndexes
 } from "../../shared/util/Helpers";
 
-const newQuestion = () => ({
+const newQuestion = (idx = 0) => ({
   id: nanoid(6),
   type: "question",
   mode: "single",
   text: "<p>New question</p>",
+  questionIdx: idx,
   answers: [
     {
       id: nanoid(6),
@@ -51,6 +53,8 @@ const newAnswer = () => ({
 
 // Reducers
 
+// This is the selected question in the questionEditor, don't confuse with
+// selected question in server state
 export const selectedQuestion = (state = null, action) => {
   switch (action.type) {
     case SELECT_QUESTION:
@@ -65,7 +69,8 @@ export const questionEditor = (state = [], action) => {
   switch (action.type) {
     case ADD_QUESTION: {
       const deepClonedState = JSON.parse(JSON.stringify(state));
-      deepClonedState.push(newQuestion());
+      const questionsCount = state.length;
+      deepClonedState.push(newQuestion(questionsCount));
       return deepClonedState;
     }
 
@@ -212,7 +217,9 @@ export const questionEditor = (state = [], action) => {
 
       reorderArray(deepClonedState, oldQuestionIdx, newQuestionIdx);
 
-      return deepClonedState;
+      const reindexedArray = updateQuestionIndexes(deepClonedState);
+
+      return reindexedArray;
     }
 
     case SORT_ANSWER: {

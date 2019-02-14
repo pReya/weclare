@@ -9,3 +9,6 @@ export const reorderArray = (array, oldIndex, newIndex) => {
     array.splice(newIndex, 0, array.splice(oldIndex, 1)[0]);
   }
 };
+
+export const updateQuestionIndexes = array =>
+  array.map((element, i) => ({ ...element, questionIdx: i }));

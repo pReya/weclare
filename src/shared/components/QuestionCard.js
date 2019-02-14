@@ -10,14 +10,19 @@ const QuestionCard = props => {
     onClickAnswer,
     countedAnswers,
     disabled,
-    selectedAnswerIdx
+    selectedAnswerIdx,
+    children
   } = props;
   return (
     <>
       <Helmet>
         <title>Answer question</title>
       </Helmet>
-      <DefaultCard title="Answer question" badge={question.progress} {...props}>
+      <DefaultCard
+        title="Answer question"
+        badge={question.progress}
+        footer={children}
+      >
         {question.text && (
           <div
             className="text-center mb-4 h4"

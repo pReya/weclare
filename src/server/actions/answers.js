@@ -44,3 +44,10 @@ export function initAnswers() {
     });
   };
 }
+
+export function getAnswerCount(questionIdx) {
+  return (dispatch, getState) => {
+    const { registeredAnswers } = getState();
+    return registeredAnswers[questionIdx].map(answer => answer.length);
+  };
+}

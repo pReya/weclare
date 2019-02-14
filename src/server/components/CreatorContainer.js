@@ -7,7 +7,7 @@ import Logger from "../../shared/util/Logger";
 import ConnectForm from "../../shared/components/ConnectForm";
 import { addConnection, setServerId } from "../actions/server";
 import { registerAnswer } from "../actions/answers";
-import { setPeer, setServerStatus } from "../../shared/actions/connection";
+import { setPeer, setConnectionStatus } from "../../shared/actions/connection";
 
 const dataHandler = (data, dispatch) => {
   const { type, payload } = data;
@@ -39,7 +39,7 @@ const createPeer = (ownServerId, dispatch) => {
 
   peer.on("open", id => {
     Logger.info("Successfully created Peer with id ", id);
-    dispatch(setServerStatus(1));
+    dispatch(setConnectionStatus(1));
     // Set Server ID again, in case the input was empty and PeerJS used a random ID
     dispatch(setServerId(id));
   });
@@ -47,13 +47,13 @@ const createPeer = (ownServerId, dispatch) => {
   peer.on("connection", connection => {
     Logger.info("New client connected with id: ", connection.peer);
     connection.on("data", data => dataHandler(data, dispatch));
-    dispatch(setServerStatus(2));
+    dispatch(setConnectionStatus(2));
     dispatch(addConnection(connection));
   });
 
   peer.on("error", err => {
     Logger.error("FEHLER: ", err);
-    dispatch(setServerStatus(3));
+    dispatch(setConnectionStatus(3));
   });
 };
 
@@ -73,7 +73,7 @@ const staticProps = {
   text:
     "Please pick a server ID that uniquely identifies your quiz session (e.g. 'algorithms_2_june_2018') or leave it empty to generate a random ID.",
   buttonText: "Create",
-  location: "/server/wait",
+  location: "/server/ask",
   validationError: "Only alphanumeric characters and -,_ or spaces are allowed."
 };
 

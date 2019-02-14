@@ -3,6 +3,7 @@ export const ADD_CONNECTION = "ADD_CONNECTION";
 export const SET_REMOTE_SERVER_ID = "SET_REMOTE_SERVER_ID";
 export const SET_CURRENT_QUESTION = "SET_CURRENT_QUESTION";
 
+// TODO: This is probably unnecessary b/c PeerJS keeps its own connection object
 export function addConnection(connection) {
   return {
     type: ADD_CONNECTION,

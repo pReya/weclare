@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Peer from "peerjs";
 import ConnectForm from "../../shared/components/ConnectForm";
 import Logger from "../../shared/util/Logger";
-import { setServerStatus, setPeer } from "../../shared/actions/connection";
+import { setConnectionStatus, setPeer } from "../../shared/actions/connection";
 import {
   addConnection,
   setRemoteServerId,
@@ -57,7 +57,7 @@ const clickConnect = (serverId, dispatch) => {
 
   peer.on("error", err => {
     console.error(err);
-    dispatch(setServerStatus(3));
+    dispatch(setConnectionStatus(3));
   });
 
   const connection = peer.connect(
@@ -65,11 +65,11 @@ const clickConnect = (serverId, dispatch) => {
     { reliable: false }
   );
   dispatch(addConnection(connection));
-  dispatch(setServerStatus(1));
+  dispatch(setConnectionStatus(1));
 
   connection.on("open", () => {
     console.log("Client Connected");
-    dispatch(setServerStatus(2));
+    dispatch(setConnectionStatus(2));
     connection.on("data", data => {
       const msg = JSON.parse(data);
       console.log("Received data: ", msg);

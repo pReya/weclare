@@ -2,11 +2,12 @@ module.exports = {
   parser: "babel-eslint",
   extends: [
     "airbnb",
-    "plugin:prettier/recommended",
-    "plugin:react-redux/recommended"
+    "plugin:react-redux/recommended",
+    "plugin:prettier/recommended"
   ],
   plugins: ["prettier", "react-redux"],
   rules: {
+    "no-shadow": "off",
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "react/no-unused-state": "off",

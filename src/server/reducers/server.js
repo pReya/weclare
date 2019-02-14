@@ -9,14 +9,14 @@ export const server = (
   state = {
     connections: [],
     ownServerId: "",
-    currentQuestion: null,
+    currentQuestionIdx: 0,
     acceptingAnswers: false
   },
   action
 ) => {
   switch (action.type) {
     case SET_CURRENT_QUESTION_IDX: {
-      return { ...state, currentQuestion: action.payload.questionIdx };
+      return { ...state, currentQuestionIdx: action.payload.questionIdx };
     }
 
     case ADD_CONNECTION:
