@@ -21,15 +21,6 @@ export function registerAnswer(questionIdx, answerIdx, userId) {
   };
 }
 
-// const initAnswerState = () => {
-//   return {
-//     type: INIT_ANSWERS,
-//     payload: {
-//       emptyAnswerArray
-//     }
-//   };
-// };
-
 export function initAnswers() {
   return (dispatch, getState) => {
     const { questionEditor } = getState();

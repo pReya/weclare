@@ -7,9 +7,8 @@ import { Route } from "react-router-dom";
 import { composeWithDevTools } from "redux-devtools-extension";
 import Footer from "../../shared/components/Footer";
 import Header from "./ServerHeaderContainer";
-import CreatorContainer from "./CreatorContainer";
+import ConnectFormServerContainer from "./ConnectFormServerContainer";
 import QuestionEditor from "./QuestionEditor";
-import WaitScreen from "./WaitScreen";
 import AskScreen from "./AskScreen";
 import mainServerReducer from "../reducers/main";
 
@@ -24,9 +23,12 @@ export default () => (
       <>
         <Header />
         <Container>
-          <Route exact path="/server/create" component={CreatorContainer} />
+          <Route
+            exact
+            path="/server/create"
+            component={ConnectFormServerContainer}
+          />
           <Route exact path="/server/editor" component={QuestionEditor} />
-          {/* <Route exact path="/server/wait" component={WaitScreen} /> */}
           <Route exact path="/server/ask" component={AskScreen} />
           <Footer />
         </Container>

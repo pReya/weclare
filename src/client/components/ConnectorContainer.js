@@ -73,7 +73,7 @@ const clickConnect = (serverId, dispatch) => {
     connection.on("data", data => {
       const msg = JSON.parse(data);
       console.log("Received data: ", msg);
-      dispatch(setCurrentQuestion(msg.question));
+      dispatch(setCurrentQuestion(msg));
     });
   });
 };

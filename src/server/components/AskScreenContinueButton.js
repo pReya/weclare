@@ -6,7 +6,10 @@ import PauseIcon from "mdi-react/PauseIcon";
 import SkipForwardIcon from "mdi-react/SkipForwardIcon";
 import FormatListNumberedIcon from "mdi-react/FormatListNumberedIcon";
 import MDSpinner from "react-md-spinner";
-import { toggleAcceptingAnswers } from "../actions/server";
+import {
+  toggleAcceptingAnswers,
+  sendCurrentQuestionToClients
+} from "../actions/server";
 import isConnected from "../selectors/server";
 
 const mapStateToProps = state => ({
@@ -14,6 +17,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  sendCurrentQuestionToClients,
   toggleAcceptingAnswers
 };
 
@@ -32,7 +36,7 @@ class AskScreenContinueButton extends React.Component {
   }
 
   render() {
-    const { toggleAcceptingAnswers } = this.props;
+    const { toggleAcceptingAnswers, sendCurrentQuestionToClients } = this.props;
     const buttonStateMachine = {
       // Waiting for clients, button disabled
       0: {
@@ -47,11 +51,11 @@ class AskScreenContinueButton extends React.Component {
           disabled: true
         }
       },
-      // Clients connected, ready to start quiz and accept answers
+      // Clients connected, ready to send first question and accept answers
       1: {
         onClick: () => {
           toggleAcceptingAnswers();
-          // sendQuestion(formattedQuestion, connections);
+          sendCurrentQuestionToClients();
           this.setState({
             buttonPhase: 2
           });
