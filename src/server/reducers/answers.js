@@ -1,6 +1,6 @@
 import { REGISTER_ANSWER, INIT_ANSWERS } from "../actions/answers";
 
-import { changeInArray } from "../../shared/util/Helpers";
+import { changeInArray } from "../../shared/util/QuestionHelpers";
 
 // Reducers
 

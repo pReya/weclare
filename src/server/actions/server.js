@@ -1,8 +1,8 @@
-import Peer from "peerjs";
 import Logger from "../../shared/util/Logger";
 import { setPeer, setConnectionStatus } from "../../shared/actions/connection";
 import { registerAnswer } from "./answers";
 import getCurrentQuestion from "../selectors/questions";
+import createPeer from "../../shared/util/NetworkHelpers";
 
 export const ADD_CONNECTION = "ADD_CONNECTION";
 export function addConnection(connection) {
@@ -44,20 +44,10 @@ export function toggleAcceptingAnswers() {
 export function startServer() {
   return (dispatch, getState) => {
     const {
-      REACT_APP_PEERJS_SERVER: server,
-      REACT_APP_PEERJS_SECURE: secure,
-      REACT_APP_PEERJS_DEBUG: debugLevel
-    } = process.env;
-
-    const {
       server: { ownServerId = null }
     } = getState();
 
-    const peer = new Peer(ownServerId, {
-      host: server,
-      secure: secure === "true",
-      debug: parseInt(debugLevel, 10)
-    });
+    const peer = createPeer(ownServerId);
 
     const dataHandler = data => {
       const { type, payload } = data;
@@ -81,7 +71,7 @@ export function startServer() {
     dispatch(setPeer(peer));
 
     peer.on("open", id => {
-      Logger.info("Successfully created Peer with id ", id);
+      Logger.info(`Successfully created peer with ID "${id}"`);
       dispatch(setConnectionStatus(1));
       // Set Server ID again, in case the input was empty and PeerJS used a random ID
       dispatch(setServerId(id));

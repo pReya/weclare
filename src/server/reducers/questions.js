@@ -23,7 +23,7 @@ import {
   deleteInArray,
   reorderArray,
   updateQuestionIndexes
-} from "../../shared/util/Helpers";
+} from "../../shared/util/QuestionHelpers";
 
 const newQuestion = (idx = 0) => ({
   id: nanoid(6),

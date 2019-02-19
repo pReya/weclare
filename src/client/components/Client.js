@@ -8,7 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import mainClientReducer from "../reducers/main";
 import Footer from "../../shared/components/Footer";
 import Header from "./ClientHeaderContainer";
-import ConnectorContainer from "./ConnectorContainer";
+import ConnectFormClientContainer from "./ConnectFormClientContainer";
 import AnswerScreen from "./AnswerScreen";
 
 const clientStore = createStore(
@@ -26,7 +26,7 @@ const Client = () => (
             <Route
               exact
               path="/client/connect/:serverId?"
-              component={ConnectorContainer}
+              component={ConnectFormClientContainer}
             />
             <Route exact path="/client/answer" component={AnswerScreen} />
           </Switch>
