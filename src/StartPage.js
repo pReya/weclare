@@ -28,7 +28,7 @@ const StartPage = () => (
               to="/client/connect"
               className="btn btn-lg btn-block btn-outline-primary"
             >
-              Join Quiz
+              Join Quiz Session
             </Button>
           </SelectBox>
         </div>
@@ -45,7 +45,7 @@ const StartPage = () => (
               to="/server/editor"
               className="btn btn-lg btn-block btn-outline-primary"
             >
-              Create Quiz
+              Create Quiz Session
             </Button>
           </SelectBox>
         </div>

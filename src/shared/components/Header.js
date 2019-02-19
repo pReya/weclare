@@ -35,11 +35,6 @@ const Header = props => {
 
           <Nav className="flex-row">
             <NavItem>
-              <NavLink tag={Link} to="/">
-                Help
-              </NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink tag={Link} to="/about">
                 About
               </NavLink>

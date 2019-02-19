@@ -17,12 +17,13 @@ const mapStateToProps = state => ({
 });
 
 const staticProps = {
-  title: "Choose a Server Id",
+  title: "Choose a Server ID",
   text:
     "Please pick a server ID that uniquely identifies your quiz session (e.g. 'algorithms_2_june_2018') or leave it empty to generate a random ID.",
   buttonText: "Create",
   location: "/server/ask",
-  validationError: "Only alphanumeric characters and -,_ or spaces are allowed."
+  validationError:
+    "Only alphanumeric characters and '-','_' or spaces are allowed."
 };
 
 export default withRouter(

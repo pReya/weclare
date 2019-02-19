@@ -22,6 +22,7 @@ const About = () => (
                 style={{
                   fontFamily: "IBM Plex Sans"
                 }}
+                // eslint-disable-next-line
                 dangerouslySetInnerHTML={{
                   __html: snarkdown(raw("../public/README.MD"))
                 }}
