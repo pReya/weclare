@@ -1100,6 +1100,14 @@ self.__precacheManifest = [
     "url": "/static/media/IBMPlexSansCondensed-ThinItalic.72d7f2e2.woff"
   },
   {
+    "revision": "c8c4012d96c6b93c717ee4bc89042b7d",
+    "url": "/static/media/IBMPlexSansCondensed-Thin.c8c4012d.woff"
+  },
+  {
+    "revision": "93fbe40da916fdbf3e1113ae125b6517",
+    "url": "/static/media/IBMPlexSansCondensed-TextItalic.93fbe40d.woff"
+  },
+  {
     "revision": "45be7007dff16f748b5cb4f7021290f9",
     "url": "/static/media/IBMPlexSansCondensed-Text.45be7007.woff"
   },
@@ -1126,14 +1134,6 @@ self.__precacheManifest = [
   {
     "revision": "33632be7aaf09d9b80b7172ef882d76b",
     "url": "/static/media/IBMPlexSansCondensed-Light.33632be7.woff"
-  },
-  {
-    "revision": "93fbe40da916fdbf3e1113ae125b6517",
-    "url": "/static/media/IBMPlexSansCondensed-TextItalic.93fbe40d.woff"
-  },
-  {
-    "revision": "c8c4012d96c6b93c717ee4bc89042b7d",
-    "url": "/static/media/IBMPlexSansCondensed-Thin.c8c4012d.woff"
   },
   {
     "revision": "3f0ae5ef17fbcf6a18599db28f37c48b",
@@ -1420,6 +1420,14 @@ self.__precacheManifest = [
     "url": "/static/media/IBMPlexSans-Italic-Pi.9d48901e.woff2"
   },
   {
+    "revision": "fd9f96aa53ff309f25db14bc27a15ebd",
+    "url": "/static/media/IBMPlexSans-ExtraLightItalic-Latin3.fd9f96aa.woff2"
+  },
+  {
+    "revision": "c47abd553d6a082036dd2eb9bddff58b",
+    "url": "/static/media/IBMPlexSans-ExtraLightItalic-Pi.c47abd55.woff2"
+  },
+  {
     "revision": "186608aec79393957b9ae9611651dd4a",
     "url": "/static/media/IBMPlexSans-Light-Cyrillic.186608ae.woff2"
   },
@@ -1434,14 +1442,6 @@ self.__precacheManifest = [
   {
     "revision": "fd7c41c8d73469b2e38859244f46d82c",
     "url": "/static/media/IBMPlexSans-LightItalic-Latin1.fd7c41c8.woff2"
-  },
-  {
-    "revision": "fd9f96aa53ff309f25db14bc27a15ebd",
-    "url": "/static/media/IBMPlexSans-ExtraLightItalic-Latin3.fd9f96aa.woff2"
-  },
-  {
-    "revision": "c47abd553d6a082036dd2eb9bddff58b",
-    "url": "/static/media/IBMPlexSans-ExtraLightItalic-Pi.c47abd55.woff2"
   },
   {
     "revision": "e9fd153262d949636d18a996d90f4da1",
@@ -1500,12 +1500,12 @@ self.__precacheManifest = [
     "url": "/static/media/IBMPlexSans-Italic-Latin2.44985413.woff2"
   },
   {
-    "revision": "062dee5e186af27221ea84bf81a936fe",
-    "url": "/static/media/IBMPlexSans-ExtraLight-Cyrillic.062dee5e.woff2"
-  },
-  {
     "revision": "831073fde096801726c2b334f5a6d90b",
     "url": "/static/media/IBMPlexSans-ExtraLightItalic-Latin1.831073fd.woff2"
+  },
+  {
+    "revision": "062dee5e186af27221ea84bf81a936fe",
+    "url": "/static/media/IBMPlexSans-ExtraLight-Cyrillic.062dee5e.woff2"
   },
   {
     "revision": "7ba888742967c5fc0bd97a3e40af68fb",
