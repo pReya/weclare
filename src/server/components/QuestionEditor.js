@@ -161,6 +161,7 @@ class QuestionEditor extends React.Component {
                 }
               }}
               color="success"
+              disabled={!questions.length > 0}
             >
               <ContentSaveIcon style={{ paddingBottom: "3px" }} /> Save &
               Continue

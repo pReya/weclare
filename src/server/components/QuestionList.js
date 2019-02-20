@@ -165,7 +165,7 @@ QuestionList.propTypes = {
 };
 
 QuestionList.defaultProps = {
-  questions: ["No questions"],
+  questions: [],
   selectedQuestion: null
 };
 export default QuestionList;
