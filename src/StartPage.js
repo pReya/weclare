@@ -26,7 +26,10 @@ const StartPage = () => (
             <Button
               tag={Link}
               to="/client/connect"
-              className="btn btn-lg btn-block btn-outline-primary"
+              size="lg"
+              block
+              outline
+              color="primary"
             >
               Join Quiz Session
             </Button>
@@ -43,7 +46,10 @@ const StartPage = () => (
             <Button
               tag={Link}
               to="/server/editor"
-              className="btn btn-lg btn-block btn-outline-primary"
+              size="lg"
+              block
+              outline
+              color="primary"
             >
               Create Quiz Session
             </Button>
