@@ -1,7 +1,7 @@
 import Logger from "../../shared/util/Logger";
 import { setPeer, setConnectionStatus } from "../../shared/actions/connection";
 import { registerAnswer } from "./answers";
-import getCurrentQuestion from "../selectors/questions";
+import { getCurrentQuestionNoSolution } from "../selectors/questions";
 import createPeer from "../../shared/util/NetworkHelpers";
 
 export const ADD_CONNECTION = "ADD_CONNECTION";
@@ -93,19 +93,22 @@ export function startServer() {
 
 export function sendCurrentQuestionToClients() {
   return (dispatch, getState) => {
-    console.log("Sending question to clients");
     const {
       server: { connections }
     } = getState();
 
-    const currentQuestion = getCurrentQuestion(getState());
+    const currentQuestionNoSolution = getCurrentQuestionNoSolution(getState());
 
-    if (connections.length > 0 && currentQuestion) {
-      connections.forEach(connection =>
-        connection.send(JSON.stringify(currentQuestion))
-      );
+    const msg = {
+      type: "question",
+      payload: currentQuestionNoSolution
+    };
+
+    if (connections.length > 0 && currentQuestionNoSolution) {
+      Logger.info("Sending question to clients", currentQuestionNoSolution);
+      connections.forEach(connection => connection.send(JSON.stringify(msg)));
     } else {
-      console.error("Can't send question to clients");
+      Logger.error("Can't send question to clients");
     }
   };
 }

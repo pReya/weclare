@@ -4,25 +4,34 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import QuestionCard from "../../shared/components/QuestionCard";
 import AskScreenContinueButton from "./AskScreenContinueButton";
-import getCurrentQuestion from "../selectors/questions";
+import { getCurrentQuestion } from "../selectors/questions";
+import getAnswerCountForCurrentQuestion from "../selectors/answers";
 
 class AskScreen extends React.Component {
   state = {
-    countedAnswers: null
+    showVoteCount: false
+  };
+
+  toggleShowVoteCount = () => {
+    this.setState(prevState => ({
+      showVoteCount: !prevState.showVoteCount
+    }));
   };
 
   render() {
-    const { countedAnswers } = this.state;
-    const { currentQuestion } = this.props;
+    const { currentQuestion, countedAnswers } = this.props;
+    const { showVoteCount } = this.state;
 
     return (
       <Row className="justify-content-center">
         <QuestionCard
           question={currentQuestion}
-          countedAnswers={countedAnswers}
+          countedAnswers={showVoteCount && countedAnswers}
           disabled
         >
-          <AskScreenContinueButton />
+          <AskScreenContinueButton
+            toggleShowVoteCount={this.toggleShowVoteCount}
+          />
         </QuestionCard>
       </Row>
     );
@@ -30,7 +39,8 @@ class AskScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentQuestion: getCurrentQuestion(state)
+  currentQuestion: getCurrentQuestion(state),
+  countedAnswers: getAnswerCountForCurrentQuestion(state)
 });
 
 export default connect(mapStateToProps)(withRouter(AskScreen));

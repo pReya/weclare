@@ -1,4 +1,4 @@
-const getCurrentQuestion = state => {
+export const getCurrentQuestion = state => {
   const {
     questionEditor: questions,
     server: { currentQuestionIdx }
@@ -6,4 +6,14 @@ const getCurrentQuestion = state => {
   return questions[currentQuestionIdx];
 };
 
-export default getCurrentQuestion;
+export const getCurrentQuestionNoSolution = state => {
+  const currentQuestion = getCurrentQuestion(state);
+
+  return {
+    ...currentQuestion,
+    answers: currentQuestion.answers.map(answer => {
+      const { isCorrect, ...answerNoSolution } = answer;
+      return answerNoSolution;
+    })
+  };
+};

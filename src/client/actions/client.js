@@ -35,6 +35,26 @@ export function setCurrentQuestion(newQuestion) {
   };
 }
 
+export function sendAnswer(answerIdx) {
+  return (dispatch, getState) => {
+    const {
+      client: { connection = null, currentQuestion = null }
+    } = getState();
+
+    if (connection && currentQuestion && typeof answerIdx !== "undefined") {
+      console.log("SEND");
+      connection.send({
+        type: "answer",
+        payload: {
+          questionIdx: currentQuestion.questionIdx,
+          answerIdx,
+          userId: connection.provider.id
+        }
+      });
+    }
+  };
+}
+
 export function connectToServer() {
   return (dispatch, getState) => {
     const {
@@ -44,11 +64,16 @@ export function connectToServer() {
     const peer = createPeer();
 
     const dataHandler = data => {
-      const { type, payload } = data;
-      Logger.info("Received Data: ", data);
+      const dataObj = JSON.parse(data);
+      const { type, payload } = dataObj;
+      Logger.info("Received Data: ", dataObj);
       switch (type) {
+        case "question":
+          dispatch(setCurrentQuestion(payload));
+          break;
+
         default:
-          console.log("Default");
+          Logger.error("ERROR: Client Data Handler Default Case");
       }
     };
 
@@ -65,11 +90,6 @@ export function connectToServer() {
       Logger.info(`Successfully connected to server ${connection.peer}`);
       dispatch(setConnectionStatus(2));
       connection.on("data", data => dataHandler(data));
-      // connection.on("data", data => {
-      //   const msg = JSON.parse(data);
-      //   console.log("Received data: ", msg);
-      //   dispatch(setCurrentQuestion(msg));
-      // });
     });
 
     peer.on("error", err => {

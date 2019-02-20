@@ -8,7 +8,6 @@ export const client = (
   state = {
     connection: null,
     remoteServerId: "",
-    questionIdx: null,
     currentQuestion: {
       // questionType: "singleChoice",
       // questionText: "Hallo Erste Frage?",
@@ -29,6 +28,7 @@ export const client = (
       return { ...state, remoteServerId: action.payload.newId };
 
     case SET_CURRENT_QUESTION:
+      console.log("reducer", action.payload);
       return { ...state, currentQuestion: action.payload.newQuestion };
 
     default:

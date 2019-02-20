@@ -35,8 +35,22 @@ class AskScreenContinueButton extends React.Component {
     return null;
   }
 
+  nextButtonPhase = () => {
+    const { buttonPhase } = this.state;
+    // Transition from 0 -> 1 must happen in getDerivedStateFromProps()
+    if (buttonPhase > 0) {
+      this.setState(prevState => ({
+        buttonPhase: (prevState.buttonPhase + 1) % 5
+      }));
+    }
+  };
+
   render() {
-    const { toggleAcceptingAnswers, sendCurrentQuestionToClients } = this.props;
+    const {
+      toggleAcceptingAnswers,
+      sendCurrentQuestionToClients,
+      toggleShowVoteCount
+    } = this.props;
     const buttonStateMachine = {
       // Waiting for clients, button disabled
       0: {
@@ -56,9 +70,7 @@ class AskScreenContinueButton extends React.Component {
         onClick: () => {
           toggleAcceptingAnswers();
           sendCurrentQuestionToClients();
-          this.setState({
-            buttonPhase: 2
-          });
+          this.nextButtonPhase();
         },
         text: (
           <>
@@ -67,12 +79,11 @@ class AskScreenContinueButton extends React.Component {
         ),
         color: "secondary"
       },
+      // Accepting answers
       2: {
         onClick: () => {
-          // toggleAcceptingAnswers();
-          this.setState({
-            buttonPhase: 3
-          });
+          toggleAcceptingAnswers();
+          this.nextButtonPhase();
         },
         text: (
           <>
@@ -81,12 +92,11 @@ class AskScreenContinueButton extends React.Component {
         ),
         color: "secondary"
       },
+      // Don't accept answers, waiting to show results
       3: {
         onClick: () => {
-          // countAnswers(registeredAnswers, currentQuestionIdx);
-          this.setState({
-            buttonPhase: 4
-          });
+          toggleShowVoteCount();
+          this.nextButtonPhase();
         },
         text: (
           <>
@@ -99,9 +109,7 @@ class AskScreenContinueButton extends React.Component {
       4: {
         onClick: () => {
           // setCurrentQuestionIdx(nextQuestionIdx);
-          this.setState({
-            buttonPhase: 0
-          });
+          this.nextButtonPhase();
         },
         text: (
           <>

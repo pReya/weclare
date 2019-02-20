@@ -1,11 +1,8 @@
-// Server Actions
+// Server Answer Actions
 export const REGISTER_ANSWER = "REGISTER_ANSWER";
-export const INIT_ANSWERS = "INIT_ANSWERS";
-
 export function registerAnswer(questionIdx, answerIdx, userId) {
   return (dispatch, getState) => {
     const { server } = getState();
-
     if (server.acceptingAnswers) {
       dispatch({
         type: REGISTER_ANSWER,
@@ -15,12 +12,11 @@ export function registerAnswer(questionIdx, answerIdx, userId) {
           userId
         }
       });
-    } else {
-      console.log("TEST");
     }
   };
 }
 
+export const INIT_ANSWERS = "INIT_ANSWERS";
 export function initAnswers() {
   return (dispatch, getState) => {
     const { questionEditor } = getState();
@@ -33,12 +29,5 @@ export function initAnswers() {
         array: emptyAnswerArray
       }
     });
-  };
-}
-
-export function getAnswerCount(questionIdx) {
-  return (dispatch, getState) => {
-    const { registeredAnswers } = getState();
-    return registeredAnswers[questionIdx].map(answer => answer.length);
   };
 }

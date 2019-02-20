@@ -5,24 +5,29 @@ import QuestionCard from "../../shared/components/QuestionCard";
 import SpinnerCard from "../../shared/components/SpinnerCard";
 
 import { TQuestion, DQuestion } from "../../shared/types";
+import { sendAnswer } from "../actions/client";
 
 const mapStateToProps = state => ({
   currentQuestion: state.client.currentQuestion,
   connection: state.client.connection
 });
 
-const sendAnswer = (connection, answerIdx, questionIdx) => {
-  if (connection) {
-    connection.send({
-      type: "answer",
-      payload: {
-        questionIdx,
-        answerIdx,
-        userId: connection.provider.id
-      }
-    });
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  onSendAnswer: answerIdx => dispatch(sendAnswer(answerIdx))
+});
+
+// const sendAnswer = (connection, answerIdx, questionIdx) => {
+//   if (connection) {
+//     connection.send({
+//       type: "answer",
+//       payload: {
+//         questionIdx,
+//         answerIdx,
+//         userId: connection.provider.id
+//       }
+//     });
+//   }
+// };
 
 class AnswerScreen extends React.Component {
   constructor(props) {
@@ -46,7 +51,7 @@ class AnswerScreen extends React.Component {
   }
 
   render() {
-    const { currentQuestion, connection } = this.props;
+    const { currentQuestion, connection, onSendAnswer } = this.props;
     const { disabled, selectedAnswerIdx } = this.state;
     const hasQuestion = Object.keys(currentQuestion).length > 0;
     return (
@@ -58,7 +63,7 @@ class AnswerScreen extends React.Component {
             selectedAnswerIdx={selectedAnswerIdx}
             onClickAnswer={answerIdx => {
               console.log("Sending back answer ", answerIdx, currentQuestion);
-              sendAnswer(connection, answerIdx, currentQuestion.questionIdx);
+              onSendAnswer(answerIdx);
               this.setState(
                 {
                   disabled: true,
@@ -83,4 +88,7 @@ AnswerScreen.defaultProps = {
   currentQuestion: DQuestion
 };
 
-export default connect(mapStateToProps)(AnswerScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AnswerScreen);
