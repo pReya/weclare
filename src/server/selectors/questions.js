@@ -1,9 +1,19 @@
+export const getProgress = state => {
+  const {
+    questionEditor: questions = [],
+    server: { currentQuestionIdx = -1 }
+  } = state;
+
+  return `${currentQuestionIdx + 1}/${questions.length}`;
+};
+
 export const getCurrentQuestion = state => {
   const {
     questionEditor: questions,
     server: { currentQuestionIdx }
   } = state;
-  return questions[currentQuestionIdx];
+  const progress = getProgress(state);
+  return { ...questions[currentQuestionIdx], progress };
 };
 
 export const getCurrentQuestionNoSolution = state => {

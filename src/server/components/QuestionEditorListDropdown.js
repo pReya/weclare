@@ -12,7 +12,7 @@ import {
 import SingleFileInput from "../../shared/components/SingleFileInput";
 import DropboxChooser from "./DropboxChooser";
 
-class QuestionListDropdown extends React.Component {
+class QuestionEditorListDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -64,9 +64,9 @@ class QuestionListDropdown extends React.Component {
   }
 }
 
-QuestionListDropdown.propTypes = {
+QuestionEditorListDropdown.propTypes = {
   onUploadFile: PropTypes.func.isRequired,
   onUploadDropbox: PropTypes.func.isRequired
 };
 
-export default QuestionListDropdown;
+export default QuestionEditorListDropdown;

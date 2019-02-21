@@ -14,7 +14,7 @@ import {
   ListGroupItem,
   ListGroupItemText
 } from "reactstrap";
-import QuestionListDropdown from "./QuestionListDropdown";
+import QuestionEditorListDropdown from "./QuestionEditorListDropdown";
 
 const truncate = (text, limit, after) => {
   const words = text.trim().split(" ");
@@ -30,7 +30,7 @@ const strip = html => {
   return doc.body.textContent || "";
 };
 
-const QuestionList = props => {
+const QuestionEditorList = props => {
   const {
     questions,
     onSelectQuestion,
@@ -144,7 +144,7 @@ const QuestionList = props => {
       </CardFooter>
       <CardFooter>
         <div className="text-center">
-          <QuestionListDropdown
+          <QuestionEditorListDropdown
             onUploadFile={onUploadFile}
             onUploadDropbox={onUploadDropbox}
           />
@@ -157,15 +157,15 @@ const QuestionList = props => {
   );
 };
 
-QuestionList.propTypes = {
+QuestionEditorList.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object),
   selectedQuestion: PropTypes.number,
   onSelectQuestion: PropTypes.func.isRequired,
   onAddQuestion: PropTypes.func.isRequired
 };
 
-QuestionList.defaultProps = {
+QuestionEditorList.defaultProps = {
   questions: [],
   selectedQuestion: null
 };
-export default QuestionList;
+export default QuestionEditorList;

@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import tv4 from "tv4";
 import ContentSaveIcon from "mdi-react/ContentSaveIcon";
 import Logger from "../../shared/util/Logger";
-import QuestionContent from "./QuestionContent";
-import QuestionList from "./QuestionList";
+import QuestionEditorContent from "./QuestionEditorContent";
+import QuestionEditorList from "./QuestionEditorList";
 import QuestionSchema from "../../shared/util/questionsSchema";
 import * as questionEditorActions from "../actions/questions";
 import * as answerActions from "../actions/answers";
@@ -117,7 +117,7 @@ class QuestionEditor extends React.Component {
       <>
         <Row className="justify-content-center mb-4">
           <Col md="4">
-            <QuestionList
+            <QuestionEditorList
               questions={questions}
               selectedQuestion={selectedQuestion}
               onSelectQuestion={selectQuestion}
@@ -132,7 +132,7 @@ class QuestionEditor extends React.Component {
             />
           </Col>
           <Col md="8">
-            <QuestionContent
+            <QuestionEditorContent
               question={questions[selectedQuestion]}
               selectedQuestion={selectedQuestion}
               onEditQuestionText={editQuestionText}

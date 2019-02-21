@@ -34,7 +34,7 @@ class AnswerScreen extends React.Component {
     super(props);
     this.initialState = {
       disabled: false,
-      selectedAnswerIdx: null
+      selectedAnswersIdx: []
     };
     this.state = this.initialState;
   }
@@ -52,7 +52,7 @@ class AnswerScreen extends React.Component {
 
   render() {
     const { currentQuestion, connection, onSendAnswer } = this.props;
-    const { disabled, selectedAnswerIdx } = this.state;
+    const { disabled, selectedAnswersIdx } = this.state;
     const hasQuestion = Object.keys(currentQuestion).length > 0;
     return (
       <Row className="justify-content-center">
@@ -60,15 +60,18 @@ class AnswerScreen extends React.Component {
           <QuestionCard
             question={currentQuestion}
             disabled={disabled}
-            selectedAnswerIdx={selectedAnswerIdx}
+            selectedAnswersIdx={selectedAnswersIdx}
             onClickAnswer={answerIdx => {
               console.log("Sending back answer ", answerIdx, currentQuestion);
               onSendAnswer(answerIdx);
               this.setState(
-                {
+                prevState => ({
                   disabled: true,
-                  selectedAnswerIdx: answerIdx
-                },
+                  selectedAnswersIdx: [
+                    ...prevState.selectedAnswersIdx,
+                    answerIdx
+                  ]
+                }),
                 () => console.log("New state", this.state)
               );
             }}

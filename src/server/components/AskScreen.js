@@ -5,7 +5,10 @@ import { withRouter } from "react-router-dom";
 import QuestionCard from "../../shared/components/QuestionCard";
 import AskScreenContinueButton from "./AskScreenContinueButton";
 import { getCurrentQuestion } from "../selectors/questions";
-import getAnswerCountForCurrentQuestion from "../selectors/answers";
+import {
+  getAnswerCountForCurrentQuestion,
+  getReceivedAnswersCounter
+} from "../selectors/answers";
 
 class AskScreen extends React.Component {
   state = {
@@ -19,7 +22,11 @@ class AskScreen extends React.Component {
   };
 
   render() {
-    const { currentQuestion, countedAnswers } = this.props;
+    const {
+      currentQuestion,
+      countedAnswers,
+      receivedAnswersCounter
+    } = this.props;
     const { showVoteCount } = this.state;
 
     return (
@@ -27,11 +34,17 @@ class AskScreen extends React.Component {
         <QuestionCard
           question={currentQuestion}
           countedAnswers={showVoteCount && countedAnswers}
+          isServer
           disabled
         >
-          <AskScreenContinueButton
-            toggleShowVoteCount={this.toggleShowVoteCount}
-          />
+          <>
+            {receivedAnswersCounter && (
+              <p>Answers received: {receivedAnswersCounter}</p>
+            )}
+            <AskScreenContinueButton
+              toggleShowVoteCount={this.toggleShowVoteCount}
+            />
+          </>
         </QuestionCard>
       </Row>
     );
@@ -40,7 +53,8 @@ class AskScreen extends React.Component {
 
 const mapStateToProps = state => ({
   currentQuestion: getCurrentQuestion(state),
-  countedAnswers: getAnswerCountForCurrentQuestion(state)
+  countedAnswers: getAnswerCountForCurrentQuestion(state),
+  receivedAnswersCounter: getReceivedAnswersCounter(state)
 });
 
 export default connect(mapStateToProps)(withRouter(AskScreen));

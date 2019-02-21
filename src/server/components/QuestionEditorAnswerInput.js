@@ -5,7 +5,7 @@ import DeleteIcon from "mdi-react/DeleteIcon";
 import DragIcon from "mdi-react/DragIcon";
 import PencilIcon from "mdi-react/PencilIcon";
 
-class EditorAnswerInput extends React.Component {
+class QuestionEditorAnswerInput extends React.Component {
   state = {
     isHovered: false
   };
@@ -86,7 +86,7 @@ class EditorAnswerInput extends React.Component {
   }
 }
 
-EditorAnswerInput.propTypes = {
+QuestionEditorAnswerInput.propTypes = {
   selectedQuestion: PropTypes.number.isRequired,
   answer: PropTypes.string.isRequired,
   onEditAnswerText: PropTypes.func.isRequired,
@@ -97,7 +97,7 @@ EditorAnswerInput.propTypes = {
   onDeleteAnswer: PropTypes.func.isRequired
 };
 
-export default EditorAnswerInput;
+export default QuestionEditorAnswerInput;
 
 const RadioInput = props => {
   const { isCorrectAnswer, number, onSetCorrectAnswer, disabled } = props;

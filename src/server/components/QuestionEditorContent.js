@@ -16,10 +16,10 @@ import {
   Row
 } from "reactstrap";
 import InfoPopoverIcon from "../../shared/components/InfoPopoverIcon";
-import EditorAnswerInput from "./EditorAnswerInput";
+import QuestionEditorAnswerInput from "./QuestionEditorAnswerInput";
 import QuillWrapper from "./QuillWrapper";
 
-const QuestionContent = props => {
+const QuestionEditorContent = props => {
   const {
     question,
     selectedQuestion,
@@ -233,7 +233,7 @@ const QuestionContent = props => {
                                   ref={providedDraggable.innerRef}
                                   key={answer.id}
                                 >
-                                  <EditorAnswerInput
+                                  <QuestionEditorAnswerInput
                                     isCorrectAnswer={answer.isCorrect}
                                     dragHandleProps={
                                       providedDraggable.dragHandleProps
@@ -297,7 +297,7 @@ const QuestionContent = props => {
   );
 };
 
-QuestionContent.propTypes = {
+QuestionEditorContent.propTypes = {
   question: PropTypes.shape({
     type: PropTypes.string,
     text: PropTypes.string,
@@ -315,9 +315,9 @@ QuestionContent.propTypes = {
   onDeleteQuestion: PropTypes.func.isRequired
 };
 
-QuestionContent.defaultProps = {
+QuestionEditorContent.defaultProps = {
   question: {},
   selectedQuestion: 0
 };
 
-export default QuestionContent;
+export default QuestionEditorContent;
