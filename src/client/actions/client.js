@@ -70,6 +70,7 @@ export function connectToServer() {
       switch (type) {
         case "question":
           dispatch(setCurrentQuestion(payload));
+          console.log("Hello");
           break;
 
         default:
