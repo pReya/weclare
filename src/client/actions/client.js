@@ -35,22 +35,28 @@ export function setCurrentQuestion(newQuestion) {
   };
 }
 
-export function sendAnswer(answerIdx) {
+export function sendAnswers(answerIdxArray) {
   return (dispatch, getState) => {
+    console.log("Send Answer action");
     const {
       client: { connection = null, currentQuestion = null }
     } = getState();
 
-    if (connection && currentQuestion && typeof answerIdx !== "undefined") {
-      console.log("SEND");
-      connection.send({
+    if (
+      connection &&
+      currentQuestion &&
+      typeof answerIdxArray !== "undefined"
+    ) {
+      const msg = {
         type: "answer",
         payload: {
           questionIdx: currentQuestion.questionIdx,
-          answerIdx,
+          answerIdxArray,
           userId: connection.provider.id
         }
-      });
+      };
+      console.log("Sending message ", msg);
+      connection.send(msg);
     }
   };
 }
@@ -70,7 +76,6 @@ export function connectToServer() {
       switch (type) {
         case "question":
           dispatch(setCurrentQuestion(payload));
-          console.log("Hello");
           break;
 
         default:

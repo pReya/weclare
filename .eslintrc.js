@@ -8,6 +8,7 @@ module.exports = {
   plugins: ["prettier", "react-redux"],
   rules: {
     "no-shadow": "off",
+    "no-nested-ternary": "off",
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "react/no-unused-state": "off",

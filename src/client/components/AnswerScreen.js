@@ -1,33 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Row } from "reactstrap";
-import QuestionCard from "../../shared/components/QuestionCard";
-import SpinnerCard from "../../shared/components/SpinnerCard";
-
+import { changeInArray } from "../../shared/util/QuestionHelpers";
 import { TQuestion, DQuestion } from "../../shared/types";
-import { sendAnswer } from "../actions/client";
+import { sendAnswers } from "../actions/client";
+import SpinnerCard from "../../shared/components/SpinnerCard";
+import QuestionCard from "../../shared/components/QuestionCard";
 
 const mapStateToProps = state => ({
-  currentQuestion: state.client.currentQuestion,
-  connection: state.client.connection
+  currentQuestion: state.client.currentQuestion
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSendAnswer: answerIdx => dispatch(sendAnswer(answerIdx))
+  onSendAnswers: answerIdxArray => dispatch(sendAnswers(answerIdxArray))
 });
-
-// const sendAnswer = (connection, answerIdx, questionIdx) => {
-//   if (connection) {
-//     connection.send({
-//       type: "answer",
-//       payload: {
-//         questionIdx,
-//         answerIdx,
-//         userId: connection.provider.id
-//       }
-//     });
-//   }
-// };
 
 class AnswerScreen extends React.Component {
   constructor(props) {
@@ -43,42 +29,69 @@ class AnswerScreen extends React.Component {
     const { currentQuestion } = this.props;
     if (currentQuestion !== prevProps.currentQuestion) {
       this.resetState();
+      this.initSelectedAnswers(currentQuestion.answers.length);
     }
   }
+
+  toggleSelectedAnswers = answerIdx => {
+    this.setState(prevState => {
+      const { selectedAnswersIdx } = prevState;
+      return {
+        ...prevState,
+        selectedAnswersIdx: changeInArray(
+          selectedAnswersIdx,
+          answerIdx,
+          e => !e
+        )
+      };
+    });
+  };
+
+  toggleDisabled = () => {
+    this.setState(prevState => ({
+      disabled: !prevState.disabled
+    }));
+  };
 
   resetState() {
     this.setState(this.initialState);
   }
 
+  initSelectedAnswers(answerCount) {
+    this.setState({ selectedAnswersIdx: Array(answerCount).fill(false) });
+  }
+
   render() {
-    const { currentQuestion, connection, onSendAnswer } = this.props;
+    const { currentQuestion, onSendAnswers } = this.props;
     const { disabled, selectedAnswersIdx } = this.state;
     const hasQuestion = Object.keys(currentQuestion).length > 0;
+    const commonProps = {
+      question: currentQuestion,
+      disabled,
+      selectedAnswersIdx,
+      toggleSelectedAnswers: this.toggleSelectedAnswers,
+      toggleDisabled: this.toggleDisabled,
+      onSendAnswers
+    };
     return (
       <Row className="justify-content-center">
         {hasQuestion ? (
+          <QuestionCard {...commonProps} />
+        ) : (
+          <SpinnerCard title="Waiting For Question From Server" />
+        )}
+        {/* {hasQuestion ? (
           <QuestionCard
             question={currentQuestion}
             disabled={disabled}
             selectedAnswersIdx={selectedAnswersIdx}
-            onClickAnswer={answerIdx => {
-              console.log("Sending back answer ", answerIdx, currentQuestion);
-              onSendAnswer(answerIdx);
-              this.setState(
-                prevState => ({
-                  disabled: true,
-                  selectedAnswersIdx: [
-                    ...prevState.selectedAnswersIdx,
-                    answerIdx
-                  ]
-                }),
-                () => console.log("New state", this.state)
-              );
-            }}
+            toggleSelectedAnswers={this.toggleSelectedAnswers}
+            toggleDisabled={this.toggleDisabled}
+            onSendAnswers={onSendAnswers}
           />
         ) : (
           <SpinnerCard title="Waiting for question" />
-        )}
+        )} */}
       </Row>
     );
   }

@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, Badge } from "reactstrap";
 import DefaultCard from "./DefaultCard";
+import Logger from "../util/Logger";
 
-const SingleQuestionContent = props => {
+const MultiQuestionCard = props => {
   const {
     title,
     question,
@@ -11,12 +12,25 @@ const SingleQuestionContent = props => {
     disabled,
     countedAnswers,
     children,
+    toggleSelectedAnswers,
+    onSendAnswers,
     isServer
   } = props;
 
-  console.log("Selected Answers", selectedAnswersIdx);
+  console.log("Children Multi", children);
+
   return (
-    <DefaultCard title={title} badge={question.progress} footer={children}>
+    <DefaultCard
+      title={title}
+      badge={question && question.progress}
+      footer={
+        <>
+          {question.mode === "multi" &&
+            !isServer && <Button block>Send Answers</Button>}
+          {children}
+        </>
+      }
+    >
       {question.text && (
         <div
           className="text-center mb-4 h4"
@@ -27,18 +41,15 @@ const SingleQuestionContent = props => {
       {question.answers &&
         question.answers.map((answer, i) => (
           <Button
-            outline={!selectedAnswersIdx.includes(i)}
+            outline={!selectedAnswersIdx[i]}
             id={i}
             key={answer.id}
             block
-            onClick={
-              onClickAnswer
-                ? e => {
-                    const selectedAnswer = parseInt(e.target.id, 10);
-                    onClickAnswer(selectedAnswer);
-                  }
-                : null
-            }
+            onClick={e => {
+              const selectedAnswer = parseInt(e.target.id, 10);
+              toggleSelectedAnswers(selectedAnswer);
+              Logger.info("Toggling multi answer ", selectedAnswer);
+            }}
             color="secondary"
             disabled={disabled}
           >
@@ -50,10 +61,8 @@ const SingleQuestionContent = props => {
             )}
           </Button>
         ))}
-      {question.mode === "multi" &&
-        !isServer && <Button block>Send Answers</Button>}
     </DefaultCard>
   );
 };
 
-export default SingleQuestionContent;
+export default MultiQuestionCard;

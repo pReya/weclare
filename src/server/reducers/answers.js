@@ -1,4 +1,4 @@
-import { REGISTER_ANSWER, INIT_ANSWERS } from "../actions/answers";
+import { REGISTER_ANSWERS, INIT_ANSWERS } from "../actions/answers";
 
 import { changeInArray } from "../../shared/util/QuestionHelpers";
 
@@ -9,14 +9,26 @@ export const registeredAnswers = (state = [], action) => {
     case INIT_ANSWERS: {
       return action.payload.array;
     }
-    case REGISTER_ANSWER: {
-      console.log("Reducer", action.payload);
-      return changeInArray(state, action.payload.questionIdx, q =>
-        changeInArray(q, action.payload.answerIdx, a => {
-          a.push(action.payload.userId);
-          return a;
-        })
-      );
+    case REGISTER_ANSWERS: {
+      console.log("Register Answers Reducer", action.payload);
+      const { answerIdxArray, questionIdx, userId } = action.payload;
+
+      const registeredAnswers = changeInArray(state, questionIdx, question => {
+        console.log(question);
+        return question.map((answer, i) => {
+          console.log(answer);
+          if (answerIdxArray.includes(i)) {
+            return [...answer, userId];
+          }
+          return answer;
+        });
+        // changeInArray(question, answerIdxArray, answer => {
+        //   answer.push(userId);
+        //   return answer;
+        // });
+      });
+      console.log(registeredAnswers);
+      return registeredAnswers;
     }
 
     default:

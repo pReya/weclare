@@ -1,36 +1,22 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { TQuestion, DQuestion } from "../types";
-import SingleQuestionContent from "./SingleQuestionContent";
+import SingleQuestionCard from "./SingleQuestionCard";
+import MultiQuestionCard from "./MultiQuestionCard";
 
 const QuestionCard = props => {
-  const {
-    question,
-    onClickAnswer,
-    countedAnswers,
-    disabled,
-    selectedAnswersIdx,
-    children,
-    title,
-    isServer
-  } = props;
-
-  const commonProps = {
-    title,
-    question,
-    children,
-    selectedAnswersIdx,
-    onClickAnswer,
-    disabled,
-    countedAnswers,
-    isServer
-  };
+  const { question } = props;
+  console.log("QuestionCard props:", props);
   return (
     <>
       <Helmet>
         <title>Answer question</title>
       </Helmet>
-      <SingleQuestionContent {...commonProps} />
+      {question.mode === "single" ? (
+        <SingleQuestionCard question={question} {...props} />
+      ) : (
+        <MultiQuestionCard question={question} {...props} />
+      )}
     </>
   );
 };

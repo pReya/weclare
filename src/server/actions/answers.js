@@ -1,14 +1,14 @@
 // Server Answer Actions
-export const REGISTER_ANSWER = "REGISTER_ANSWER";
-export function registerAnswer(questionIdx, answerIdx, userId) {
+export const REGISTER_ANSWERS = "REGISTER_ANSWERS";
+export function registerAnswers(questionIdx, answerIdxArray, userId) {
   return (dispatch, getState) => {
     const { server } = getState();
     if (server.acceptingAnswers) {
       dispatch({
-        type: REGISTER_ANSWER,
+        type: REGISTER_ANSWERS,
         payload: {
           questionIdx,
-          answerIdx,
+          answerIdxArray,
           userId
         }
       });

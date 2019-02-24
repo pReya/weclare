@@ -1,6 +1,6 @@
 import Logger from "../../shared/util/Logger";
 import { setPeer, setConnectionStatus } from "../../shared/actions/connection";
-import { registerAnswer } from "./answers";
+import { registerAnswers } from "./answers";
 import { getCurrentQuestionNoSolution } from "../selectors/questions";
 import createPeer from "../../shared/util/NetworkHelpers";
 
@@ -56,9 +56,9 @@ export function startServer() {
         case "answer":
           console.log("Received answer", payload);
           dispatch(
-            registerAnswer(
+            registerAnswers(
               payload.questionIdx,
-              payload.answerIdx,
+              payload.answerIdxArray,
               payload.userId
             )
           );
