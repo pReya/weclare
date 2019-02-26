@@ -15,7 +15,7 @@ function DefaultCard(props) {
 
   return (
     <Col md="8">
-      <Card className="shadow">
+      <Card className="shadow-none">
         <CardHeader>
           {badge ? (
             <h6 className="my-0 d-flex justify-content-between">

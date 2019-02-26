@@ -78,20 +78,12 @@ class AnswerScreen extends React.Component {
         {hasQuestion ? (
           <QuestionCard {...commonProps} />
         ) : (
-          <SpinnerCard title="Waiting For Question From Server" />
-        )}
-        {/* {hasQuestion ? (
-          <QuestionCard
-            question={currentQuestion}
-            disabled={disabled}
-            selectedAnswersIdx={selectedAnswersIdx}
-            toggleSelectedAnswers={this.toggleSelectedAnswers}
-            toggleDisabled={this.toggleDisabled}
-            onSendAnswers={onSendAnswers}
+          <SpinnerCard
+            title="Waiting For Question From Server"
+            size={36}
+            text="You're connected to the server, but the Quiz Session has not been started yet."
           />
-        ) : (
-          <SpinnerCard title="Waiting for question" />
-        )} */}
+        )}
       </Row>
     );
   }

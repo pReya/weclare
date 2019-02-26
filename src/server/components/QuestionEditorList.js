@@ -43,14 +43,14 @@ const QuestionEditorList = props => {
   } = props;
 
   return (
-    <Card className="shadow">
+    <Card className="shadow-none">
       <CardHeader>
-        <h6 className="my-0 d-flex justify-content-between">
+        <h5 className="my-0 d-flex justify-content-between">
           Questions
           <Badge color="dark" pill>
             {questions.length}
           </Badge>
-        </h6>
+        </h5>
       </CardHeader>
       <DragDropContext
         onDragEnd={result => {

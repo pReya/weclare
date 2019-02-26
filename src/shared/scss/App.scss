@@ -1,18 +1,17 @@
-@import "custom.scss";
-
 $font-prefix: "~@ibm/plex";
+$font-family-base: "IBM Plex Sans";
 
+@import "custom.scss";
 @import "~@ibm/plex/scss/ibm-plex.scss";
 
 body {
-  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: map-get($theme-colors, light);
+  background-color: theme-color(light);
 }
 
 .card-header {
-  font-weight: bold !important;
+  border-top: 3px solid theme-color-level(dark, -5);
 }
 
 hr {

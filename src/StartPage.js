@@ -7,8 +7,8 @@ import SelectBox from "./shared/components/SelectBox";
 
 const StartPage = () => (
   <Container>
-    <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 className="display-4">Weclare</h1>
+    <div className="pricing-header px-3 py-5 mx-auto text-center mt-5">
+      <h1 className="display-3 font-weight-bold text-dark">Weclare</h1>
       <p className="lead">
         A web based, peer-to-peer classroom response system, tailored to
         computer science education at university level.

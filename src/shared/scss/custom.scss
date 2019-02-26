@@ -1,5 +1,4 @@
 // Generated with http://colormind.io/bootstrap/
-
 $theme-colors: (
   "light": #f9f8fa,
   "dark": #222129,
@@ -8,7 +7,46 @@ $theme-colors: (
   "info": #222129,
   "success": #5fa15d,
   "warning": #dc9125,
-  "danger": #f44336
+  "danger": #f44336,
+  "greyBorder": #9e9ea7
 );
+
+// Greyson
+// http://bootstrap.themes.guide/greyson/
+// $theme-colors: (
+//   "primary": #2f3c48,
+//   "secondary": #6f7f8c,
+//   "success": #3e4d59,
+//   "danger": #cc330d,
+//   "info": #5c8f94,
+//   "warning": #6e9fa5,
+//   "light": #eceeec,
+//   "dark": #1e2b37
+// );
+
+// $theme-colors: (
+//   "primary": #2f3c48,
+//   "secondary": #6f7f8c,
+//   "success": #3e4d59,
+//   "danger": #cc330d,
+//   "info": #5c8f94,
+//   "warning": #6e9fa5,
+//   "light": #f7f7fa,
+//   "dark": #1e2b37,
+//   "greyBorder": #9e9ea7
+// );
+
+// $theme-colors: (
+//   "primary": #d19c57,
+//   "secondary": #9c948e,
+//   "success": #74a952,
+//   "danger": #f44336,
+//   "info": #28273b,
+//   "warning": #f1991a,
+//   "light": #fbfafa,
+//   "dark": #28273b
+// );
+
+// $enable-rounded: false;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";

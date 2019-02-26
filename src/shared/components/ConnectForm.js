@@ -45,7 +45,7 @@ class ConnectForm extends React.Component {
     return (
       <DefaultCard title={title} text={text}>
         <Form>
-          <FormGroup row className="form-row">
+          <FormGroup row className="form-row mb-1">
             <Col>
               <Input
                 bsSize="lg"

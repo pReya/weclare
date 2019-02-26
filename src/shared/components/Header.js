@@ -1,14 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import {
-  Container,
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from "reactstrap";
+import { Container, Navbar, NavbarBrand, NavLink } from "reactstrap";
 import ConnectionIndicator from "./ConnectionIndicator";
 
 const Header = props => {
@@ -17,10 +10,10 @@ const Header = props => {
     <>
       <Navbar
         expand="sm"
-        className="mb-4 border-bottom shadow-sm d-flex flex-row justify-content-between bg-white"
+        className="mb-4 border-bottom shadow-none d-flex flex-row justify-content-between bg-white py-3"
       >
         <Container>
-          <NavbarBrand href="/">
+          <NavbarBrand className="w-50" href="/">
             Weclare
             {isServer ? " Server" : " Client"}
           </NavbarBrand>
@@ -33,13 +26,9 @@ const Header = props => {
             />
           )}
 
-          <Nav className="flex-row">
-            <NavItem>
-              <NavLink tag={Link} to="/about">
-                About
-              </NavLink>
-            </NavItem>
-          </Nav>
+          <NavLink className="w-50 text-right" tag={Link} to="/about">
+            About
+          </NavLink>
         </Container>
       </Navbar>
     </>

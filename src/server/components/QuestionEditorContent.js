@@ -36,16 +36,18 @@ const QuestionEditorContent = props => {
   } = props;
 
   return (
-    <Card className="shadow">
+    <Card className="shadow-none">
       <CardHeader>
-        <h6 className="my-0">Edit Question</h6>
+        <h5 className="my-0">Edit Question</h5>
       </CardHeader>
       <CardBody>
         {selectedQuestion != null ? (
           <Form>
             <FormGroup>
               <Row form className="justify-content-between">
-                <Label sm="auto">Question Text</Label>
+                <Label sm="auto" className="font-weight-bold">
+                  Question Text
+                </Label>
                 <Col sm="auto">
                   <InfoPopoverIcon
                     text={
@@ -122,7 +124,7 @@ const QuestionEditorContent = props => {
             <FormGroup>
               <Row form className="justify-content-between">
                 <Label sm="auto">
-                  Answers{" "}
+                  <span className="font-weight-bold">Answers </span>
                   <span className="small text-muted">
                     {question.mode === "multi"
                       ? "(Check the correct answers)"

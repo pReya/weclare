@@ -37,7 +37,6 @@ export function setCurrentQuestion(newQuestion) {
 
 export function sendAnswers(answerIdxArray) {
   return (dispatch, getState) => {
-    console.log("Send Answer action");
     const {
       client: { connection = null, currentQuestion = null }
     } = getState();

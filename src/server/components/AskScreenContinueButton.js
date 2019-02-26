@@ -77,7 +77,7 @@ class AskScreenContinueButton extends React.Component {
             <PlayIcon style={{ paddingBottom: "3px" }} /> Start Quiz
           </>
         ),
-        color: "secondary"
+        color: "primary"
       },
       // Accepting answers
       2: {
@@ -90,7 +90,7 @@ class AskScreenContinueButton extends React.Component {
             <PauseIcon style={{ paddingBottom: "3px" }} /> Stop Question
           </>
         ),
-        color: "secondary"
+        color: "primary"
       },
       // Don't accept answers, waiting to show results
       3: {
@@ -104,7 +104,7 @@ class AskScreenContinueButton extends React.Component {
             Results
           </>
         ),
-        color: "secondary"
+        color: "primary"
       },
       4: {
         onClick: () => {

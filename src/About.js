@@ -12,7 +12,7 @@ const About = () => (
     <Container>
       <Row>
         <Col md="12">
-          <Card className="shadow">
+          <Card className="shadow-none">
             <CardHeader>
               <h6 className="my-0">About</h6>
             </CardHeader>

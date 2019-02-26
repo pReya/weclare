@@ -5,7 +5,7 @@ import DefaultCard from "./DefaultCard";
 import { TSpinnerCard, DSpinnerCard } from "../types";
 
 const SpinnerCard = props => {
-  const { title, size } = props;
+  const { title, size, text } = props;
 
   return (
     <>
@@ -13,14 +13,26 @@ const SpinnerCard = props => {
         <title>{title}</title>
       </Helmet>
       <DefaultCard title={title}>
-        <div className="d-flex justify-content-center">
-          <MDSpinner
-            color1="#8a817c"
-            color2="#f44336"
-            color3="#dc9125"
-            color4="#5fa15d"
-            size={size}
-          />
+        <div className="d-flex flex-column justify-content-center">
+          <div style={{ textAlign: "center" }}>
+            <MDSpinner
+              color1="#8a817c"
+              color2="#f44336"
+              color3="#dc9125"
+              color4="#5fa15d"
+              size={size}
+            />
+          </div>
+          {text && (
+            <div
+              style={{
+                textAlign: "center"
+              }}
+              className="mt-4 text-muted"
+            >
+              {text}
+            </div>
+          )}
         </div>
       </DefaultCard>
     </>

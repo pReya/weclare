@@ -26,7 +26,11 @@ const MultiQuestionCard = props => {
       footer={
         <>
           {question.mode === "multi" &&
-            !isServer && <Button block>Send Answers</Button>}
+            !isServer && (
+              <Button color="primary" block>
+                Send Answers
+              </Button>
+            )}
           {children}
         </>
       }

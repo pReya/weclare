@@ -6,7 +6,7 @@ const SelectBox = props => {
   const { header, text, children, emoji } = props;
   return (
     <div>
-      <Card className="shadow">
+      <Card className="shadow-none">
         <CardHeader>
           <h4 className="my-0">{header}</h4>
         </CardHeader>

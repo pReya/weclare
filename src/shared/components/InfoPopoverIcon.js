@@ -9,7 +9,7 @@ function InfoPopoverIcon(props) {
     <>
       <InformationIcon
         style={{ marginRight: "10px" }}
-        size={18}
+        size={20}
         color="#8a817c"
         id={id}
       />
