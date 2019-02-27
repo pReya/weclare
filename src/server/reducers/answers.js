@@ -10,18 +10,17 @@ export const registeredAnswers = (state = [], action) => {
       return action.payload.array;
     }
     case REGISTER_ANSWERS: {
-      console.log("Register Answers Reducer", action.payload);
       const { answerIdxArray, questionIdx, userId } = action.payload;
 
-      const registeredAnswers = changeInArray(state, questionIdx, question => {
-        return question.map((answer, i) => {
+      const registeredAnswers = changeInArray(state, questionIdx, question =>
+        question.map((answer, i) => {
           if (answerIdxArray.includes(i)) {
             return [...answer, userId];
           }
           return answer;
-        });
-      });
-      console.log("Registered answers: ", registeredAnswers);
+        })
+      );
+
       return registeredAnswers;
     }
 

@@ -18,7 +18,7 @@ class ModalOverlay extends React.Component {
   render() {
     const { children } = this.props;
     const { showModal } = this.state;
-    console.log(children);
+
     return (
       <>
         {React.cloneElement(React.Children.only(children), {

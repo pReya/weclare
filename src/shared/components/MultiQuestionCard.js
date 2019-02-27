@@ -27,8 +27,6 @@ const MultiQuestionCard = props => {
     toggleDisabled
   } = props;
 
-  console.log("Selected Answers", selectedAnswersIdx);
-
   return (
     <DefaultCard
       title={title}

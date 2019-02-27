@@ -36,7 +36,7 @@ class AskScreen extends React.Component {
       setPreviousQuestionIdx
     } = this.props;
     const { showVoteCount } = this.state;
-    console.log("Counted Answers", countedAnswers);
+
     return (
       <Row className="justify-content-center">
         <Col xs="2" className="align-self-center">

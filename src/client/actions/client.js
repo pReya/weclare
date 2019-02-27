@@ -54,7 +54,6 @@ export function sendAnswers(answerIdxArray) {
           userId: connection.provider.id
         }
       };
-      console.log("Sending message ", msg);
       connection.send(msg);
     }
   };

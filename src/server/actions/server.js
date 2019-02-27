@@ -72,7 +72,6 @@ export function startServer() {
       Logger.info("Received Data: ", data);
       switch (type) {
         case "answer":
-          console.log("Received answer", payload);
           dispatch(
             registerAnswers(
               payload.questionIdx,
@@ -82,7 +81,7 @@ export function startServer() {
           );
           break;
         default:
-          console.log("Default");
+          Logger.error("Switch case default reached");
       }
     };
 

@@ -6,7 +6,7 @@ import MultiQuestionCard from "./MultiQuestionCard";
 
 const QuestionCard = props => {
   const { question, isServer } = props;
-  console.log("QuestionCard props:", props);
+
   const title = isServer ? "Ask Question" : "Answer Question";
   return (
     <>
