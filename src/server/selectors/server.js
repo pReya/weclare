@@ -12,3 +12,10 @@ export const hasNextQuestion = state => {
   } = state;
   return currentQuestionIdx + 1 < questions.length;
 };
+
+export const hasPreviousQuestion = state => {
+  const {
+    server: { currentQuestionIdx = 0 }
+  } = state;
+  return !(currentQuestionIdx - 1 < 0);
+};

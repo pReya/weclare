@@ -39,7 +39,6 @@ export function setNextQuestionIdx() {
     const {
       server: { currentQuestionIdx = 0 }
     } = getState();
-    console.log("NEXT QUESTION IDX ACTION");
     dispatch(setCurrentQuestionIdx(currentQuestionIdx + 1));
   };
 }
@@ -49,7 +48,7 @@ export function setPreviousQuestionIdx() {
     const {
       server: { currentQuestionIdx = 0 }
     } = getState();
-    dispatch(setCurrentQuestionIdx(currentQuestionIdx + 1));
+    dispatch(setCurrentQuestionIdx(currentQuestionIdx - 1));
   };
 }
 

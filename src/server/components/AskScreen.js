@@ -10,6 +10,9 @@ import {
   getAnswerCountForCurrentQuestion,
   getReceivedAnswersCounter
 } from "../selectors/answers";
+import { setNextQuestionIdx, setPreviousQuestionIdx } from "../actions/server";
+import { ChevronRight, ChevronLeft } from "../../shared/components/Chevron";
+import { hasPreviousQuestion, hasNextQuestion } from "../selectors/server";
 
 class AskScreen extends React.Component {
   state = {
@@ -26,12 +29,22 @@ class AskScreen extends React.Component {
     const {
       currentQuestion,
       countedAnswers,
-      receivedAnswersCounter
+      receivedAnswersCounter,
+      hasNextQuestion,
+      hasPreviousQuestion,
+      setNextQuestionIdx,
+      setPreviousQuestionIdx
     } = this.props;
     const { showVoteCount } = this.state;
     console.log("Counted Answers", countedAnswers);
     return (
       <Row className="justify-content-center">
+        <Col xs="2" className="align-self-center">
+          <ChevronLeft
+            disabled={!hasPreviousQuestion}
+            onClick={() => setPreviousQuestionIdx()}
+          />
+        </Col>
         <QuestionCard
           question={currentQuestion}
           countedAnswers={showVoteCount && countedAnswers}
@@ -61,6 +74,12 @@ class AskScreen extends React.Component {
             <AskScreenContinueButton />
           </>
         </QuestionCard>
+        <Col xs="2" className="align-self-center">
+          <ChevronRight
+            disabled={!hasNextQuestion}
+            onClick={() => setNextQuestionIdx()}
+          />
+        </Col>
       </Row>
     );
   }
@@ -69,7 +88,17 @@ class AskScreen extends React.Component {
 const mapStateToProps = state => ({
   currentQuestion: getCurrentQuestion(state),
   countedAnswers: getAnswerCountForCurrentQuestion(state),
-  receivedAnswersCounter: getReceivedAnswersCounter(state)
+  receivedAnswersCounter: getReceivedAnswersCounter(state),
+  hasPreviousQuestion: hasPreviousQuestion(state),
+  hasNextQuestion: hasNextQuestion(state)
 });
 
-export default connect(mapStateToProps)(withRouter(AskScreen));
+const mapDispatchToProps = {
+  setNextQuestionIdx,
+  setPreviousQuestionIdx
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(AskScreen));

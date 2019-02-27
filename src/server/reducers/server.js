@@ -16,7 +16,11 @@ export const server = (
 ) => {
   switch (action.type) {
     case SET_CURRENT_QUESTION_IDX: {
-      return { ...state, currentQuestionIdx: action.payload.questionIdx };
+      return {
+        ...state,
+        currentQuestionIdx:
+          action.payload.questionIdx < 0 ? 0 : action.payload.questionIdx
+      };
     }
 
     case ADD_CONNECTION:

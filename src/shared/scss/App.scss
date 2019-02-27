@@ -53,3 +53,19 @@ hr {
 .hover-hide {
   display: none;
 }
+
+.chevron {
+  &.enabled {
+    fill: theme-color(secondary);
+  }
+
+  &.enabled:hover {
+    cursor: pointer;
+    fill: theme-color(dark);
+  }
+
+  &.disabled {
+    fill: theme-color(primary);
+    pointer-events: none;
+  }
+}
