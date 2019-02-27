@@ -46,8 +46,8 @@ const MultiQuestionCard = props => {
           >
             {answer.text}
             {countedAnswers && (
-              <Badge className="float-right" color="secondary">
-                {countedAnswers[i] !== 0 && countedAnswers[i]}
+              <Badge className="float-right align-middle" color="secondary">
+                {typeof countedAnswers[i] === "number" && countedAnswers[i]}
               </Badge>
             )}
           </Button>

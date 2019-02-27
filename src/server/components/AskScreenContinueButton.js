@@ -4,21 +4,23 @@ import { connect } from "react-redux";
 import PlayIcon from "mdi-react/PlayIcon";
 import PauseIcon from "mdi-react/PauseIcon";
 import SkipForwardIcon from "mdi-react/SkipForwardIcon";
-import FormatListNumberedIcon from "mdi-react/FormatListNumberedIcon";
 import MDSpinner from "react-md-spinner";
 import {
   toggleAcceptingAnswers,
-  sendCurrentQuestionToClients
+  sendCurrentQuestionToClients,
+  setNextQuestionIdx
 } from "../actions/server";
-import isConnected from "../selectors/server";
+import { isConnected, hasNextQuestion } from "../selectors/server";
 
 const mapStateToProps = state => ({
-  isConnected: isConnected(state)
+  isConnected: isConnected(state),
+  hasNextQuestion: hasNextQuestion(state)
 });
 
 const mapDispatchToProps = {
   sendCurrentQuestionToClients,
-  toggleAcceptingAnswers
+  toggleAcceptingAnswers,
+  setNextQuestionIdx
 };
 
 class AskScreenContinueButton extends React.Component {
@@ -37,10 +39,11 @@ class AskScreenContinueButton extends React.Component {
 
   nextButtonPhase = () => {
     const { buttonPhase } = this.state;
-    // Transition from 0 -> 1 must happen in getDerivedStateFromProps()
+
+    // Transition from 0 -> 1 must happen in getDerivedStateFromProps(), because it's based on clients
     if (buttonPhase > 0) {
       this.setState(prevState => ({
-        buttonPhase: (prevState.buttonPhase + 1) % 5
+        buttonPhase: (prevState.buttonPhase + 1) % 4
       }));
     }
   };
@@ -49,7 +52,8 @@ class AskScreenContinueButton extends React.Component {
     const {
       toggleAcceptingAnswers,
       sendCurrentQuestionToClients,
-      toggleShowVoteCount
+      setNextQuestionIdx,
+      hasNextQuestion
     } = this.props;
     const buttonStateMachine = {
       // Waiting for clients, button disabled
@@ -92,23 +96,24 @@ class AskScreenContinueButton extends React.Component {
         ),
         color: "primary"
       },
-      // Don't accept answers, waiting to show results
+      // // Don't accept answers, waiting to show results
+      // 3: {
+      //   onClick: () => {
+      //     toggleShowVoteCount();
+      //     this.nextButtonPhase();
+      //   },
+      //   text: (
+      //     <>
+      //       <FormatListNumberedIcon style={{ paddingBottom: "3px" }} /> Show
+      //       Results
+      //     </>
+      //   ),
+      //   color: "primary"
+      // },
       3: {
         onClick: () => {
-          toggleShowVoteCount();
-          this.nextButtonPhase();
-        },
-        text: (
-          <>
-            <FormatListNumberedIcon style={{ paddingBottom: "3px" }} /> Show
-            Results
-          </>
-        ),
-        color: "primary"
-      },
-      4: {
-        onClick: () => {
-          // setCurrentQuestionIdx(nextQuestionIdx);
+          console.log("SET NEXT QUESTION");
+          setNextQuestionIdx();
           this.nextButtonPhase();
         },
         text: (
@@ -116,7 +121,10 @@ class AskScreenContinueButton extends React.Component {
             <SkipForwardIcon style={{ paddingBottom: "3px" }} /> Next Question
           </>
         ),
-        color: "secondary"
+        color: "secondary",
+        additionalButtonProps: {
+          disabled: !hasNextQuestion
+        }
       }
     };
 

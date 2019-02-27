@@ -1,8 +1,14 @@
-const isConnected = state => {
+export const isConnected = state => {
   const {
     server: { connections }
   } = state;
   return connections.length > 0;
 };
 
-export default isConnected;
+export const hasNextQuestion = state => {
+  const {
+    questionEditor: questions = [],
+    server: { currentQuestionIdx = 0 }
+  } = state;
+  return currentQuestionIdx + 1 < questions.length;
+};

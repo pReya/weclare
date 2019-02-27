@@ -3,6 +3,15 @@ import { Button, Badge } from "reactstrap";
 import DefaultCard from "./DefaultCard";
 import Logger from "../util/Logger";
 
+const convertSelectedAnswersArray = selectedAnswersArray => {
+  if (selectedAnswersArray) {
+    return selectedAnswersArray
+      .map((answer, i) => answer && i)
+      .filter(answer => typeof answer === "number");
+  }
+  return [];
+};
+
 const MultiQuestionCard = props => {
   const {
     title,
@@ -14,10 +23,11 @@ const MultiQuestionCard = props => {
     children,
     toggleSelectedAnswers,
     onSendAnswers,
-    isServer
+    isServer,
+    toggleDisabled
   } = props;
 
-  console.log("Children Multi", children);
+  console.log("Selected Answers", selectedAnswersIdx);
 
   return (
     <DefaultCard
@@ -27,9 +37,26 @@ const MultiQuestionCard = props => {
         <>
           {question.mode === "multi" &&
             !isServer && (
-              <Button color="primary" block>
-                Send Answers
-              </Button>
+              <>
+                <p className="text-center text-muted">
+                  Multiple choice question: Select answers and click send.
+                </p>
+                <Button
+                  color="primary"
+                  disabled={disabled}
+                  onClick={() => {
+                    const selectedAnswers = convertSelectedAnswersArray(
+                      selectedAnswersIdx
+                    );
+                    Logger.info("Sending multi answer ", selectedAnswers);
+                    onSendAnswers(selectedAnswers);
+                    toggleDisabled();
+                  }}
+                  block
+                >
+                  Send Answers
+                </Button>
+              </>
             )}
           {children}
         </>
@@ -59,8 +86,12 @@ const MultiQuestionCard = props => {
           >
             {answer.text}
             {countedAnswers && (
-              <Badge className="float-right" color="secondary">
-                {countedAnswers[i] !== 0 && countedAnswers[i]}
+              <Badge
+                className="float-right"
+                style={{ lineHeight: 1.5 }}
+                color="secondary"
+              >
+                {typeof countedAnswers[i] === "number" && countedAnswers[i]}
               </Badge>
             )}
           </Button>

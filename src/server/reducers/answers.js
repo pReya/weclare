@@ -14,20 +14,14 @@ export const registeredAnswers = (state = [], action) => {
       const { answerIdxArray, questionIdx, userId } = action.payload;
 
       const registeredAnswers = changeInArray(state, questionIdx, question => {
-        console.log(question);
         return question.map((answer, i) => {
-          console.log(answer);
           if (answerIdxArray.includes(i)) {
             return [...answer, userId];
           }
           return answer;
         });
-        // changeInArray(question, answerIdxArray, answer => {
-        //   answer.push(userId);
-        //   return answer;
-        // });
       });
-      console.log(registeredAnswers);
+      console.log("Registered answers: ", registeredAnswers);
       return registeredAnswers;
     }
 

@@ -34,6 +34,25 @@ export function setCurrentQuestionIdx(questionIdx) {
   };
 }
 
+export function setNextQuestionIdx() {
+  return (dispatch, getState) => {
+    const {
+      server: { currentQuestionIdx = 0 }
+    } = getState();
+    console.log("NEXT QUESTION IDX ACTION");
+    dispatch(setCurrentQuestionIdx(currentQuestionIdx + 1));
+  };
+}
+
+export function setPreviousQuestionIdx() {
+  return (dispatch, getState) => {
+    const {
+      server: { currentQuestionIdx = 0 }
+    } = getState();
+    dispatch(setCurrentQuestionIdx(currentQuestionIdx + 1));
+  };
+}
+
 export const TOGGLE_ACCEPTING_ANSWERS = "TOGGLE_ACCEPTING_ANSWERS";
 export function toggleAcceptingAnswers() {
   return {

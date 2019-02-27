@@ -1,7 +1,8 @@
 import React from "react";
-import { Row } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import FormatListNumberedIcon from "mdi-react/FormatListNumberedIcon";
 import QuestionCard from "../../shared/components/QuestionCard";
 import AskScreenContinueButton from "./AskScreenContinueButton";
 import { getCurrentQuestion } from "../selectors/questions";
@@ -28,7 +29,7 @@ class AskScreen extends React.Component {
       receivedAnswersCounter
     } = this.props;
     const { showVoteCount } = this.state;
-
+    console.log("Counted Answers", countedAnswers);
     return (
       <Row className="justify-content-center">
         <QuestionCard
@@ -39,11 +40,25 @@ class AskScreen extends React.Component {
         >
           <>
             {receivedAnswersCounter && (
-              <p>Answers received: {receivedAnswersCounter}</p>
+              <div className="d-flex flex-row justify-content-between align-items-center mb-2">
+                {/* <div className="d-flex flex-row justify-content-between"> */}
+
+                <div className="text-muted">
+                  {receivedAnswersCounter} users have answered
+                </div>
+
+                <Button
+                  size="sm"
+                  outline={!showVoteCount}
+                  onClick={this.toggleShowVoteCount}
+                >
+                  <FormatListNumberedIcon style={{ paddingBottom: "3px" }} />{" "}
+                  {showVoteCount ? "Hide" : "Show"} Results
+                </Button>
+              </div>
             )}
-            <AskScreenContinueButton
-              toggleShowVoteCount={this.toggleShowVoteCount}
-            />
+
+            <AskScreenContinueButton />
           </>
         </QuestionCard>
       </Row>
