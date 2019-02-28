@@ -132,8 +132,6 @@ export const questionEditor = (state = [], action) => {
         ...deepClonedState.slice(action.payload.questionIdx + 1)
       ];
 
-      console.log("updatedQuestions", updatedQuestions);
-
       return updatedQuestions;
     }
 

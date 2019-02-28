@@ -3,7 +3,7 @@ import { Button, Badge } from "reactstrap";
 import DefaultCard from "./DefaultCard";
 import Logger from "../util/Logger";
 
-const MultiQuestionCard = props => {
+const SingleQuestionCard = props => {
   const {
     title,
     question,
@@ -22,7 +22,7 @@ const MultiQuestionCard = props => {
     <DefaultCard title={title} badge={question.progress} footer={children}>
       {question.text && (
         <div
-          className="text-center mb-4 h4"
+          className="text-center my-5 h4"
           // eslint-disable-next-line
           dangerouslySetInnerHTML={{ __html: question.text }}
         />
@@ -46,7 +46,11 @@ const MultiQuestionCard = props => {
           >
             {answer.text}
             {countedAnswers && (
-              <Badge className="float-right align-middle" color="secondary">
+              <Badge
+                className="float-right"
+                style={{ lineHeight: 1.5 }}
+                color="secondary"
+              >
                 {typeof countedAnswers[i] === "number" && countedAnswers[i]}
               </Badge>
             )}
@@ -56,4 +60,4 @@ const MultiQuestionCard = props => {
   );
 };
 
-export default MultiQuestionCard;
+export default SingleQuestionCard;

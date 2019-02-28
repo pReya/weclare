@@ -8,7 +8,8 @@ import MDSpinner from "react-md-spinner";
 import {
   toggleAcceptingAnswers,
   sendCurrentQuestionToClients,
-  setNextQuestionIdx
+  incrementQuestionIdx,
+  stopAcceptingConnections
 } from "../actions/server";
 import { isConnected, hasNextQuestion } from "../selectors/server";
 
@@ -20,7 +21,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   sendCurrentQuestionToClients,
   toggleAcceptingAnswers,
-  setNextQuestionIdx
+  stopAcceptingConnections,
+  incrementQuestionIdx
 };
 
 class AskScreenContinueButton extends React.Component {
@@ -51,8 +53,9 @@ class AskScreenContinueButton extends React.Component {
   render() {
     const {
       toggleAcceptingAnswers,
+      stopAcceptingConnections,
       sendCurrentQuestionToClients,
-      setNextQuestionIdx,
+      incrementQuestionIdx,
       hasNextQuestion
     } = this.props;
     const buttonStateMachine = {
@@ -72,6 +75,7 @@ class AskScreenContinueButton extends React.Component {
       // Clients connected, ready to send first question and accept answers
       1: {
         onClick: () => {
+          stopAcceptingConnections();
           toggleAcceptingAnswers();
           sendCurrentQuestionToClients();
           this.nextButtonPhase();
@@ -112,8 +116,7 @@ class AskScreenContinueButton extends React.Component {
       // },
       3: {
         onClick: () => {
-          console.log("SET NEXT QUESTION");
-          setNextQuestionIdx();
+          incrementQuestionIdx();
           this.nextButtonPhase();
         },
         text: (

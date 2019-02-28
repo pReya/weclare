@@ -34,7 +34,7 @@ export function setCurrentQuestionIdx(questionIdx) {
   };
 }
 
-export function setNextQuestionIdx() {
+export function incrementQuestionIdx() {
   return (dispatch, getState) => {
     const {
       server: { currentQuestionIdx = 0 }
@@ -43,7 +43,7 @@ export function setNextQuestionIdx() {
   };
 }
 
-export function setPreviousQuestionIdx() {
+export function decrementQuestionIdx() {
   return (dispatch, getState) => {
     const {
       server: { currentQuestionIdx = 0 }
@@ -56,6 +56,25 @@ export const TOGGLE_ACCEPTING_ANSWERS = "TOGGLE_ACCEPTING_ANSWERS";
 export function toggleAcceptingAnswers() {
   return {
     type: TOGGLE_ACCEPTING_ANSWERS
+  };
+}
+
+export const TOGGLE_ACCEPTING_CONNECTIONS = "TOGGLE_ACCEPTING_CONNECTIONS";
+export function stopAcceptingConnections() {
+  return (dispatch, getState) => {
+    const {
+      connection: { peer = null },
+      server: { acceptingConnections }
+    } = getState();
+
+    console.log("Current Accept state: ", acceptingConnections);
+
+    if (acceptingConnections) {
+      dispatch({
+        type: TOGGLE_ACCEPTING_CONNECTIONS
+      });
+      peer.disconnect();
+    }
   };
 }
 

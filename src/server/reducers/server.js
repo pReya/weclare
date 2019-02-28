@@ -2,7 +2,8 @@ import {
   ADD_CONNECTION,
   SET_SERVER_ID,
   SET_CURRENT_QUESTION_IDX,
-  TOGGLE_ACCEPTING_ANSWERS
+  TOGGLE_ACCEPTING_ANSWERS,
+  TOGGLE_ACCEPTING_CONNECTIONS
 } from "../actions/server";
 
 export const server = (
@@ -10,7 +11,8 @@ export const server = (
     connections: [],
     ownServerId: "",
     currentQuestionIdx: 0,
-    acceptingAnswers: false
+    acceptingAnswers: false,
+    acceptingConnections: true
   },
   action
 ) => {
@@ -34,6 +36,9 @@ export const server = (
 
     case TOGGLE_ACCEPTING_ANSWERS:
       return { ...state, acceptingAnswers: !state.acceptingAnswers };
+
+    case TOGGLE_ACCEPTING_CONNECTIONS:
+      return { ...state, acceptingConnections: !state.acceptingConnections };
 
     default:
       return state;

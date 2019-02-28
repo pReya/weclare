@@ -10,7 +10,7 @@ import {
   getAnswerCountForCurrentQuestion,
   getReceivedAnswersCounter
 } from "../selectors/answers";
-import { setNextQuestionIdx, setPreviousQuestionIdx } from "../actions/server";
+import { incrementQuestionIdx, decrementQuestionIdx } from "../actions/server";
 import { ChevronRight, ChevronLeft } from "../../shared/components/Chevron";
 import { hasPreviousQuestion, hasNextQuestion } from "../selectors/server";
 
@@ -32,8 +32,8 @@ class AskScreen extends React.Component {
       receivedAnswersCounter,
       hasNextQuestion,
       hasPreviousQuestion,
-      setNextQuestionIdx,
-      setPreviousQuestionIdx
+      incrementQuestionIdx,
+      decrementQuestionIdx
     } = this.props;
     const { showVoteCount } = this.state;
 
@@ -42,7 +42,7 @@ class AskScreen extends React.Component {
         <Col xs="2" className="align-self-center">
           <ChevronLeft
             disabled={!hasPreviousQuestion}
-            onClick={() => setPreviousQuestionIdx()}
+            onClick={() => decrementQuestionIdx()}
           />
         </Col>
         <QuestionCard
@@ -77,7 +77,7 @@ class AskScreen extends React.Component {
         <Col xs="2" className="align-self-center">
           <ChevronRight
             disabled={!hasNextQuestion}
-            onClick={() => setNextQuestionIdx()}
+            onClick={() => incrementQuestionIdx()}
           />
         </Col>
       </Row>
@@ -94,8 +94,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setNextQuestionIdx,
-  setPreviousQuestionIdx
+  incrementQuestionIdx,
+  decrementQuestionIdx
 };
 
 export default connect(

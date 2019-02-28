@@ -62,7 +62,7 @@ const MultiQuestionCard = props => {
     >
       {question.text && (
         <div
-          className="text-center mb-4 h4"
+          className="text-center my-5 h4"
           // eslint-disable-next-line
           dangerouslySetInnerHTML={{ __html: question.text }}
         />

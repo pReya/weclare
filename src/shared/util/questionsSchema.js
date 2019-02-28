@@ -6,7 +6,7 @@ const schema = {
   items: {
     type: "object",
     title: "A single questions",
-    required: ["id", "type", "text", "answers"],
+    required: ["id", "type", "text", "answers", "questionIdx"],
     properties: {
       id: {
         type: "string",
@@ -15,6 +15,10 @@ const schema = {
       type: {
         type: "string",
         title: "Type of question (e.g. single, multi, text)"
+      },
+      questionIdx: {
+        type: "number",
+        title: "Question Index"
       },
       mode: {
         type: "string",
