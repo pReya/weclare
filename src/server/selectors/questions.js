@@ -1,10 +1,13 @@
 export const getProgress = state => {
   const {
-    questionEditor: questions = [],
-    server: { currentQuestionIdx = -1 }
+    questionEditor: questions,
+    server: { currentQuestionIdx }
   } = state;
 
-  return `${currentQuestionIdx + 1}/${questions.length}`;
+  if (questions.length > 0 && typeof currentQuestionIdx === "number") {
+    return `${currentQuestionIdx + 1}/${questions.length}`;
+  }
+  return "0/0";
 };
 
 export const getCurrentQuestion = state => {
@@ -13,7 +16,10 @@ export const getCurrentQuestion = state => {
     server: { currentQuestionIdx }
   } = state;
   const progress = getProgress(state);
-  return { ...questions[currentQuestionIdx], progress };
+
+  if (questions.length > 0 && typeof currentQuestionIdx === "number") {
+    return { ...questions[currentQuestionIdx], progress };
+  }
 };
 
 export const getCurrentQuestionNoSolution = state => {

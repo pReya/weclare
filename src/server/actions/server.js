@@ -67,8 +67,6 @@ export function stopAcceptingConnections() {
       server: { acceptingConnections }
     } = getState();
 
-    console.log("Current Accept state: ", acceptingConnections);
-
     if (acceptingConnections) {
       dispatch({
         type: TOGGLE_ACCEPTING_CONNECTIONS
@@ -78,13 +76,31 @@ export function stopAcceptingConnections() {
   };
 }
 
+async function openAsync(peer) {
+  return new Promise((resolve, reject) => {
+    peer.on("open", id => {
+      Logger.info(`Successfully created peer with ID "${id}"`);
+      resolve();
+    });
+  });
+}
+
 export function startServer() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const {
       server: { ownServerId = null }
     } = getState();
 
     const peer = createPeer(ownServerId);
+
+    async function openAsync(peer) {
+      return new Promise((resolve, reject) => {
+        peer.on("open", id => {
+          Logger.info(`Successfully created peer with ID "${id}"`);
+          resolve(id);
+        });
+      });
+    }
 
     const dataHandler = data => {
       const { type, payload } = data;
@@ -106,12 +122,16 @@ export function startServer() {
 
     dispatch(setPeer(peer));
 
-    peer.on("open", id => {
-      Logger.info(`Successfully created peer with ID "${id}"`);
-      dispatch(setConnectionStatus(1));
-      // Set Server ID again, in case the input was empty and PeerJS used a random ID
-      dispatch(setServerId(id));
-    });
+    // peer.on("open", id => {
+    //   Logger.info(`Successfully created peer with ID "${id}"`);
+    //   dispatch(setConnectionStatus(1));
+    //   // Set Server ID again, in case the input was empty and PeerJS used a random ID
+    //   dispatch(setServerId(id));
+    // });
+    const id = await openAsync(peer);
+    console.log("Have waited for id", id);
+    dispatch(setConnectionStatus(1));
+    dispatch(setServerId(id));
 
     peer.on("connection", connection => {
       Logger.info("New client connected with id: ", connection.peer);

@@ -12,7 +12,6 @@ export const DSpinnerCard = {
 
 export const TQuestion = PropTypes.shape({
   question: PropTypes.shape({
-    progress: PropTypes.string,
     questionIdx: PropTypes.number,
     text: PropTypes.string,
     type: PropTypes.string,
@@ -21,13 +20,13 @@ export const TQuestion = PropTypes.shape({
 });
 
 export const DQuestion = {
-  question: {
-    progress: "",
-    questionIdx: null,
-    text: null,
-    type: null,
-    answers: null
-  },
-  disabled: false,
-  selectedAnswerIdx: null
+  progress: "0/0",
+  questionIdx: 0,
+  text: "Mock question: How is the development going?",
+  type: "single",
+  mode: "question",
+  answers: [
+    { id: "6FedDc", text: "Good", isCorrect: true },
+    { id: "9FbdDa", text: "Not Good", isCorrect: false }
+  ]
 };

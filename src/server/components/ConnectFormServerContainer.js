@@ -13,7 +13,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  serverId: state.server.ownServerId
+  serverId: state.server.ownServerId,
+  connectionStatus: state.connection.status
 });
 
 const staticProps = {

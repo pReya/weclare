@@ -13,12 +13,22 @@ import ReactRouterPropTypes from "react-router-prop-types";
 import DefaultCard from "./DefaultCard";
 
 class ConnectForm extends React.Component {
-  state = { inputIsInvalid: false };
+  state = {
+    inputIsInvalid: false,
+    isWaitingForOpen: false
+  };
+
+  setWaitForOpen() {
+    this.setState(prevState => ({
+      ...prevState,
+      isWaitingForOpen: true
+    }));
+  }
 
   validateServerId(id) {
     const serverIdRex = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/;
     const isValid = !id || serverIdRex.test(id);
-    this.setState({ inputIsInvalid: !isValid });
+    this.setState(prevState => ({ ...prevState, inputIsInvalid: !isValid }));
   }
 
   render() {
@@ -33,10 +43,17 @@ class ConnectForm extends React.Component {
       history,
       location,
       helpText,
-      validationError
+      validationError,
+      connectionStatus
     } = this.props;
 
-    const { inputIsInvalid } = this.state;
+    const { inputIsInvalid, isWaitingForOpen } = this.state;
+
+    console.log("ServerID", serverId);
+
+    if (history && location && connectionStatus === 1) {
+      history.push(location);
+    }
 
     if (match && match.params && match.params.serverId) {
       onChangeServerId(match.params.serverId);
@@ -52,6 +69,7 @@ class ConnectForm extends React.Component {
                 id="serverId"
                 type="text"
                 value={serverId}
+                disabled={isWaitingForOpen}
                 onChange={e => {
                   const newId = e.target.value;
                   this.validateServerId(newId);
@@ -70,15 +88,13 @@ class ConnectForm extends React.Component {
                 id="connect"
                 className="btn-block"
                 size="lg"
+                disabled={isWaitingForOpen || inputIsInvalid}
                 onClick={() => {
                   onClickConnect(serverId);
-                  if (history && location) {
-                    history.push(location);
-                  }
+                  this.setWaitForOpen();
                 }}
-                disabled={inputIsInvalid}
               >
-                {buttonText}
+                {isWaitingForOpen ? "WAITING" : buttonText}
               </Button>
             </Col>
           </FormGroup>
