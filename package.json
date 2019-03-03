@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ibm/plex": "^1.2.1",
-    "bootstrap": "^4.1.3",
+    "bootstrap": "^4.3.1",
     "github-markdown-css": "^2.10.0",
     "highlight.js": "^9.13.1",
     "load-script": "^1.0.0",
@@ -19,7 +19,6 @@
     "react-beautiful-dnd": "^10.0.3",
     "react-dom": "^16.5.2",
     "react-helmet": "^5.2.0",
-    "react-md-spinner": "^0.3.0",
     "react-quill": "^1.3.3",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
@@ -34,7 +33,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "secureStart": "export HTTPS=true&&npm start",
     "build": "cp README.MD public/ && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

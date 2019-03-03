@@ -80,7 +80,6 @@ class AnswerScreen extends React.Component {
         ) : (
           <SpinnerCard
             title="Waiting For Question From Server"
-            size={36}
             text="You're connected to the server, but the Quiz Session has not been started yet."
           />
         )}

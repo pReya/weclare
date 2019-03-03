@@ -1,11 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import MDSpinner from "react-md-spinner";
+import { Spinner } from "reactstrap";
 import DefaultCard from "./DefaultCard";
 import { TSpinnerCard, DSpinnerCard } from "../types";
 
 const SpinnerCard = props => {
-  const { title, size, text } = props;
+  const { title, text } = props;
 
   return (
     <>
@@ -15,13 +15,7 @@ const SpinnerCard = props => {
       <DefaultCard title={title}>
         <div className="d-flex flex-column justify-content-center">
           <div style={{ textAlign: "center" }}>
-            <MDSpinner
-              color1="#8a817c"
-              color2="#f44336"
-              color3="#dc9125"
-              color4="#5fa15d"
-              size={size}
-            />
+            <Spinner size="lg" />
           </div>
           {text && (
             <div

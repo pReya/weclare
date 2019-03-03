@@ -60,7 +60,7 @@ export function sendAnswers(answerIdxArray) {
 }
 
 export function connectToServer() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const {
       client: { remoteServerId = null }
     } = getState();
@@ -81,6 +81,17 @@ export function connectToServer() {
       }
     };
 
+    async function openAsync(connection) {
+      return new Promise((resolve, reject) => {
+        connection.on("open", () => {
+          Logger.info(`Successfully connected to server`);
+          connection.on("data", data => dataHandler(data));
+          resolve();
+        });
+        peer.on("error", err => reject(err));
+      });
+    }
+
     dispatch(setPeer(peer));
 
     const connection = peer.connect(
@@ -89,12 +100,14 @@ export function connectToServer() {
     );
     dispatch(addConnection(connection));
     dispatch(setConnectionStatus(1));
+    await openAsync(connection);
+    dispatch(setConnectionStatus(2));
 
-    connection.on("open", () => {
-      Logger.info(`Successfully connected to server ${connection.peer}`);
-      dispatch(setConnectionStatus(2));
-      connection.on("data", data => dataHandler(data));
-    });
+    // connection.on("open", () => {
+    //   Logger.info(`Successfully connected to server ${connection.peer}`);
+    //   dispatch(setConnectionStatus(2));
+    //   connection.on("data", data => dataHandler(data));
+    // });
 
     peer.on("error", err => {
       Logger.error("ERROR: ", err);

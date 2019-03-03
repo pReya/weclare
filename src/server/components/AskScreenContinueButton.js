@@ -1,10 +1,9 @@
 import React from "react";
-import { Button } from "reactstrap";
+import { Button, Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import PlayIcon from "mdi-react/PlayIcon";
 import PauseIcon from "mdi-react/PauseIcon";
 import SkipForwardIcon from "mdi-react/SkipForwardIcon";
-import MDSpinner from "react-md-spinner";
 import {
   toggleAcceptingAnswers,
   sendCurrentQuestionToClients,
@@ -63,7 +62,7 @@ class AskScreenContinueButton extends React.Component {
       0: {
         text: (
           <>
-            <MDSpinner singleColor="#8a817c" size={16} /> Waiting for clients
+            <Spinner size="sm" /> Waiting for clients
           </>
         ),
         color: "primary",

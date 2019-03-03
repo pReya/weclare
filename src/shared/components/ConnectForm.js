@@ -6,7 +6,8 @@ import {
   FormGroup,
   Button,
   Input,
-  Col
+  Col,
+  Spinner
 } from "reactstrap";
 import PropTypes from "prop-types";
 import ReactRouterPropTypes from "react-router-prop-types";
@@ -15,21 +16,21 @@ import DefaultCard from "./DefaultCard";
 class ConnectForm extends React.Component {
   state = {
     inputIsInvalid: false,
-    isWaitingForOpen: false
+    isWaitingForServer: false
   };
 
-  setWaitForOpen() {
+  setWaitingForServer = () => {
     this.setState(prevState => ({
       ...prevState,
-      isWaitingForOpen: true
+      isWaitingForServer: true
     }));
-  }
+  };
 
-  validateServerId(id) {
+  validateServerId = id => {
     const serverIdRex = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/;
     const isValid = !id || serverIdRex.test(id);
     this.setState(prevState => ({ ...prevState, inputIsInvalid: !isValid }));
-  }
+  };
 
   render() {
     const {
@@ -47,14 +48,13 @@ class ConnectForm extends React.Component {
       connectionStatus
     } = this.props;
 
-    const { inputIsInvalid, isWaitingForOpen } = this.state;
-
-    console.log("ServerID", serverId);
+    const { inputIsInvalid, isWaitingForServer } = this.state;
 
     if (history && location && connectionStatus === 1) {
       history.push(location);
     }
 
+    // React Router: If URL has serverID
     if (match && match.params && match.params.serverId) {
       onChangeServerId(match.params.serverId);
     }
@@ -69,13 +69,13 @@ class ConnectForm extends React.Component {
                 id="serverId"
                 type="text"
                 value={serverId}
-                disabled={isWaitingForOpen}
+                disabled={isWaitingForServer}
+                invalid={inputIsInvalid}
                 onChange={e => {
                   const newId = e.target.value;
                   this.validateServerId(newId);
                   onChangeServerId(newId);
                 }}
-                invalid={inputIsInvalid}
               />
               {validationError && (
                 <FormFeedback>{validationError}</FormFeedback>
@@ -88,13 +88,19 @@ class ConnectForm extends React.Component {
                 id="connect"
                 className="btn-block"
                 size="lg"
-                disabled={isWaitingForOpen || inputIsInvalid}
+                disabled={isWaitingForServer || inputIsInvalid}
                 onClick={() => {
                   onClickConnect(serverId);
-                  this.setWaitForOpen();
+                  this.setWaitingForServer();
                 }}
               >
-                {isWaitingForOpen ? "WAITING" : buttonText}
+                {isWaitingForServer ? (
+                  <>
+                    <Spinner size="sm" color="info" /> Waiting...
+                  </>
+                ) : (
+                  buttonText
+                )}
               </Button>
             </Col>
           </FormGroup>

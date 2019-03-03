@@ -76,15 +76,6 @@ export function stopAcceptingConnections() {
   };
 }
 
-async function openAsync(peer) {
-  return new Promise((resolve, reject) => {
-    peer.on("open", id => {
-      Logger.info(`Successfully created peer with ID "${id}"`);
-      resolve();
-    });
-  });
-}
-
 export function startServer() {
   return async (dispatch, getState) => {
     const {
@@ -99,6 +90,7 @@ export function startServer() {
           Logger.info(`Successfully created peer with ID "${id}"`);
           resolve(id);
         });
+        peer.on("error", err => reject(err));
       });
     }
 
@@ -122,14 +114,7 @@ export function startServer() {
 
     dispatch(setPeer(peer));
 
-    // peer.on("open", id => {
-    //   Logger.info(`Successfully created peer with ID "${id}"`);
-    //   dispatch(setConnectionStatus(1));
-    //   // Set Server ID again, in case the input was empty and PeerJS used a random ID
-    //   dispatch(setServerId(id));
-    // });
     const id = await openAsync(peer);
-    console.log("Have waited for id", id);
     dispatch(setConnectionStatus(1));
     dispatch(setServerId(id));
 
