@@ -20,6 +20,8 @@ export const getCurrentQuestion = state => {
   if (questions.length > 0 && typeof currentQuestionIdx === "number") {
     return { ...questions[currentQuestionIdx], progress };
   }
+
+  return undefined;
 };
 
 export const getCurrentQuestionNoSolution = state => {

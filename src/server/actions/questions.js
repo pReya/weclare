@@ -1,3 +1,8 @@
+import tv4 from "tv4";
+import Logger from "../../shared/util/Logger";
+import QuestionSchema from "../../shared/util/QuestionsSchema";
+import { saveToStorage } from "../../shared/util/FileHelpers";
+
 // Question Editor Actions
 export const SELECT_QUESTION = "SELECT_QUESTION";
 export function selectQuestion(questionIdx) {
@@ -91,6 +96,32 @@ export function loadQuestions(newQuestions) {
     }
   };
 }
+
+export const loadQuestionsFromStorage = () => dispatch => {
+  const newQuestions = localStorage.getItem("weclare");
+  if (newQuestions) {
+    dispatch(loadQuestions(JSON.parse(newQuestions)));
+  }
+};
+
+export const validateAndSaveToStorage = data => dispatch => {
+  const valid = tv4.validate(JSON.parse(data), QuestionSchema);
+  if (valid) {
+    Logger.info("Questionset was successfully validated");
+    saveToStorage(data);
+    dispatch(loadQuestionsFromStorage());
+  } else {
+    Logger.error("Imported file was invalid", tv4.error);
+  }
+};
+
+export const saveFileToStorage = file => dispatch => {
+  const reader = new FileReader();
+  reader.onload = () => {
+    dispatch(validateAndSaveToStorage(reader.result));
+  };
+  reader.readAsText(file);
+};
 
 export const SORT_QUESTION = "SORT_QUESTION";
 export function sortQuestion(oldQuestionIdx, newQuestionIdx) {
