@@ -1,26 +1,12 @@
 import React from "react";
 import { Col, Row, Button } from "reactstrap";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import ReactRouterPropTypes from "react-router-prop-types";
 import ContentSaveIcon from "mdi-react/ContentSaveIcon";
 import QuestionEditorContent from "./QuestionEditorContent";
 import QuestionEditorList from "./QuestionEditorList";
-import * as questionEditorActions from "../actions/questions";
-import * as answerActions from "../actions/answers";
 import { saveToStorage, downloadFile } from "../../shared/util/FileHelpers";
 import { TQuestion } from "../../shared/types";
-
-const mapStateToProps = state => ({
-  questions: state.questionEditor,
-  selectedQuestion: state.selectedQuestion
-});
-
-const mapDispatchToProps = {
-  ...questionEditorActions,
-  ...answerActions
-};
 
 class QuestionEditor extends React.Component {
   constructor(props) {
@@ -113,12 +99,7 @@ class QuestionEditor extends React.Component {
   }
 }
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(QuestionEditor)
-);
+export default QuestionEditor;
 
 QuestionEditor.propTypes = {
   selectedQuestion: PropTypes.number,

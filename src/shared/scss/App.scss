@@ -69,3 +69,12 @@ hr {
     pointer-events: none;
   }
 }
+
+// Due to react-beautiful-dnd every list item gets wrapped in a div, so first-child always applies and they lose their top border
+.card-header {
+  + .list-group {
+    .list-group-item:first-child {
+      border-top: 1px solid rgba(0, 0, 0, 0.125);
+    }
+  }
+}

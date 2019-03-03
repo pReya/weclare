@@ -8,7 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import Footer from "../../shared/components/Footer";
 import Header from "./ServerHeaderContainer";
 import ConnectFormServerContainer from "./ConnectFormServerContainer";
-import QuestionEditor from "./QuestionEditor";
+import QuestionEditorContainer from "./QuestionEditorContainer";
 import AskScreen from "./AskScreen";
 import mainServerReducer from "../reducers/main";
 
@@ -28,7 +28,11 @@ export default () => (
             path="/server/create"
             component={ConnectFormServerContainer}
           />
-          <Route exact path="/server/editor" component={QuestionEditor} />
+          <Route
+            exact
+            path="/server/editor"
+            component={QuestionEditorContainer}
+          />
           <Route exact path="/server/ask" component={AskScreen} />
           <Footer />
         </Container>
