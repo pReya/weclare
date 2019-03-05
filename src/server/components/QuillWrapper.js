@@ -13,7 +13,8 @@ class QuillWrapper extends React.Component {
     "code-block",
     "code",
     "list",
-    "link"
+    "link",
+    "font"
   ];
 
   modules = {
@@ -22,7 +23,8 @@ class QuillWrapper extends React.Component {
       [{ list: "ordered" }, { list: "bullet" }],
       ["link"],
       ["code-block"],
-      ["clean"]
+      ["clean"],
+      [{ font: [] }]
     ],
     syntax: {
       highlight: text => hljs.highlightAuto(text).value

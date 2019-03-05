@@ -148,7 +148,11 @@ const QuestionEditorList = props => {
             onUploadFile={onUploadFile}
             onUploadDropbox={onUploadDropbox}
           />
-          <Button color="light" onClick={onDownloadFile}>
+          <Button
+            color="light"
+            onClick={onDownloadFile}
+            disabled={questions.length === 0}
+          >
             <DownloadIcon className="text-secondary" /> Export
           </Button>
         </div>
