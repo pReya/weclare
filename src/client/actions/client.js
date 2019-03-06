@@ -7,7 +7,7 @@ export const ADD_CONNECTION = "ADD_CONNECTION";
 export const SET_REMOTE_SERVER_ID = "SET_REMOTE_SERVER_ID";
 export const SET_CURRENT_QUESTION = "SET_CURRENT_QUESTION";
 
-// TODO: This is probably unnecessary b/c PeerJS keeps its own connection object
+// TODO: This is probably unnecessary b/c PeerJS keeps its own connection object, however API docs say, one should not rely on the PeerJS Object
 export function addConnection(connection) {
   return {
     type: ADD_CONNECTION,
@@ -84,7 +84,7 @@ export function connectToServer() {
     async function openAsync(connection) {
       return new Promise((resolve, reject) => {
         connection.on("open", () => {
-          Logger.info(`Successfully connected to server`);
+          Logger.info(`Successfully connected to server ${connection.peer}`);
           connection.on("data", data => dataHandler(data));
           resolve();
         });
@@ -102,12 +102,6 @@ export function connectToServer() {
     dispatch(setConnectionStatus(1));
     await openAsync(connection);
     dispatch(setConnectionStatus(2));
-
-    // connection.on("open", () => {
-    //   Logger.info(`Successfully connected to server ${connection.peer}`);
-    //   dispatch(setConnectionStatus(2));
-    //   connection.on("data", data => dataHandler(data));
-    // });
 
     peer.on("error", err => {
       Logger.error("ERROR: ", err);

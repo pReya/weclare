@@ -4,7 +4,7 @@ import { Container } from "reactstrap";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import mainClientReducer from "../reducers/main";
 import Footer from "../../shared/components/Footer";
 import Header from "./ClientHeaderContainer";
@@ -29,6 +29,10 @@ const Client = () => (
               component={ConnectFormClientContainer}
             />
             <Route exact path="/client/answer" component={AnswerScreen} />
+            <Route
+              path="/client"
+              render={() => <Redirect to="/client/connect" />}
+            />
           </Switch>
           <Footer />
         </Container>

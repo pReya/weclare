@@ -103,10 +103,10 @@ const QuestionEditorList = props => {
                           <div
                             className="hover-hide"
                             {...providedDraggable.dragHandleProps}
+                            style={{ width: "22px", height: "22px" }}
                           >
                             <DragIcon
                               style={{
-                                marginBottom: "3px",
                                 marginRight: "-6px"
                               }}
                             />

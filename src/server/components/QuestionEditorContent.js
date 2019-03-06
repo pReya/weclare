@@ -125,11 +125,13 @@ const QuestionEditorContent = props => {
               <Row form className="justify-content-between">
                 <Label sm="auto">
                   <span className="font-weight-bold">Answers </span>
-                  <span className="small text-muted">
-                    {question.mode === "multi"
-                      ? "(Check the correct answers)"
-                      : "(Select the correct answer)"}
-                  </span>
+                  {question.type === "question" && (
+                    <span className="small text-muted">
+                      {question.mode === "multi"
+                        ? "(Check the correct answers)"
+                        : "(Select the correct answer)"}
+                    </span>
+                  )}
                 </Label>
 
                 <Col sm="auto">

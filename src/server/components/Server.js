@@ -3,7 +3,7 @@ import { Container } from "reactstrap";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { Route } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { composeWithDevTools } from "redux-devtools-extension";
 import Footer from "../../shared/components/Footer";
 import Header from "./ServerHeaderContainer";
@@ -23,17 +23,23 @@ export default () => (
       <>
         <Header />
         <Container>
-          <Route
-            exact
-            path="/server/create"
-            component={ConnectFormServerContainer}
-          />
-          <Route
-            exact
-            path="/server/editor"
-            component={QuestionEditorContainer}
-          />
-          <Route exact path="/server/ask" component={AskScreen} />
+          <Switch>
+            <Route
+              exact
+              path="/server/create"
+              component={ConnectFormServerContainer}
+            />
+            <Route exact path="/server/ask" component={AskScreen} />
+            <Route
+              exact
+              path="/server/editor"
+              component={QuestionEditorContainer}
+            />
+            <Route
+              path="/server"
+              render={() => <Redirect to="/server/editor" />}
+            />
+          </Switch>
           <Footer />
         </Container>
       </>

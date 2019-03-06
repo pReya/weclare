@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import PropTypes from "prop-types";
 import ReactRouterPropTypes from "react-router-prop-types";
+import { Redirect } from "react-router-dom";
 import DefaultCard from "./DefaultCard";
 
 class ConnectForm extends React.Component {
@@ -50,13 +51,13 @@ class ConnectForm extends React.Component {
 
     const { inputIsInvalid, isWaitingForServer } = this.state;
 
-    if (history && location && connectionStatus === 1) {
-      history.push(location);
-    }
-
     // React Router: If URL has serverID
     if (match && match.params && match.params.serverId) {
       onChangeServerId(match.params.serverId);
+    }
+
+    if (history && location && connectionStatus === 1) {
+      return <Redirect to={location} />;
     }
 
     return (
