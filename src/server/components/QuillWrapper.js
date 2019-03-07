@@ -1,7 +1,6 @@
 import React from "react";
 import "react-quill/dist/quill.snow.css";
 import "../../shared/scss/quill.scss";
-import "highlight.js/styles/atom-one-light.css";
 import hljs from "highlight.js";
 import ReactQuill from "react-quill";
 
@@ -30,6 +29,11 @@ class QuillWrapper extends React.Component {
       highlight: text => hljs.highlightAuto(text).value
     }
   };
+
+  constructor(props) {
+    super(props);
+    hljs.configure({ languages: ["java"] });
+  }
 
   handleChange = newValue => {
     const { onEditQuestionText, selectedQuestion } = this.props;

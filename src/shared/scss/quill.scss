@@ -15,3 +15,10 @@
   border-left: 0;
   border-right: 0;
 }
+
+// Quill Snow will set background on syntax blocks. This overwrites it
+.ql-snow .ql-editor pre.ql-syntax {
+  @extend .hljs;
+}
+
+@import "~highlight.js/styles/foundation";
