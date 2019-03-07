@@ -8,7 +8,6 @@ const QuestionCard = props => {
   const { question, isServer } = props;
 
   const title = isServer ? "Ask Question" : "Answer Question";
-  console.log("Props Question Card", props);
   return (
     <>
       <Helmet>

@@ -15,7 +15,8 @@ const SingleQuestionCard = props => {
     toggleSelectedAnswers,
     onSendAnswers,
     isServer,
-    toggleDisabled
+    toggleDisabled,
+    highlightSolutions
   } = props;
 
   return (
@@ -30,7 +31,10 @@ const SingleQuestionCard = props => {
       {question.answers &&
         question.answers.map((answer, i) => (
           <Button
-            outline={!selectedAnswersIdx[i]}
+            outline={
+              !(highlightSolutions && answer.isCorrect) &&
+              !selectedAnswersIdx[i]
+            }
             id={i}
             key={answer.id}
             block
@@ -41,7 +45,9 @@ const SingleQuestionCard = props => {
               onSendAnswers([selectedAnswer]);
               toggleDisabled();
             }}
-            color="secondary"
+            color={
+              highlightSolutions && answer.isCorrect ? "success" : "secondary"
+            }
             disabled={disabled}
           >
             {answer.text}

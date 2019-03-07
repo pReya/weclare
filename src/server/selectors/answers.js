@@ -14,14 +14,17 @@ export const getAnswerCountForCurrentQuestion = state => {
 
 export const getReceivedAnswersCounter = state => {
   const {
-    server: { connections = [] },
-    registeredAnswers
+    server: { connections = [], currentQuestionIdx },
+    registeredAnswers = []
   } = state;
-  const flatRegisteredAnswers = registeredAnswers.flat(2);
-  const distinctUsers = [...new Set(flatRegisteredAnswers)].length;
 
   const connectionCount = connections.length;
-  if (connectionCount === 0) return null;
+  if (connectionCount === 0 || !registeredAnswers[currentQuestionIdx])
+    return null;
+
+  const flatRegisteredAnswers = registeredAnswers[currentQuestionIdx].flat(2);
+  const distinctUsers = [...new Set(flatRegisteredAnswers)].length;
+
   const percentageValue = Math.trunc((distinctUsers / connectionCount) * 100);
   const percentageString = Number.isNaN(percentageValue)
     ? ""

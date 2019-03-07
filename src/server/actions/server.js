@@ -34,12 +34,69 @@ export function setCurrentQuestionIdx(questionIdx) {
   };
 }
 
+export function sendCurrentQuestionToClients() {
+  return (dispatch, getState) => {
+    const {
+      server: { connections }
+    } = getState();
+
+    const currentQuestionNoSolution = getCurrentQuestionNoSolution(getState());
+
+    const msg = {
+      type: "question",
+      payload: currentQuestionNoSolution
+    };
+
+    if (connections.length > 0 && currentQuestionNoSolution) {
+      Logger.info("Sending question to clients", currentQuestionNoSolution);
+      connections.forEach(connection => connection.send(JSON.stringify(msg)));
+    } else {
+      Logger.error("Can't send question to clients");
+    }
+  };
+}
+
+export const SET_ASK_SCREEN_STATE = "SET_ASK_SCREEN_STATE";
+export function setAskScreenState(newState) {
+  return {
+    type: SET_ASK_SCREEN_STATE,
+    payload: {
+      newState
+    }
+  };
+}
+
+export function resetAskScreenState() {
+  return (dispatch, getState) => {
+    const {
+      server: { connections }
+    } = getState();
+
+    if (connections.length > 0) {
+      dispatch({
+        type: SET_ASK_SCREEN_STATE,
+        payload: {
+          newState: 1
+        }
+      });
+    } else {
+      dispatch({
+        type: SET_ASK_SCREEN_STATE,
+        payload: {
+          newState: 0
+        }
+      });
+    }
+  };
+}
+
 export function incrementQuestionIdx() {
   return (dispatch, getState) => {
     const {
       server: { currentQuestionIdx = 0 }
     } = getState();
     dispatch(setCurrentQuestionIdx(currentQuestionIdx + 1));
+    dispatch(resetAskScreenState());
   };
 }
 
@@ -49,6 +106,7 @@ export function decrementQuestionIdx() {
       server: { currentQuestionIdx = 0 }
     } = getState();
     dispatch(setCurrentQuestionIdx(currentQuestionIdx - 1));
+    dispatch(resetAskScreenState());
   };
 }
 
@@ -73,6 +131,49 @@ export function stopAcceptingConnections() {
       });
       peer.disconnect();
     }
+  };
+}
+
+export const NEXT_ASK_SCREEN_STATE = "NEXT_ASK_SCREEN_STATE";
+export function nextAskScreenState() {
+  return (dispatch, getState) => {
+    const {
+      server: { currentAskScreenState, connections }
+    } = getState();
+
+    const actions = {
+      // Waiting for clients, button disabled
+      0: () => {
+        if (connections.length > 0) {
+          dispatch({
+            type: NEXT_ASK_SCREEN_STATE
+          });
+        }
+      },
+      // Clients connected, ready to send first question and accept answers
+      1: () => {
+        dispatch(stopAcceptingConnections());
+        dispatch(toggleAcceptingAnswers());
+        dispatch(sendCurrentQuestionToClients());
+        dispatch({
+          type: NEXT_ASK_SCREEN_STATE
+        });
+      },
+      // Stop accepting Answers
+      2: () => {
+        dispatch(toggleAcceptingAnswers());
+        dispatch({
+          type: NEXT_ASK_SCREEN_STATE
+        });
+      },
+      // Next question
+      3: () => {
+        dispatch(incrementQuestionIdx());
+      }
+    };
+
+    // Run transition actions
+    actions[currentAskScreenState]();
   };
 }
 
@@ -108,7 +209,7 @@ export function startServer() {
           );
           break;
         default:
-          Logger.error("Switch case default reached");
+          Logger.error("dataHandler Switch case default reached");
       }
     };
 
@@ -123,33 +224,12 @@ export function startServer() {
       connection.on("data", data => dataHandler(data));
       dispatch(setConnectionStatus(2));
       dispatch(addConnection(connection));
+      dispatch(nextAskScreenState());
     });
 
     peer.on("error", err => {
       Logger.error("ERROR: ", err);
       dispatch(setConnectionStatus(3));
     });
-  };
-}
-
-export function sendCurrentQuestionToClients() {
-  return (dispatch, getState) => {
-    const {
-      server: { connections }
-    } = getState();
-
-    const currentQuestionNoSolution = getCurrentQuestionNoSolution(getState());
-
-    const msg = {
-      type: "question",
-      payload: currentQuestionNoSolution
-    };
-
-    if (connections.length > 0 && currentQuestionNoSolution) {
-      Logger.info("Sending question to clients", currentQuestionNoSolution);
-      connections.forEach(connection => connection.send(JSON.stringify(msg)));
-    } else {
-      Logger.error("Can't send question to clients");
-    }
   };
 }

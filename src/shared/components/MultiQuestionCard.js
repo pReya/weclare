@@ -24,7 +24,8 @@ const MultiQuestionCard = props => {
     toggleSelectedAnswers,
     onSendAnswers,
     isServer,
-    toggleDisabled
+    toggleDisabled,
+    highlightSolutions
   } = props;
 
   return (
@@ -70,7 +71,10 @@ const MultiQuestionCard = props => {
       {question.answers &&
         question.answers.map((answer, i) => (
           <Button
-            outline={!selectedAnswersIdx[i]}
+            outline={
+              !(highlightSolutions && answer.isCorrect) &&
+              !selectedAnswersIdx[i]
+            }
             id={i}
             key={answer.id}
             block
@@ -79,7 +83,9 @@ const MultiQuestionCard = props => {
               toggleSelectedAnswers(selectedAnswer);
               Logger.info("Toggling multi answer ", selectedAnswer);
             }}
-            color="secondary"
+            color={
+              highlightSolutions && answer.isCorrect ? "success" : "secondary"
+            }
             disabled={disabled}
           >
             {answer.text}

@@ -3,7 +3,9 @@ import {
   SET_SERVER_ID,
   SET_CURRENT_QUESTION_IDX,
   TOGGLE_ACCEPTING_ANSWERS,
-  TOGGLE_ACCEPTING_CONNECTIONS
+  TOGGLE_ACCEPTING_CONNECTIONS,
+  NEXT_ASK_SCREEN_STATE,
+  SET_ASK_SCREEN_STATE
 } from "../actions/server";
 
 export const server = (
@@ -11,6 +13,7 @@ export const server = (
     connections: [],
     ownServerId: "",
     currentQuestionIdx: 0,
+    currentAskScreenState: 0,
     acceptingAnswers: false,
     acceptingConnections: true
   },
@@ -39,6 +42,18 @@ export const server = (
 
     case TOGGLE_ACCEPTING_CONNECTIONS:
       return { ...state, acceptingConnections: !state.acceptingConnections };
+
+    case NEXT_ASK_SCREEN_STATE:
+      return {
+        ...state,
+        currentAskScreenState: (state.currentAskScreenState + 1) % 4
+      };
+
+    case SET_ASK_SCREEN_STATE:
+      return {
+        ...state,
+        currentAskScreenState: action.payload.newState
+      };
 
     default:
       return state;
