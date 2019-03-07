@@ -18,20 +18,3 @@ export function setPeer(peer) {
     }
   };
 }
-
-// export function sendNextQuestionToClients() {
-//   return (dispatch, getState) => {
-//     const {
-//       server: { connections = [], currentQuestionIdx },
-//       questionEditor: questions
-//     } = getState();
-//     // use getFormattedQuestion here – how?
-//     if (connections.length > 0 && formattedQuestion) {
-//       connections.forEach(connection =>
-//         connection.send(JSON.stringify(formattedQuestion))
-//       );
-//     } else {
-//       console.error("Can't send question to clients");
-//     }
-//   };
-// }

@@ -6,9 +6,11 @@ import { TQuestion, DQuestion } from "../../shared/types";
 import { sendAnswers } from "../actions/client";
 import SpinnerCard from "../../shared/components/SpinnerCard";
 import QuestionCard from "../../shared/components/QuestionCard";
+import isConnected from "../selectors/client";
 
 const mapStateToProps = state => ({
-  currentQuestion: state.client.currentQuestion
+  currentQuestion: state.client.currentQuestion,
+  isConnected: isConnected(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -62,7 +64,7 @@ class AnswerScreen extends React.Component {
   }
 
   render() {
-    const { currentQuestion, onSendAnswers } = this.props;
+    const { currentQuestion, onSendAnswers, isConnected } = this.props;
     const { disabled, selectedAnswersIdx } = this.state;
     const hasQuestion = Object.keys(currentQuestion).length > 0;
     const commonProps = {
@@ -73,14 +75,22 @@ class AnswerScreen extends React.Component {
       toggleDisabled: this.toggleDisabled,
       onSendAnswers
     };
+
     return (
       <Row className="justify-content-center">
-        {hasQuestion ? (
-          <QuestionCard {...commonProps} />
+        {isConnected ? (
+          hasQuestion ? (
+            <QuestionCard {...commonProps} />
+          ) : (
+            <SpinnerCard
+              title="Waiting For Question From Server"
+              text="You're connected to the server, but the Quiz Session has not been started yet."
+            />
+          )
         ) : (
           <SpinnerCard
-            title="Waiting For Question From Server"
-            text="You're connected to the server, but the Quiz Session has not been started yet."
+            title="Connecting to Server"
+            text="Trying to connect to the server."
           />
         )}
       </Row>

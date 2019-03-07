@@ -8,12 +8,7 @@ export const client = (
   state = {
     connection: null,
     remoteServerId: "",
-    currentQuestion: {
-      // questionType: "singleChoice",
-      // questionText: "Hallo Erste Frage?",
-      // correctAnswers: 1,
-      // answers: [{ answerText: "Answer A" }, { answerText: "Answer B" }]
-    }
+    currentQuestion: {}
   },
   action
 ) => {
