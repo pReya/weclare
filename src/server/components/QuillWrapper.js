@@ -1,7 +1,8 @@
 import React from "react";
 import "react-quill/dist/quill.snow.css";
 import "../../shared/scss/quill.scss";
-import hljs from "highlight.js";
+import hljs from "highlight.js/lib/highlight";
+import java from "highlight.js/lib/languages/java";
 import ReactQuill from "react-quill";
 
 class QuillWrapper extends React.Component {
@@ -32,6 +33,7 @@ class QuillWrapper extends React.Component {
 
   constructor(props) {
     super(props);
+    hljs.registerLanguage("java", java);
     hljs.configure({ languages: ["java"] });
   }
 

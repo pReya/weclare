@@ -94,15 +94,17 @@ class AskScreen extends React.Component {
                   {receivedAnswersCounter} users have answered
                 </div>
                 <div>
-                  <Button
-                    size="sm"
-                    outline={!highlightSolutions}
-                    onClick={this.toggleHighlightSolutions}
-                    className="mr-2"
-                  >
-                    <CheckAllIcon style={{ paddingBottom: "3px" }} />{" "}
-                    {highlightSolutions ? "Hide" : "Show"} Solutions
-                  </Button>
+                  {currentQuestion.type === "question" && (
+                    <Button
+                      size="sm"
+                      outline={!highlightSolutions}
+                      onClick={this.toggleHighlightSolutions}
+                      className="mr-2"
+                    >
+                      <CheckAllIcon style={{ paddingBottom: "3px" }} />{" "}
+                      {highlightSolutions ? "Hide" : "Show"} Solutions
+                    </Button>
+                  )}
 
                   <Button
                     size="sm"

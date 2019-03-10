@@ -21,4 +21,14 @@
   @extend .hljs;
 }
 
+#code-container .ql-syntax {
+  @extend .hljs;
+  margin-top: 35px;
+  border-radius: 0.25rem;
+  font-size: 0.7em;
+  display: block;
+  text-align: left !important;
+  overflow: hidden;
+}
+
 @import "~highlight.js/styles/foundation";
