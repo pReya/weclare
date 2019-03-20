@@ -19,6 +19,7 @@ import {
 } from "reactstrap";
 import InfoPopoverIcon from "../../shared/components/InfoPopoverIcon";
 import QuestionEditorAnswerInput from "./QuestionEditorAnswerInput";
+import CodemirrorWrapper from "./CodemirrorWrapper";
 import QuillWrapper from "./QuillWrapper";
 
 const QuestionEditorContent = props => {
@@ -120,7 +121,6 @@ const QuestionEditorContent = props => {
                   <QuillWrapper
                     content={question.text}
                     onEditContent={onEditQuestionText}
-                    selectedQuestion={selectedQuestion}
                   />
                 </Col>
               </Row>
@@ -131,24 +131,33 @@ const QuestionEditorContent = props => {
                     <Label sm="auto" className="font-weight-bold">
                       Executable Code
                     </Label>
-                    <InfoPopoverIcon
-                      text={
-                        <>
-                          A <strong>public class</strong> with a{" "}
-                          <strong>main method</strong> is required for the code
-                          execution to work properly.
-                        </>
-                      }
-                      id="info-question-mode"
-                      placement="left"
-                    />
+                    <Col sm="auto">
+                      <InfoPopoverIcon
+                        text={
+                          <>
+                            A <strong>public class</strong> with a{" "}
+                            <strong>main method</strong> is required for the
+                            code execution to work properly.
+                          </>
+                        }
+                        id="info-question-mode"
+                        placement="left"
+                      />
+                      <DeleteIcon
+                        style={{ cursor: "pointer" }}
+                        color="#bc754a"
+                        onClick={() => {
+                          onEditQuestionCode("");
+                          onToggleCodeSnippetVisibility();
+                        }}
+                      />
+                    </Col>
                   </Row>
                   <Row form>
                     <Col>
-                      <QuillWrapper
-                        isCodeOnlyEditor
-                        content={question.code}
+                      <CodemirrorWrapper
                         onEditContent={onEditQuestionCode}
+                        content={question.code}
                       />
                     </Col>
                   </Row>
