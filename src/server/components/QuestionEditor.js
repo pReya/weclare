@@ -11,8 +11,17 @@ import { TQuestion } from "../../shared/types";
 class QuestionEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      codeSnippetVisible: false
+    };
     props.loadQuestionsFromStorage();
   }
+
+  toggleCodeSnippetVisibility = () => {
+    this.setState(prevState => ({
+      codeSnippetVisible: !prevState.codeSnippetVisible
+    }));
+  };
 
   render() {
     const {
@@ -23,7 +32,8 @@ class QuestionEditor extends React.Component {
       // actions
       addQuestion,
       selectQuestion,
-      editQuestionText,
+      editCurrentQuestionText,
+      editCurrentQuestionCode,
       editQuestionType,
       editQuestionMode,
       deleteQuestion,
@@ -38,6 +48,8 @@ class QuestionEditor extends React.Component {
       saveFileToStorage,
       validateAndSaveToStorage
     } = this.props;
+
+    const { codeSnippetVisible } = this.state;
 
     return (
       <>
@@ -61,7 +73,8 @@ class QuestionEditor extends React.Component {
             <QuestionEditorContent
               question={questions[selectedQuestion]}
               selectedQuestion={selectedQuestion}
-              onEditQuestionText={editQuestionText}
+              onEditQuestionText={editCurrentQuestionText}
+              onEditQuestionCode={editCurrentQuestionCode}
               onEditQuestionMode={editQuestionMode}
               onEditQuestionType={editQuestionType}
               onEditAnswerText={editAnswerText}
@@ -71,6 +84,8 @@ class QuestionEditor extends React.Component {
               onSortAnswer={sortAnswer}
               onDeleteAnswer={deleteAnswer}
               onDeleteQuestion={deleteQuestion}
+              onToggleCodeSnippetVisibility={this.toggleCodeSnippetVisibility}
+              codeSnippetVisible={codeSnippetVisible}
             />
           </Col>
         </Row>
@@ -107,7 +122,8 @@ QuestionEditor.propTypes = {
   // Questions
   selectQuestion: PropTypes.func.isRequired,
   addQuestion: PropTypes.func.isRequired,
-  editQuestionText: PropTypes.func.isRequired,
+  editCurrentQuestionText: PropTypes.func.isRequired,
+  editCurrentQuestionCode: PropTypes.func.isRequired,
   editQuestionMode: PropTypes.func.isRequired,
   editQuestionType: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,

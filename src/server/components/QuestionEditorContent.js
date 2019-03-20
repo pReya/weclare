@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PlaylistPlusIcon from "mdi-react/PlaylistPlusIcon";
+import MonitorIcon from "mdi-react/MonitorIcon";
+import CancelIcon from "mdi-react/CancelIcon";
 import DeleteIcon from "mdi-react/DeleteIcon";
 import {
   Card,
@@ -25,6 +27,7 @@ const QuestionEditorContent = props => {
     selectedQuestion,
     onEditAnswerText,
     onEditQuestionText,
+    onEditQuestionCode,
     onEditQuestionMode,
     onEditQuestionType,
     onAddAnswer,
@@ -32,7 +35,9 @@ const QuestionEditorContent = props => {
     onSetCorrectSingleAnswer,
     onSetCorrectMultiAnswer,
     onDeleteAnswer,
-    onDeleteQuestion
+    onDeleteQuestion,
+    onToggleCodeSnippetVisibility,
+    codeSnippetVisible
   } = props;
 
   return (
@@ -114,11 +119,54 @@ const QuestionEditorContent = props => {
                 <Col>
                   <QuillWrapper
                     content={question.text}
-                    onEditQuestionText={onEditQuestionText}
+                    onEditContent={onEditQuestionText}
                     selectedQuestion={selectedQuestion}
                   />
                 </Col>
               </Row>
+
+              {codeSnippetVisible ? (
+                <>
+                  <Row form className="justify-content-between">
+                    <Label sm="auto" className="font-weight-bold">
+                      Executable Code
+                    </Label>
+                    <InfoPopoverIcon
+                      text={
+                        <>
+                          A <strong>public class</strong> with a{" "}
+                          <strong>main method</strong> is required for the code
+                          execution to work properly.
+                        </>
+                      }
+                      id="info-question-mode"
+                      placement="left"
+                    />
+                  </Row>
+                  <Row form>
+                    <Col>
+                      <QuillWrapper
+                        isCodeOnlyEditor
+                        content={question.code}
+                        onEditContent={onEditQuestionCode}
+                      />
+                    </Col>
+                  </Row>
+                </>
+              ) : (
+                <Row form>
+                  <Col>
+                    <Button
+                      outline
+                      block
+                      color="primary"
+                      onClick={() => onToggleCodeSnippetVisibility()}
+                    >
+                      <MonitorIcon /> Add executable code snippet
+                    </Button>
+                  </Col>
+                </Row>
+              )}
             </FormGroup>
 
             <FormGroup>
@@ -294,7 +342,12 @@ const QuestionEditorContent = props => {
             </Button>
           </Form>
         ) : (
-          <span className="text-muted">No question selected</span>
+          <div className="text-center">
+            <div>
+              <CancelIcon size={32} color="#8a817c" />
+            </div>
+            <div className="text-muted mt-3">No question selected</div>
+          </div>
         )}
       </CardBody>
     </Card>

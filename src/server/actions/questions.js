@@ -17,23 +17,37 @@ export function selectQuestion(questionIdx) {
 export const ADD_QUESTION = "ADD_QUESTION";
 export function addQuestion() {
   return (dispatch, getState) => {
-    // 1: add question to `questions` state
     dispatch({ type: ADD_QUESTION });
-
-    // 2: select newest question as `selectedQuestion`
     const { questionEditor } = getState();
     dispatch(selectQuestion(questionEditor.length - 1));
   };
 }
 
 export const EDIT_QUESTION_TEXT = "EDIT_QUESTION_TEXT";
-export function editQuestionText(questionIdx, text) {
-  return {
-    type: EDIT_QUESTION_TEXT,
-    payload: {
-      questionIdx,
-      text
-    }
+export function editCurrentQuestionText(text) {
+  return (dispatch, getState) => {
+    const { selectedQuestion } = getState();
+    dispatch({
+      type: EDIT_QUESTION_TEXT,
+      payload: {
+        questionIdx: selectedQuestion,
+        text
+      }
+    });
+  };
+}
+
+export const EDIT_QUESTION_CODE = "EDIT_QUESTION_CODE";
+export function editCurrentQuestionCode(code) {
+  return (dispatch, getState) => {
+    const { selectedQuestion } = getState();
+    dispatch({
+      type: EDIT_QUESTION_CODE,
+      payload: {
+        questionIdx: selectedQuestion,
+        code
+      }
+    });
   };
 }
 

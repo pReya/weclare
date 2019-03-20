@@ -64,9 +64,9 @@ class QuestionEditorAnswerInput extends React.Component {
 
           {isHovered && (
             <InputGroupAddon addonType="append">
-              <InputGroupText className="pointerCursor">
+              {/* <InputGroupText className="pointerCursor">
                 <PencilIcon />
-              </InputGroupText>
+              </InputGroupText> */}
               <InputGroupText
                 className="pointerCursor"
                 onClick={() => {
