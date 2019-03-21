@@ -11,17 +11,8 @@ import { TQuestion } from "../../shared/types";
 class QuestionEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      codeSnippetVisible: false
-    };
     props.loadQuestionsFromStorage();
   }
-
-  toggleCodeSnippetVisibility = () => {
-    this.setState(prevState => ({
-      codeSnippetVisible: !prevState.codeSnippetVisible
-    }));
-  };
 
   render() {
     const {
@@ -49,8 +40,6 @@ class QuestionEditor extends React.Component {
       validateAndSaveToStorage
     } = this.props;
 
-    const { codeSnippetVisible } = this.state;
-
     return (
       <>
         <Row className="justify-content-center mb-4">
@@ -71,6 +60,11 @@ class QuestionEditor extends React.Component {
           </Col>
           <Col md="8">
             <QuestionEditorContent
+              key={
+                (questions[selectedQuestion] &&
+                  questions[selectedQuestion].id) ||
+                "none"
+              }
               question={questions[selectedQuestion]}
               selectedQuestion={selectedQuestion}
               onEditQuestionText={editCurrentQuestionText}
@@ -84,8 +78,6 @@ class QuestionEditor extends React.Component {
               onSortAnswer={sortAnswer}
               onDeleteAnswer={deleteAnswer}
               onDeleteQuestion={deleteQuestion}
-              onToggleCodeSnippetVisibility={this.toggleCodeSnippetVisibility}
-              codeSnippetVisible={codeSnippetVisible}
             />
           </Col>
         </Row>

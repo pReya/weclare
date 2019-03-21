@@ -5,12 +5,12 @@ import "codemirror/theme/eclipse.css";
 import "codemirror/lib/codemirror.css";
 import "codemirror/mode/clike/clike";
 
-export const CodemirrorWrapper = props => {
+const CodemirrorWrapper = props => {
   const { content, onEditContent } = props;
 
   return (
     <CodeMirror
-      className="border rounded"
+      className="border rounded overflow-hidden"
       options={{
         lineNumbers: true,
         theme: "eclipse",
