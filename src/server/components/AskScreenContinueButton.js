@@ -50,7 +50,7 @@ const AskScreenContinueButton = props => {
       }
     }
   };
-
+  console.log("AskScreenContinueButton render");
   const { currentAskScreenState } = props;
   const currentPhaseObj = buttonState[currentAskScreenState];
   return (

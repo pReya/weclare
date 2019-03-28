@@ -68,9 +68,10 @@ class QuestionCard extends React.Component {
           >
             Send Answers
           </Button>
+          {children}
         </>
       );
-    } else if (question.mode === "single") {
+    } else {
       footer = children;
     }
 
