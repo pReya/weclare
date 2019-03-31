@@ -13,21 +13,10 @@ import {
   getReceivedAnswersCounter
 } from "../selectors/answers";
 import { incrementQuestionIdx, decrementQuestionIdx } from "../actions/server";
+import { runCurrentCode } from "../actions/doppio";
 import { ChevronRight, ChevronLeft } from "../../shared/components/Chevron";
 import { hasPreviousQuestion, hasNextQuestion } from "../selectors/server";
-
-const BrowserFS = require("browserfs");
-const Doppio = require("doppiojvm");
-
-const writeJavaSourceFileAsync = async (name, source) =>
-  new Promise((resolve, reject) => {
-    const { fs } = window;
-
-    fs.writeFile(`/tmp/${name}.java`, source, err => {
-      if (err) reject(err);
-      resolve();
-    });
-  });
+import CodeExecutionArea from "./CodeExecutionArea";
 
 class AskScreen extends React.Component {
   constructor(props) {
@@ -35,64 +24,11 @@ class AskScreen extends React.Component {
 
     this.initialState = {
       showVoteCount: false,
+      showTerminal: false,
       highlightSolutions: false,
       prevQuestion: props.currentQuestion
     };
     this.state = this.initialState;
-  }
-
-  async componentDidUpdate() {
-    const { fs, process } = window;
-    const { currentQuestion } = this.props;
-
-    if (currentQuestion.code) {
-      await writeJavaSourceFileAsync("App", currentQuestion.code);
-      fs.readdir("/tmp", (err, files) => {
-        // handling error
-        if (err) {
-          return console.log("Unable to scan directory: " + err);
-        }
-        // listing all files using forEach
-        files.forEach(file => {
-          // Do whatever you want to do with the file
-          console.log(file);
-        });
-      });
-      process.initializeTTYs();
-      const terminalDiv = document.getElementById("terminal");
-      process.stdout.on("data", data => {
-        const line = document.createTextNode(data.toString());
-        terminalDiv.appendChild(line);
-        terminalDiv.appendChild(document.createElement("br"));
-      });
-      process.stderr.on("data", data => {
-        const line = document.createTextNode(data.toString());
-        terminalDiv.appendChild(line);
-        terminalDiv.appendChild(document.createElement("br"));
-      });
-      // eslint-disable-next-line
-      new Doppio.VM.JVM(
-        {
-          // '/sys' is the path to a directory in the BrowserFS file system with:
-          // * vendor/java_home/*
-          doppioHomePath: "/sys",
-          // Add the paths to your class and JAR files in the BrowserFS file system
-          classpath: [".", "/sys/", "/home/", "/tmp/"]
-        },
-        (err, jvmObject) => {
-          jvmObject.runClass("Loader", [], exitCode => {
-            if (exitCode === 0) {
-              // Execution terminated successfully
-              const line = document.createTextNode("JVM exited successfully");
-              terminalDiv.appendChild(line);
-            } else {
-              const line = document.createTextNode("JVM exited unsuccessfully");
-              terminalDiv.appendChild(line);
-            }
-          });
-        }
-      );
-    }
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -102,6 +38,7 @@ class AskScreen extends React.Component {
     ) {
       return {
         prevQuestion: props.currentQuestion,
+        showTerminal: false,
         showVoteCount: false,
         highlightSolutions: false
       };
@@ -116,66 +53,19 @@ class AskScreen extends React.Component {
     }));
   };
 
+  toggleShowTerminal = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      showTerminal: !prevState.showTerminal
+    }));
+  };
+
   toggleHighlightSolutions = () => {
     this.setState(prevState => ({
       ...prevState,
       highlightSolutions: !prevState.highlightSolutions
     }));
   };
-
-  // startDoppio() {
-  //   // Initialize TTYs; required if needed to be initialized immediately due to
-  //   // circular dependency issue.
-  //   // See: https://github.com/jvilk/bfs-process#stdinstdoutstderr
-  //   process.initializeTTYs();
-  //   process.stdout.on("data", data => {
-  //     // data is a Node Buffer, which BrowserFS implements in the browser.
-  //     // http://nodejs.org/api/buffer.html
-  //     alert("Received the following output: " + data.toString());
-  //   });
-
-  //   // eslint-disable-next-line
-  //   new Doppio.VM.JVM(
-  //     {
-  //       // '/sys' is the path to a directory in the BrowserFS file system with:
-  //       // * vendor/java_home/*
-  //       doppioHomePath: "/sys",
-  //       // Add the paths to your class and JAR files in the BrowserFS file system
-  //       classpath: [".", "/sys/", "/home/"]
-  //     },
-  //     (err, jvmObject) => {
-  //       jvmObject.runClass("Javac", ["/home/App.java"], exitCode => {
-  //         if (exitCode === 0) {
-  //           // Execution terminated successfully
-  //           console.log("SUCCESS");
-  //           new Doppio.VM.JVM(
-  //             {
-  //               // '/sys' is the path to a directory in the BrowserFS file system with:
-  //               // * vendor/java_home/*
-  //               doppioHomePath: "/sys",
-  //               // Add the paths to your class and JAR files in the BrowserFS file system
-  //               classpath: [".", "/sys/", "/home/"]
-  //             },
-  //             (err, jvmObject) => {
-  //               jvmObject.runClass("App", [], exitCode => {
-  //                 if (exitCode === 0) {
-  //                   // Execution terminated successfully
-  //                   console.log("SUCCESS2");
-  //                 } else {
-  //                   console.log("ERROR2");
-  //                   // Execution failed. :(
-  //                 }
-  //               });
-  //             }
-  //           );
-  //         } else {
-  //           console.log("ERROR");
-  //           // Execution failed. :(
-  //         }
-  //       });
-  //     }
-  //   );
-  // }
 
   resetState() {
     this.setState(this.initialState);
@@ -192,8 +82,10 @@ class AskScreen extends React.Component {
       decrementQuestionIdx,
       acceptingAnswers
     } = this.props;
-    const { showVoteCount, highlightSolutions } = this.state;
 
+    const { showVoteCount, highlightSolutions, showTerminal } = this.state;
+
+    const questionHasCodeSnippet = currentQuestion && currentQuestion.code;
     return (
       <Row className="justify-content-center">
         <Col xs="2" className="align-self-center">
@@ -240,14 +132,12 @@ class AskScreen extends React.Component {
               </div>
             )}
             <AskScreenContinueButtonContainer />
-            <div
-              style={{ height: "300px", overflow: "scroll" }}
-              id="terminal"
-              className="border rounded text-white bg-dark p-3 my-3"
-            >
-              Starting JVM...
-              <br />
-            </div>
+            {questionHasCodeSnippet && (
+              <CodeExecutionArea
+                showTerminal={showTerminal}
+                onClickExecute={this.toggleShowTerminal}
+              />
+            )}
           </>
         </QuestionCard>
         <Col xs="2" className="align-self-center">
@@ -261,31 +151,6 @@ class AskScreen extends React.Component {
   }
 }
 
-BrowserFS.install(window);
-BrowserFS.configure(
-  {
-    fs: "MountableFileSystem",
-    options: {
-      "/tmp": { fs: "InMemory" },
-      "/home": { fs: "LocalStorage" },
-      "/sys": {
-        fs: "XmlHttpRequest",
-        options: {
-          index: `${process.env.PUBLIC_URL}/doppio/listings.json`
-        }
-      }
-    }
-  },
-  e => {
-    if (e) {
-      // An error happened!
-      throw e;
-    }
-    // Otherwise, BrowserFS is ready-to-use!
-    window.fs = window.require("fs");
-  }
-);
-
 const mapStateToProps = state => ({
   currentQuestion: getCurrentQuestion(state),
   countedAnswers: getAnswerCountForCurrentQuestion(state),
@@ -297,7 +162,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   incrementQuestionIdx,
-  decrementQuestionIdx
+  decrementQuestionIdx,
+  runCurrentCode
 };
 
 export default connect(
