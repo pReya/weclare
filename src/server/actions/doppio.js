@@ -1,15 +1,7 @@
+import { addLine, resetTerminal } from "./terminal";
+
 const Doppio = require("doppiojvm");
 const BrowserFS = require("browserfs");
-
-const writeTerminalLine = (terminalElement, text) => {
-  if (terminalElement) {
-    const line = document.createTextNode(text);
-    terminalElement.appendChild(line);
-    terminalElement.appendChild(document.createElement("br"));
-  } else {
-    console.log(text);
-  }
-};
 
 const writeJavaSourceFileAsync = async (name, source) =>
   new Promise((resolve, reject) => {
@@ -63,11 +55,9 @@ export function runCurrentCode() {
     const currentQuestion = questions[currentQuestionIdx];
 
     if (currentQuestion.code) {
-      const terminalDiv = document.getElementById("terminal");
-      console.log("TerminalDiv", terminalDiv);
       await setupBrowserFs();
       const { fs, process } = window;
-      writeTerminalLine(terminalDiv, "BrowserFS setup successfull.");
+      dispatch(addLine("BrowserFS setup successful."));
       await writeJavaSourceFileAsync("App", currentQuestion.code);
       //   fs.readdir("/tmp", (err, files) => {
       //     // handling error
@@ -80,17 +70,17 @@ export function runCurrentCode() {
       //       console.log(file);
       //     });
       //   });
-      writeTerminalLine(terminalDiv, "Wrote source file to file system.");
+      dispatch(addLine("Wrote source file to file system."));
       process.initializeTTYs();
 
       process.stdout.on("data", data =>
-        writeTerminalLine(terminalDiv, data.toString())
+        dispatch(addLine(data.toString(), false))
       );
 
       process.stderr.on("data", data =>
-        writeTerminalLine(terminalDiv, data.toString())
+        dispatch(addLine(data.toString(), false))
       );
-      writeTerminalLine(terminalDiv, "Starting JVM.");
+      dispatch(addLine("Starting JVM."));
       // Instantiate Doppio JVM
       // eslint-disable-next-line
       new Doppio.VM.JVM(
@@ -101,9 +91,9 @@ export function runCurrentCode() {
         (err, jvmObject) => {
           jvmObject.runClass("Loader", [], exitCode => {
             if (exitCode === 0) {
-              writeTerminalLine(terminalDiv, "JVM exited successfully");
+              dispatch(addLine("JVM exited successfully"));
             } else {
-              writeTerminalLine(terminalDiv, "JVM exited with an error");
+              dispatch(addLine("JVM exited with an error"));
             }
           });
         }

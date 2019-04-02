@@ -1,5 +1,5 @@
 import React from "react";
-import TerminalWindow from "./TerminalWindow";
+import TerminalWindowContainer from "./TerminalWindowContainer";
 import ExecuteCodeButtonContainer from "./ExecuteCodeButtonContainer";
 
 const CodeExecutionArea = props => {
@@ -8,7 +8,7 @@ const CodeExecutionArea = props => {
   return (
     <>
       {!showTerminal && <ExecuteCodeButtonContainer onClick={onClickExecute} />}
-      <TerminalWindow showTerminal={showTerminal} />
+      <TerminalWindowContainer showTerminal={showTerminal} />
     </>
   );
 };

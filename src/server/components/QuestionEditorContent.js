@@ -154,7 +154,7 @@ class QuestionEditorContent extends React.Component {
                               code execution to work properly.
                             </>
                           }
-                          id="info-question-mode"
+                          id="info-question-code"
                           placement="left"
                         />
                         <DeleteIcon
