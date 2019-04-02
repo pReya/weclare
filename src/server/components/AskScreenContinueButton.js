@@ -11,7 +11,7 @@ const AskScreenContinueButton = props => {
     0: {
       text: (
         <>
-          <Spinner size="sm" className="mr-2" /> Waiting for clients
+          <Spinner size="sm" className="mr-2" /> Waiting for clients to start
         </>
       ),
       color: "primary",

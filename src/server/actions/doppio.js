@@ -92,7 +92,7 @@ export function runCurrentCode() {
         );
       }
 
-      dispatch(addLine("Starting JVM..."));
+      dispatch(addLine("Loading JVM..."));
 
       // Instantiate Doppio JVM
       // eslint-disable-next-line

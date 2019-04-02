@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Input, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 import DeleteIcon from "mdi-react/DeleteIcon";
 import DragIcon from "mdi-react/DragIcon";
-import PencilIcon from "mdi-react/PencilIcon";
 
 class QuestionEditorAnswerInput extends React.Component {
   state = {
@@ -100,7 +99,7 @@ QuestionEditorAnswerInput.propTypes = {
 export default QuestionEditorAnswerInput;
 
 const RadioInput = props => {
-  const { isCorrectAnswer, number, onSetCorrectAnswer, disabled } = props;
+  const { isCorrectAnswer, onSetCorrectAnswer, disabled } = props;
   return (
     <Input
       addon
@@ -115,7 +114,6 @@ const RadioInput = props => {
 
 RadioInput.propTypes = {
   isCorrectAnswer: PropTypes.bool.isRequired,
-  number: PropTypes.number.isRequired,
   onSetCorrectAnswer: PropTypes.func.isRequired,
   disabled: PropTypes.bool
 };

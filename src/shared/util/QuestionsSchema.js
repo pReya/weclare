@@ -5,7 +5,7 @@ const schema = {
   title: "A question set for weclare.de",
   items: {
     type: "object",
-    title: "A single questions",
+    title: "A single question",
     required: ["id", "type", "text", "answers", "questionIdx"],
     properties: {
       id: {
@@ -27,6 +27,10 @@ const schema = {
       text: {
         type: "string",
         title: "The question text"
+      },
+      code: {
+        type: "string",
+        title: "Executable code for this question"
       },
       answers: {
         type: "array",

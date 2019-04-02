@@ -6,7 +6,6 @@ import QuestionCard from "../../shared/components/QuestionCard";
 import AskScreenContinueButtonContainer from "./AskScreenContinueButtonContainer";
 import { ChevronRight, ChevronLeft } from "../../shared/components/Chevron";
 import CodeExecutionArea from "./CodeExecutionArea";
-import { resetTerminal } from "../actions/terminal";
 
 class AskScreen extends React.Component {
   constructor(props) {
