@@ -1,22 +1,12 @@
 import React from "react";
 import { Row, Col, Button } from "reactstrap";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import FormatListNumberedIcon from "mdi-react/FormatListNumberedIcon";
 import CheckAllIcon from "mdi-react/CheckAllIcon";
-// import Doppio from "doppiojvm/dist/release/doppio";
 import QuestionCard from "../../shared/components/QuestionCard";
 import AskScreenContinueButtonContainer from "./AskScreenContinueButtonContainer";
-import { getCurrentQuestion } from "../selectors/questions";
-import {
-  getAnswerCountForCurrentQuestion,
-  getReceivedAnswersCounter
-} from "../selectors/answers";
-import { incrementQuestionIdx, decrementQuestionIdx } from "../actions/server";
-import { runCurrentCode } from "../actions/doppio";
 import { ChevronRight, ChevronLeft } from "../../shared/components/Chevron";
-import { hasPreviousQuestion, hasNextQuestion } from "../selectors/server";
 import CodeExecutionArea from "./CodeExecutionArea";
+import { resetTerminal } from "../actions/terminal";
 
 class AskScreen extends React.Component {
   constructor(props) {
@@ -80,7 +70,9 @@ class AskScreen extends React.Component {
       hasPreviousQuestion,
       incrementQuestionIdx,
       decrementQuestionIdx,
-      acceptingAnswers
+      acceptingAnswers,
+      isBusy,
+      resetTerminal
     } = this.props;
 
     const { showVoteCount, highlightSolutions, showTerminal } = this.state;
@@ -90,8 +82,11 @@ class AskScreen extends React.Component {
       <Row className="justify-content-center">
         <Col xs="2" className="align-self-center">
           <ChevronLeft
-            disabled={!hasPreviousQuestion || acceptingAnswers}
-            onClick={() => decrementQuestionIdx()}
+            disabled={!hasPreviousQuestion || acceptingAnswers || isBusy}
+            onClick={() => {
+              resetTerminal();
+              decrementQuestionIdx();
+            }}
           />
         </Col>
         <QuestionCard
@@ -142,8 +137,11 @@ class AskScreen extends React.Component {
         </QuestionCard>
         <Col xs="2" className="align-self-center">
           <ChevronRight
-            disabled={!hasNextQuestion || acceptingAnswers}
-            onClick={() => incrementQuestionIdx()}
+            disabled={!hasNextQuestion || acceptingAnswers || isBusy}
+            onClick={() => {
+              resetTerminal();
+              incrementQuestionIdx();
+            }}
           />
         </Col>
       </Row>
@@ -151,22 +149,4 @@ class AskScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  currentQuestion: getCurrentQuestion(state),
-  countedAnswers: getAnswerCountForCurrentQuestion(state),
-  receivedAnswersCounter: getReceivedAnswersCounter(state),
-  hasPreviousQuestion: hasPreviousQuestion(state),
-  hasNextQuestion: hasNextQuestion(state),
-  acceptingAnswers: state.server.acceptingAnswers
-});
-
-const mapDispatchToProps = {
-  incrementQuestionIdx,
-  decrementQuestionIdx,
-  runCurrentCode
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(AskScreen));
+export default AskScreen;

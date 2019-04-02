@@ -1,4 +1,5 @@
-import { addLine, resetTerminal } from "./terminal";
+import { addLine } from "./terminal";
+import { toggleBusy } from "./server";
 
 const Doppio = require("doppiojvm");
 const BrowserFS = require("browserfs");
@@ -55,9 +56,9 @@ export function runCurrentCode() {
     const currentQuestion = questions[currentQuestionIdx];
 
     if (currentQuestion.code) {
+      dispatch(toggleBusy());
       await setupBrowserFs();
       const { fs, process } = window;
-      dispatch(addLine("BrowserFS setup successful."));
       await writeJavaSourceFileAsync("App", currentQuestion.code);
       //   fs.readdir("/tmp", (err, files) => {
       //     // handling error
@@ -70,17 +71,19 @@ export function runCurrentCode() {
       //       console.log(file);
       //     });
       //   });
-      dispatch(addLine("Wrote source file to file system."));
-      process.initializeTTYs();
+      //   process.initializeTTYs();
 
-      process.stdout.on("data", data =>
-        dispatch(addLine(data.toString(), false))
-      );
+      // Only attach listeners once
+      if (process.stdout.listenerCount("data") === 0) {
+        process.stdout.on("data", data =>
+          dispatch(addLine(data.toString(), false))
+        );
+        process.stderr.on("data", data =>
+          dispatch(addLine(data.toString(), false))
+        );
+      }
 
-      process.stderr.on("data", data =>
-        dispatch(addLine(data.toString(), false))
-      );
-      dispatch(addLine("Starting JVM."));
+      dispatch(addLine("Starting JVM..."));
       // Instantiate Doppio JVM
       // eslint-disable-next-line
       new Doppio.VM.JVM(
@@ -95,6 +98,7 @@ export function runCurrentCode() {
             } else {
               dispatch(addLine("JVM exited with an error"));
             }
+            dispatch(toggleBusy());
           });
         }
       );

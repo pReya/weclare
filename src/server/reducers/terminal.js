@@ -11,6 +11,7 @@ export const terminal = (state = [], action) => {
     }
 
     case RESET_TERMINAL: {
+      console.log("Reset");
       return [];
     }
 

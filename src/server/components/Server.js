@@ -9,7 +9,7 @@ import Footer from "../../shared/components/Footer";
 import Header from "./ServerHeaderContainer";
 import ConnectFormServerContainer from "./ConnectFormServerContainer";
 import QuestionEditorContainer from "./QuestionEditorContainer";
-import AskScreen from "./AskScreen";
+import AskScreenContainer from "./AskScreenContainer";
 import mainServerReducer from "../reducers/main";
 
 const serverStore = createStore(
@@ -29,7 +29,7 @@ export default () => (
               path="/server/create"
               component={ConnectFormServerContainer}
             />
-            <Route exact path="/server/ask" component={AskScreen} />
+            <Route exact path="/server/ask" component={AskScreenContainer} />
             <Route
               exact
               path="/server/editor"
