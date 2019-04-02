@@ -1,16 +1,16 @@
 {
   "main.css": "/static/css/main.d484d4cd.chunk.css",
-  "main.js": "/static/js/main.b96bcef3.chunk.js",
-  "main.js.map": "/static/js/main.b96bcef3.chunk.js.map",
+  "main.js": "/static/js/main.6979d817.chunk.js",
+  "main.js.map": "/static/js/main.6979d817.chunk.js.map",
   "static/css/1.07b75263.chunk.css": "/static/css/1.07b75263.chunk.css",
-  "static/js/1.dca2a8a4.chunk.js": "/static/js/1.dca2a8a4.chunk.js",
-  "static/js/1.dca2a8a4.chunk.js.map": "/static/js/1.dca2a8a4.chunk.js.map",
+  "static/js/1.72524805.chunk.js": "/static/js/1.72524805.chunk.js",
+  "static/js/1.72524805.chunk.js.map": "/static/js/1.72524805.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
   "static/media/App.scss": "/static/media/IBMPlexSans-BoldItalic.a183af96.woff",
   "static/css/main.d484d4cd.chunk.css.map": "/static/css/main.d484d4cd.chunk.css.map",
   "static/css/1.07b75263.chunk.css.map": "/static/css/1.07b75263.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.a815b83d1ff286c1e9ccf5a99ff7c1c5.js": "/precache-manifest.a815b83d1ff286c1e9ccf5a99ff7c1c5.js",
+  "precache-manifest.c70c44cb922e67006b9996bd0b369a55.js": "/precache-manifest.c70c44cb922e67006b9996bd0b369a55.js",
   "service-worker.js": "/service-worker.js"
 }
