@@ -117,6 +117,13 @@ export function toggleAcceptingAnswers() {
   };
 }
 
+export const TOGGLE_BUSY = "TOGGLE_BUSY";
+export function toggleBusy() {
+  return {
+    type: TOGGLE_BUSY
+  };
+}
+
 export const TOGGLE_ACCEPTING_CONNECTIONS = "TOGGLE_ACCEPTING_CONNECTIONS";
 export function stopAcceptingConnections() {
   return (dispatch, getState) => {

@@ -23,7 +23,8 @@ class QuestionEditor extends React.Component {
       // actions
       addQuestion,
       selectQuestion,
-      editQuestionText,
+      editCurrentQuestionText,
+      editCurrentQuestionCode,
       editQuestionType,
       editQuestionMode,
       deleteQuestion,
@@ -59,9 +60,15 @@ class QuestionEditor extends React.Component {
           </Col>
           <Col md="8">
             <QuestionEditorContent
+              key={
+                (questions[selectedQuestion] &&
+                  questions[selectedQuestion].id) ||
+                "none"
+              }
               question={questions[selectedQuestion]}
               selectedQuestion={selectedQuestion}
-              onEditQuestionText={editQuestionText}
+              onEditQuestionText={editCurrentQuestionText}
+              onEditQuestionCode={editCurrentQuestionCode}
               onEditQuestionMode={editQuestionMode}
               onEditQuestionType={editQuestionType}
               onEditAnswerText={editAnswerText}
@@ -107,7 +114,8 @@ QuestionEditor.propTypes = {
   // Questions
   selectQuestion: PropTypes.func.isRequired,
   addQuestion: PropTypes.func.isRequired,
-  editQuestionText: PropTypes.func.isRequired,
+  editCurrentQuestionText: PropTypes.func.isRequired,
+  editCurrentQuestionCode: PropTypes.func.isRequired,
   editQuestionMode: PropTypes.func.isRequired,
   editQuestionType: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,

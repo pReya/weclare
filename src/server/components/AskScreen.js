@@ -1,25 +1,20 @@
 import React from "react";
 import { Row, Col, Button } from "reactstrap";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import FormatListNumberedIcon from "mdi-react/FormatListNumberedIcon";
 import CheckAllIcon from "mdi-react/CheckAllIcon";
 import QuestionCard from "../../shared/components/QuestionCard";
 import AskScreenContinueButtonContainer from "./AskScreenContinueButtonContainer";
-import { getCurrentQuestion } from "../selectors/questions";
-import {
-  getAnswerCountForCurrentQuestion,
-  getReceivedAnswersCounter
-} from "../selectors/answers";
-import { incrementQuestionIdx, decrementQuestionIdx } from "../actions/server";
 import { ChevronRight, ChevronLeft } from "../../shared/components/Chevron";
-import { hasPreviousQuestion, hasNextQuestion } from "../selectors/server";
+import CodeExecutionArea from "./CodeExecutionArea";
+import { resetTerminal } from "../actions/terminal";
 
 class AskScreen extends React.Component {
   constructor(props) {
     super(props);
+
     this.initialState = {
       showVoteCount: false,
+      showTerminal: false,
       highlightSolutions: false,
       prevQuestion: props.currentQuestion
     };
@@ -31,9 +26,9 @@ class AskScreen extends React.Component {
       props.currentQuestion &&
       props.currentQuestion.text !== state.prevQuestion.text
     ) {
-      console.log("Question has changed");
       return {
         prevQuestion: props.currentQuestion,
+        showTerminal: false,
         showVoteCount: false,
         highlightSolutions: false
       };
@@ -45,6 +40,13 @@ class AskScreen extends React.Component {
     this.setState(prevState => ({
       ...prevState,
       showVoteCount: !prevState.showVoteCount
+    }));
+  };
+
+  toggleShowTerminal = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      showTerminal: !prevState.showTerminal
     }));
   };
 
@@ -68,16 +70,23 @@ class AskScreen extends React.Component {
       hasPreviousQuestion,
       incrementQuestionIdx,
       decrementQuestionIdx,
-      acceptingAnswers
+      acceptingAnswers,
+      isBusy,
+      resetTerminal
     } = this.props;
-    const { showVoteCount, highlightSolutions } = this.state;
 
+    const { showVoteCount, highlightSolutions, showTerminal } = this.state;
+
+    const questionHasCodeSnippet = currentQuestion && currentQuestion.code;
     return (
       <Row className="justify-content-center">
         <Col xs="2" className="align-self-center">
           <ChevronLeft
-            disabled={!hasPreviousQuestion || acceptingAnswers}
-            onClick={() => decrementQuestionIdx()}
+            disabled={!hasPreviousQuestion || acceptingAnswers || isBusy}
+            onClick={() => {
+              resetTerminal();
+              decrementQuestionIdx();
+            }}
           />
         </Col>
         <QuestionCard
@@ -117,14 +126,22 @@ class AskScreen extends React.Component {
                 </div>
               </div>
             )}
-
             <AskScreenContinueButtonContainer />
+            {questionHasCodeSnippet && (
+              <CodeExecutionArea
+                showTerminal={showTerminal}
+                onClickExecute={this.toggleShowTerminal}
+              />
+            )}
           </>
         </QuestionCard>
         <Col xs="2" className="align-self-center">
           <ChevronRight
-            disabled={!hasNextQuestion || acceptingAnswers}
-            onClick={() => incrementQuestionIdx()}
+            disabled={!hasNextQuestion || acceptingAnswers || isBusy}
+            onClick={() => {
+              resetTerminal();
+              incrementQuestionIdx();
+            }}
           />
         </Col>
       </Row>
@@ -132,21 +149,4 @@ class AskScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  currentQuestion: getCurrentQuestion(state),
-  countedAnswers: getAnswerCountForCurrentQuestion(state),
-  receivedAnswersCounter: getReceivedAnswersCounter(state),
-  hasPreviousQuestion: hasPreviousQuestion(state),
-  hasNextQuestion: hasNextQuestion(state),
-  acceptingAnswers: state.server.acceptingAnswers
-});
-
-const mapDispatchToProps = {
-  incrementQuestionIdx,
-  decrementQuestionIdx
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(AskScreen));
+export default AskScreen;

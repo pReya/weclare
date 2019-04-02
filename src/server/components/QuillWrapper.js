@@ -38,8 +38,8 @@ class QuillWrapper extends React.Component {
   }
 
   handleChange = newValue => {
-    const { onEditQuestionText, selectedQuestion } = this.props;
-    onEditQuestionText(selectedQuestion, newValue);
+    const { onEditContent } = this.props;
+    onEditContent(newValue);
   };
 
   render() {

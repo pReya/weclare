@@ -5,7 +5,8 @@ import {
   TOGGLE_ACCEPTING_ANSWERS,
   TOGGLE_ACCEPTING_CONNECTIONS,
   NEXT_ASK_SCREEN_STATE,
-  SET_ASK_SCREEN_STATE
+  SET_ASK_SCREEN_STATE,
+  TOGGLE_BUSY
 } from "../actions/server";
 
 export const server = (
@@ -15,7 +16,8 @@ export const server = (
     currentQuestionIdx: 0,
     currentAskScreenState: 0,
     acceptingAnswers: false,
-    acceptingConnections: true
+    acceptingConnections: true,
+    isBusy: false
   },
   action
 ) => {
@@ -42,6 +44,9 @@ export const server = (
 
     case TOGGLE_ACCEPTING_CONNECTIONS:
       return { ...state, acceptingConnections: !state.acceptingConnections };
+
+    case TOGGLE_BUSY:
+      return { ...state, isBusy: !state.isBusy };
 
     case NEXT_ASK_SCREEN_STATE:
       return {
