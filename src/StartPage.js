@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Button, Container } from "reactstrap";
+import { Row, Button, Container, CardDeck } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import Footer from "./shared/components/Footer";
@@ -16,33 +16,36 @@ const StartPage = () => (
     </div>
 
     <Row>
-      <Col sm="6">
-        <div className="card-deck mb-3 text-center">
-          <SelectBox
-            header="For Students"
-            text="Start the client app, which allows you to connect to an existing session and answer questions."
-            emoji="👩‍🎓"
+      <CardDeck className="text-center">
+        <SelectBox
+          header="For Students"
+          text="Start the client app, which allows you to connect to an existing session and answer questions."
+          emoji="👩‍🎓"
+        >
+          <Button
+            tag={Link}
+            to="/client/connect"
+            size="lg"
+            block
+            outline
+            color="primary"
+            className="align-self-end mt-auto"
           >
-            <Button
-              tag={Link}
-              to="/client/connect"
-              size="lg"
-              block
-              outline
-              color="primary"
-            >
-              Join Quiz Session
-            </Button>
-          </SelectBox>
-        </div>
-      </Col>
-      <Col sm="6">
-        <div className="card-deck mb-3 text-center">
-          <SelectBox
-            header="For Instructors"
-            text="Start the server app, which allows you to create new question sets and accept connections from students."
-            emoji="👩‍🏫"
-          >
+            Join Quiz Session
+          </Button>
+        </SelectBox>
+
+        <SelectBox
+          header="For Instructors"
+          text="Start the server app, which allows you to create new question sets and accept connections from students."
+          emoji="👩‍🏫"
+        >
+          <>
+            <div className="text-danger mb-3">
+              <small className="text-muted">
+                This app will load ~60 MB of Java Runtime files.
+              </small>
+            </div>
             <Button
               tag={Link}
               to="/server/editor"
@@ -50,12 +53,13 @@ const StartPage = () => (
               block
               outline
               color="primary"
+              className="align-self-end mt-auto"
             >
               Create Quiz Session
             </Button>
-          </SelectBox>
-        </div>
-      </Col>
+          </>
+        </SelectBox>
+      </CardDeck>
     </Row>
     <Footer />
   </Container>

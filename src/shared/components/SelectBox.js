@@ -5,28 +5,26 @@ import PropTypes from "prop-types";
 const SelectBox = props => {
   const { header, text, children, emoji } = props;
   return (
-    <div>
-      <Card className="shadow-none">
-        <CardHeader>
-          <h4 className="my-0">{header}</h4>
-        </CardHeader>
-        <CardBody>
-          <CardText>
-            <span
-              role="img"
-              aria-label="Student"
-              className="d-block"
-              style={{ fontSize: "4em" }}
-            >
-              {emoji}
-            </span>
+    <Card className="shadow-none">
+      <CardHeader>
+        <h4 className="my-0">{header}</h4>
+      </CardHeader>
+      <CardBody className="d-flex flex-column">
+        <CardText>
+          <span
+            role="img"
+            aria-label="Student"
+            className="d-block"
+            style={{ fontSize: "4em" }}
+          >
+            {emoji}
+          </span>
 
-            <span>{text}</span>
-          </CardText>
-          {children}
-        </CardBody>
-      </Card>
-    </div>
+          <span>{text}</span>
+        </CardText>
+        {children}
+      </CardBody>
+    </Card>
   );
 };
 
