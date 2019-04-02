@@ -33,11 +33,6 @@ public class Loader {
 
     if (result == 0) {
       try {
-        // File dir = new File("/tmp");
-        // File[] contents = dir.listFiles();
-        // for (File object : contents) {
-        // System.out.println(object);
-        // }
         System.out.println("Compilation successful. Executing...");
         System.out.println("---");
 

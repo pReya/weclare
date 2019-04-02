@@ -153,7 +153,10 @@ export function nextAskScreenState() {
       0: () => {
         if (connections.length > 0) {
           dispatch({
-            type: NEXT_ASK_SCREEN_STATE
+            type: SET_ASK_SCREEN_STATE,
+            payload: {
+              newState: 1
+            }
           });
         }
       },
@@ -231,7 +234,12 @@ export function startServer() {
       connection.on("data", data => dataHandler(data));
       dispatch(setConnectionStatus(2));
       dispatch(addConnection(connection));
-      dispatch(nextAskScreenState());
+      dispatch({
+        type: SET_ASK_SCREEN_STATE,
+        payload: {
+          newState: 1
+        }
+      });
     });
 
     peer.on("error", err => {
