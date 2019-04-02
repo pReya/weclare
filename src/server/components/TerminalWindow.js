@@ -28,7 +28,7 @@ class TerminalWindow extends React.Component {
     return (
       <div
         ref={this.terminalRef}
-        style={{ height: "300px", overflow: "scroll", whiteSpace: "pre-wrap" }}
+        style={{ height: "300px", overflow: "auto", whiteSpace: "pre-wrap" }}
         id="terminal"
         className={`border rounded text-white bg-dark p-3 my-3 ${
           showTerminal ? "d-block" : "d-none"

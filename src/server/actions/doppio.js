@@ -4,6 +4,12 @@ import { toggleBusy } from "./server";
 const Doppio = require("doppiojvm");
 const BrowserFS = require("browserfs");
 
+const findPublicStaticClass = source => {
+  const re = /public\s+class\s+(\b[A-Za-z][A-Za-z0-9_]*\b)/m;
+  const result = re.exec(source);
+  return result ? result[1] : null;
+};
+
 const writeJavaSourceFileAsync = async (name, source) =>
   new Promise((resolve, reject) => {
     const { fs } = window;
@@ -22,7 +28,6 @@ const setupBrowserFs = async () => {
         fs: "MountableFileSystem",
         options: {
           "/tmp": { fs: "InMemory" },
-          "/home": { fs: "LocalStorage" },
           "/sys": {
             fs: "XmlHttpRequest",
             options: {
@@ -57,21 +62,25 @@ export function runCurrentCode() {
 
     if (currentQuestion.code) {
       dispatch(toggleBusy());
+      const classname = findPublicStaticClass(currentQuestion.code);
+      if (!classname) {
+        dispatch(addLine("Could not find a public class to compile.", false));
+        return;
+      }
       await setupBrowserFs();
-      const { fs, process } = window;
-      await writeJavaSourceFileAsync("App", currentQuestion.code);
-      //   fs.readdir("/tmp", (err, files) => {
-      //     // handling error
-      //     if (err) {
-      //       return console.log("Unable to scan directory: " + err);
-      //     }
-      //     // listing all files using forEach
-      //     files.forEach(file => {
-      //       // Do whatever you want to do with the file
-      //       console.log(file);
-      //     });
+      const { process } = window;
+      await writeJavaSourceFileAsync(classname, currentQuestion.code);
+      // fs.readdir("/tmp", (err, files) => {
+      //   // handling error
+      //   if (err) {
+      //     return console.log("Unable to scan directory: " + err);
+      //   }
+      //   // listing all files using forEach
+      //   files.forEach(file => {
+      //     // Do whatever you want to do with the file
+      //     console.log(file);
       //   });
-      //   process.initializeTTYs();
+      // });
 
       // Only attach listeners once
       if (process.stdout.listenerCount("data") === 0) {
@@ -84,18 +93,17 @@ export function runCurrentCode() {
       }
 
       dispatch(addLine("Starting JVM..."));
+
       // Instantiate Doppio JVM
       // eslint-disable-next-line
       new Doppio.VM.JVM(
         {
           doppioHomePath: "/sys",
-          classpath: [".", "/sys/", "/home/", "/tmp/"]
+          classpath: [".", "/sys/", "/tmp/"]
         },
         (err, jvmObject) => {
-          jvmObject.runClass("Loader", [], exitCode => {
-            if (exitCode === 0) {
-              dispatch(addLine("JVM exited successfully"));
-            } else {
+          jvmObject.runClass("Loader", [classname], exitCode => {
+            if (exitCode !== 0) {
               dispatch(addLine("JVM exited with an error"));
             }
             dispatch(toggleBusy());

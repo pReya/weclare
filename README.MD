@@ -6,10 +6,10 @@ It is the prototype(!) of a classroom response system specifically designed for 
 
 Weclare was designed to fulfill these high-level requirements:
 
-- Web based (no downloads necessary for both involved parties)
-- Interactive code execution of Java code snippets in the browser (running a JVM in the browser)
-- Peer-to-Peer design: No or minimal (only for signalling) server interaction required (based on WebRTC)
-- Good formatting options for code snippets (Syntax Highlighting)
+- **Web based**: No downloads necessary for both, students and instructor (using [Create React App](https://github.com/facebook/create-react-app) and [Redux](https://github.com/reduxjs/redux))
+- **Peer-2-Peer**: Minimal (only for signalling) server interaction required (based on WebRTC using [PeerJS](https://github.com/peers/peerjs))
+- **Code Execution**: Java code snippets within questions can be compiled and executed right in the browser (using [Doppio](https://github.com/plasma-umass/doppio/))
+- **Code Formatting**: Formatting options (indentation, syntax highlighting) for Java code snippets (using [react-quill](https://github.com/zenoamaro/react-quill) and [react-codemirror2](https://github.com/scniro/react-codemirror2))
 
 ## What is a classroom response system?
 
