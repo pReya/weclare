@@ -7,6 +7,7 @@ import DefaultCard from "./DefaultCard";
 import "../scss/quill.scss";
 import Logger from "../util/Logger";
 import { TQuestion, DQuestion } from "../types";
+import CodemirrorWrapper from "./CodemirrorWrapper";
 
 class QuestionCard extends React.Component {
   // Convert boolean array to numerical array, e.g. [true, false, true] -> [0,2]
@@ -89,6 +90,10 @@ class QuestionCard extends React.Component {
             dangerouslySetInnerHTML={{ __html: question.text }}
           />
         )}
+        {question.code && (
+          <CodemirrorWrapper content={question.code} readOnly="nocursor" />
+        )}
+
         {question.answers &&
           question.answers.map((answer, i) => (
             <Button

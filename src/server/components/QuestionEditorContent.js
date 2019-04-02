@@ -19,7 +19,7 @@ import {
 } from "reactstrap";
 import InfoPopoverIcon from "../../shared/components/InfoPopoverIcon";
 import QuestionEditorAnswerInput from "./QuestionEditorAnswerInput";
-import CodemirrorWrapper from "./CodemirrorWrapper";
+import CodemirrorWrapper from "../../shared/components/CodemirrorWrapper";
 import QuillWrapper from "./QuillWrapper";
 
 class QuestionEditorContent extends React.Component {

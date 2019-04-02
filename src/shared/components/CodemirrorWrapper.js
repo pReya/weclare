@@ -6,15 +6,17 @@ import "codemirror/lib/codemirror.css";
 import "codemirror/mode/clike/clike";
 
 const CodemirrorWrapper = props => {
-  const { content, onEditContent } = props;
+  const { content, onEditContent, readOnly = false } = props;
 
   return (
     <CodeMirror
-      className="border rounded overflow-hidden"
+      className="border rounded overflow-hidden mb-4"
       options={{
+        readOnly,
         lineNumbers: true,
         theme: "eclipse",
-        mode: "text/x-java"
+        mode: "text/x-java",
+        viewportMargin: Infinity
       }}
       value={content}
       onBeforeChange={(editor, data, value) => {
@@ -26,12 +28,14 @@ const CodemirrorWrapper = props => {
 
 CodemirrorWrapper.propTypes = {
   content: PropTypes.string,
-  onEditContent: PropTypes.func
+  onEditContent: PropTypes.func,
+  readOnly: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 CodemirrorWrapper.defaultProps = {
   content: "",
-  onEditContent: () => null
+  onEditContent: () => null,
+  readOnly: false
 };
 
 export default CodemirrorWrapper;
