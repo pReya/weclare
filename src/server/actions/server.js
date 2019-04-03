@@ -1,5 +1,10 @@
 import Logger from "../../shared/util/Logger";
-import { setPeer, setConnectionStatus } from "../../shared/actions/connection";
+import {
+  setPeer,
+  setConnectionStatus,
+  setConnectionError,
+  toggleConnectionBusy
+} from "../../shared/actions/connection";
 import { registerAnswers } from "./answers";
 import { getCurrentQuestionNoSolution } from "../selectors/questions";
 import createPeer from "../../shared/util/NetworkHelpers";
@@ -189,25 +194,18 @@ export function nextAskScreenState() {
 
 export function startServer() {
   return async (dispatch, getState) => {
-    const {
-      server: { ownServerId = null }
-    } = getState();
-
-    const peer = createPeer(ownServerId);
-
     async function openAsync(peer) {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         peer.on("open", id => {
           Logger.info(`Successfully created peer with ID "${id}"`);
           resolve(id);
         });
-        peer.on("error", err => reject(err));
       });
     }
 
     const dataHandler = data => {
       const { type, payload } = data;
-      Logger.info("Received Data: ", data);
+      Logger.info("Received data: ", data);
       switch (type) {
         case "answer":
           dispatch(
@@ -223,11 +221,23 @@ export function startServer() {
       }
     };
 
-    dispatch(setPeer(peer));
+    const {
+      server: { ownServerId = null }
+    } = getState();
 
-    const id = await openAsync(peer);
-    dispatch(setConnectionStatus(1));
-    dispatch(setServerId(id));
+    const peer = createPeer(ownServerId);
+    peer.on("error", err => {
+      Logger.error("ERROR: ", err);
+      switch (err.type) {
+        case "unavailable-id": {
+          dispatch(setConnectionError("This ID is already taken."));
+          dispatch(toggleConnectionBusy());
+          break;
+        }
+        default:
+      }
+      dispatch(setConnectionStatus(3));
+    });
 
     peer.on("connection", connection => {
       Logger.info("New client connected with id: ", connection.peer);
@@ -242,9 +252,12 @@ export function startServer() {
       });
     });
 
-    peer.on("error", err => {
-      Logger.error("ERROR: ", err);
-      dispatch(setConnectionStatus(3));
-    });
+    dispatch(setPeer(peer));
+    const id = await openAsync(peer);
+    console.log("ID", id);
+    if (typeof id === "string") {
+      dispatch(setConnectionStatus(1));
+      dispatch(setServerId(id));
+    }
   };
 }

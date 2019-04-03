@@ -16,20 +16,12 @@ import DefaultCard from "./DefaultCard";
 
 class ConnectForm extends React.Component {
   state = {
-    inputIsInvalid: false,
-    isWaitingForServer: false
-  };
-
-  setWaitingForServer = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      isWaitingForServer: true
-    }));
+    inputIsInvalid: false
   };
 
   validateServerId = id => {
     const serverIdRex = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/;
-    const isValid = !id || serverIdRex.test(id);
+    const isValid = serverIdRex.test(id);
     this.setState(prevState => ({ ...prevState, inputIsInvalid: !isValid }));
   };
 
@@ -46,17 +38,23 @@ class ConnectForm extends React.Component {
       location,
       helpText,
       validationError,
-      connectionStatus
+      connectionStatus,
+      busyText,
+      connectionError,
+      connectionBusy,
+      onToggleConnectionBusy,
+      onClearConnectionError,
+      isServer
     } = this.props;
 
-    const { inputIsInvalid, isWaitingForServer } = this.state;
+    const { inputIsInvalid } = this.state;
 
     // React Router: If URL has serverID
     if (match && match.params && match.params.serverId) {
       onChangeServerId(match.params.serverId);
     }
 
-    if (history && location && connectionStatus === 1) {
+    if (history && location && connectionStatus === (isServer ? 1 : 2)) {
       return <Redirect to={location} />;
     }
 
@@ -70,34 +68,43 @@ class ConnectForm extends React.Component {
                 id="serverId"
                 type="text"
                 value={serverId}
-                disabled={isWaitingForServer}
-                invalid={inputIsInvalid}
+                disabled={connectionBusy}
+                invalid={inputIsInvalid || Boolean(connectionError)}
                 onChange={e => {
                   const newId = e.target.value;
                   this.validateServerId(newId);
                   onChangeServerId(newId);
+                  if (typeof onClearConnectionError === "function") {
+                    onClearConnectionError();
+                  }
                 }}
               />
-              {validationError && (
-                <FormFeedback>{validationError}</FormFeedback>
+              {validationError &&
+                inputIsInvalid && (
+                  <FormFeedback>{validationError}</FormFeedback>
+                )}
+              {connectionError && (
+                <FormFeedback>{connectionError}</FormFeedback>
               )}
               {helpText && <FormText>{helpText}</FormText>}
             </Col>
-            <Col md={3}>
+            <Col md={4}>
               <Button
                 type="button"
                 id="connect"
                 className="btn-block"
                 size="lg"
-                disabled={isWaitingForServer || inputIsInvalid}
+                disabled={connectionBusy || inputIsInvalid || !serverId}
                 onClick={() => {
                   onClickConnect(serverId);
-                  this.setWaitingForServer();
+                  if (typeof onToggleConnectionBusy === "function") {
+                    onToggleConnectionBusy();
+                  }
                 }}
               >
-                {isWaitingForServer ? (
+                {connectionBusy ? (
                   <>
-                    <Spinner size="sm" color="info" /> Waiting...
+                    <Spinner size="sm" color="info" /> {busyText}
                   </>
                 ) : (
                   buttonText
@@ -122,8 +129,9 @@ ConnectForm.propTypes = {
   location: PropTypes.string.isRequired,
   helpText: PropTypes.string,
   validationError: PropTypes.string,
-  inputIsInvalid: PropTypes.bool,
-  match: ReactRouterPropTypes.match
+  match: ReactRouterPropTypes.match,
+  connectionStatus: PropTypes.number,
+  busyText: PropTypes.string
 };
 
 ConnectForm.defaultProps = {
@@ -131,7 +139,8 @@ ConnectForm.defaultProps = {
   match: undefined,
   buttonText: "Connect",
   validationError: undefined,
-  inputIsInvalid: false
+  connectionStatus: 0,
+  busyText: "Waiting..."
 };
 
 export default ConnectForm;

@@ -4,17 +4,25 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import ConnectForm from "../../shared/components/ConnectForm";
 import { setServerId, startServer } from "../actions/server";
+import {
+  toggleConnectionBusy,
+  clearConnectionError
+} from "../../shared/actions/connection";
 
 const mapDispatchToProps = dispatch => ({
   onChangeServerId: newServerId => dispatch(setServerId(newServerId)),
   onClickConnect: () => {
     dispatch(startServer());
-  }
+  },
+  onToggleConnectionBusy: () => dispatch(toggleConnectionBusy()),
+  onClearConnectionError: () => dispatch(clearConnectionError())
 });
 
 const mapStateToProps = state => ({
   serverId: state.server.ownServerId,
-  connectionStatus: state.connection.status
+  connectionStatus: state.connection.status,
+  connectionBusy: state.connection.busy,
+  connectionError: state.connection.errorMsg
 });
 
 const staticProps = {
@@ -22,9 +30,11 @@ const staticProps = {
   text:
     "Please pick a server ID that uniquely identifies your quiz session (e.g. 'algorithms_2_2018') or leave it empty to generate a random ID.",
   buttonText: "Create",
+  busyText: "Creating...",
   location: "/server/ask",
   validationError:
-    "Only alphanumeric characters and '-','_' or spaces are allowed."
+    "Must start and end with alphanumeric characters. '-','_' and ' ' allowed in between.",
+  isServer: true
 };
 
 export default withRouter(

@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Button, Container, CardDeck } from "reactstrap";
+import { Button, Container, CardDeck } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import Footer from "./shared/components/Footer";
@@ -15,52 +15,51 @@ const StartPage = () => (
       </p>
     </div>
 
-    <Row>
-      <CardDeck className="text-center">
-        <SelectBox
-          header="For Students"
-          text="Start the client app, which allows you to connect to an existing session and answer questions."
-          emoji="👩‍🎓"
+    <CardDeck className="text-center">
+      <SelectBox
+        header="For Students"
+        text="Start the client app, which allows you to connect to an existing session and answer questions."
+        emoji="👩‍🎓"
+      >
+        <Button
+          tag={Link}
+          to="/client/connect"
+          size="lg"
+          block
+          outline
+          color="primary"
+          className="align-self-end mt-auto"
         >
+          Join Quiz Session
+        </Button>
+      </SelectBox>
+
+      <SelectBox
+        header="For Instructors"
+        text="Start the server app, which allows you to create new question sets and accept connections from students."
+        emoji="👩‍🏫"
+      >
+        <>
+          <div className="text-danger mb-3">
+            <small className="text-muted">
+              Attention: This app will load ~60 MB of Java Runtime files.
+            </small>
+          </div>
           <Button
             tag={Link}
-            to="/client/connect"
+            to="/server/editor"
             size="lg"
             block
             outline
             color="primary"
             className="align-self-end mt-auto"
           >
-            Join Quiz Session
+            Create Quiz Session
           </Button>
-        </SelectBox>
+        </>
+      </SelectBox>
+    </CardDeck>
 
-        <SelectBox
-          header="For Instructors"
-          text="Start the server app, which allows you to create new question sets and accept connections from students."
-          emoji="👩‍🏫"
-        >
-          <>
-            <div className="text-danger mb-3">
-              <small className="text-muted">
-                This app will load ~60 MB of Java Runtime files.
-              </small>
-            </div>
-            <Button
-              tag={Link}
-              to="/server/editor"
-              size="lg"
-              block
-              outline
-              color="primary"
-              className="align-self-end mt-auto"
-            >
-              Create Quiz Session
-            </Button>
-          </>
-        </SelectBox>
-      </CardDeck>
-    </Row>
     <Footer />
   </Container>
 );

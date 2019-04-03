@@ -4,7 +4,7 @@ import AskScreen from "./AskScreen";
 import { getCurrentQuestion } from "../selectors/questions";
 import {
   getAnswerCountForCurrentQuestion,
-  getReceivedAnswersCounter
+  getNumberOfUsersAnsweredString
 } from "../selectors/answers";
 import { incrementQuestionIdx, decrementQuestionIdx } from "../actions/server";
 import { runCurrentCode } from "../actions/doppio";
@@ -14,7 +14,7 @@ import { resetTerminal } from "../actions/terminal";
 const mapStateToProps = state => ({
   currentQuestion: getCurrentQuestion(state),
   countedAnswers: getAnswerCountForCurrentQuestion(state),
-  receivedAnswersCounter: getReceivedAnswersCounter(state),
+  receivedAnswersCounter: getNumberOfUsersAnsweredString(state),
   hasPreviousQuestion: hasPreviousQuestion(state),
   hasNextQuestion: hasNextQuestion(state),
   acceptingAnswers: state.server.acceptingAnswers,

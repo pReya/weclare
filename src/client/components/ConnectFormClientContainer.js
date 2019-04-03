@@ -4,15 +4,23 @@ import { connect } from "react-redux";
 import ConnectForm from "../../shared/components/ConnectForm";
 
 import { setRemoteServerId, connectToServer } from "../actions/client";
+import {
+  toggleConnectionBusy,
+  clearConnectionError
+} from "../../shared/actions/connection";
 
 const mapDispatchToProps = dispatch => ({
   onChangeServerId: newServerId => dispatch(setRemoteServerId(newServerId)),
-  onClickConnect: () => dispatch(connectToServer())
+  onClickConnect: () => dispatch(connectToServer()),
+  onToggleConnectionBusy: () => dispatch(toggleConnectionBusy()),
+  onClearConnectionError: () => dispatch(clearConnectionError())
 });
 
 const mapStateToProps = state => ({
   serverId: state.client.remoteServerId,
-  connectionStatus: state.connection.status
+  connectionStatus: state.connection.status,
+  connectionError: state.connection.errorMsg,
+  connectionBusy: state.connection.busy
 });
 
 const staticProps = {
@@ -21,8 +29,10 @@ const staticProps = {
     "Please enter a valid Server ID. You should receive this ID from your instructor.",
   buttonText: "Connect",
   location: "/client/answer",
+  busyText: "Connecting...",
   validationError:
-    "Only alphanumeric characters and '-','_' or spaces are allowed."
+    "Must start and end with alphanumeric characters. '-','_' and ' ' allowed in between.",
+  isServer: false
 };
 
 export default connect(

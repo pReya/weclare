@@ -1,5 +1,10 @@
 import Logger from "../../shared/util/Logger";
-import { setPeer, setConnectionStatus } from "../../shared/actions/connection";
+import {
+  setPeer,
+  setConnectionStatus,
+  setConnectionError,
+  toggleConnectionBusy
+} from "../../shared/actions/connection";
 import createPeer from "../../shared/util/NetworkHelpers";
 
 // Client Actions
@@ -7,7 +12,7 @@ export const ADD_CONNECTION = "ADD_CONNECTION";
 export const SET_REMOTE_SERVER_ID = "SET_REMOTE_SERVER_ID";
 export const SET_CURRENT_QUESTION = "SET_CURRENT_QUESTION";
 
-// TODO: This is probably unnecessary b/c PeerJS keeps its own connection object, however API docs say, one should not rely on the PeerJS Object
+// This is probably unnecessary b/c PeerJS keeps its own connection object, however API docs say, one should not rely on the PeerJS Object
 export function addConnection(connection) {
   return {
     type: ADD_CONNECTION,
@@ -66,6 +71,19 @@ export function connectToServer() {
     } = getState();
 
     const peer = createPeer();
+    peer.on("error", err => {
+      switch (err.type) {
+        case "peer-unavailable": {
+          dispatch(setConnectionError("This ID does not exist."));
+          dispatch(toggleConnectionBusy());
+          break;
+        }
+        default: {
+          console.log("Error Type: ", err.type);
+        }
+      }
+      dispatch(setConnectionStatus(3));
+    });
 
     const dataHandler = data => {
       const dataObj = JSON.parse(data);
@@ -82,13 +100,12 @@ export function connectToServer() {
     };
 
     async function openAsync(connection) {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         connection.on("open", () => {
           Logger.info(`Successfully connected to server ${connection.peer}`);
           connection.on("data", data => dataHandler(data));
           resolve();
         });
-        peer.on("error", err => reject(err));
       });
     }
 
@@ -102,10 +119,5 @@ export function connectToServer() {
     dispatch(setConnectionStatus(1));
     await openAsync(connection);
     dispatch(setConnectionStatus(2));
-
-    peer.on("error", err => {
-      Logger.error("ERROR: ", err);
-      dispatch(setConnectionStatus(3));
-    });
   };
 }

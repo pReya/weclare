@@ -12,7 +12,7 @@ export const getAnswerCountForCurrentQuestion = state => {
   return [];
 };
 
-export const getReceivedAnswersCounter = state => {
+export const getNumberOfUsersAnswered = state => {
   const {
     server: { connections = [], currentQuestionIdx },
     registeredAnswers = []
@@ -24,6 +24,17 @@ export const getReceivedAnswersCounter = state => {
 
   const flatRegisteredAnswers = registeredAnswers[currentQuestionIdx].flat(2);
   const distinctUsers = [...new Set(flatRegisteredAnswers)].length;
+
+  return distinctUsers;
+};
+
+export const getNumberOfUsersAnsweredString = state => {
+  const {
+    server: { connections = [] }
+  } = state;
+
+  const connectionCount = connections.length;
+  const distinctUsers = getNumberOfUsersAnswered(state) || "0";
 
   const percentageValue = Math.trunc((distinctUsers / connectionCount) * 100);
   const percentageString = Number.isNaN(percentageValue)

@@ -1,3 +1,5 @@
+import { getNumberOfUsersAnswered } from "../selectors/answers";
+import { NEXT_ASK_SCREEN_STATE } from "./server";
 // Server Answer Actions
 export const REGISTER_ANSWERS = "REGISTER_ANSWERS";
 export function registerAnswers(questionIdx, answerIdxArray, userId) {
@@ -12,6 +14,16 @@ export function registerAnswers(questionIdx, answerIdxArray, userId) {
           userId
         }
       });
+      // Get state again after new answer has been registered
+      const newState = getState();
+      const receivedAnswers = getNumberOfUsersAnswered(newState);
+
+      // End question when all users have sent answers
+      if (receivedAnswers >= server.connections.length) {
+        dispatch({
+          type: NEXT_ASK_SCREEN_STATE
+        });
+      }
     }
   };
 }
