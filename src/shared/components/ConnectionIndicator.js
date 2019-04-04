@@ -50,7 +50,7 @@ export default class ConnectionIndicator extends React.Component {
   }
 
   render() {
-    const { status, isServer, numberOfClients, ownServerId } = this.props;
+    const { status, isServer, numberOfClients, ownServerId, peer } = this.props;
     const { dropdownOpen, showModal } = this.state;
     const statusDescriptions = {
       client: ["⌨️ Ready", "Trying to connect", "✅ Connected", "❌ Error"],
@@ -63,9 +63,10 @@ export default class ConnectionIndicator extends React.Component {
     };
     const componentRole = isServer ? "server" : "client";
     const value = statusDescriptions[componentRole][status];
+    const peerOpen = peer && peer.open;
     return (
       <InputGroup className="justify-content-center col-md-8">
-        {isServer && [1, 2, 3].includes(status) ? (
+        {isServer && [1, 2, 3].includes(status) && peerOpen ? (
           <InputGroupButtonDropdown
             addonType="prepend"
             isOpen={dropdownOpen}
@@ -74,6 +75,7 @@ export default class ConnectionIndicator extends React.Component {
             <DropdownToggle caret className="font-weight-bold">
               {`${ownServerId} `}
             </DropdownToggle>
+
             <DropdownMenu>
               <DropdownItem header>Share with client</DropdownItem>
               <DropdownItem divider />

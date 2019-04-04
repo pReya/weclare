@@ -5,7 +5,14 @@ import { Container, Navbar, NavbarBrand, NavLink } from "reactstrap";
 import ConnectionIndicator from "./ConnectionIndicator";
 
 const Header = props => {
-  const { status, numberOfClients, isServer, isClient, ownServerId } = props;
+  const {
+    status,
+    numberOfClients,
+    isServer,
+    isClient,
+    ownServerId,
+    peer
+  } = props;
   return (
     <>
       <Navbar
@@ -23,6 +30,7 @@ const Header = props => {
               status={status}
               numberOfClients={numberOfClients}
               ownServerId={ownServerId}
+              peer={peer}
             />
           )}
 
