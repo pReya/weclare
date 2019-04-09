@@ -6,6 +6,18 @@ import {
   CLEAR_CONNECTION_ERROR
 } from "../actions/connection";
 
+// Server:
+// 0: Ready
+// 1: Waiting for Connections
+// 2: Clients connected
+// 3: Error
+
+// Client:
+// 0: Ready
+// 1: Trying to connect
+// 2: Connected to server
+// 3: Error
+
 export const connection = (
   state = {
     peer: null,

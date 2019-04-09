@@ -94,7 +94,9 @@ class ConnectForm extends React.Component {
                 id="connect"
                 className="btn-block"
                 size="lg"
-                disabled={connectionBusy || inputIsInvalid || !serverId}
+                disabled={
+                  connectionBusy || inputIsInvalid || (!isServer && !serverId)
+                }
                 onClick={() => {
                   onClickConnect(serverId);
                   if (typeof onToggleConnectionBusy === "function") {
