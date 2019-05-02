@@ -39,7 +39,7 @@ export default class DropboxChooser extends Component {
   }
 
   componentDidMount() {
-    const { appKey } = this.props;
+    const { appKey = "" } = this.props;
     if (!DropboxChooser.isDropboxReady() && !scriptLoadingStarted) {
       scriptLoadingStarted = true;
       loadScript(DROPBOX_SDK_URL, {
@@ -75,11 +75,13 @@ export default class DropboxChooser extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, appKey } = this.props;
     return (
-      <div onClick={this.onChoose}>
-        {children || <button type="button">Open Dropbox Chooser</button>}
-      </div>
+      appKey && (
+        <div onClick={this.onChoose}>
+          {children || <button type="button">Open Dropbox Chooser</button>}
+        </div>
+      )
     );
   }
 }
