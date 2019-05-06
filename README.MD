@@ -2,7 +2,9 @@
 
 Weclare is an acronym for "**we**b based **cla**ssroom **re**sponse system".  
 
-It is the prototype(!) of a classroom response system specifically designed for the use in computer science education at the university level. 
+It is the prototype(!) of a classroom response system specifically designed for the use in computer science education at the university level.
+
+To try it out, you can find a live version under [weclare.de](https://weclare.de/).
 
 Weclare was designed to fulfill these high-level requirements:
 
@@ -17,6 +19,6 @@ A classroom response system (CRS) is a special case of an "Audience Response Sys
 
 ## What is the motivation behind the creation of Weclare?
 
-Weclare is the result of a bachelor thesis by Moritz Stückler at HAW Hamburg. It is heavily inspired by an existing system called ["StuReSy" made by another student at the University of Hamburg](https://github.com/sturesy).
+Weclare is the result of a [bachelor thesis](https://github.com/pReya/ba-thesis-weclare) by Moritz Stückler at HAW Hamburg. It is heavily inspired by an existing system called ["StuReSy" made by another student at the University of Hamburg](https://github.com/sturesy).
 
 However today, StuReSy seems unnecessarily complicated. It needs a dedicated server component and a Java Client to be configured when creating questions. Also it lacks a lot of computer science specific features (formatting source code fragments, syntax highlighting, etc).
