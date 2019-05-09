@@ -22,3 +22,10 @@ A classroom response system (CRS) is a special case of an "Audience Response Sys
 Weclare is the result of a [bachelor thesis](https://github.com/pReya/ba-thesis-weclare) by Moritz Stückler at HAW Hamburg. It is heavily inspired by an existing system called ["StuReSy" made by another student at the University of Hamburg](https://github.com/sturesy).
 
 However today, StuReSy seems unnecessarily complicated. It needs a dedicated server component and a Java Client to be configured when creating questions. Also it lacks a lot of computer science specific features (formatting source code fragments, syntax highlighting, etc).
+
+## How to run locally
+1. Download and install `npm` on your machine
+2. Clone/copy the content of this repository to an empty folder
+3. Navigate to the new folder and run `npm install`
+4. Run `npm start`
+5. Open your browser at `localhost:3000` to see the app
