@@ -165,7 +165,7 @@ export function nextAskScreenState() {
           });
         }
       },
-      // Clients connected, ready to send first question and accept answers
+      // Clients connected, button enabled, ready to send first question and accept answers
       1: () => {
         dispatch(stopAcceptingConnections());
         dispatch(toggleAcceptingAnswers());

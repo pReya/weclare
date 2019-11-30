@@ -1,10 +1,11 @@
 import { getNumberOfUsersAnswered } from "../selectors/answers";
-import { NEXT_ASK_SCREEN_STATE } from "./server";
+import { NEXT_ASK_SCREEN_STATE, toggleAcceptingAnswers } from "./server";
 // Server Answer Actions
 export const REGISTER_ANSWERS = "REGISTER_ANSWERS";
 export function registerAnswers(questionIdx, answerIdxArray, userId) {
   return (dispatch, getState) => {
     const { server } = getState();
+    console.log("Accepting answers?", server.acceptingAnswers);
     if (server.acceptingAnswers) {
       dispatch({
         type: REGISTER_ANSWERS,
@@ -20,6 +21,7 @@ export function registerAnswers(questionIdx, answerIdxArray, userId) {
 
       // End question when all users have sent answers
       if (receivedAnswers >= server.connections.length) {
+        dispatch(toggleAcceptingAnswers());
         dispatch({
           type: NEXT_ASK_SCREEN_STATE
         });
